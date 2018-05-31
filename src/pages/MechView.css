@@ -1,0 +1,13 @@
+.MechView {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.MechView > .Arm {
+  padding-top: 80px;
+}
+
+.MechView > .Side {
+  padding-top: 40px;
+}
