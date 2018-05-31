@@ -1,8 +1,8 @@
 import { lens } from 'lens.ts'
 
-import { IEquipment} from '../Equipment/Equipment'
-import { Hardpoint } from '../Equipment/Hardpoint'
-import { ITrait } from '../Equipment/Trait'
+import { IComponent} from '../Component/Component'
+import { Hardpoint } from '../Component/Hardpoint'
+import { ITrait } from '../Component/Trait'
 
 export interface ISection {
   name: string,
@@ -10,7 +10,7 @@ export interface ISection {
   rearArmor?: number,
   structure: number,
   hardpoints: Hardpoint[],
-  equipment: IEquipment[],
+  components: IComponent[],
   criticals: number,
   traits: ITrait[],
 }

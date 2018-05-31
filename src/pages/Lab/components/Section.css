@@ -8,6 +8,8 @@
   flex-direction: column;
   width: 184px;
   margin: 12px 6px;
+  cursor: default;
+  user-select: none;
 }
 
 .CriticalsSection > .Header {
@@ -80,66 +82,66 @@
   justify-content: space-between;
 }
 
-.CriticalsSection > .Equipment {
+.CriticalsSection > .Component {
   
 }
 
-.CriticalsSection > .Equipment > .Critical {
+.CriticalsSection > .Component > .Critical {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   box-sizing: border-box;
-  padding: 3px;
+  padding: 4px;
   border-bottom: 1px solid darkgrey;
   height: 20px;
 }
 
-.CriticalsSection > .Equipment > .Critical:hover {
-  box-shadow: inset 0 0 1px black, inset 0 0 12px rgba(0, 0, 0, 0.2), inset 0 0 256px rgba(255, 255, 255, 0.4);
+.CriticalsSection > .Component > .Critical:hover {
+  box-shadow: inset 0 0 1px black, inset 0 0 12px rgba(0, 0, 0, 0.2), inset 0 0 256px rgba(255, 255, 255, 0.3);
 }
 
-.CriticalsSection > .Equipment > .Critical:last-child {
+.CriticalsSection > .Component > .Critical:last-child {
   border-bottom: 0px solid white;
 }
 
-.CriticalsSection > .Equipment > * {
+.CriticalsSection > .Component > * {
   box-shadow: inset 0 0 1px black, inset 0 0 12px rgba(0, 0, 0, 0.2);
 }
 
-.CriticalsSection > .Equipment > .Omni {
+.CriticalsSection > .Component > .Omni {
   background: darkgrey;
 }
 
-.CriticalsSection > .Equipment > .Energy {
+.CriticalsSection > .Component > .Energy {
   background: rgb(155, 203, 64);
 }
 
-.CriticalsSection > .Equipment > .Ballistic {
+.CriticalsSection > .Component > .Ballistic {
   background: rgb(137, 55, 223);
 }
 
-.CriticalsSection > .Equipment > .Missile {
+.CriticalsSection > .Component > .Missile {
   background: rgb(16, 127, 127);
 }
 
-.CriticalsSection > .Equipment > .BallisticAmmo {
+.CriticalsSection > .Component > .BallisticAmmo {
   background: rgba(137, 55, 223, 0.5);
 }
 
-.CriticalsSection > .Equipment > .MissileAmmo {
+.CriticalsSection > .Component > .MissileAmmo {
   background: rgba(16, 127, 127, 0.5);
 }
 
 
-.CriticalsSection > .Equipment > .FerroFibrous, .EndoSteel, .Engine, .Gyro {
+.CriticalsSection > .Component > .FerroFibrous, .EndoSteel, .Engine, .Gyro {
   background: rgb(63, 73, 73);
 }
 
-.CriticalsSection > .Equipment > .JumpJet {
+.CriticalsSection > .Component > .JumpJet {
   background: rgb(96, 120, 120);
 }
 
-.CriticalsSection > .Equipment > .Shoulder, .UpperArmActuator, .LowerArmActuator, .HandActuator, .Hip, .UpperLegActuator, .LowerLegActuator, .FootActuator, .LifeSupport, .Sensors, .Cockpit {
+.CriticalsSection > .Component > .Shoulder, .UpperArmActuator, .LowerArmActuator, .HandActuator, .Hip, .UpperLegActuator, .LowerLegActuator, .FootActuator, .LifeSupport, .Sensors, .Cockpit {
   color: grey;
 }

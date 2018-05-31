@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { getGyroCriticals, getGyroHitPoints, getGyroTonnage } from '../../models/Tables/GyroTable'
-import { IMech } from '../../models/VehicleBay/Mech/Mech'
+import { getGyroCriticals, getGyroHitPoints, getGyroTonnage } from '../../../../models/Tables/GyroTable'
+import { IMech } from '../../../../models/VehicleBay/Mech/Mech'
 
 export const GyroInfo: React.SFC<Readonly<IMech>> = ({ tech, engine, gyro }) => (
   <div className='Info'>

@@ -1,9 +1,9 @@
 import { lens } from 'lens.ts'
 
-import { IEngine } from '../Equipment/Engine'
-import { IQuirk } from '../Equipment/Quirk'
+import { IEngine } from '../Component/Engine'
+import { IQuirk } from '../Component/Quirk'
 
-import { IGyro } from '../Equipment/Gyro';
+import { IGyro } from '../Component/Gyro';
 import { Tech } from '../Tech';
 import { ISection } from './Section'
 

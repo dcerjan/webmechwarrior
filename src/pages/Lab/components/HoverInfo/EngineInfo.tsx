@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { EngineTable, getEngineHitPoints, getEngintInternalHeatsinks, getRunningMP, getWalkingMP } from '../../models/Tables/EngineTable';
-import { IMech } from '../../models/VehicleBay/Mech/Mech';
+import { EngineTable, getEngineHitPoints, getEngintInternalHeatsinks, getRunningMP, getWalkingMP } from '../../../../models/Tables/EngineTable';
+import { IMech } from '../../../../models/VehicleBay/Mech/Mech';
 
 export const EngineInfo: React.SFC<Readonly<IMech>> = ({ tech, tonnage, engine }) => (
   <div className='Info'>

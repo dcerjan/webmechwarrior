@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IMech } from '../models/VehicleBay/Mech/Mech'
+import { IMech } from '../../../models/VehicleBay/Mech/Mech'
 
 import './MechView.css'
 import { Section } from './Section'

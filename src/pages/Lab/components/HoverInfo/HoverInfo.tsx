@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-import { Omit } from '../../lib/type';
-import { IEquipment } from '../../models/VehicleBay/Equipment/Equipment';
-import { Hardpoint } from '../../models/VehicleBay/Equipment/Hardpoint';
-import { IMech } from '../../models/VehicleBay/Mech/Mech';
+import { Omit } from '../../../../lib/type';
+import { IComponent } from '../../../../models/VehicleBay/Component/Component';
+import { Hardpoint } from '../../../../models/VehicleBay/Component/Hardpoint';
+import { IMech } from '../../../../models/VehicleBay/Mech/Mech';
 
 import './HoverInfo.css'
 
@@ -12,7 +12,7 @@ import { GyroInfo } from './GyroInfo';
 
 interface IProps {
   mech: IMech,
-  hoverContext: Readonly<IEquipment>,
+  hoverContext: Readonly<IComponent>,
   position: [number, number]
 }
 

@@ -5,12 +5,6 @@ export enum GyroType {
   XL = 'XL',
 }
 
-/*
-Heavy-Duty 2.0 4
-Standard 1.0 4
-Extra-light (XL) 0.5 6
-*/
-
 interface IGyroTableRecord {
   type: GyroType,
   weightMultiplier: number,

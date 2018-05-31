@@ -1,12 +1,12 @@
 import * as React from 'react'
 
-import { replicate } from '../lib/functional';
+import { replicate } from '../../../lib/functional';
 
-import { Equipment, IEquipment } from '../models/VehicleBay/Equipment/Equipment';
-import { Hardpoint } from '../models/VehicleBay/Equipment/Hardpoint';
-import { IMech, MechParts } from '../models/VehicleBay/Mech/Mech';
-import { ISection } from '../models/VehicleBay/Mech/Section';
-import { Tech } from '../models/VehicleBay/Tech';
+import { Component, IComponent } from '../../../models/VehicleBay/Component/Component';
+import { Hardpoint } from '../../../models/VehicleBay/Component/Hardpoint';
+import { IMech, MechParts } from '../../../models/VehicleBay/Mech/Mech';
+import { ISection } from '../../../models/VehicleBay/Mech/Section';
+import { Tech } from '../../../models/VehicleBay/Tech';
 import { HoverInfo } from './HoverInfo';
 import './Section.css'
 
@@ -16,7 +16,7 @@ const countHardpoints = (hardpointType: Hardpoint, section: ISection): number =>
 const Destructure: React.SFC<any> = ({ children }) => (children || null)
 
 
-const Info: React.SFC<ISection> = ({ armor, rearArmor, structure, name }) => (
+const Info: React.SFC<ISection> = ({ armor, rearArmor, structure, name, traits }) => (
   <Destructure>
     <div className='Detail'>
       <div>Armor</div>
@@ -40,18 +40,27 @@ const Info: React.SFC<ISection> = ({ armor, rearArmor, structure, name }) => (
       <div>Structure</div>
       <div>{structure}</div>
     </div>
+    {
+      traits.length
+        ? traits.map((trait, index) => (
+          <div key={`${trait.name}:${index}`} className='Detail'>
+            <div>{ trait.name }</div>
+          </div>
+        ))
+        : null
+    }
   </Destructure>
 )
 
-const CriticalSlots: React.SFC<{ equipment: IEquipment[], criticals: number, onEnter: (equimpent: Readonly<IEquipment>) => void, onLeave: () => void }> = ({ equipment, criticals, onEnter, onLeave }) => {
-  const empty = Equipment({ name: '-- empty --', criticals: 1, type: Hardpoint.Empty, tech: Tech.None })
+const CriticalSlots: React.SFC<{ component: IComponent[], criticals: number, onEnter: (equimpent: Readonly<IComponent>) => void, onLeave: () => void }> = ({ component, criticals, onEnter, onLeave }) => {
+  const empty = Component({ name: '-- empty slot --', criticals: 1, type: Hardpoint.Empty, tech: Tech.None })
 
-  const takenCriticals = equipment.reduce((sum, c) => sum + c.criticals, 0)
+  const takenCriticals = component.reduce((sum, c) => sum + c.criticals, 0)
 
   return (
     <Destructure>
       { 
-        [...equipment, ...replicate(empty, criticals - takenCriticals)]
+        [...component, ...replicate(empty, criticals - takenCriticals)]
           .map((critical, index) => (
             <div
               key={`${critical.name}:${index}`}
@@ -76,19 +85,23 @@ const CriticalSlots: React.SFC<{ equipment: IEquipment[], criticals: number, onE
 }
 
 interface IProps { mech: IMech, section: ISection }
-interface IState { hoverContext?: Readonly<IEquipment>, hoverPosition: [number, number] }
+interface IState { hoverContext?: Readonly<IComponent>, hoverPosition: [number, number] }
 
 export class Section extends React.PureComponent<IProps, IState> {
   public state: IState = {
     hoverContext: undefined,
     hoverPosition: [0, 0],
   }
+  
+  private mounted: boolean = false;
 
   public componentDidMount() {
+    this.mounted = true
     window.document.addEventListener('mousemove', this.onMouseMove, true);
   }
 
   public componentWillUnmount() {
+    this.mounted = false
     window.document.removeEventListener('mousemove', this.onMouseMove);
   }
 
@@ -126,11 +139,11 @@ export class Section extends React.PureComponent<IProps, IState> {
         <div className='Info'>
           <Info {...section} />
         </div>
-        <div className='Equipment'>
+        <div className='Component'>
           <CriticalSlots
             criticals={section.criticals}
-            equipment={section.equipment}
-            onEnter={(equipment: Readonly<IEquipment>) => this.setState({ hoverContext: equipment })}
+            component={section.components}
+            onEnter={(component: Readonly<IComponent>) => this.setState({ hoverContext: component })}
             onLeave={() => this.setState({ hoverContext: undefined })}
           />
         </div>
@@ -139,7 +152,8 @@ export class Section extends React.PureComponent<IProps, IState> {
   }
 
   private onMouseMove = (evt: MouseEvent) => {
-    this.setState({ hoverPosition: [evt.clientX + 12, evt.clientY + 4] })
+    if (this.mounted) {
+      this.setState({ hoverPosition: [evt.clientX + 12, evt.clientY + 4] })
+    }
   }
 }
-

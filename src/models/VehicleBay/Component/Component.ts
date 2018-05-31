@@ -3,7 +3,7 @@ import { lens } from 'lens.ts'
 import { Tech } from '../Tech';
 import { Hardpoint } from './Hardpoint'
 
-export interface IEquipment {
+export interface IComponent {
   type: Hardpoint,
   tech: Tech,
   name: string,
@@ -18,8 +18,8 @@ export interface IEquipment {
   ammoPerTonn?: number,
 }
 
-export const Equipment = (props: IEquipment): Readonly<IEquipment> => ({
+export const Component = (props: IComponent): Readonly<IComponent> => ({
   ...props,
 });
 
-export const EquipmentL = lens<IEquipment>();
+export const ComponentL = lens<IComponent>();
