@@ -1,6 +1,16 @@
 import * as React from 'react'
-import { EngineTable, getEngineHitPoints, getEngintInternalHeatsinks, getRunningMP, getWalkingMP } from '../../../../models/Tables/EngineTable';
-import { IMech } from '../../../../models/VehicleBay/Mech/Mech';
+import {
+  EngineType,
+  getClanEngineCriticals,
+  getEngineHitPoints,
+  getEngineManufacturer,
+  getEngineTonnage,
+  getEngintInternalHeatsinks,
+  getRunningMP,
+  getWalkingMP,
+} from '../../../../models/Tables/EngineTable'
+import { MechComponentType } from '../../../../models/Tables/MechComponentType'
+import { IMech } from '../../../../models/VehicleBay/Mech/Mech'
 
 export const EngineInfo: React.SFC<Readonly<IMech>> = ({ tech, tonnage, engine }) => (
   <div className='Info'>
@@ -20,7 +30,7 @@ export const EngineInfo: React.SFC<Readonly<IMech>> = ({ tech, tonnage, engine }
       </div>
       <div className='Detail'>
         <div>Manufacturer:</div>
-        <div>{ engine.manufacturer }</div>
+        <div>{ getEngineManufacturer(engine.rating) }</div>
       </div>
       <div className='Detail'>
         <div>Rating:</div>
@@ -32,11 +42,18 @@ export const EngineInfo: React.SFC<Readonly<IMech>> = ({ tech, tonnage, engine }
       </div>
       <div className='Detail'>
         <div>Tonnage:</div>
-        <div>{ EngineTable[engine.rating][engine.type] } tons</div>
+        <div>{ getEngineTonnage(engine.rating, engine.type) } tons</div>
       </div>
       <div className='Detail'>
         <div>Criticals:</div>
-        <div>{`CT: ${engine.criticalSlots}${engine.sideTorsoSlots ? ` - LT/RT: ${ engine.sideTorsoSlots }` : ''}`}</div>
+        <div>
+          {
+            `CT(${
+              getClanEngineCriticals(EngineType.XL, MechComponentType.CenterTorso)
+            }) LT(${getClanEngineCriticals(EngineType.XL, MechComponentType.SideTorso)
+            }) RT(${getClanEngineCriticals(EngineType.XL, MechComponentType.SideTorso)})`
+          }
+        </div>
       </div>
     </div>
     <div className='Section'>

@@ -1,0 +1,4 @@
+name, heat, damage, range, ammo, weight, space, rating
+Light Machine Gun, 0, 1, 0/2/4/6, 200, 0.5, 1, B
+Machine Gun, 0, 2, 0/1/2/3, 200, 0.5, 1, B
+Heavy Machine Gun, 0, 3, 0/1/2/—, 100, 1.0, 1, B

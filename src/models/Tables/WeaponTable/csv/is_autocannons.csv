@@ -1,0 +1,17 @@
+name, heat, damage, range, ammo, weight, space, rating
+Autocannon/2, 1, 2, 4/8/16/24, 45, 6, 1, C
+Autocannon/5, 1, 5, 3/6/12/18, 20, 8, 4, C
+Autocannon/10, 3, 10, 0/5/10/15, 10, 12, 7, C
+Autocannon/20, 7, 20, 0/3/6/9, 5, 14, 10, C
+LB 2-X AC, 1, 2, 4/9/18/27, 45, 6, 4, E
+LB 5-X AC, 1, 5, 3/7/14/21, 20, 8, 5, E
+LB 10-X AC, 2, 10, 0/6/12/18, 10, 11, 6, E
+LB 20-X AC, 6, 20, 0/4/8/12, 5, 14, 11, E
+Light AC/2, 1, 2, 0/6/12/18, 45, 4, 1, D
+Light AC/5, 1, 5, 0/5/10/15, 20, 5, 2, D
+Rotary AC/2, 1/Shot, 2/Shot, 0/6/12/18, 45, 8, 3, E
+Rotary AC/5, 1/Shot, 5/Shot, 0/5/10/15, 20, 10, 6, E
+Ultra AC/2, 1/Shot, 2/Shot, 3/8/17/25, 45, 7, 3, E
+Ultra AC/5, 1/Shot, 5/Shot, 2/6/13/20, 20, 9, 5, E
+Ultra AC/10, 4/Shot, 10/Shot, 0/6/12/18, 10, 13, 7, E
+Ultra AC/20, 8/Shot, 20/Shot, 0/3/7/10, 5, 15, 10, E

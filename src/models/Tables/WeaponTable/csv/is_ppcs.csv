@@ -1,0 +1,6 @@
+name, heat, damage, range, ammo, weight, space, rating
+Light PPC, 5, 5, 3/6/12/18, NA, 3, 2, E
+PPC, 10, 10, 3/6/12/18, NA, 7, 3, D
+Heavy PPC, 15, 15, 3/6/12/18, NA, 10, 4, E
+ER PPC, 15, 10, 0/7/14/23, NA, 7, 3, E
+Snub-Nose PPC, 10, 10/8/5, 0/9/13/15, NA, 6, 2, E

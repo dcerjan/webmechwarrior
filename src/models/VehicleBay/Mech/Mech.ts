@@ -1,10 +1,10 @@
 import { lens } from 'lens.ts'
 
-import { IEngine } from '../Component/Engine'
-import { IQuirk } from '../Component/Quirk'
+import { TechType } from '../../Tables/TechType'
 
-import { IGyro } from '../Component/Gyro';
-import { Tech } from '../Tech';
+import { IEngine } from '../Component/Engine'
+import { IGyro } from '../Component/Gyro'
+import { IQuirk } from '../Component/Quirk'
 import { ISection } from './Section'
 
 export enum MechParts {
@@ -20,7 +20,7 @@ export enum MechParts {
 
 export interface IMech {
   name: string,
-  tech: Tech,
+  tech: TechType,
   quirks: IQuirk[],
   tonnage: number,
   engine: IEngine,
@@ -45,4 +45,4 @@ export const Mech = (props: IMech): Readonly<IMech> => ({
   ...props,
 })
 
-export const MechL = lens<IMech>();
+export const MechL = lens<IMech>()

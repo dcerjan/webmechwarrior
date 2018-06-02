@@ -1,0 +1,10 @@
+name, heat, damage, range, ammo, weight, space, rating
+ER Small Laser, 2, 3, 0/2/4/5, NA, 0.5, 1, E
+ER Medium Laser, 5, 5, 0/4/8/12, NA, 1, 1, E
+ER Large Laser, 12, 8, 0/7/14/19, NA, 5, 2, E
+Small Laser, 1, 3, 0/1/2/3, NA, 0.5, 1, C
+Medium Laser, 3, 5, 0/3/6/9, NA, 1, 1, C
+Large Laser, 8, 8, 0/5/10/15, NA, 5, 2, C
+Small Pulse Laser, 2, 3, 0/1/2/3, NA, 1, 1, E
+Medium Pulse Laser, 4, 6, 0/2/4/6, NA, 2, 1, E
+Large Pulse Laser, 10, 9, 0/3/7/10, NA, 7, 2, E

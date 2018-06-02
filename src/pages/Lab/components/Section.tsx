@@ -1,13 +1,14 @@
 import * as React from 'react'
 
-import { replicate } from '../../../lib/functional';
+import { replicate } from '../../../lib/functional'
 
-import { Component, IComponent } from '../../../models/VehicleBay/Component/Component';
-import { Hardpoint } from '../../../models/VehicleBay/Component/Hardpoint';
-import { IMech, MechParts } from '../../../models/VehicleBay/Mech/Mech';
-import { ISection } from '../../../models/VehicleBay/Mech/Section';
-import { Tech } from '../../../models/VehicleBay/Tech';
-import { HoverInfo } from './HoverInfo';
+import { TechType } from '../../../models/Tables/TechType'
+import { Component, IComponent } from '../../../models/VehicleBay/Component/Component'
+import { Hardpoint } from '../../../models/VehicleBay/Component/Hardpoint'
+import { IMech, MechParts } from '../../../models/VehicleBay/Mech/Mech'
+import { ISection } from '../../../models/VehicleBay/Mech/Section'
+
+import { HoverInfo } from './HoverInfo'
 import './Section.css'
 
 const countHardpoints = (hardpointType: Hardpoint, section: ISection): number =>
@@ -53,7 +54,7 @@ const Info: React.SFC<ISection> = ({ armor, rearArmor, structure, name, traits }
 )
 
 const CriticalSlots: React.SFC<{ component: IComponent[], criticals: number, onEnter: (equimpent: Readonly<IComponent>) => void, onLeave: () => void }> = ({ component, criticals, onEnter, onLeave }) => {
-  const empty = Component({ name: '-- empty slot --', criticals: 1, type: Hardpoint.Empty, tech: Tech.None })
+  const empty = Component({ name: '-- empty slot --', criticals: 1, type: Hardpoint.Empty, tech: TechType.Clan })
 
   const takenCriticals = component.reduce((sum, c) => sum + c.criticals, 0)
 
@@ -93,16 +94,16 @@ export class Section extends React.PureComponent<IProps, IState> {
     hoverPosition: [0, 0],
   }
   
-  private mounted: boolean = false;
+  private mounted: boolean = false
 
   public componentDidMount() {
     this.mounted = true
-    window.document.addEventListener('mousemove', this.onMouseMove, true);
+    window.document.addEventListener('mousemove', this.onMouseMove, true)
   }
 
   public componentWillUnmount() {
     this.mounted = false
-    window.document.removeEventListener('mousemove', this.onMouseMove);
+    window.document.removeEventListener('mousemove', this.onMouseMove)
   }
 
   public render() {

@@ -1,0 +1,3 @@
+name, heat, damage, range, ammo, weight, space, rating
+Hatchet, 0, **, PHYS, NA, Var*, Var*, B
+Sword, 0, **, PHYS, NA, Var*, Var*, B

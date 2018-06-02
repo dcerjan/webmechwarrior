@@ -1,4 +1,4 @@
-import { getRunningMP, getWalkingMP } from "./EngineTable";
+import { getRunningMP, getWalkingMP } from './EngineTable'
 
 export enum JumpJetType {
   Standard = 'Standard',
