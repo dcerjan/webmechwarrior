@@ -1,14 +1,14 @@
 import * as React from 'react'
 
-import { Omit } from '../../../../lib/type';
-import { IComponent } from '../../../../models/VehicleBay/Component/Component';
-import { Hardpoint } from '../../../../models/VehicleBay/Component/Hardpoint';
-import { IMech } from '../../../../models/VehicleBay/Mech/Mech';
+import { Omit } from '../../../../lib/type'
+import { IComponent } from '../../../../models/VehicleBay/Component/Component'
+import { Hardpoint } from '../../../../models/VehicleBay/Component/Hardpoint'
+import { IMech } from '../../../../models/VehicleBay/Mech/Mech'
 
 import './HoverInfo.css'
 
 import { EngineInfo } from './EngineInfo'
-import { GyroInfo } from './GyroInfo';
+import { GyroInfo } from './GyroInfo'
 
 interface IProps {
   mech: IMech,

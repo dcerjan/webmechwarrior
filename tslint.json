@@ -13,6 +13,8 @@
     "jsx-boolean-value": false,
     "object-literal-sort-keys": false,
     "semicolon": [true, "never"],
-    "quotemark": [true, "single"]
+    "quotemark": [true, "single"],
+    "no-trailing-whitespace": true,
+    "no-shadowed-variable": false
   }
 }

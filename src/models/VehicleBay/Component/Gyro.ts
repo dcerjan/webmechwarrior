@@ -1,5 +1,5 @@
 import { lens } from 'lens.ts'
-import { GyroType } from '../../Tables/GyroTable';
+import { GyroType } from '../../Tables/GyroTable'
 
 export interface IGyro {
   name: string,
@@ -11,4 +11,4 @@ export const Gyro = (props: IGyro): Readonly<IGyro> => ({
   ...props,
 })
 
-export const EngineL = lens<IGyro>();
+export const EngineL = lens<IGyro>()

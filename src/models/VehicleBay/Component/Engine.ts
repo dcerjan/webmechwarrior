@@ -1,5 +1,5 @@
 import { lens } from 'lens.ts'
-import { EngineType } from '../../Tables/EngineTable';
+import { EngineType } from '../../Tables/EngineTable'
 
 export interface IEngine {
   name: string,
@@ -14,4 +14,4 @@ export const Engine = (props: IEngine): Readonly<IEngine> => ({
   ...props,
 })
 
-export const EngineL = lens<IEngine>();
+export const EngineL = lens<IEngine>()

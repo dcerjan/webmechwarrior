@@ -1,4 +1,4 @@
-name, heat, damage, range, ammo, weight, space, rating
+name,heat,damage,range,ammo,weight,space,rating
 A-Pods, 0, **, **, OS, 0.5, 1, B
 B-Pods, 0, **, **, OS, 1, 1, E
 Anti-Missile System, 1, **, **, 12, 0.5, 1, E
@@ -10,7 +10,7 @@ Improved C3 Computer, 0, NA, NA, NA, 2.5, 2*, E
 Guardian ECM Suite, 0, NA, 0/0/0/6, NA, 1.5, 2, E
 Machine Gun Array, NA, **, **, **, +0.5, 1, E
 MASC, NA, NA, NA, NA, Var*, Var*, E
-One-Shot (SRM/LRM), NA, NA, NA, OS, +0.5, NA, **
+One-Shot (SRM/LRM), NA, NA, NA, OS, +0.5, NA, **  
 Narc Missile Beacon, 0, **, 0/3/6/9, 6, 3, 2, E
 Imp. Narc Launcher, 0, **, 0/4/9/15, 4, 5, 3, E
 TAG, 0, **, 0/5/9/15, NA, 1, 1, E

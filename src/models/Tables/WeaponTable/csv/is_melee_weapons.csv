@@ -1,3 +1,3 @@
-name, heat, damage, range, ammo, weight, space, rating
-Hatchet, 0, **, PHYS, NA, Var*, Var*, B
-Sword, 0, **, PHYS, NA, Var*, Var*, B
+name,tech,class,type,heat,damage,range,ammo,weight,space,rating
+Hatchet,InnerSphere,Melee,Melee,0,**,PHYS,NA,Var*,Var*,B
+Sword,InnerSphere,Melee,Melee,0,**,PHYS,NA,Var*,Var*,B

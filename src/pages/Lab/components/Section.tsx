@@ -60,7 +60,7 @@ const CriticalSlots: React.SFC<{ component: IComponent[], criticals: number, onE
 
   return (
     <Destructure>
-      { 
+      {
         [...component, ...replicate(empty, criticals - takenCriticals)]
           .map((critical, index) => (
             <div
@@ -93,7 +93,7 @@ export class Section extends React.PureComponent<IProps, IState> {
     hoverContext: undefined,
     hoverPosition: [0, 0],
   }
-  
+
   private mounted: boolean = false
 
   public componentDidMount() {

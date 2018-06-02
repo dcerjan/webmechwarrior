@@ -3,12 +3,24 @@ import * as React from 'react'
 import { MechView } from './MechView'
 import './VehicleBay.css'
 
-import { MadCatMkII } from '../__mocks__/MadCatMkII';
+import { IComponentExplorerState } from '../state/reducer'
 
-export const VehicleBay: React.SFC<{}> = () => {
+import { MadCatMkII } from '../__mocks__/MadCatMkII'
+import { ComponentExplorer } from './ComponentExplorer'
+
+interface IVehicleBayProps {
+  componentExplorer: IComponentExplorerState,
+  setActiveTab: (tab: string) => void,
+}
+
+export const VehicleBay: React.SFC<IVehicleBayProps> = ({ componentExplorer, setActiveTab }) => {
   return (
     <div className='VehicleBay'>
       <MechView mech={MadCatMkII} />
+      <ComponentExplorer
+        componentExplorer={componentExplorer}
+        setActiveTab={setActiveTab}
+      />
     </div>
   )
 }

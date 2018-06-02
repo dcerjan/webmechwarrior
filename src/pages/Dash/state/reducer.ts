@@ -1,6 +1,6 @@
 import { lens } from 'lens.ts'
 import { Reducer } from 'redux'
-import { DashAction, DashActionType } from './actions';
+import { DashAction, DashActionType } from './actions'
 
 export interface IDashState {
   messages: string[]

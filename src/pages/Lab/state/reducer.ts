@@ -5,15 +5,24 @@ import { IComponent } from '../../../models/VehicleBay/Component/Component'
 
 import { LabAction, LabActionType } from './actions'
 
-interface ILabState {
-  draggedComponent: IComponent | null
-  hoverContext: IComponent | null
+export interface IComponentExplorerState {
+  tab: string,
+}
+
+export interface ILabState {
+  draggedComponent: IComponent | null,
+  hoverContext: IComponent | null,
+  componentExplorer: IComponentExplorerState
 }
 const LabStateL = lens<ILabState>()
+
 
 const initial: ILabState = {
   draggedComponent: null,
   hoverContext: null,
+  componentExplorer: {
+    tab: 'All',
+  }
 }
 
 export const reducer: Reducer<ILabState, LabAction> = (state = initial, action) => {
@@ -26,6 +35,9 @@ export const reducer: Reducer<ILabState, LabAction> = (state = initial, action) 
 
   case LabActionType.SET_HOVER_CONTEXT:
     return LabStateL.hoverContext.set(action.context)(state)
+
+  case LabActionType.SET_ACTIVE_TAB:
+    return LabStateL.componentExplorer.tab.set(action.tab)(state)
 
   default:
     return state

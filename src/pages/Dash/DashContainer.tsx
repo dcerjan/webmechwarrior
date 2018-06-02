@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect'
 
-import { Worker } from '../../state/Worker';
+import { Worker } from '../../state/Worker'
 
-import { dashMessagesSelector } from './state/selectors';
-import { start, stop } from './state/worker';
+import { dashMessagesSelector } from './state/selectors'
+import { start, stop } from './state/worker'
 
 
 interface IProps {

@@ -1,0 +1,14 @@
+.Item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: 4px;
+  border-bottom: 1px solid darkgrey;
+  height: 20px;
+}
+
+.Item:last-child {
+  border-bottom: 0px solid darkgrey;
+}

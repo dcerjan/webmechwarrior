@@ -1,11 +1,12 @@
 import { lens } from 'lens.ts'
 
-import { Tech } from '../Tech';
+import { TechType } from '../../Tables/TechType'
+
 import { Hardpoint } from './Hardpoint'
 
 export interface IComponent {
   type: Hardpoint,
-  tech: Tech,
+  tech: TechType,
   name: string,
   criticals: number,
   tonnage?: number,
@@ -20,6 +21,6 @@ export interface IComponent {
 
 export const Component = (props: IComponent): Readonly<IComponent> => ({
   ...props,
-});
+})
 
-export const ComponentL = lens<IComponent>();
+export const ComponentL = lens<IComponent>()

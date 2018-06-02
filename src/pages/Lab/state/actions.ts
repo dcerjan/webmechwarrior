@@ -4,6 +4,7 @@ export enum LabActionType {
   START_DRAG_COMPONENT = 'LabAction::START_DRAG_COMPONENT',
   END_DRAG_COMPONENT = 'LabAction::END_DRAG_COMPONENT',
   SET_HOVER_CONTEXT = 'LabAction::SET_HOVER_CONTEXT',
+  SET_ACTIVE_TAB = 'LabAction::SET_ACTIVE_TAB',
 }
 
 export enum HoverContextType {
@@ -26,7 +27,11 @@ export const endDragComponent: EndDragComponent = () => ({ type: LabActionType.E
 type SetHoverContext = (context: IComponent | null) => { type: LabActionType.SET_HOVER_CONTEXT, context: IComponent | null }
 export const setHoverContext: SetHoverContext = (context) => ({ type: LabActionType.SET_HOVER_CONTEXT, context })
 
+type SetActiveTab = (tab: string) => { type: LabActionType.SET_ACTIVE_TAB, tab: string }
+export const setActiveTab: SetActiveTab = (tab) => ({ type: LabActionType.SET_ACTIVE_TAB, tab })
+
 export type LabAction =
   | ReturnType<StartDragComponent>
   | ReturnType<EndDragComponent>
   | ReturnType<SetHoverContext>
+  | ReturnType<SetActiveTab>

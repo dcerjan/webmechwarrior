@@ -9,7 +9,7 @@ export const startSaga = <T>(id: string, saga: () => Iterator<T>) => {
     console.debug(`Task under id ${id} is already running, canceling it before restarting`)
     tasks[id].cancel()
   }
-  tasks[id] = sagaMiddleware.run(saga);
+  tasks[id] = sagaMiddleware.run(saga)
 }
 
 export const cancelSaga = (id: string) => {

@@ -1,41 +1,41 @@
-name, heat, damage, range, ammo, weight, space, rating
-LRM 5, 2, 1/Msl, 6/7/14/21, 24, 2, 1, C
-LRM 10, 4, 1/Msl, 6/7/14/21, 12, 5, 2, C
-LRM 15, 5, 1/Msl, 6/7/14/21, 8, 7, 3, C
-LRM 20, 6, 1/Msl, 6/7/14/21, 6, 10, 5, C
-LRM 5 + Artemis IV, 2, 1/Msl, 6/7/14/21, 24, 3, 2, E
-LRM 10 + Artemis IV, 4, 1/Msl, 6/7/14/21, 12, 6, 3, E
-LRM 15 + Artemis IV, 5, 1/Msl, 6/7/14/21, 8, 8, 4, E
-LRM 20 + Artemis IV, 6, 1/Msl, 6/7/14/21, 6, 11, 6, E
-MML 3 (LRM), 2, 1/Msl, 6/7/14/21, 40, 1.5, 2, E
-MML 5 (LRM), 3, 1/Msl, 6/7/14/21, 24, 3, 3, E
-MML 7 (LRM), 4, 1/Msl, 6/7/14/21, 17, 4.5, 4, E
-MML 9 (LRM), 5, 1/Msl, 6/7/14/21, 13, 6, 5, E
-MML 3 (SRM), 2, 2/Msl, 0/3/6/9, 33, 1.5, 2, E
-MML 5 (SRM), 3, 2/Msl, 0/3/6/9, 20, 3, 3, E
-MML 7 (SRM), 4, 2/Msl, 0/3/6/9, 14, 4.5, 4, E
-MML 9 (SRM), 5, 2/Msl, 0/3/6/9, 11, 6, 5, E
-MML 3 (LRM) + Artemis IV, 2, 1/Msl, 6/7/14/21, 40, 2.5, 3, E
-MML 5 (LRM) + Artemis IV, 3, 1/Msl, 6/7/14/21, 24, 4, 4, E
-MML 7 (LRM) + Artemis IV, 4, 1/Msl, 6/7/14/21, 17, 5.5, 5, E
-MML 9 (LRM) + Artemis IV, 5, 1/Msl, 6/7/14/21, 13, 7, 6, E
-MML 3 (SRM) + Artemis IV, 2, 2/Msl, 0/3/6/9, 33, 2.5, 3, E
-MML 5 (SRM) + Artemis IV, 3, 2/Msl, 0/3/6/9, 20, 4, 4, E
-MML 7 (SRM) + Artemis IV, 4, 2/Msl, 0/3/6/9, 14, 5.5, 5, E
-MML 9 (SRM) + Artemis IV, 5, 2/Msl, 0/3/6/9, 11, 7, 6, E
-SRM 2, 2, 2/Msl, 0/3/6/9, 50, 1, 1, C
-SRM 4, 3, 2/Msl, 0/3/6/9, 25, 2, 1, C
-SRM 6, 4, 2/Msl, 0/3/6/9, 15, 3, 2, C
-SRM 2 + Artemis IV, 2, 2/Msl, 0/3/6/9, 50, 2, 2, E
-SRM 4 + Artemis IV, 3, 2/Msl, 0/3/6/9, 25, 3, 2, E
-SRM 6 + Artemis IV, 4, 2/Msl, 0/3/6/9, 15, 4, 3, E
-MRM 10, 4, 1/Msl, 0/3/8/15, 24, 3, 2, C
-MRM 20, 6, 1/Msl, 0/3/8/15, 12, 7, 3, C
-MRM 30, 10, 1/Msl, 0/3/8/15, 8, 10, 5, C
-MRM 40, 12, 1/Msl, 0/3/8/15, 6, 12, 7, C
-Rocket Launcher 10, 3, 1/Msl, 0/5/11/18, OS, 0.5, 1, B
-Rocket Launcher 15, 4, 1/Msl, 0/4/9/15, OS, 1, 2, B
-Rocket Launcher 20, 5, 1/Msl, 0/3/7/12, OS, 1.5, 3, B
-Streak SRM 2, 2, 2/Msl, 0/3/6/9, 50, 1.5, 1, E
-Streak SRM 4, 3, 2/Msl, 0/3/6/9, 25, 3, 1, E
-Streak SRM 6, 4, 2/Msl, 0/3/6/9, 15, 4.5, 2, E
+name,tech,class,type,heat,damage,range,ammo,weight,space,rating
+LRM 5,InnerSphere,Missile,LongRange,2,1/Msl,6/7/14/21,24,2,1,C
+LRM 10,InnerSphere,Missile,LongRange,4,1/Msl,6/7/14/21,12,5,2,C
+LRM 15,InnerSphere,Missile,LongRange,5,1/Msl,6/7/14/21,8,7,3,C
+LRM 20,InnerSphere,Missile,LongRange,6,1/Msl,6/7/14/21,6,10,5,C
+LRM 5 + Artemis IV,InnerSphere,Missile,LongRange,2,1/Msl,6/7/14/21,24,3,2,E
+LRM 10 + Artemis IV,InnerSphere,Missile,LongRange,4,1/Msl,6/7/14/21,12,6,3,E
+LRM 15 + Artemis IV,InnerSphere,Missile,LongRange,5,1/Msl,6/7/14/21,8,8,4,E
+LRM 20 + Artemis IV,InnerSphere,Missile,LongRange,6,1/Msl,6/7/14/21,6,11,6,E
+MML 3 (LRM),InnerSphere,Missile,LongRange,2,1/Msl,6/7/14/21,40,1.5,2,E
+MML 5 (LRM),InnerSphere,Missile,LongRange,3,1/Msl,6/7/14/21,24,3,3,E
+MML 7 (LRM),InnerSphere,Missile,LongRange,4,1/Msl,6/7/14/21,17,4.5,4,E
+MML 9 (LRM),InnerSphere,Missile,LongRange,5,1/Msl,6/7/14/21,13,6,5,E
+MML 3 (SRM),InnerSphere,Missile,ShortRange,2,2/Msl,0/3/6/9,33,1.5,2,E
+MML 5 (SRM),InnerSphere,Missile,ShortRange,3,2/Msl,0/3/6/9,20,3,3,E
+MML 7 (SRM),InnerSphere,Missile,ShortRange,4,2/Msl,0/3/6/9,14,4.5,4,E
+MML 9 (SRM),InnerSphere,Missile,ShortRange,5,2/Msl,0/3/6/9,11,6,5,E
+MML 3 (LRM) + Artemis IV,InnerSphere,Missile,LongRange,2,1/Msl,6/7/14/21,40,2.5,3,E
+MML 5 (LRM) + Artemis IV,InnerSphere,Missile,LongRange,3,1/Msl,6/7/14/21,24,4,4,E
+MML 7 (LRM) + Artemis IV,InnerSphere,Missile,LongRange,4,1/Msl,6/7/14/21,17,5.5,5,E
+MML 9 (LRM) + Artemis IV,InnerSphere,Missile,LongRange,5,1/Msl,6/7/14/21,13,7,6,E
+MML 3 (SRM) + Artemis IV,InnerSphere,Missile,ShortRange,2,2/Msl,0/3/6/9,33,2.5,3,E
+MML 5 (SRM) + Artemis IV,InnerSphere,Missile,ShortRange,3,2/Msl,0/3/6/9,20,4,4,E
+MML 7 (SRM) + Artemis IV,InnerSphere,Missile,ShortRange,4,2/Msl,0/3/6/9,14,5.5,5,E
+MML 9 (SRM) + Artemis IV,InnerSphere,Missile,ShortRange,5,2/Msl,0/3/6/9,11,7,6,E
+SRM 2,InnerSphere,Missile,ShortRange,2,2/Msl,0/3/6/9,50,1,1,C
+SRM 4,InnerSphere,Missile,ShortRange,3,2/Msl,0/3/6/9,25,2,1,C
+SRM 6,InnerSphere,Missile,ShortRange,4,2/Msl,0/3/6/9,15,3,2,C
+SRM 2 + Artemis IV,InnerSphere,Missile,ShortRange,2,2/Msl,0/3/6/9,50,2,2,E
+SRM 4 + Artemis IV,InnerSphere,Missile,ShortRange,3,2/Msl,0/3/6/9,25,3,2,E
+SRM 6 + Artemis IV,InnerSphere,Missile,ShortRange,4,2/Msl,0/3/6/9,15,4,3,E
+MRM 10,InnerSphere,Missile,MediumRange,4,1/Msl,0/3/8/15,24,3,2,C
+MRM 20,InnerSphere,Missile,MediumRange,6,1/Msl,0/3/8/15,12,7,3,C
+MRM 30,InnerSphere,Missile,MediumRange,10,1/Msl,0/3/8/15,8,10,5,C
+MRM 40,InnerSphere,Missile,MediumRange,12,1/Msl,0/3/8/15,6,12,7,C
+Rocket Launcher 10,InnerSphere,Missile,MediumRange,3,1/Msl,0/5/11/18,OS,0.5,1,B
+Rocket Launcher 15,InnerSphere,Missile,MediumRange,4,1/Msl,0/4/9/15,OS,1,2,B
+Rocket Launcher 20,InnerSphere,Missile,MediumRange,5,1/Msl,0/3/7/12,OS,1.5,3,B
+Streak SRM 2,InnerSphere,Missile,ShortRange,2,2/Msl,0/3/6/9,50,1.5,1,E
+Streak SRM 4,InnerSphere,Missile,ShortRange,3,2/Msl,0/3/6/9,25,3,1,E
+Streak SRM 6,InnerSphere,Missile,ShortRange,4,2/Msl,0/3/6/9,15,4.5,2,E

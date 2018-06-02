@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { DashboardStateL, IDashState, initial } from './reducer';
+import { DashboardStateL, IDashState, initial } from './reducer'
 
 export const dashStateSelector = (state: any): IDashState => state.Dash || initial
 

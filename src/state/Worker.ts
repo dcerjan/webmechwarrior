@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Action, Reducer } from "redux";
+import { Action, Reducer } from 'redux'
 
 export interface IWorker<S, A extends Action, T> {
   id: string,

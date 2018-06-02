@@ -19,7 +19,7 @@ export const createRootReducer = (dynamic: ReducersMapObject) => {
 }
 
 export const injectDynamicReducer = (id: string, reducer: Reducer) => {
-  dynamicReducers[id] = reducer;
+  dynamicReducers[id] = reducer
 
   return dynamicReducers
 }

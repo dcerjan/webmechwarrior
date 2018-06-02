@@ -6,6 +6,6 @@ export interface IQuirk {
 
 export const Quirk = (props: IQuirk): Readonly<IQuirk> => ({
   ...props,
-});
+})
 
-export const QuirkL = lens<IQuirk>();
+export const QuirkL = lens<IQuirk>()

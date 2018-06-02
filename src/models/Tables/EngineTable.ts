@@ -113,7 +113,7 @@ export const getWalkingMP = (rating: number, tonnage: number): number =>
 export const getRunningMP = (rating: number, tonnage: number): number =>
   Math.ceil(rating / tonnage * 1.5)
 
-export const getEngintInternalHeatsinks = (rating: number): number => 
+export const getEngintInternalHeatsinks = (rating: number): number =>
   Math.floor(rating / 25)
 
 export const getEngineHitPoints = (): number =>
