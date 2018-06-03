@@ -1,2 +1,2 @@
 name,tech,class,type,heat,damage,range,ammo,weight,space,rating
-Plasma Rifle,,InnerSphere,Energy,Plasma,10,10,0/5/10/15,10,6,2,E
+Plasma Rifle,InnerSphere,Energy,Plasma,10,10,0/5/10/15,10,6,2,E

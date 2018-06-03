@@ -1,4 +1,4 @@
-.ItemList {
+.Pane {
   background: rgb(0, 0, 0, 0.7);
   color: white;
   box-sizing: border-box;
@@ -6,10 +6,17 @@
   border-radius: 0px;
   display: flex;
   flex-direction: column;
-  width: 298px;
+  width: 184px;
   margin: 12px 6px;
   cursor: default;
   user-select: none;
-  max-height: 90%;
-  overflow-y: auto;
+}
+
+.Pane > .Title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 3px;
+  border-bottom: 1px solid white;
 }

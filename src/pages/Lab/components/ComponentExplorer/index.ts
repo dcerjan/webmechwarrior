@@ -1,4 +1,4 @@
-import { ItemList as ComponentExplorer } from './ItemList'
+import { ComponentExplorer } from './ComponentExplorer'
 
 export {
   ComponentExplorer,

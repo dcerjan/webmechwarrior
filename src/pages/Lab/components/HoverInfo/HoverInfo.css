@@ -4,6 +4,7 @@
   color: white;
   background: rgb(0, 0, 0, 0.7);
   width: 196px;
+  z-index: 10;
 }
 
 .HoverInfo > .Info {

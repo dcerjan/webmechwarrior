@@ -1,3 +1,4 @@
+/*
 import * as React from 'react'
 
 import './ItemList.css'
@@ -21,33 +22,43 @@ export const ItemList: React.SFC<IComponentExplorerProps> = ({ componentExplorer
       value={componentExplorer.tab}
       onChange={setActiveTab}
       tabs={{
-        'All': (
-          <div>
-            { InnerSphere.map((weapon) => <Item key={weapon.name} weapon={weapon} />) }
-          </div>
-        ),
-        'Energy': (
-          <div>
-            { InnerSphere
-                .filter(weapon => weapon.class === WeaponClass.Energy)
-                .map((weapon) => <Item key={weapon.name} weapon={weapon} />) }
-          </div>
-        ),
-        'Ballistic': (
-          <div>
-            { InnerSphere
-                .filter(weapon => weapon.class === WeaponClass.Ballistic)
-                .map((weapon) => <Item key={weapon.name} weapon={weapon} />) }
-          </div>
-        ),
-        'Missile': (
-          <div>
-            { InnerSphere
-                .filter(weapon => weapon.class === WeaponClass.Missile)
-                .map((weapon) => <Item key={weapon.name} weapon={weapon} />) }
-          </div>
-        )
+        'All': {
+          component: (
+            <div>
+              { InnerSphere.map((weapon) => <Item key={weapon.name} weapon={weapon} />) }
+            </div>
+          ),
+        },
+        'Energy': {
+          component: (
+            <div>
+              { InnerSphere
+                  .filter(weapon => weapon.class === WeaponClass.Energy)
+                  .map((weapon) => <Item key={weapon.name} weapon={weapon} />) }
+            </div>
+          ),
+        },
+        'Ballistic': {
+          component: (
+            <div>
+              { InnerSphere
+                  .filter(weapon => weapon.class === WeaponClass.Ballistic)
+                  .map((weapon) => <Item key={weapon.name} weapon={weapon} />) }
+            </div>
+          ),
+        },
+        'Missile': {
+          component: (
+            <div>
+              { InnerSphere
+                  .filter(weapon => weapon.class === WeaponClass.Missile)
+                  .map((weapon) => <Item key={weapon.name} weapon={weapon} />) }
+            </div>
+          )
+        }
       }}
     />
   </div>
 )
+
+*/

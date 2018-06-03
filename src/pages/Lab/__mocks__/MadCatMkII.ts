@@ -6,7 +6,7 @@ import { Engine } from '../../../models/VehicleBay/Component/Engine'
 import { Gyro } from '../../../models/VehicleBay/Component/Gyro'
 import { Hardpoint } from '../../../models/VehicleBay/Component/Hardpoint'
 import { Trait } from '../../../models/VehicleBay/Component/Trait'
-import { Mech, MechL } from '../../../models/VehicleBay/Mech/Mech'
+import { Mech } from '../../../models/VehicleBay/Mech/Mech'
 import { Section } from '../../../models/VehicleBay/Mech/Section'
 
 export const MadCatMkII = Mech({
@@ -177,5 +177,3 @@ export const MadCatMkII = Mech({
     })
   },
 })
-
-MechL.loadout.LeftArm.armor.set(10)(MadCatMkII)

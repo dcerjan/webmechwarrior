@@ -1,6 +1,9 @@
 import { lens } from 'lens.ts'
 import { Reducer } from 'redux'
 
+import { ArmorType } from '../../../models/Tables/ArmorTable'
+import { InternalStructureType } from '../../../models/Tables/InternalStructureTable'
+import { IHeavyWeaponRecord } from '../../../models/Tables/WeaponTable/HeavyWeaponRecord'
 import { IComponent } from '../../../models/VehicleBay/Component/Component'
 
 import { LabAction, LabActionType } from './actions'
@@ -9,9 +12,31 @@ export interface IComponentExplorerState {
   tab: string,
 }
 
+export enum HoverContextType {
+  None = 'None',
+  HeavyWeapon = 'Heavy Weapon',
+  HeavyWeaponAmmo = 'Heavy Weapon Ammo',
+  Component = 'Component',
+  InternalStructure = 'Internal Structure',
+  Armor = 'Armor',
+  Engine = 'Engine',
+  Gyro = 'Gyro',
+}
+
+type ValidHoverContext =
+  | IHeavyWeaponRecord
+  | IComponent
+  | InternalStructureType
+  | ArmorType
+  | null
+export interface IHoverContextState {
+  type: HoverContextType,
+  context: ValidHoverContext,
+}
+
 export interface ILabState {
   draggedComponent: IComponent | null,
-  hoverContext: IComponent | null,
+  hoverContext: IHoverContextState,
   componentExplorer: IComponentExplorerState
 }
 const LabStateL = lens<ILabState>()
@@ -19,7 +44,10 @@ const LabStateL = lens<ILabState>()
 
 const initial: ILabState = {
   draggedComponent: null,
-  hoverContext: null,
+  hoverContext: {
+    type: HoverContextType.None,
+    context: null
+  },
   componentExplorer: {
     tab: 'All',
   }
