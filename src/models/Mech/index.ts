@@ -13,6 +13,7 @@ export enum Hardpoint {
   Shoulder = 'Shoulder',
   UpperArmActuator = 'UpperArmActuator',
   LowerArmActuator = 'LowerArmActuator',
+  Hand = 'Hand',
   Hip = 'Hip',
   UpperLegActuator = 'UpperLegActuator',
   LowerLegActuator = 'LowerLegActuator',
@@ -30,8 +31,8 @@ export enum Hardpoint {
   EnergyAmmo = 'EnergyAmmo',
   HeatSink = 'HeatSink',
   JumpJet = 'JumpJet',
-  EndoSteel = 'EndoSteel',
-  FerroFibrous = 'FerroFibrous',
+  InternalStructure = 'InternalStructure',
+  Armor = 'Armor',
 }
 
 export interface IComponent {

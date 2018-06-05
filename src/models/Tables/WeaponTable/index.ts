@@ -20,6 +20,20 @@ const InnerSphere = [
   ...isPPCs,
 ].map(parseHeavyWeaponRecord)
 
+const AllHeavyWeapons = [
+  ...InnerSphere,
+]
+
 export {
   InnerSphere,
+}
+
+export const getHeavyWeaponCriticalSlots = (name: string): number => {
+  const found = AllHeavyWeapons.find(weapon => weapon.name === name)
+
+  if (found) {
+    return found.space
+  } else {
+    throw new Error(`No heavy weapon ${name} found`)
+  }
 }

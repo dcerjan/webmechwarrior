@@ -22,7 +22,7 @@
 }
 
 .CriticalsSection > .Header > .Title {
-  flex: 1 1;
+  flex: 2 2;
 }
 
 .CriticalsSection > .Header > .Hardpoints {
@@ -134,7 +134,7 @@
 }
 
 
-.CriticalsSection > .Component > .FerroFibrous, .EndoSteel, .Engine, .Gyro {
+.CriticalsSection > .Component > .InternalStructure, .Armor, .Engine, .Gyro {
   background: rgb(63, 73, 73);
 }
 

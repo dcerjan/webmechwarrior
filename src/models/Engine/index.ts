@@ -188,7 +188,7 @@ export const getAvailableEngines = (tech: TechType) => {
   }
 }
 
-export const getEngineCriticalSlotAllocation = (tech: TechType, type: EngineType): IEngineCriticalSlotAllocation => {
+export const getEngineCriticalSlotAllocation = (type: EngineType): IEngineCriticalSlotAllocation => {
   switch (type) {
   case EngineType.Standard: return { [MechComponentType.CenterTorso]: 6 }
   case EngineType.Compact: return { [MechComponentType.CenterTorso]: 3 }

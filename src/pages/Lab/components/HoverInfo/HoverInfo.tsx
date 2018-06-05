@@ -40,9 +40,9 @@ const getInfo = (mech: IMech, hoverContext: IHoverContextState) => {
 const getComponent = (mech: IMech, component: IComponent) => {
   switch (component.type) {
   case Hardpoint.Engine:
-    return <EngineInfo engine={mech.engine} mechTonnage={mech.tonnage} tech={mech.tech} />
+    return <EngineInfo engine={mech.engine} mechTonnage={mech.tonnage} />
   case Hardpoint.Gyro:
-    return <GyroInfo engine={mech.engine} gyro={mech.gyro} tech={mech.tech} />
+    return <GyroInfo engine={mech.engine} gyro={mech.gyro} />
   default:
     return <div>{`#TODO: ${component.type}`}</div>
   }

@@ -2,8 +2,8 @@ import { EngineRating, getRunningMP, getWalkingMP } from '../Engine'
 import { MechTonnage } from '../InternalStructure'
 
 export enum JumpJetType {
-  Standard = 'Standard',
-  Improved = 'Improved',
+  Standard = 'Standard Jump Jet',
+  Improved = 'Improved Jump Jet',
 }
 
 interface IJumpJetRecord {

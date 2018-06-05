@@ -4,6 +4,7 @@ import { TechType } from '../../../models/common/TechType'
 import { Engine, EngineType, getEngineHitPoints, getEngintInternalHeatsinks } from '../../../models/Engine'
 import { getGyroHitPoints, Gyro, GyroType } from '../../../models/Gryo'
 import { InternalStructureType } from '../../../models/InternalStructure'
+import { JumpJetType } from '../../../models/JumpJets'
 import { Component, Hardpoint, Mech, Section } from '../../../models/Mech'
 
 export const MadCatMkII = Mech({
@@ -33,7 +34,7 @@ export const MadCatMkII = Mech({
         Component({ name: 'Life Support', type: Hardpoint.LifeSupport }),
         Component({ name: 'Sensors', type: Hardpoint.Sensors }),
         Component({ name: 'Cockpit', type: Hardpoint.Cockpit }),
-        Component({ name: 'Ferro Fibrous', type: Hardpoint.FerroFibrous }),
+        Component({ name: ArmorType.FerroFibrousClan, type: Hardpoint.Armor }),
         Component({ name: 'Sensors', type: Hardpoint.Sensors }),
         Component({ name: 'Life Support', type: Hardpoint.LifeSupport }),
       ],
@@ -46,10 +47,10 @@ export const MadCatMkII = Mech({
       criticals: 6,
       hardpoints: [Hardpoint.Energy],
       components: [
-        Component({ name: 'XL Fusion engine', type: Hardpoint.Engine }),
-        Component({ name: 'Gyro', type: Hardpoint.Gyro }),
-        Component({ name: 'Jump Jet (H)', type: Hardpoint.JumpJet }),
-        Component({ name: 'Endo Steel', type: Hardpoint.EndoSteel }),
+        Component({ name: EngineType.ExtraLightClan, type: Hardpoint.Engine }),
+        Component({ name: GyroType.Standard, type: Hardpoint.Gyro }),
+        Component({ name: JumpJetType.Standard, type: Hardpoint.JumpJet }),
+        Component({ name: InternalStructureType.EndoSteelClan, type: Hardpoint.InternalStructure }),
       ]
     }),
     [MechComponentType.LeftTorso]: Section({
@@ -60,17 +61,17 @@ export const MadCatMkII = Mech({
       criticals: 12,
       hardpoints: [Hardpoint.Energy, Hardpoint.Energy, Hardpoint.Missile],
       components: [
-        Component({ name: 'XL Fusion engine', type: Hardpoint.Engine }),
-        Component({ name: 'Jump Jet (H)', type: Hardpoint.JumpJet }),
+        Component({ name: EngineType.ExtraLightClan, type: Hardpoint.Engine }),
+        Component({ name: JumpJetType.Standard, type: Hardpoint.JumpJet }),
         Component({ name: 'ER Medium Laser', type: Hardpoint.Energy }),
         Component({ name: 'ER Medium Laser', type: Hardpoint.Energy }),
-        Component({ name: 'LRM 10 ', type: Hardpoint.Missile }),
+        Component({ name: 'LRM 10', type: Hardpoint.Missile }),
         Component({ name: 'LRM Ammo', type: Hardpoint.MissileAmmo }),
         Component({ name: 'Gauss Ammo ', type: Hardpoint.BallisticAmmo }),
         Component({ name: 'Gauss Ammo ', type: Hardpoint.BallisticAmmo }),
-        Component({ name: 'Endo Steel', type: Hardpoint.EndoSteel }),
-        Component({ name: 'Ferro Fibrous', type: Hardpoint.FerroFibrous }),
-        Component({ name: 'Ferro Fibrous', type: Hardpoint.FerroFibrous }),
+        Component({ name: InternalStructureType.EndoSteelClan, type: Hardpoint.InternalStructure }),
+        Component({ name: ArmorType.FerroFibrousClan, type: Hardpoint.Armor }),
+        Component({ name: ArmorType.FerroFibrousClan, type: Hardpoint.Armor }),
       ],
     }),
     [MechComponentType.RightTorso]: Section({
@@ -81,17 +82,17 @@ export const MadCatMkII = Mech({
       criticals: 12,
       hardpoints: [Hardpoint.Energy, Hardpoint.Energy, Hardpoint.Missile],
       components: [
-        Component({ name: 'XL Fusion engine', type: Hardpoint.Engine }),
-        Component({ name: 'Jump Jet (H)', type: Hardpoint.JumpJet }),
+        Component({ name: EngineType.ExtraLightClan, type: Hardpoint.Engine }),
+        Component({ name: JumpJetType.Standard, type: Hardpoint.JumpJet }),
         Component({ name: 'ER Medium Laser', type: Hardpoint.Energy }),
         Component({ name: 'ER Medium Laser', type: Hardpoint.Energy }),
-        Component({ name: 'LRM 10 ', type: Hardpoint.Missile }),
+        Component({ name: 'LRM 10', type: Hardpoint.Missile }),
         Component({ name: 'LRM Ammo', type: Hardpoint.MissileAmmo }),
         Component({ name: 'Gauss Ammo ', type: Hardpoint.BallisticAmmo }),
         Component({ name: 'Gauss Ammo ', type: Hardpoint.BallisticAmmo }),
-        Component({ name: 'Endo Steel', type: Hardpoint.EndoSteel }),
-        Component({ name: 'Ferro Fibrous', type: Hardpoint.FerroFibrous }),
-        Component({ name: 'Ferro Fibrous', type: Hardpoint.FerroFibrous }),
+        Component({ name: InternalStructureType.EndoSteelClan, type: Hardpoint.InternalStructure }),
+        Component({ name: ArmorType.FerroFibrousClan, type: Hardpoint.Armor }),
+        Component({ name: ArmorType.FerroFibrousClan, type: Hardpoint.Armor }),
       ],
     }),
     [MechComponentType.LeftArm]: Section({
@@ -104,7 +105,7 @@ export const MadCatMkII = Mech({
         Component({ name: 'Shoulder', type: Hardpoint.Shoulder }),
         Component({ name: 'Upper Arm Actuator', type: Hardpoint.UpperArmActuator }),
         Component({ name: 'Gauss Rifle', type: Hardpoint.Ballistic }),
-        Component({ name: 'Ferro Fibrous', type: Hardpoint.FerroFibrous }),
+        Component({ name: ArmorType.FerroFibrousClan, type: Hardpoint.Armor }),
       ],
     }),
     [MechComponentType.RightArm]: Section({
@@ -117,7 +118,7 @@ export const MadCatMkII = Mech({
         Component({ name: 'Shoulder', type: Hardpoint.Shoulder }),
         Component({ name: 'Upper Arm Actuator', type: Hardpoint.UpperArmActuator }),
         Component({ name: 'Gauss Rifle', type: Hardpoint.Ballistic }),
-        Component({ name: 'Ferro Fibrous', type: Hardpoint.FerroFibrous }),
+        Component({ name: ArmorType.FerroFibrousClan, type: Hardpoint.Armor }),
       ],
     }),
     [MechComponentType.LeftLeg]: Section({
@@ -131,8 +132,8 @@ export const MadCatMkII = Mech({
         Component({ name: 'Upper Leg Actuator', type: Hardpoint.UpperLegActuator }),
         Component({ name: 'Lower Leg Actuator', type: Hardpoint.LowerLegActuator }),
         Component({ name: 'Foot Actuator', type: Hardpoint.FootActuator }),
-        Component({ name: 'Endo Steel', type: Hardpoint.EndoSteel }),
-        Component({ name: 'Endo Steel', type: Hardpoint.EndoSteel }),
+        Component({ name: InternalStructureType.EndoSteelClan, type: Hardpoint.InternalStructure }),
+        Component({ name: InternalStructureType.EndoSteelClan, type: Hardpoint.InternalStructure }),
       ],
     }),
     [MechComponentType.RightLeg]: Section({
@@ -146,8 +147,8 @@ export const MadCatMkII = Mech({
         Component({ name: 'Upper Leg Actuator', type: Hardpoint.UpperLegActuator }),
         Component({ name: 'Lower Leg Actuator', type: Hardpoint.LowerLegActuator }),
         Component({ name: 'Foot Actuator', type: Hardpoint.FootActuator }),
-        Component({ name: 'Endo Steel', type: Hardpoint.EndoSteel }),
-        Component({ name: 'Endo Steel', type: Hardpoint.EndoSteel }),
+        Component({ name: InternalStructureType.EndoSteelClan, type: Hardpoint.InternalStructure }),
+        Component({ name: InternalStructureType.EndoSteelClan, type: Hardpoint.InternalStructure }),
       ],
     })
   },

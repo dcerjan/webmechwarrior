@@ -2,10 +2,10 @@ import { lens } from 'lens.ts'
 import { TechType } from '../common/TechType'
 
 export enum GyroType {
-  Compact = 'Compact',
-  HeavyDuty = 'HeavyDuty',
-  Standard = 'Standard',
-  XL = 'XL',
+  Compact = 'Compact Gyro',
+  HeavyDuty = 'HeavyDuty Gyro',
+  Standard = 'Standard Gyro',
+  XL = 'XL Gyro',
 }
 
 export interface IGyro {

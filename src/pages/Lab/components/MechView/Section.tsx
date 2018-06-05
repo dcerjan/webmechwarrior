@@ -7,6 +7,9 @@ import { HoverContextType, IHoverContextState } from '../../state/reducer'
 import './Section.css'
 
 import { ArmorType, getMaxArmorForPart } from '../../../../models/Armor'
+import { MechComponentType } from '../../../../models/common/MechComponentType'
+import { getCriticalSlotsFor } from '../../../../models/common/utils'
+import { IEngineCriticalSlotAllocation } from '../../../../models/Engine'
 import { MechTonnage } from '../../../../models/InternalStructure'
 import { Component, Hardpoint, IComponent, IMech, ISection } from '../../../../models/Mech'
 
@@ -53,26 +56,38 @@ const Info: React.SFC<IInfoProps> = ({ mechTonnage, armorType, section }) => (
 )
 
 interface ICriticalSlotsProps {
-  component: IComponent[],
+  mechComponentType: MechComponentType,
+  components: IComponent[],
   criticals: number,
   setHoverContext: (context: IHoverContextState) => void,
 }
 
-const CriticalSlots: React.SFC<ICriticalSlotsProps> = ({ component, criticals, setHoverContext }) => {
+const CriticalSlots: React.SFC<ICriticalSlotsProps> = ({ mechComponentType, components, criticals, setHoverContext }) => {
   const empty = Component({ name: '-- empty slot --', type: Hardpoint.Empty })
 
-  // const takenCriticals = component.reduce((sum, c) => sum + c.criticals, 0)
-  const takenCriticals = component.reduce((sum, c) => sum + 1, 0)
+  const getCriticals = (component: IComponent): number => {
+    if (
+      (component.type === Hardpoint.Engine) &&
+      [MechComponentType.CenterTorso, MechComponentType.LeftTorso, MechComponentType.RightTorso].includes(mechComponentType)
+    ) {
+      const criticalsAllocation = getCriticalSlotsFor(component.type, component.name) as IEngineCriticalSlotAllocation
+      return criticalsAllocation[mechComponentType]
+    } else {
+      return getCriticalSlotsFor(component.type, component.name) as number
+    }
+  }
+
+  const takenCriticals = components.reduce((sum, c) => sum + getCriticals(c), 0)
 
   return (
     <Destructure>
       {
-        [...component, ...replicate(empty, criticals - takenCriticals)]
+        [...components, ...replicate(empty, criticals - takenCriticals)]
           .map((critical, index) => (
             <div
               key={`${critical.name}:${index}`}
               className={`Critical ${critical.type}`}
-              style={{ height: 20 * 1} /* style={{ height: 20 * critical.criticals}} */ }
+              style={{ height: 20 * getCriticals(critical) }}
               onMouseEnter={() => setHoverContext({ type: HoverContextType.Component, context: critical })}
               onMouseLeave={() => setHoverContext({ type: HoverContextType.None, context: null })}
             >
@@ -129,8 +144,9 @@ export const Section: React.SFC<ISectionProps> = ({ mech, section, setHoverConte
       </div>
       <div className='Component'>
         <CriticalSlots
+          mechComponentType={section.name}
           criticals={section.criticals}
-          component={section.components}
+          components={section.components}
           setHoverContext={setHoverContext}
         />
       </div>

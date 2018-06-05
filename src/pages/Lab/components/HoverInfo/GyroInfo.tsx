@@ -1,25 +1,23 @@
 import * as React from 'react'
 
-import { TechType } from '../../../../models/common/TechType'
 import { IEngine } from '../../../../models/Engine'
 import { getGyroCriticals, getGyroHitPoints, getGyroTonnage, IGyro } from '../../../../models/Gryo'
 
 interface IEngineInfoProps {
-  tech: TechType,
   engine: IEngine,
   gyro: IGyro
 }
 
-export const GyroInfo: React.SFC<IEngineInfoProps> = ({ tech, engine, gyro }) => (
+export const GyroInfo: React.SFC<IEngineInfoProps> = ({ engine, gyro }) => (
   <div className='Info'>
     <div className='Section'>
       <div className='Detail'>
-        <div>{tech} tech gyro</div>
+        <div>Gyro</div>
       </div>
     </div>
     <div className='Section'>
       <div className='Detail'>
-        <div>Gyro:</div>
+        <div>Type:</div>
         <div>{ gyro.type }</div>
       </div>
       <div className='Detail'>

@@ -1,6 +1,5 @@
 import * as React from 'react'
 
-import { TechType } from '../../../../models/common/TechType'
 import {
   getEngineCriticalSlotAllocation,
   getEngineHitPoints,
@@ -14,24 +13,23 @@ import {
 import { MechTonnage } from '../../../../models/InternalStructure'
 
 interface IEngineInfoProps {
-  tech: TechType,
   mechTonnage: MechTonnage,
   engine: IEngine,
 }
 
-export const EngineInfo: React.SFC<IEngineInfoProps> = ({ tech, mechTonnage, engine }) => {
-  const criticalSlotAllocation = getEngineCriticalSlotAllocation(tech, engine.type)
+export const EngineInfo: React.SFC<IEngineInfoProps> = ({ mechTonnage, engine }) => {
+  const criticalSlotAllocation = getEngineCriticalSlotAllocation(engine.type)
 
   return (
     <div className='Info'>
       <div className='Section'>
         <div className='Detail'>
-          <div>{tech} tech engine</div>
+          <div>Engine</div>
         </div>
       </div>
       <div className='Section'>
         <div className='Detail'>
-          <div>Engine:</div>
+          <div>Type:</div>
           <div>{ engine.type }</div>
         </div>
         <div className='Detail'>
@@ -44,7 +42,7 @@ export const EngineInfo: React.SFC<IEngineInfoProps> = ({ tech, mechTonnage, eng
         </div>
         <div className='Detail'>
           <div>Internal heatsinks:</div>
-          <div>{ getEngintInternalHeatsinks(engine.rating) }</div>
+          <div>{ engine.internalHeatSinks }/{ getEngintInternalHeatsinks(engine.rating) }</div>
         </div>
         <div className='Detail'>
           <div>Tonnage:</div>
