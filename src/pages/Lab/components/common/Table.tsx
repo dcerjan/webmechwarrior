@@ -4,16 +4,16 @@ import Scrollbars from 'react-custom-scrollbars'
 
 import './Table.css'
 
-export interface IColumnConfig<T> {
+export interface IColumnConfig<T, S extends keyof T, V = T[S]> {
   title: keyof T,
   weight?: number,
   align?: ColumnAlign,
-  format?: (value: T[keyof T]) => string,
-  className?: (value: T) => string,
+  format?: (row: T, value: V) => string,
+  className?: (row: T, value: V) => string,
 }
 
 export interface IRowConfig<T> {
-  columns: Array<IColumnConfig<T>>,
+  columns: Array<IColumnConfig<T, keyof T>>,
   className?: (value: T) => string,
   onEnter?: (event: React.MouseEvent<HTMLDivElement>, value: T) => void,
   onLeave?: (event: React.MouseEvent<HTMLDivElement>, value: T) => void,
@@ -69,14 +69,14 @@ export const Table: React.SFC<ITableProps<any>> = ({ config, data }) => {
               { config.columns.map(column => (
                 <div
                   key={column.title}
-                  className={classNames('Column', column.align || DEFAULT_COLUMN_ALIGN, column.className && column.className(item))}
+                  className={classNames('Column', column.align || DEFAULT_COLUMN_ALIGN, column.className && column.className(item, item[column.title]))}
                   style={{
                     flex: `${column.weight || DEFAULT_COLUMN_WEIGHT}px`,
                     width: `${column.weight || DEFAULT_COLUMN_WEIGHT}px`,
                   }}
                 >
                   { column.format
-                    ? column.format(item[column.title])
+                    ? column.format(item, item[column.title])
                     : item[column.title] }
                 </div>
               )) }

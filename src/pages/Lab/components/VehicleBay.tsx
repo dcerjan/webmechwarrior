@@ -5,8 +5,8 @@ import './VehicleBay.css'
 
 import { IComponentExplorerState, IHoverContextState } from '../state/reducer'
 
-import { ArmorType } from '../../../models/Tables/ArmorTable'
-import { InternalStructureType } from '../../../models/Tables/InternalStructureTable'
+import { ArmorType } from '../../../models/Armor'
+import { InternalStructureType } from '../../../models/InternalStructure'
 import { MadCatMkII } from '../__mocks__/MadCatMkII'
 import { ComponentExplorer } from './ComponentExplorer'
 import { HoverInfo } from './HoverInfo'

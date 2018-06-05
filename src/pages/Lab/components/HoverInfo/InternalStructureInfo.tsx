@@ -1,10 +1,9 @@
 import * as React from 'react'
-
-import { getInternalStructureCriticals, getInternalStructureTonnage, InternalStructureType } from '../../../../models/Tables/InternalStructureTable'
+import { getInternalStructureCriticals, getInternalStructureTonnage, InternalStructureType, MechTonnage } from '../../../../models/InternalStructure'
 
 interface IInternalStructureInfoProps {
   internalStructure: InternalStructureType,
-  mechTonnage: number,
+  mechTonnage: MechTonnage,
 }
 
 export const InternalStructureInfo: React.SFC<IInternalStructureInfoProps> = ({

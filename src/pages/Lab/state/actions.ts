@@ -1,4 +1,5 @@
-import { IComponent } from '../../../models/VehicleBay/Component/Component'
+
+import { IComponent } from '../../../models/Mech'
 import { IHoverContextState } from './reducer'
 
 export enum LabActionType {

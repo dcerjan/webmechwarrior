@@ -1,16 +1,14 @@
 import * as React from 'react'
 
 import { IHeavyWeaponRecord } from '../../../../models/Tables/WeaponTable/HeavyWeaponRecord'
-import { IComponent } from '../../../../models/VehicleBay/Component/Component'
-import { Hardpoint } from '../../../../models/VehicleBay/Component/Hardpoint'
-import { IMech } from '../../../../models/VehicleBay/Mech/Mech'
 
 import { HoverContextType, IHoverContextState } from '../../state/reducer'
 
 import './HoverInfo.css'
 
-import { ArmorType } from '../../../../models/Tables/ArmorTable'
-import { InternalStructureType } from '../../../../models/Tables/InternalStructureTable'
+import { ArmorType } from '../../../../models/Armor'
+import { InternalStructureType } from '../../../../models/InternalStructure'
+import { Hardpoint, IComponent, IMech } from '../../../../models/Mech'
 import { ArmorTypeInfo } from './ArmorInfo'
 import { EngineInfo } from './EngineInfo'
 import { GyroInfo } from './GyroInfo'
@@ -42,9 +40,9 @@ const getInfo = (mech: IMech, hoverContext: IHoverContextState) => {
 const getComponent = (mech: IMech, component: IComponent) => {
   switch (component.type) {
   case Hardpoint.Engine:
-    return <EngineInfo {...mech} />
+    return <EngineInfo engine={mech.engine} mechTonnage={mech.tonnage} tech={mech.tech} />
   case Hardpoint.Gyro:
-    return <GyroInfo {...mech} />
+    return <GyroInfo engine={mech.engine} gyro={mech.gyro} tech={mech.tech} />
   default:
     return <div>{`#TODO: ${component.type}`}</div>
   }

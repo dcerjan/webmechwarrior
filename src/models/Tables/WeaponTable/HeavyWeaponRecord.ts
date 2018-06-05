@@ -1,6 +1,7 @@
 import { lens } from 'lens.ts'
-import { TechType } from '../TechType'
-import { TechRating } from './TechRating'
+
+import { TechAvailability } from '../../common/TechAvailability'
+import { TechType } from '../../common/TechType'
 
 interface IDamage {
   short: number,
@@ -46,7 +47,7 @@ export interface IHeavyWeaponRecord {
   ammo?: number,
   weight: number,
   space: number,
-  rating: TechRating,
+  techAvailability: TechAvailability,
 }
 export const HeavyWeaponL = lens<IHeavyWeaponRecord>()
 
@@ -97,7 +98,7 @@ export const parseHeavyWeaponRecord = (weapon: IWeaponTableRow): IHeavyWeaponRec
   ammo: weapon.ammo === 'NA'
     ? undefined
     : parseInt(weapon.ammo, 10),
-  weight: parseInt(weapon.weight, 10),
+  weight: parseFloat(weapon.weight),
   space: parseInt(weapon.space, 10),
-  rating: weapon.rating as TechRating,
+  techAvailability: weapon.rating as TechAvailability,
 })

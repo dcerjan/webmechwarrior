@@ -1,5 +1,5 @@
-import { getInternalStructureHitPoints } from './InternalStructureTable'
-import { MechComponentType } from './MechComponentType'
+import { MechComponentType } from '../common/MechComponentType'
+import { getMaxArmorHitPoints, MechTonnage } from '../InternalStructure'
 
 export enum ArmorType {
   Standard = 'Standard',
@@ -32,10 +32,8 @@ export const getArmorBasePointMultiplier = (type: ArmorType) => {
     }
 }
 
-export const getMaxArmorForPart = (mechTonnage: number, type: ArmorType, component: MechComponentType): number => {
-  const points = component !== MechComponentType.Head
-    ? getInternalStructureHitPoints(mechTonnage, component) * 2.0
-    : 9
+export const getMaxArmorForPart = (mechTonnage: MechTonnage, type: ArmorType, component: MechComponentType): number => {
+  const points = getMaxArmorHitPoints(mechTonnage, component)
   const multiplier = getArmorBasePointMultiplier(type)
 
   return Math.floor(points * multiplier)

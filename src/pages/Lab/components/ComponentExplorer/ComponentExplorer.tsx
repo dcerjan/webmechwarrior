@@ -32,17 +32,18 @@ const getTableConfig = (
     columns: [
       {
         title: 'name',
-        weight: 180,
+        weight: 150,
       },
       {
         title: 'space',
-        weight: 50,
+        weight: 30,
         align: ColumnAlign.Right,
       },
       {
         title: 'weight',
         weight: 50,
         align: ColumnAlign.Right,
+        format: (value) => `${value.weight.toFixed(1)} tons`
       },
     ]
   }

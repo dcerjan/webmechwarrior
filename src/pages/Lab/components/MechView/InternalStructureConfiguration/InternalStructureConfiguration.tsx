@@ -1,12 +1,12 @@
 import * as classNames from 'classnames'
 import * as React from 'react'
 
-import { InternalStructureType } from '../../../../../models/Tables/InternalStructureTable'
 
 import { Pane } from '../../common/Pane'
 
 import { HoverContextType, IHoverContextState } from '../../../state/reducer'
 
+import { InternalStructureType } from '../../../../../models/InternalStructure'
 import './InternalStructureConfiguration.css'
 
 

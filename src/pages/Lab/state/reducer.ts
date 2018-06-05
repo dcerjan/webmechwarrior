@@ -1,11 +1,11 @@
 import { lens } from 'lens.ts'
 import { Reducer } from 'redux'
 
-import { ArmorType } from '../../../models/Tables/ArmorTable'
-import { InternalStructureType } from '../../../models/Tables/InternalStructureTable'
 import { IHeavyWeaponRecord } from '../../../models/Tables/WeaponTable/HeavyWeaponRecord'
-import { IComponent } from '../../../models/VehicleBay/Component/Component'
 
+import { ArmorType } from '../../../models/Armor'
+import { InternalStructureType } from '../../../models/InternalStructure'
+import { IComponent } from '../../../models/Mech'
 import { LabAction, LabActionType } from './actions'
 
 export interface IComponentExplorerState {
@@ -37,7 +37,7 @@ export interface IHoverContextState {
 export interface ILabState {
   draggedComponent: IComponent | null,
   hoverContext: IHoverContextState,
-  componentExplorer: IComponentExplorerState
+  componentExplorer: IComponentExplorerState,
 }
 const LabStateL = lens<ILabState>()
 

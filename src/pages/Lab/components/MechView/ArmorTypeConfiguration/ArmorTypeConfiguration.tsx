@@ -5,7 +5,7 @@ import { Pane } from '../../common/Pane'
 
 import { HoverContextType, IHoverContextState } from '../../../state/reducer'
 
-import { ArmorType } from '../../../../../models/Tables/ArmorTable'
+import { ArmorType } from '../../../../../models/Armor'
 import './ArmorTypeConfiguration.css'
 
 

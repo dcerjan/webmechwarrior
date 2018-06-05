@@ -2,15 +2,13 @@ import * as React from 'react'
 
 import { replicate } from '../../../../lib/functional'
 
-import { TechType } from '../../../../models/Tables/TechType'
-import { Component, IComponent } from '../../../../models/VehicleBay/Component/Component'
-import { Hardpoint } from '../../../../models/VehicleBay/Component/Hardpoint'
-import { IMech, MechParts } from '../../../../models/VehicleBay/Mech/Mech'
-import { ISection } from '../../../../models/VehicleBay/Mech/Section'
-
 import { HoverContextType, IHoverContextState } from '../../state/reducer'
 
 import './Section.css'
+
+import { ArmorType, getMaxArmorForPart } from '../../../../models/Armor'
+import { MechTonnage } from '../../../../models/InternalStructure'
+import { Component, Hardpoint, IComponent, IMech, ISection } from '../../../../models/Mech'
 
 const countHardpoints = (hardpointType: Hardpoint, section: ISection): number =>
   section.hardpoints.filter(hardpoint => hardpoint === hardpointType).length
@@ -18,26 +16,23 @@ const countHardpoints = (hardpointType: Hardpoint, section: ISection): number =>
 const Destructure: React.SFC<any> = ({ children }) => (children || null)
 
 interface IInfoProps {
+  mechTonnage: MechTonnage,
+  armorType: ArmorType,
   section: ISection,
 }
 
-const Info: React.SFC<IInfoProps> = ({ section }) => (
+const Info: React.SFC<IInfoProps> = ({ mechTonnage, armorType, section }) => (
   <Destructure>
     <div className='Detail'>
       <div>Armor</div>
-      <div>{ section.armor }/{
-        name === MechParts.Head
-          ? 9
-          : section.structure * 2 - (section.rearArmor != null
-            ? section.rearArmor
-            : 0) }
+      <div>{ section.armor }/{ getMaxArmorForPart(mechTonnage, armorType, section.name) - (section.rearArmor || 0) }
       </div>
     </div>
     { section.rearArmor != null
       ? (
         <div className='Detail'>
           <div>Rear Armor</div>
-          <div>{ section.rearArmor }/{ section.structure * 2 - section.armor }</div>
+          <div>{ section.rearArmor }/{ getMaxArmorForPart(mechTonnage, armorType, section.name) - section.armor }</div>
         </div>
       )
       : null }
@@ -45,7 +40,7 @@ const Info: React.SFC<IInfoProps> = ({ section }) => (
       <div>Structure</div>
       <div>{ section.structure }</div>
     </div>
-    {
+    { /* dd traits
       section.traits.length
         ? section.traits.map((trait, index) => (
           <div key={`${trait.name}:${index}`} className='Detail'>
@@ -53,7 +48,7 @@ const Info: React.SFC<IInfoProps> = ({ section }) => (
           </div>
         ))
         : null
-    }
+      */ }
   </Destructure>
 )
 
@@ -64,9 +59,10 @@ interface ICriticalSlotsProps {
 }
 
 const CriticalSlots: React.SFC<ICriticalSlotsProps> = ({ component, criticals, setHoverContext }) => {
-  const empty = Component({ name: '-- empty slot --', criticals: 1, type: Hardpoint.Empty, tech: TechType.Clan })
+  const empty = Component({ name: '-- empty slot --', type: Hardpoint.Empty })
 
-  const takenCriticals = component.reduce((sum, c) => sum + c.criticals, 0)
+  // const takenCriticals = component.reduce((sum, c) => sum + c.criticals, 0)
+  const takenCriticals = component.reduce((sum, c) => sum + 1, 0)
 
   return (
     <Destructure>
@@ -76,18 +72,20 @@ const CriticalSlots: React.SFC<ICriticalSlotsProps> = ({ component, criticals, s
             <div
               key={`${critical.name}:${index}`}
               className={`Critical ${critical.type}`}
-              style={{ height: 20 * critical.criticals}}
+              style={{ height: 20 * 1} /* style={{ height: 20 * critical.criticals}} */ }
               onMouseEnter={() => setHoverContext({ type: HoverContextType.Component, context: critical })}
               onMouseLeave={() => setHoverContext({ type: HoverContextType.None, context: null })}
             >
               <div>
                 { critical.name }
               </div>
+              { /* get ammo
               { critical.ammoPerTonn != null
                 ? (
                   <div>({ critical.ammoPerTonn })</div>
                 )
                 : null }
+              */ }
             </div>
           ))
       }
@@ -127,7 +125,7 @@ export const Section: React.SFC<ISectionProps> = ({ mech, section, setHoverConte
         </div>
       </div>
       <div className='Info'>
-        <Info section={section} />
+        <Info section={section} mechTonnage={mech.tonnage} armorType={mech.armorType}/>
       </div>
       <div className='Component'>
         <CriticalSlots

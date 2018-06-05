@@ -1,11 +1,12 @@
 import * as React from 'react'
+import { ArmorType, getArmorCriticalSlots, getMaxArmorForPart } from '../../../../models/Armor'
+import { MechComponentType } from '../../../../models/common/MechComponentType'
+import { MechTonnage } from '../../../../models/InternalStructure'
 
-import { ArmorType, getArmorCriticalSlots, getMaxArmorForPart } from '../../../../models/Tables/ArmorTable'
-import { MechComponentType } from '../../../../models/Tables/MechComponentType'
 
 interface IArmorTypeInfoProps {
   armorType: ArmorType,
-  mechTonnage: number,
+  mechTonnage: MechTonnage,
 }
 
 export const ArmorTypeInfo: React.SFC<IArmorTypeInfoProps> = ({
@@ -42,13 +43,7 @@ export const ArmorTypeInfo: React.SFC<IArmorTypeInfoProps> = ({
           <div>Max armor total:</div>
           <div>
             { Object.values(MechComponentType)
-              .reduce((total, component) => {
-                if ([MechComponentType.Arm, MechComponentType.Leg, MechComponentType.SideTorso].includes(component)) {
-                  return total + 2.0 * getMaxArmorForPart(mechTonnage, armorType, component)
-                } else {
-                  return getMaxArmorForPart(mechTonnage, armorType, component)
-                }
-              }, 0)
+              .reduce((total, component) => total + getMaxArmorForPart(mechTonnage, armorType, component), 0)
             }
           </div>
         </div>

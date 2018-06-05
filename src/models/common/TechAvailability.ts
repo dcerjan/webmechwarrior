@@ -1,4 +1,4 @@
-export enum TechRating {
+export enum TechAvailability {
   A = 'A',
   B = 'B',
   C = 'C',
