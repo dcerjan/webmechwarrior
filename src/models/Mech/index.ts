@@ -8,7 +8,7 @@ import { IEngine } from '../Engine'
 import { IGyro } from '../Gryo'
 import { InternalStructure, MechTonnage } from '../InternalStructure'
 
-interface IBaseMech {
+export interface IBaseMech {
   name: string,
   tech: Tech,
   type: MechType,
@@ -19,17 +19,19 @@ interface IBaseMech {
   armor: Armor
 }
 
+export interface IBipedalLoadout {
+  [Component.Head]: IHead,
+  [Component.CenterTorso]: ICenterTorso,
+  [Component.LeftTorso]: ISideTorso,
+  [Component.RightTorso]: ISideTorso,
+  [Component.LeftArm]: IArm,
+  [Component.RightArm]: IArm,
+  [Component.LeftLeg]: ILeg,
+  [Component.RightLeg]: ILeg,
+}
+
 export interface IBipedalMech extends IBaseMech {
-  loadout: {
-    [Component.Head]: IHead,
-    [Component.CenterTorso]: ICenterTorso,
-    [Component.LeftTorso]: ISideTorso,
-    [Component.RightTorso]: ISideTorso,
-    [Component.LeftArm]: IArm,
-    [Component.RightArm]: IArm,
-    [Component.LeftLeg]: ILeg,
-    [Component.RightLeg]: ILeg,
-  },
+  loadout: IBipedalLoadout,
 }
 
 export const BipedalMech = (props: IBipedalMech): Readonly<IBipedalMech> => ({
@@ -38,17 +40,19 @@ export const BipedalMech = (props: IBipedalMech): Readonly<IBipedalMech> => ({
 
 export const BipedalMechL = lens<IBipedalMech>()
 
+export interface IQuadrupedalLoadout {
+  [Component.Head]: IHead,
+  [Component.CenterTorso]: ICenterTorso,
+  [Component.LeftTorso]: ISideTorso,
+  [Component.RightTorso]: ISideTorso,
+  [Component.FrontLeftLeg]: ILeg,
+  [Component.FrontRightLeg]: ILeg,
+  [Component.RearLeftLeg]: ILeg,
+  [Component.RearRightLeg]: ILeg,
+}
+
 export interface IQuadrupedalMech extends IBaseMech {
-  loadout: {
-    [Component.Head]: IHead,
-    [Component.CenterTorso]: ICenterTorso,
-    [Component.LeftTorso]: ISideTorso,
-    [Component.RightTorso]: ISideTorso,
-    [Component.FrontLeftLeg]: ILeg,
-    [Component.FrontRightLeg]: ILeg,
-    [Component.RearLeftLeg]: ILeg,
-    [Component.RearRightLeg]: ILeg,
-  },
+  loadout: IQuadrupedalLoadout,
 }
 
 export const QuadrupedalMech = (props: IQuadrupedalMech): Readonly<IQuadrupedalMech> => ({

@@ -1,0 +1,111 @@
+import { lens } from 'lens.ts'
+import { Reducer } from 'redux'
+
+import { Armor } from '../../../models/Armor'
+import { MechType } from '../../../models/common/MechType'
+import { Tech } from '../../../models/common/Tech'
+import { EngineType, IEngine } from '../../../models/Engine'
+import { GyroType, IGyro } from '../../../models/Gryo'
+import { InternalStructure, MechTonnage } from '../../../models/InternalStructure'
+import { IBipedalLoadout, IQuadrupedalLoadout } from '../../../models/Mech'
+
+import { replicate } from '../../../lib/functional'
+import { Arm, CenterTorso, Component, Head, Leg, SideTorso } from '../../../models/common/Component'
+import { MechEquipmentName } from '../../../models/MechEquipment/MechEquipmentName'
+import { MechDesignerAction, MechDesignerActionType } from './action'
+
+export interface IMechDesignerState {
+  name: string,
+  tech: Tech,
+  type: MechType,
+  tonnage: MechTonnage,
+  engine: Pick<IEngine, 'rating' | 'type'>,
+  gyro: Pick<IGyro, 'type'>,
+  internalStructure: InternalStructure,
+  armor: Armor,
+  loadout: IBipedalLoadout | IQuadrupedalLoadout
+}
+
+const MechDesignerStateL = lens<IMechDesignerState>()
+
+const DEFAULT_NAME = ''
+const DEFAULT_TECH = Tech.IS
+const DEAFULT_MECH_TYPE = MechType.Bipedal
+const DEFAULT_TONNAGE = 50
+const DEFAULT_ENGINE_RATING = 300
+const DEFAULT_ENGINE_TYPE = EngineType.Standard
+const DEFAULT_GYRO_TYPE = GyroType.Standard
+const DEFAULT_INTERNAL_STRUCTURE = InternalStructure.Standard
+const DEFAULT_ARMOR = Armor.Standard
+const DEAFULT_LOADOUT: IBipedalLoadout = {
+  // 3, 18, 13, 9,  13
+  [Component.Head]: Head(9, 3, [], [
+    ...replicate(MechEquipmentName.Life_Support, 2),
+    ...replicate(MechEquipmentName.Sensors, 2),
+    MechEquipmentName.Cockpit,
+    MechEquipmentName.None,
+  ]),
+  [Component.CenterTorso]: CenterTorso(28, 8, 18, [], [
+    ...replicate(MechEquipmentName.Engine, 6),
+    ...replicate(MechEquipmentName.Gyro, 4),
+    ...replicate(MechEquipmentName.None, 2),
+  ]),
+  [Component.LeftTorso]: SideTorso(Component.LeftTorso, 20, 6, 13, [], replicate(MechEquipmentName.None, 12)),
+  [Component.RightTorso]: SideTorso(Component.RightTorso, 20, 6, 13, [], replicate(MechEquipmentName.None, 12)),
+  [Component.LeftArm]: Arm(Component.LeftArm, 18, 9, [], [
+    MechEquipmentName.Shoulder_Actuator,
+    MechEquipmentName.Upper_Arm_Actuator,
+    MechEquipmentName.Lower_Arm_Actuator,
+    MechEquipmentName.Hand_Actuator,
+    ...replicate(MechEquipmentName.None, 8)
+  ]),
+  [Component.RightArm]: Arm(Component.RightArm, 18, 9, [], [
+    MechEquipmentName.Shoulder_Actuator,
+    MechEquipmentName.Upper_Arm_Actuator,
+    MechEquipmentName.Lower_Arm_Actuator,
+    MechEquipmentName.Hand_Actuator,
+    ...replicate(MechEquipmentName.None, 8)
+  ]),
+  [Component.LeftLeg]: Leg(Component.LeftLeg, 26, 13, [], [
+    MechEquipmentName.Hip_Actuator,
+    MechEquipmentName.Upper_Leg_Actuator,
+    MechEquipmentName.Lower_Leg_Actuator,
+    MechEquipmentName.Foot_Actuator,
+    ...replicate(MechEquipmentName.None, 2)
+  ]),
+  [Component.RightLeg]: Leg(Component.RightLeg, 26, 13, [], [
+    MechEquipmentName.Hip_Actuator,
+    MechEquipmentName.Upper_Leg_Actuator,
+    MechEquipmentName.Lower_Leg_Actuator,
+    MechEquipmentName.Foot_Actuator,
+    ...replicate(MechEquipmentName.None, 2)
+  ]),
+}
+
+
+const initialState: IMechDesignerState = {
+  name: DEFAULT_NAME,
+  tech: DEFAULT_TECH,
+  type: DEAFULT_MECH_TYPE,
+  tonnage: DEFAULT_TONNAGE,
+  engine: {
+    rating: DEFAULT_ENGINE_RATING,
+    type: DEFAULT_ENGINE_TYPE,
+  },
+  gyro: {
+    type: DEFAULT_GYRO_TYPE,
+  },
+  internalStructure: DEFAULT_INTERNAL_STRUCTURE,
+  armor: DEFAULT_ARMOR,
+  loadout: DEAFULT_LOADOUT,
+}
+
+export const reducer: Reducer<IMechDesignerState, MechDesignerAction> = (state = initialState, action) => {
+  switch (action.type) {
+  case MechDesignerActionType.SET_CHASSIS_NAME:
+    return MechDesignerStateL.name.set(action.name)(state)
+
+  default:
+    return state
+  }
+}

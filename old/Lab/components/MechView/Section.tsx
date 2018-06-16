@@ -8,11 +8,10 @@ import './Section.css'
 
 import { Armor, getMaxArmorForPart } from '../../../../models/Armor'
 import { Hardpoint } from '../../../../models/common/Hardpoint'
-import { Component } from '../../../../models/common/Component'
 import { getCriticalSlotsFor } from '../../../../models/common/utils'
 import { IEngineCriticalSlotAllocation } from '../../../../models/Engine'
 import { MechTonnage } from '../../../../models/InternalStructure'
-import { Component, IBipedalMech, IComponent, ISection } from '../../../../models/Mech'
+import { IBipedalMech } from '../../../../models/Mech'
 
 const countHardpoints = (hardpointType: Hardpoint, section: ISection): number =>
   section.hardpoints.filter(hardpoint => hardpoint === hardpointType).length

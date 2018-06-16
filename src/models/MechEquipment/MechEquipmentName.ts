@@ -2,7 +2,7 @@ export enum MechEquipmentName {
   /***********************/
   /*  General Equipment  */
   /***********************/
-  None = 'None',
+  None = '-- empty slot --',
   Cockpit = 'Cockpit',
   Sensors = 'Sensors',
   Life_Support = 'Life Support',

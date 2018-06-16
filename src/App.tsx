@@ -5,7 +5,7 @@ import { BrowserRouter, Link, Route, Switch } from 'react-router-dom'
 import './App.css'
 
 import DashContainer from './pages/Dash/DashContainer'
-import LabContainer from './pages/Lab/LabContainer'
+import { ConnectedMechDesigner } from './pages/MechDesigner/MechDesignerContainer'
 import { store } from './state/store'
 
 class App extends React.Component {
@@ -16,11 +16,11 @@ class App extends React.Component {
           <div className='App'>
             <div>
               <Link to='/'>Dash</Link>
-              <Link to='/Lab'>Lab</Link>
+              <Link to='/MechDesigner'>MechDesigner</Link>
             </div>
             <Switch>
               <Route exact path='/' component={DashContainer} />
-              <Route path='/Lab' component={LabContainer} />
+              <Route path='/MechDesigner' component={ConnectedMechDesigner} />
             </Switch>
           </div>
         </BrowserRouter>

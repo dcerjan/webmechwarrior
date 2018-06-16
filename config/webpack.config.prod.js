@@ -199,6 +199,9 @@ module.exports = {
                         importLoaders: 1,
                         minimize: true,
                         sourceMap: shouldUseSourceMap,
+                        modules: true,
+                        localIdentName: '[name]__[local]--[hash:base64:5]',
+                        camelCase: true,
                       },
                     },
                     {
@@ -208,6 +211,9 @@ module.exports = {
                         // https://github.com/facebookincubator/create-react-app/issues/2677
                         ident: 'postcss',
                         plugins: () => [
+                          require('postcss-nested-props'),
+                          require('postcss-nested'),
+                          require('postcss-icss-values'),
                           require('postcss-flexbugs-fixes'),
                           autoprefixer({
                             browsers: [

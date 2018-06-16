@@ -1,0 +1,32 @@
+.Input {
+  display: flex;
+  flex: 1 1;
+
+  > input {
+    flex: 1 1;
+    width: 100%;
+    font: inherit;
+    transition: border-bottom 350ms ease-in-out;
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid lightgrey;
+    }
+    &:placeholder {
+    }
+    &:hover {
+      border-bottom: 1px solid lightgrey;
+    }
+    color: white;
+
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgb(122, 122, 122);
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    background: none;
+  }
+
+  > .Warning { background: orange }
+  > .Error { background: red }
+}
