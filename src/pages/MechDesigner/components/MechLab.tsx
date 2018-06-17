@@ -6,7 +6,7 @@ interface IBasicMechSetupProps {
   mech: IMechDesignerState
 }
 
-export class BasicMechSetup extends React.PureComponent<IBasicMechSetupProps> {
+export class MechLab extends React.PureComponent<IBasicMechSetupProps> {
 
   public render() {
     const { mech } = this.props

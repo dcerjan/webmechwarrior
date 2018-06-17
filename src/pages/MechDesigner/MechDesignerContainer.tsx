@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Worker } from '../../state/Worker'
 
 import { createStructuredSelector } from 'reselect'
-import { BasicMechSetup } from './components/BasicMechSetup'
+import { MechLab } from './components/MechLab'
 import { setChassisName } from './state/action'
 import { IMechDesignerState } from './state/reducer'
 import { selectMechDesignerState } from './state/selectors'
@@ -30,7 +30,7 @@ export class MechDesignerContainer extends React.PureComponent<IMechDesignerProp
     return (
       <Worker start={start} stop={stop}>
         <div>
-          <BasicMechSetup
+          <MechLab
             mech={mech}
           />
         </div>
