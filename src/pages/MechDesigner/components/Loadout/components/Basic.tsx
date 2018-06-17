@@ -1,10 +1,15 @@
+import * as pluralize from 'pluralize'
 import * as React from 'react'
+
 import { Card } from '../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../components/Common/Detail'
 import { Select, StringInput } from '../../../../../components/Field'
 import { segment } from '../../../../../lib/functional'
+import { getCockpitTonnage } from '../../../../../models/Cockpit'
 import { MechType } from '../../../../../models/common/MechType'
 import { Tech } from '../../../../../models/common/Tech'
+import { getEngineTonnage } from '../../../../../models/Engine'
+import { getGyroTonnage } from '../../../../../models/Gryo'
 import { IInjectedLoadoutProps } from '../Loadout'
 
 export class Basic extends React.PureComponent<IInjectedLoadoutProps> {
@@ -12,9 +17,18 @@ export class Basic extends React.PureComponent<IInjectedLoadoutProps> {
   public render() {
     return (
       <Card
-        title={ <StringInput name='name' placeholder={'\'Mech name'} /> }
-        footer={ <Detail label='Battle Value' value={`over 9000`} /> }
+        title='Mech'
+        footer={
+          <Detail
+            label='Free tonnage'
+            value={this.getFreeTonnageDescription()}
+            color={this.getFreeTonnage() < 0
+              ? DetailColor.TransparentRed
+              : DetailColor.TransaprentBlue}
+          />
+        }
       >
+        <Detail label='Chasis' value={ <StringInput name='name' placeholder={'\'Mech name'} /> } />
         <Detail
           label='Tech'
           value={ <Select
@@ -44,5 +58,22 @@ export class Basic extends React.PureComponent<IInjectedLoadoutProps> {
         />
       </Card>
     )
+  }
+
+  private getFreeTonnage() {
+    const { values } = this.props
+
+    const engine = getEngineTonnage(values.engine.rating, values.engine.type)
+    const gyro = getGyroTonnage(values.engine.rating, values.gyro.type)
+    const cockpit = getCockpitTonnage(values.cockpit)
+
+    const amount = values.tonnage - engine - gyro - cockpit
+
+    return amount
+  }
+
+  private getFreeTonnageDescription() {
+    const amount = this.getFreeTonnage()
+    return `${amount.toFixed(1)} ${pluralize('ton', amount)}`
   }
 }

@@ -5,7 +5,9 @@ import { getFormValues, InjectedFormProps, reduxForm } from 'redux-form'
 import { MechType } from '../../../../models/common/MechType'
 import { IMechDesignerState } from '../../state/reducer'
 import { Basic } from './components/Basic'
+import { Cockpit } from './components/Cockpit'
 import { Engine } from './components/Engine'
+import { Gyro } from './components/Gyro'
 
 interface ILoadoutProps {
   mech: IMechDesignerState,
@@ -39,6 +41,8 @@ class Loadout extends React.PureComponent<ILoadoutProps & IInjectedLoadoutProps 
         <form>
           <Basic values={values} />
           <Engine values={values} />
+          <Gyro values={values} />
+          <Cockpit values={values} />
         </form>
       </div>
     )

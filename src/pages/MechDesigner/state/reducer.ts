@@ -10,6 +10,7 @@ import { InternalStructure, MechTonnage } from '../../../models/InternalStructur
 import { IBipedalLoadout, IQuadrupedalLoadout } from '../../../models/Mech'
 
 import { replicate } from '../../../lib/functional'
+import { CockpitType } from '../../../models/Cockpit'
 import { Arm, CenterTorso, Component, Head, Leg, SideTorso } from '../../../models/common/Component'
 import { MechEquipmentName } from '../../../models/MechEquipment/MechEquipmentName'
 import { MechDesignerAction, MechDesignerActionType } from './action'
@@ -21,6 +22,7 @@ export interface IMechDesignerState {
   tonnage: MechTonnage,
   engine: Pick<IEngine, 'rating' | 'type'>,
   gyro: Pick<IGyro, 'type'>,
+  cockpit: CockpitType,
   internalStructure: InternalStructure,
   armor: Armor,
   loadout: IBipedalLoadout | IQuadrupedalLoadout
@@ -35,6 +37,7 @@ const DEFAULT_TONNAGE = 50
 const DEFAULT_ENGINE_RATING = 300
 const DEFAULT_ENGINE_TYPE = EngineType.Standard
 const DEFAULT_GYRO_TYPE = GyroType.Standard
+const DEFAULT_COCKPIT = CockpitType.Standard
 const DEFAULT_INTERNAL_STRUCTURE = InternalStructure.Standard
 const DEFAULT_ARMOR = Armor.Standard
 const DEAFULT_LOADOUT: IBipedalLoadout = {
@@ -95,6 +98,7 @@ const initialState: IMechDesignerState = {
   gyro: {
     type: DEFAULT_GYRO_TYPE,
   },
+  cockpit: DEFAULT_COCKPIT,
   internalStructure: DEFAULT_INTERNAL_STRUCTURE,
   armor: DEFAULT_ARMOR,
   loadout: DEAFULT_LOADOUT,
