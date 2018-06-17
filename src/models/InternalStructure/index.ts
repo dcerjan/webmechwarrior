@@ -1,10 +1,10 @@
 import { Component } from '../common/Component'
+import { Tech } from '../common/Tech'
 
 
-export enum InternalStructure {
+export enum InternalStructureType {
   Standard = 'Standard',
-  EndoSteelIS = 'Endo Steel (IS)',
-  EndoSteelClan = 'Endo Steel (Clan)',
+  EndoSteel = 'Endo Steel',
 }
 
 interface IInternalStructureTableRecord {
@@ -77,19 +77,17 @@ export const InternalStructureTable = {
 
 export type MechTonnage = 20 | 25 | 30 | 35 | 40 | 45 | 50 | 55 | 60 | 65 | 70 | 75 | 80 | 85 | 90 | 95 | 100
 
-export const getInternalStructureTonnage = (mechTonnage: MechTonnage, type: InternalStructure): number => {
+export const getInternalStructureTonnage = (mechTonnage: MechTonnage, type: InternalStructureType): number => {
   switch (type) {
-  case InternalStructure.Standard: return InternalStructureTable[mechTonnage].standardTonnage
-  case InternalStructure.EndoSteelIS: return InternalStructureTable[mechTonnage].endoSteelTonnage
-  case InternalStructure.EndoSteelClan: return InternalStructureTable[mechTonnage].endoSteelTonnage
+  case InternalStructureType.Standard: return InternalStructureTable[mechTonnage].standardTonnage
+  case InternalStructureType.EndoSteel: return InternalStructureTable[mechTonnage].endoSteelTonnage
   }
 }
 
-export const getInternalStructureCriticals = (type: InternalStructure): number => {
+export const getInternalStructureCriticals = (tech: Tech, type: InternalStructureType): number => {
   switch (type) {
-  case InternalStructure.Standard: return 0
-  case InternalStructure.EndoSteelIS: return 14
-  case InternalStructure.EndoSteelClan: return 7
+  case InternalStructureType.Standard: return 0
+  case InternalStructureType.EndoSteel: return tech === Tech.IS ? 14 : 7
   }
 }
 
@@ -100,3 +98,8 @@ export const getMaxArmorHitPoints = (mechTonnage: MechTonnage, component: Compon
   component === Component.Head
     ? 9
     : InternalStructureTable[mechTonnage][component] * 2
+
+export const getAvailableInternalStructureTypes = (tech: Tech) => [
+  InternalStructureType.Standard,
+  InternalStructureType.EndoSteel,
+]

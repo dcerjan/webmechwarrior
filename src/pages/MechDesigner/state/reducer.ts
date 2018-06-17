@@ -1,12 +1,12 @@
 import { lens } from 'lens.ts'
 import { Reducer } from 'redux'
 
-import { Armor } from '../../../models/Armor'
+import { ArmorType } from '../../../models/Armor'
 import { MechType } from '../../../models/common/MechType'
 import { Tech } from '../../../models/common/Tech'
 import { EngineType, IEngine } from '../../../models/Engine'
 import { GyroType, IGyro } from '../../../models/Gryo'
-import { InternalStructure, MechTonnage } from '../../../models/InternalStructure'
+import { InternalStructureType, MechTonnage } from '../../../models/InternalStructure'
 import { IBipedalLoadout, IQuadrupedalLoadout } from '../../../models/Mech'
 
 import { replicate } from '../../../lib/functional'
@@ -23,8 +23,8 @@ export interface IMechDesignerState {
   engine: Pick<IEngine, 'rating' | 'type'>,
   gyro: Pick<IGyro, 'type'>,
   cockpit: CockpitType,
-  internalStructure: InternalStructure,
-  armor: Armor,
+  internalStructure: InternalStructureType,
+  armor: ArmorType,
   loadout: IBipedalLoadout | IQuadrupedalLoadout
 }
 
@@ -38,8 +38,8 @@ const DEFAULT_ENGINE_RATING = 300
 const DEFAULT_ENGINE_TYPE = EngineType.Standard
 const DEFAULT_GYRO_TYPE = GyroType.Standard
 const DEFAULT_COCKPIT = CockpitType.Standard
-const DEFAULT_INTERNAL_STRUCTURE = InternalStructure.Standard
-const DEFAULT_ARMOR = Armor.Standard
+const DEFAULT_INTERNAL_STRUCTURE = InternalStructureType.Standard
+const DEFAULT_ARMOR = ArmorType.Standard
 const DEAFULT_LOADOUT: IBipedalLoadout = {
   // 3, 18, 13, 9,  13
   [Component.Head]: Head(9, 3, [], [

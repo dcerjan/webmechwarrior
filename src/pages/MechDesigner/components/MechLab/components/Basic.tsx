@@ -10,9 +10,9 @@ import { MechType } from '../../../../../models/common/MechType'
 import { Tech } from '../../../../../models/common/Tech'
 import { getEngineTonnage } from '../../../../../models/Engine'
 import { getGyroTonnage } from '../../../../../models/Gryo'
-import { IInjectedLoadoutProps } from '../Loadout'
+import { IInjectedMechLabProps } from '../MechLab'
 
-export class Basic extends React.PureComponent<IInjectedLoadoutProps> {
+export class Basic extends React.PureComponent<IInjectedMechLabProps> {
 
   public render() {
     return (

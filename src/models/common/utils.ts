@@ -1,7 +1,7 @@
-import { Armor } from '../Armor'
+import { ArmorType } from '../Armor'
 import { EngineType, getEngineCriticalSlotAllocation, IEngineCriticalSlotAllocation } from '../Engine'
 import { getGyroCriticals, GyroType } from '../Gryo'
-import { InternalStructure } from '../InternalStructure'
+import { InternalStructureType } from '../InternalStructure'
 import { getJumpJetCriticals, JumpJetType } from '../JumpJets'
 import { getHeavyWeaponCriticalSlots } from '../Tables/WeaponTable'
 import { Hardpoint } from './Hardpoint'
@@ -10,8 +10,8 @@ export type SlotableEquipment =
   | EngineType
   | GyroType
   | JumpJetType
-  | InternalStructure
-  | Armor
+  | InternalStructureType
+  | ArmorType
   | string
 
 export type CriticalSlotAllocation =

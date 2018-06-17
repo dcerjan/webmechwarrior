@@ -3,7 +3,7 @@ import * as React from 'react'
 
 import { Card } from '../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../components/Common/Detail'
-import { Range, Select } from '../../../../../components/Field'
+import { Select } from '../../../../../components/Field'
 import { ISelectOption } from '../../../../../components/Field/Select/common'
 import { segment } from '../../../../../lib/functional'
 import { Component } from '../../../../../models/common/Component'
@@ -19,9 +19,9 @@ import {
   getRunningMP,
   getWalkingMP,
 } from '../../../../../models/Engine'
-import { IInjectedLoadoutProps } from '../Loadout'
+import { IInjectedMechLabProps } from '../MechLab'
 
-export class Engine extends React.PureComponent<IInjectedLoadoutProps> {
+export class Engine extends React.PureComponent<IInjectedMechLabProps> {
 
   public render() {
     const { values } = this.props
@@ -52,17 +52,6 @@ export class Engine extends React.PureComponent<IInjectedLoadoutProps> {
             name='engine.type'
             options={this.getEngineTypes()}
             alignment='Right'
-          />}
-          color={DetailColor.TransparentBluishGrey}
-        />
-        <Detail
-          label='Rating v2'
-          value={<Range
-            name='engine.rating'
-            alignment='Right'
-            min={10}
-            max={400}
-            step={5}
           />}
           color={DetailColor.TransparentBluishGrey}
         />

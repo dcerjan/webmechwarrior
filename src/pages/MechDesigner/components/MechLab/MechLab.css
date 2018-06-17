@@ -1,0 +1,12 @@
+.MechLab {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.Basic {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}

@@ -12,9 +12,9 @@ import {
   getGyroTonnage,
   GyroType,
 } from '../../../../../models/Gryo'
-import { IInjectedLoadoutProps } from '../Loadout'
+import { IInjectedMechLabProps } from '../MechLab'
 
-export class Gyro extends React.PureComponent<IInjectedLoadoutProps> {
+export class Gyro extends React.PureComponent<IInjectedMechLabProps> {
 
   public render() {
     const { values } = this.props

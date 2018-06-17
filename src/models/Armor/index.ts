@@ -1,40 +1,52 @@
 import { Component } from '../common/Component'
+import { Tech } from '../common/Tech'
 import { getMaxArmorHitPoints, MechTonnage } from '../InternalStructure'
 
-export enum Armor {
+export enum ArmorType {
   Standard = 'Standard',
-  FerroFibrousIS = 'Ferro Fibrous (IS)',
-  FerroFibrousClan = 'Ferro Fibrous (Clan)',
-  LightFerroFibrous = 'Light Ferro Fibrous',
-  HeavyFerroFibrous = 'Heavy Ferro Fibrous',
+  FerroFibrous = 'Ferro Fibrous',
+  LightFerro = 'Light Ferro',
+  HeavyFerro = 'Heavy Ferro',
   Stealth = 'Stealth',
 }
 
-export const getArmorCriticalSlots = (type: Armor) => {
+export const getArmorCriticalSlots = (tech: Tech, type: ArmorType) => {
   switch (type) {
-  case Armor.Standard: return 0
-  case Armor.FerroFibrousIS: return 14
-  case Armor.FerroFibrousClan: return 7
-  case Armor.LightFerroFibrous: return 7
-  case Armor.HeavyFerroFibrous: return 21
-  case Armor.Stealth: return 12
+  case ArmorType.Standard: return 0
+  case ArmorType.FerroFibrous: return tech === Tech.IS ? 14 : 7
+  case ArmorType.LightFerro: return 7
+  case ArmorType.HeavyFerro: return 21
+  case ArmorType.Stealth: return 12
   }
 }
 
-export const getArmorBasePointMultiplier = (type: Armor) => {
+export const getArmorBasePointMultiplier = (tech: Tech, type: ArmorType) => {
   switch (type) {
-    case Armor.Standard: return 1.0
-    case Armor.FerroFibrousIS: return 1.12
-    case Armor.FerroFibrousClan: return 1.2
-    case Armor.LightFerroFibrous: return 1.06
-    case Armor.HeavyFerroFibrous: return 1.24
-    case Armor.Stealth: return 1.0
+    case ArmorType.Standard: return 1.0
+    case ArmorType.FerroFibrous: return tech === Tech.IS ? 1.12 : 1.2
+    case ArmorType.LightFerro: return 1.06
+    case ArmorType.HeavyFerro: return 1.24
+    case ArmorType.Stealth: return 1.0
     }
 }
 
-export const getMaxArmorForPart = (mechTonnage: MechTonnage, type: Armor, component: Component): number => {
-  const points = getMaxArmorHitPoints(mechTonnage, component)
-  const multiplier = getArmorBasePointMultiplier(type)
+export const getMaxArmorForPart = (mechTonnage: MechTonnage, component: Component): number => {
+  return getMaxArmorHitPoints(mechTonnage, component)
+}
 
-  return Math.floor(points * multiplier)
+export const getAvailableArmorTypes = (tech: Tech) => {
+  const types = [
+    ArmorType.Standard,
+    ArmorType.FerroFibrous
+  ]
+
+  if (tech === Tech.IS) {
+    return types.concat([
+      ArmorType.HeavyFerro,
+      ArmorType.LightFerro,
+      ArmorType.Stealth,
+    ])
+  } else {
+    return types
+  }
 }

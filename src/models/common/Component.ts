@@ -145,3 +145,25 @@ export const Leg = (
   hardpoints: Hardpoint[],
   equipment: MechEquipmentName[],
 ): ILeg => BaseMechPart(name, armor, structure, hardpoints, equipment, 6) as ILeg
+
+export const getMechBipedComponents = () => [
+  Component.Head,
+  Component.CenterTorso,
+  Component.LeftTorso,
+  Component.RightTorso,
+  Component.LeftArm,
+  Component.RightArm,
+  Component.LeftLeg,
+  Component.RightLeg,
+]
+
+export const getMechQuadrupedComponents = () => [
+  Component.Head,
+  Component.CenterTorso,
+  Component.LeftTorso,
+  Component.RightTorso,
+  Component.FrontLeftLeg,
+  Component.FrontRightLeg,
+  Component.RearLeftLeg,
+  Component.RearRightLeg,
+]

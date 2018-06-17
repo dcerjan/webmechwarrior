@@ -14,9 +14,9 @@ import {
   getLifeSupportCriticals,
   getSensorsCriticals,
 } from '../../../../../models/Cockpit'
-import { IInjectedLoadoutProps } from '../Loadout'
+import { IInjectedMechLabProps } from '../MechLab'
 
-export class Cockpit extends React.PureComponent<IInjectedLoadoutProps> {
+export class Cockpit extends React.PureComponent<IInjectedMechLabProps> {
 
   public render() {
     const { values } = this.props

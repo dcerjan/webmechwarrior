@@ -1,12 +1,12 @@
 import { lens } from 'lens.ts'
 
-import { Armor } from '../Armor'
+import { ArmorType } from '../Armor'
 import { Component, IArm, ICenterTorso, IHead, ILeg, ISideTorso } from '../common/Component'
 import { MechType } from '../common/MechType'
 import { Tech } from '../common/Tech'
 import { IEngine } from '../Engine'
 import { IGyro } from '../Gryo'
-import { InternalStructure, MechTonnage } from '../InternalStructure'
+import { InternalStructureType, MechTonnage } from '../InternalStructure'
 
 export interface IBaseMech {
   name: string,
@@ -15,8 +15,8 @@ export interface IBaseMech {
   tonnage: MechTonnage,
   engine: IEngine,
   gyro: IGyro,
-  internalStructure: InternalStructure,
-  armor: Armor
+  internalStructure: InternalStructureType,
+  armor: ArmorType
 }
 
 export interface IBipedalLoadout {
@@ -60,3 +60,35 @@ export const QuadrupedalMech = (props: IQuadrupedalMech): Readonly<IQuadrupedalM
 })
 
 export const QuadrupedalMechL = lens<IQuadrupedalMech>()
+
+export const getBipedalLoadoutArmor = (loadout: IBipedalLoadout): number => {
+  return (
+    loadout[Component.Head].armor +
+    loadout[Component.CenterTorso].armor +
+    loadout[Component.CenterTorso].rearArmor +
+    loadout[Component.LeftTorso].armor +
+    loadout[Component.LeftTorso].rearArmor +
+    loadout[Component.RightTorso].armor +
+    loadout[Component.RightTorso].rearArmor +
+    loadout[Component.LeftArm].armor +
+    loadout[Component.RightArm].armor +
+    loadout[Component.LeftLeg].armor +
+    loadout[Component.RightLeg].armor
+  )
+}
+
+export const getQuadrupedalLoadoutArmor = (loadout: IQuadrupedalLoadout): number => {
+  return (
+    loadout[Component.Head].armor +
+    loadout[Component.CenterTorso].armor +
+    loadout[Component.CenterTorso].rearArmor +
+    loadout[Component.LeftTorso].armor +
+    loadout[Component.LeftTorso].rearArmor +
+    loadout[Component.RightTorso].armor +
+    loadout[Component.RightTorso].rearArmor +
+    loadout[Component.FrontLeftLeg].armor +
+    loadout[Component.FrontRightLeg].armor +
+    loadout[Component.RearLeftLeg].armor +
+    loadout[Component.RearRightLeg].armor
+  )
+}
