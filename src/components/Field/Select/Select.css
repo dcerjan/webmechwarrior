@@ -51,7 +51,10 @@
       transform: rotate(0deg);
       transition: border 185ms ease-in-out, transform 185ms ease-in-out;
 
-      &.Expanded { transform: rotate(-90deg); }
+      &.Expanded {
+        transform: rotate(-90deg);
+        border-right: 7px solid lightgrey;
+      }
     }
 
     > .Options {
@@ -95,6 +98,7 @@
             background: rgb(50, 50, 50);
           }
         }
+        &.KeyboardFocus { background-color: rgb(96, 120, 119) }
       }
     }
   }
