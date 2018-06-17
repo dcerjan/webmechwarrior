@@ -1,19 +1,25 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { InjectedFormProps, reduxForm } from 'redux-form'
+import { getFormValues, InjectedFormProps, reduxForm } from 'redux-form'
 
 import { Card } from '../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../components/Common/Detail'
 import { Select, StringInput } from '../../../../components/Field'
+import { segment } from '../../../../lib/functional'
 import { MechType } from '../../../../models/common/MechType'
 import { Tech } from '../../../../models/common/Tech'
 import { IMechDesignerState } from '../../state/reducer'
+import { Engine } from './components/Engine'
 
 interface ILoadoutProps {
-  mech: IMechDesignerState
+  mech: IMechDesignerState,
 }
 
-class Loadout extends React.PureComponent<ILoadoutProps & InjectedFormProps<ILoadoutProps>> {
+export interface IInjectedLoadoutProps {
+  values: IMechDesignerState,
+}
+
+class Loadout extends React.PureComponent<ILoadoutProps & IInjectedLoadoutProps & InjectedFormProps<ILoadoutProps>> {
 
   public render() {
     const { mech } = this.props
@@ -30,28 +36,52 @@ class Loadout extends React.PureComponent<ILoadoutProps & InjectedFormProps<ILoa
   }
 
   private renderBipedalLoadout() {
-    const { mech } = this.props
+    const { values } = this.props
 
     return (
       <div>
         <form>
-          <Card
-            title={ <StringInput name='name' placeholder={'\'Mech name'} /> }
-            footer={ <Detail label='Battle Value' value={`over 9000`} /> }
-          >
-            <Detail label='Tonnage' value={`${mech.tonnage.toFixed(1)} tons`} color={DetailColor.TransparentBluishGrey}/>
-            <Detail label='Tech' value={ <Select name='tech' options={Object.values(Tech)} alignment='Right' /> } color={DetailColor.TransparentBluishGrey}/>
-            <Detail label='Mech Type' value={mech.type} color={DetailColor.TransparentBluishGrey}/>
-          </Card>
-          <Card
-            title={ mech.name }
-            titleExtra={ `${mech.tonnage.toFixed(1)} tons` }
-          >
-            <Detail label='Tech' value={mech.tech} color={DetailColor.TransparentBluishGrey}/>
-            <Detail label='Mech Type' value={mech.type} color={DetailColor.TransparentBluishGrey}/>
-          </Card>
+          { this.basic() }
+          <Engine values={values} />
         </form>
       </div>
+    )
+  }
+
+  private basic() {
+    return (
+      <Card
+        title={ <StringInput name='name' placeholder={'\'Mech name'} /> }
+        footer={ <Detail label='Battle Value' value={`over 9000`} /> }
+      >
+        <Detail
+          label='Tech'
+          value={ <Select
+            name='tech'
+            options={Object.values(Tech).map(tech => ({ value: tech, name: tech }))}
+            alignment='Right'
+          /> }
+          color={DetailColor.TransparentBluishGrey}
+        />
+        <Detail
+          label='Mech Type'
+          value={ <Select
+            name='type'
+            options={Object.values(MechType).map(type => ({ value: type, name: type }))}
+            alignment='Right'
+          /> }
+          color={DetailColor.TransparentBluishGrey}
+        />
+        <Detail
+          label='Tonnage'
+          value={ <Select
+            name='tonnage'
+            options={segment(20, 100, 5).map(t => ({ value: t, name: `${t.toFixed(1)} tons` }))}
+            alignment='Right'
+          /> }
+          color={DetailColor.TransparentBluishGrey}
+        />
+      </Card>
     )
   }
 
@@ -67,13 +97,18 @@ class Loadout extends React.PureComponent<ILoadoutProps & InjectedFormProps<ILoa
 }
 
 const mapState = (state: any, props: ILoadoutProps) => ({
-  initialValues: props.mech
+  initialValues: props.mech,
+})
+
+const mapInternalState = (state: any) => ({
+  values: getFormValues('Lab.Loadout')(state),
 })
 
 const LoadoutForm: React.SFC<ILoadoutProps> = (
   connect(mapState)(
-    reduxForm({ form: 'Loadout' })(
-      Loadout
+    reduxForm({ form: 'Lab.Loadout' })(
+      connect(mapInternalState)
+        (Loadout)
     )
   )
 ) as any

@@ -8,8 +8,8 @@ export enum EngineType {
   Compact = 'Compact',
   Standard = 'Standard',
   Light = 'Light',
-  ExtraLightIS = 'Extra Light (IS)',
-  ExtraLightClan = 'Extra Light (Clan)',
+  ExtraLightIS = 'XL (IS)',
+  ExtraLightClan = 'XL (Clan)',
   ICE = 'ICE',
   Cell = 'Cell',
   Fission = 'Fission',
@@ -163,7 +163,7 @@ export interface IEngineCriticalSlotAllocation {
 }
 
 export const getWalkingMP = (rating: EngineRating, tonnage: MechTonnage): number =>
-  rating / tonnage
+  Math.floor(rating / tonnage)
 
 export const getRunningMP = (rating: EngineRating, tonnage: MechTonnage): number =>
   Math.ceil(rating / tonnage * 1.5)
