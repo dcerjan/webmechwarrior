@@ -1,6 +1,16 @@
 .Select {
   display: flex;
   flex: 1 1;
+  background: rgba(50, 50, 50, 0.5);
+  border: 1px solid rgb(122, 122, 122);
+  box-sizing: border-box;
+  transition: border 185ms ease-in-out, background 185ms ease-in-out;
+  height: 16px;
+
+  &.Focused {
+    background: rgba(50, 50, 50, 1.0);
+    border: 1px solid lightgrey;
+  }
 
   > .Wrapper {
     display: flex;
@@ -43,6 +53,8 @@
     }
 
     > .Icon {
+      box-sizing: border-box;
+      margin: 0px 2px;
       width: 0;
       height: 0;
       border-top: 4px solid transparent;

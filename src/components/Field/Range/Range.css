@@ -1,0 +1,72 @@
+.Range {
+  display: flex;
+  flex: 1 1;
+  background: rgba(50, 50, 50, 0.5);
+  border: 1px solid rgb(122, 122, 122);
+  box-sizing: border-box;
+  transition: border 185ms ease-in-out, background 185ms ease-in-out;
+  height: 16px;
+
+  &.Focused {
+    background: rgba(50, 50, 50, 1.0);
+    border: 1px solid lightgrey;
+  }
+
+  > .Wrapper {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 1;
+    width: 100%;
+    font: inherit;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      > .Icon { border-right: 7px solid lightgrey; }
+    }
+    color: white;
+
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    background: none;
+    cursor: pointer;
+
+    > .Value {
+      flex: 1 1;
+      display: flex;
+      box-sizing: border-box;
+      padding: 0px 3px;
+
+      &.Left { justify-content: flex-start }
+      &.Center { justify-content: center }
+      &.Right { justify-content: flex-end }
+    }
+
+    > .Adjusters {
+      box-sizing: border-box;
+      padding: 0px 2px;
+      > .Icon {
+        width: 0;
+        height: 0;
+        border-top: 4px solid transparent;
+        border-right: 7px solid rgb(122, 122, 122);
+        border-bottom: 4px solid transparent;
+        transform: rotate(0deg);
+        transition: border 185ms ease-in-out, transform 185ms ease-in-out;
+
+        &:hover { border-right: 7px solid lightgrey }
+        &.Increment { transform: rotate(90deg) }
+        &.Decrement { transform: rotate(-90deg) }
+      }
+    }
+  }
+
+  > .Warning { background: orange }
+  > .Error { background: red }
+}

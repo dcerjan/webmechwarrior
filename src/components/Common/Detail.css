@@ -2,9 +2,11 @@
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid darkgrey;
   box-sizing: border-box;
   box-shadow: inset 0 0 1px black, inset 0 0 12px rgba(0, 0, 0, 0.2);
+  height: 20px;
 
   &:last-child {
     border-bottom: none;

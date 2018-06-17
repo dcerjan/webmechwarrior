@@ -16,12 +16,14 @@ interface IInternalSelectComponentProps<T> {
 interface IInternalSelectComponentState {
   expanded: boolean,
   keyboardFocusIndex: number,
+  focused: boolean,
 }
 
 export class InternalSelectComponent<T> extends React.PureComponent<IFormComponentProps<T> & IInternalSelectComponentProps<T>, IInternalSelectComponentState> {
   public state: IInternalSelectComponentState = {
     expanded: false,
     keyboardFocusIndex: -1,
+    focused: false,
   }
 
   private anchor: HTMLElement | null = null
@@ -45,8 +47,8 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
   }
 
   public render() {
-    const { expanded } = this.state
     const { input, meta, placeholder, alignment } = this.props
+    const { expanded, focused } = this.state
     const message = meta.warning || meta.error || null
     const level = (meta.warning && 'Warning') || (meta.error && 'Error') || null
 
@@ -59,7 +61,7 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
     return (
       <div
         ref={this.onRef}
-        className={styles.Select}
+        className={classNames(styles.Select, focused ? styles.Focused : null)}
       >
         { level
           ? <div className={level}>{ message }</div>
@@ -74,9 +76,7 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
           onDrop={() => input.onDrop(this.props.input.value)}
           onKeyDown={this.onKeyDown}
         >
-          <div
-            className={classNames(styles.Value, alignmentClass, !input.value && styles.Placeholder)}
-          >
+          <div className={classNames(styles.Value, alignmentClass, !input.value && styles.Placeholder)}>
             { this.getNameOfValue(input.value) || placeholder || '' }
           </div>
           <div className={classNames(styles.Icon, expanded ? styles.Expanded : null)} />
@@ -151,14 +151,14 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
   private focus = () => {
     // required to prevent onMouseDown toggle
     this.preventToggleOnClickAfterFocus = true
-    this.setState({ expanded: true }, () => {
+    this.setState({ expanded: true, focused: true }, () => {
       this.scrollToSelected()
       this.props.input.onFocus(this.props.input.value)
     })
   }
 
   private blur = () => {
-    this.setState({ expanded: false }, () => {
+    this.setState({ expanded: false, focused: false }, () => {
       const option = this.getKeyboardFocusOption()
       if (option != null) {
         this.props.input.onBlur(option.value)
