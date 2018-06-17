@@ -110,8 +110,8 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
     }
   }
 
-  private getKeyboardFocusOption = () => {
-    return this.props.options[this.getKeyboardFocusOptionIndex()]
+  private getOptionAtIndex = (index: number) => {
+    return this.props.options[index]
   }
 
   private scrollToSelected() {
@@ -139,12 +139,22 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
 
   private onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const index = this.getKeyboardFocusOptionIndex()
-    if (event.key === 'ArrowUp') {
-      this.setState({ keyboardFocusIndex: Math.max(0, index - 1) }, () => this.scrollToIndex(this.state.keyboardFocusIndex))
-    } else if (event.key === 'ArrowDown') {
-      this.setState({ keyboardFocusIndex: Math.min(this.props.options.length - 1, index + 1) }, () => this.scrollToIndex(this.state.keyboardFocusIndex))
-    } else if (event.key === ' ') {
-      this.select(this.getKeyboardFocusOption())()
+    if (this.state.expanded) {
+      if (event.key === 'ArrowUp') {
+        this.setState({ keyboardFocusIndex: Math.max(0, index - 1) }, () => this.scrollToIndex(this.state.keyboardFocusIndex))
+      } else if (event.key === 'ArrowDown') {
+        this.setState({ keyboardFocusIndex: Math.min(this.props.options.length - 1, index + 1) }, () => this.scrollToIndex(this.state.keyboardFocusIndex))
+      } else if (event.key === ' ') {
+        this.select(this.getOptionAtIndex(index))()
+      }
+    } else {
+      if (event.key === 'ArrowUp') {
+        const prevIndex = Math.max(0, index - 1)
+        this.setState({ keyboardFocusIndex: prevIndex }, this.select(this.getOptionAtIndex(prevIndex)))
+      } else if (event.key === 'ArrowDown') {
+        const nextIndex = Math.min(this.props.options.length - 1, index + 1)
+        this.setState({ keyboardFocusIndex: nextIndex }, this.select(this.getOptionAtIndex(nextIndex)))
+      }
     }
   }
 
@@ -159,7 +169,7 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
 
   private blur = () => {
     this.setState({ expanded: false, focused: false }, () => {
-      const option = this.getKeyboardFocusOption()
+      const option = this.getOptionAtIndex(this.getKeyboardFocusOptionIndex())
       if (option != null) {
         this.props.input.onBlur(option.value)
       } else {
