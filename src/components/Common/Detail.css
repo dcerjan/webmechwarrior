@@ -44,4 +44,6 @@
   &.TransaprentBlue { background-color: rgb(26, 155, 252, 0.5) }
   &.BluishGrey { background-color: rgb(96, 120, 119) }
   &.TransparentBluishGrey { background-color: rgba(96, 120, 119, 0.5) }
+  &.Red { background-color: rgb(252, 26, 26) }
+  &.TransparentRed { background-color: rgba(252, 26, 26, 0.5) }
 }

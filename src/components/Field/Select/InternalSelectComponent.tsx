@@ -168,14 +168,19 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
   }
 
   private blur = () => {
-    this.setState({ expanded: false, focused: false }, () => {
-      const option = this.getOptionAtIndex(this.getKeyboardFocusOptionIndex())
-      if (option != null) {
-        this.props.input.onBlur(option.value)
-      } else {
-        this.props.input.onBlur(this.props.input.value)
-      }
-    })
+    if (this.state.expanded) {
+      this.setState({ expanded: false, focused: false }, () => {
+        const option = this.getOptionAtIndex(this.getKeyboardFocusOptionIndex())
+        if (option != null) {
+          this.props.input.onBlur(option.value)
+        } else {
+          this.props.input.onBlur(this.props.input.value)
+        }
+      })
+    } else {
+      this.setState({ focused: false }, () =>
+        this.props.input.onBlur(this.props.input.value))
+    }
   }
 
   private onMouseDown = () => {
@@ -206,8 +211,10 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
         <Scrollbars
           ref={this.onScrollbars}
           autoHeight
-          autoHeightMin={0}
-          autoHeightMax={18 * 10}
+          autoHeightMin={0 + 15}
+          autoHeightMax={18 * 10 + 15}
+          renderTrackHorizontal={undefined}
+          hideTracksWhenNotNeeded
         >
           { options.map((option, index) => (
             <div

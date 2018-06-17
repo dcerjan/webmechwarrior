@@ -10,12 +10,14 @@ export enum DetailColor {
   Blue = 'Blue',
   LightGrey = 'LightGrey',
   BluishGrey = 'BluishGrey',
+  Red = 'Red',
   TransparentLime = 'TransparentLime',
   TransparentPurple = 'TransparentPurple',
   TransparentTeal = 'TransparentTeal',
   TransaprentBlue = 'TransaprentBlue',
   TransaprentLightGrey = 'TransaprentLightGrey',
   TransparentBluishGrey = 'TransparentBluishGrey',
+  TransparentRed = 'TransparentRed',
 }
 
 interface IDetailProps {
