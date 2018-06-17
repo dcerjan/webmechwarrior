@@ -3,15 +3,16 @@ import { Field } from 'redux-form'
 
 import { IFormFieldProps } from '../common'
 
+import { ISelectOption } from './common'
 import { InternalSelectComponent } from './InternalSelectComponent'
 
-interface IStringInputFieldProps<F> extends Pick<IFormFieldProps<string, F>, 'name' | 'validate'> {
+interface IStringInputFieldProps<T, F> extends Pick<IFormFieldProps<ISelectOption<T>, F>, 'name' | 'validate'> {
   placeholder?: string,
-  options: string[],
+  options: Array<ISelectOption<T>>,
   alignment?: 'Left' | 'Center' | 'Right',
 }
 
-export class Select<F> extends React.PureComponent<IStringInputFieldProps<F>> {
+export class Select<T, F> extends React.PureComponent<IStringInputFieldProps<T, F>> {
 
   public render() {
     const { name, validate, placeholder, options, alignment } = this.props

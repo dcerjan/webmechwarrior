@@ -1,12 +1,14 @@
 import * as classNames from 'classnames'
 import * as React from 'react'
 
+import Scrollbars from 'react-custom-scrollbars'
 import { IFormComponentProps } from '../common'
+import { ISelectOption } from './common'
 import * as styles from './Select.css'
 
-interface IInternalSelectComponentProps {
+interface IInternalSelectComponentProps<T> {
   placeholder?: string,
-  options: string[],
+  options: Array<ISelectOption<T>>,
   alignment: 'Left' | 'Center' | 'Right',
 }
 
@@ -14,12 +16,13 @@ interface IInternalSelectComponentState {
   expanded: boolean,
 }
 
-export class InternalSelectComponent extends React.PureComponent<IFormComponentProps<string> & IInternalSelectComponentProps, IInternalSelectComponentState> {
+export class InternalSelectComponent<T> extends React.PureComponent<IFormComponentProps<T> & IInternalSelectComponentProps<T>, IInternalSelectComponentState> {
   public state: IInternalSelectComponentState = {
     expanded: false,
   }
 
   private anchor: HTMLElement | null = null
+  private scrollbars: Scrollbars | null = null
 
   public componentDidMount() {
     document.addEventListener('mousedown', this.clickedOutside, false)
@@ -60,7 +63,7 @@ export class InternalSelectComponent extends React.PureComponent<IFormComponentP
           <div
             className={classNames(styles.Value, alignmentClass, !input.value && styles.Placeholder)}
           >
-            { input.value || placeholder || '' }
+            { this.getNameOfValue(input.value) || placeholder || '' }
           </div>
           <div className={classNames(styles.Icon, expanded ? styles.Expanded : null)} />
           { expanded
@@ -71,12 +74,29 @@ export class InternalSelectComponent extends React.PureComponent<IFormComponentP
     )
   }
 
-  private toggle = () => {
-    this.setState({ expanded: !this.state.expanded })
+  private getNameOfValue = (value: T): string | null => {
+    const { options } = this.props
+    const val = options.find(x => x.value === value)
+    if (val != null) {
+      return val.name
+    } else {
+      return null
+    }
   }
 
-  private select = (option: string) => () => {
-    this.props.input.onChange(option)
+  private toggle = () => {
+    this.setState({ expanded: !this.state.expanded }, () => {
+      if (this.state.expanded && this.scrollbars != null) {
+        const selectedIndex = this.props.options.findIndex(option => option.value === this.props.input.value)
+        this.scrollbars.scrollTop(selectedIndex !== -1 ? (selectedIndex * 19 - 10) : 0)
+      }
+    })
+  }
+
+  private select = (option: ISelectOption<T>) => () => {
+    if (!option.disabled) {
+      this.props.input.onChange(option.value)
+    }
     this.setState({ expanded: false })
   }
 
@@ -84,17 +104,32 @@ export class InternalSelectComponent extends React.PureComponent<IFormComponentP
     const { options } = this.props
     return (
       <div className={styles.Options}>
-        { options.map((option, index) => (
-          <div
-            key={`${option}:${index}`}
-            className={classNames(styles.Option, option === this.props.input.value ? styles.Selected : null)}
-            onClick={this.select(option)}
-          >
-            { option }
-          </div>
-        ))}
+        <Scrollbars
+          ref={this.onScrollbars}
+          autoHeight
+          autoHeightMin={0}
+          autoHeightMax={18 * 10}
+        >
+          { options.map((option, index) => (
+            <div
+              key={`${option}:${index}`}
+              className={classNames(
+                styles.Option,
+                option.value === this.props.input.value ? styles.Selected : null,
+                option.disabled ? styles.Disabled : null
+              )}
+              onClick={this.select(option)}
+            >
+              { option.name }
+            </div>
+          ))}
+        </Scrollbars>
       </div>
     )
+  }
+
+  private onScrollbars = (scrollbars: Scrollbars | null) => {
+    this.scrollbars = scrollbars
   }
 
   private onRef = (div: HTMLDivElement | null) => {

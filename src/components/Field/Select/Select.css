@@ -5,7 +5,6 @@
   > .Wrapper {
     display: flex;
     position: relative;
-    z-index: 1;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -62,7 +61,7 @@
       z-index: 2;
       top: 100%;
       left: -10px;
-      width: calc(100% + 20px);
+      min-width: calc(100% + 20px);
       background: rgb(50, 50, 50);
       color: white;
       box-sizing: border-box;
@@ -71,7 +70,7 @@
       cursor: default;
       user-select: none;
 
-      > .Option {
+      .Option {
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid darkgrey;
@@ -80,12 +79,21 @@
         box-shadow: inset 0 0 1px black, inset 0 0 12px rgba(0, 0, 0, 0.2);
         transition: background-color 185ms ease-in-out;
         cursor: pointer;
+        min-width: 100%;
 
         &:last-child { border: none }
         &:hover { background-color: rgb(96, 120, 119) }
         &.Selected {
           background-color: rgba(96, 120, 119, 0.5);
           &:hover { background-color: rgb(96, 120, 119) }
+        }
+        &.Disabled {
+          color: rgb(117, 117, 117);
+          background: rgb(50, 50, 50);
+          &:hover {
+            color: rgb(117, 117, 117);
+            background: rgb(50, 50, 50);
+          }
         }
       }
     }
