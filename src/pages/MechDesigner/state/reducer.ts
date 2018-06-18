@@ -42,41 +42,41 @@ const DEFAULT_INTERNAL_STRUCTURE = InternalStructureType.Standard
 const DEFAULT_ARMOR = ArmorType.Standard
 const DEAFULT_LOADOUT: IBipedalLoadout = {
   // 3, 18, 13, 9,  13
-  [Component.Head]: Head(9, 3, [], [
+  [Component.Head]: Head(0, [], [
     ...replicate(MechEquipmentName.Life_Support, 2),
     ...replicate(MechEquipmentName.Sensors, 2),
     MechEquipmentName.Cockpit,
     MechEquipmentName.None,
   ]),
-  [Component.CenterTorso]: CenterTorso(28, 8, 18, [], [
+  [Component.CenterTorso]: CenterTorso(0, 0, [], [
     ...replicate(MechEquipmentName.Engine, 6),
     ...replicate(MechEquipmentName.Gyro, 4),
     ...replicate(MechEquipmentName.None, 2),
   ]),
-  [Component.LeftTorso]: SideTorso(Component.LeftTorso, 20, 6, 13, [], replicate(MechEquipmentName.None, 12)),
-  [Component.RightTorso]: SideTorso(Component.RightTorso, 20, 6, 13, [], replicate(MechEquipmentName.None, 12)),
-  [Component.LeftArm]: Arm(Component.LeftArm, 18, 9, [], [
+  [Component.LeftTorso]: SideTorso(Component.LeftTorso, 0, 0, [], replicate(MechEquipmentName.None, 12)),
+  [Component.RightTorso]: SideTorso(Component.RightTorso, 0, 0, [], replicate(MechEquipmentName.None, 12)),
+  [Component.LeftArm]: Arm(Component.LeftArm, 0, [], [
     MechEquipmentName.Shoulder_Actuator,
     MechEquipmentName.Upper_Arm_Actuator,
     MechEquipmentName.Lower_Arm_Actuator,
     MechEquipmentName.Hand_Actuator,
     ...replicate(MechEquipmentName.None, 8)
   ]),
-  [Component.RightArm]: Arm(Component.RightArm, 18, 9, [], [
+  [Component.RightArm]: Arm(Component.RightArm, 0, [], [
     MechEquipmentName.Shoulder_Actuator,
     MechEquipmentName.Upper_Arm_Actuator,
     MechEquipmentName.Lower_Arm_Actuator,
     MechEquipmentName.Hand_Actuator,
     ...replicate(MechEquipmentName.None, 8)
   ]),
-  [Component.LeftLeg]: Leg(Component.LeftLeg, 26, 13, [], [
+  [Component.LeftLeg]: Leg(Component.LeftLeg, 0, [], [
     MechEquipmentName.Hip_Actuator,
     MechEquipmentName.Upper_Leg_Actuator,
     MechEquipmentName.Lower_Leg_Actuator,
     MechEquipmentName.Foot_Actuator,
     ...replicate(MechEquipmentName.None, 2)
   ]),
-  [Component.RightLeg]: Leg(Component.RightLeg, 26, 13, [], [
+  [Component.RightLeg]: Leg(Component.RightLeg, 0, [], [
     MechEquipmentName.Hip_Actuator,
     MechEquipmentName.Upper_Leg_Actuator,
     MechEquipmentName.Lower_Leg_Actuator,

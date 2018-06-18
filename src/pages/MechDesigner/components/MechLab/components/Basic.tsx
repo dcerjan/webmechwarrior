@@ -10,6 +10,8 @@ import { MechType } from '../../../../../models/common/MechType'
 import { Tech } from '../../../../../models/common/Tech'
 import { getEngineTonnage } from '../../../../../models/Engine'
 import { getGyroTonnage } from '../../../../../models/Gryo'
+import { getInternalStructureTonnage } from '../../../../../models/InternalStructure'
+import { getArmorTonnage } from '../../../../../models/Mech'
 import { IInjectedMechLabProps } from '../MechLab'
 
 export class Basic extends React.PureComponent<IInjectedMechLabProps> {
@@ -66,8 +68,11 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
     const engine = getEngineTonnage(values.engine.rating, values.engine.type)
     const gyro = getGyroTonnage(values.engine.rating, values.gyro.type)
     const cockpit = getCockpitTonnage(values.cockpit)
+    const internal = getInternalStructureTonnage(values.tonnage, values.internalStructure)
 
-    const amount = values.tonnage - engine - gyro - cockpit
+    const armor = getArmorTonnage(values.type, values.tech, values.armor, values.loadout)
+
+    const amount = values.tonnage - engine - gyro - cockpit - internal - armor
 
     return amount
   }

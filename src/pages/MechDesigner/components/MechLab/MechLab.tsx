@@ -9,6 +9,7 @@ import { Cockpit } from './components/Cockpit'
 import { Engine } from './components/Engine'
 import { Gyro } from './components/Gyro'
 import { InternalStructure } from './components/InternalStructure'
+import { Loadout } from './components/Loadout/Loadout'
 import * as styles from './MechLab.css'
 
 interface ILoadoutProps {
@@ -36,7 +37,7 @@ class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps 
             <Armor values={values} />
           </div>
           <div>
-            {'<Loadout values={values} />'}
+            <Loadout values={values} />
           </div>
         </form>
       </div>

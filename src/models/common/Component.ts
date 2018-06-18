@@ -37,7 +37,6 @@ type SideTorsos =
 interface IBaseMechPart {
   name: Component,
   armor: number,
-  structure: number,
   hardpoints: Hardpoint[],
   equipment: MechEquipmentName[],
   criticals: 6 | 12,
@@ -46,14 +45,12 @@ interface IBaseMechPart {
 const BaseMechPart = (
   name: Component,
   armor: number,
-  structure: number,
   hardpoints: Hardpoint[],
   equipment: MechEquipmentName[],
   criticals: 6 | 12,
 ): IBaseMechPart => ({
   name,
   armor,
-  structure,
   hardpoints,
   equipment,
   criticals,
@@ -68,10 +65,9 @@ export const HeadL = lens<IHead>()
 
 export const Head = (
   armor: number,
-  structure: number,
   hardpoints: Hardpoint[],
   equipment: MechEquipmentName[],
-): IHead => ({ ...BaseMechPart(Component.Head, armor, structure, hardpoints, equipment, 6) }) as IHead
+): IHead => ({ ...BaseMechPart(Component.Head, armor, hardpoints, equipment, 6) }) as IHead
 
 
 export interface ICenterTorso extends IBaseMechPart {
@@ -85,12 +81,11 @@ export const CenterTorsoL = lens<ICenterTorso>()
 export const CenterTorso = (
   armor: number,
   rearArmor: number,
-  structure: number,
   hardpoints: Hardpoint[],
   equipment: MechEquipmentName[],
 ): ICenterTorso => ({
   rearArmor,
-  ...BaseMechPart(Component.CenterTorso, armor, structure, hardpoints, equipment, 12),
+  ...BaseMechPart(Component.CenterTorso, armor, hardpoints, equipment, 12),
 }) as ICenterTorso
 
 
@@ -106,12 +101,11 @@ export const SideTorso = (
   name: SideTorsos,
   armor: number,
   rearArmor: number,
-  structure: number,
   hardpoints: Hardpoint[],
   equipment: MechEquipmentName[],
 ): ISideTorso => ({
   rearArmor,
-  ...BaseMechPart(name, armor, structure, hardpoints, equipment, 12),
+  ...BaseMechPart(name, armor, hardpoints, equipment, 12),
 }) as ISideTorso
 
 
@@ -125,10 +119,9 @@ export const ArmL = lens<IArm>()
 export const Arm = (
   name: Arms,
   armor: number,
-  structure: number,
   hardpoints: Hardpoint[],
   equipment: MechEquipmentName[],
-): IArm => BaseMechPart(name, armor, structure, hardpoints, equipment, 12) as IArm
+): IArm => BaseMechPart(name, armor, hardpoints, equipment, 12) as IArm
 
 
 export interface ILeg extends IBaseMechPart  {
@@ -141,10 +134,9 @@ export const LegL = lens<ILeg>()
 export const Leg = (
   name: Legs,
   armor: number,
-  structure: number,
   hardpoints: Hardpoint[],
   equipment: MechEquipmentName[],
-): ILeg => BaseMechPart(name, armor, structure, hardpoints, equipment, 6) as ILeg
+): ILeg => BaseMechPart(name, armor, hardpoints, equipment, 6) as ILeg
 
 export const getMechBipedComponents = () => [
   Component.Head,

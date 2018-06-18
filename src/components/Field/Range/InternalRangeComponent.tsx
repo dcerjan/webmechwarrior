@@ -9,6 +9,7 @@ interface IInternalRangeComponentProps {
   min: number,
   max: number,
   step: number,
+  formater?: (val: number) => string,
 }
 
 interface IInternalRangeComponentState {
@@ -21,7 +22,7 @@ export class InternalRangeComponent<T> extends React.PureComponent<IFormComponen
   }
 
   public render() {
-    const { input, meta, alignment } = this.props
+    const { input, meta, alignment, formater } = this.props
     const { focused } = this.state
     const message = meta.warning || meta.error || null
     const level = (meta.warning && 'Warning') || (meta.error && 'Error') || null
@@ -45,7 +46,9 @@ export class InternalRangeComponent<T> extends React.PureComponent<IFormComponen
           onKeyDown={this.onKeyDown}
         >
           <div className={classNames(styles.Value, alignmentClass)} >
-            { input.value }
+            { formater
+              ? formater(input.value)
+              : input.value }
           </div>
           <div className={styles.Adjusters}>
             <div

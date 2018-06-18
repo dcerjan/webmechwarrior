@@ -1,0 +1,21 @@
+.Loadout {
+  display: flex;
+  flex-direction: row;
+
+  .Outer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+  }
+
+  .Side {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+  }
+
+  .Center {
+    display: flex;
+    flex-direction: column;
+  }
+}

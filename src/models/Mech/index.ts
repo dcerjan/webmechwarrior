@@ -1,6 +1,6 @@
 import { lens } from 'lens.ts'
 
-import { ArmorType } from '../Armor'
+import { ArmorType, getArmorBasePointMultiplier } from '../Armor'
 import { Component, IArm, ICenterTorso, IHead, ILeg, ISideTorso } from '../common/Component'
 import { MechType } from '../common/MechType'
 import { Tech } from '../common/Tech'
@@ -91,4 +91,12 @@ export const getQuadrupedalLoadoutArmor = (loadout: IQuadrupedalLoadout): number
     loadout[Component.RearLeftLeg].armor +
     loadout[Component.RearRightLeg].armor
   )
+}
+
+export const getArmorTonnage = (type: MechType, tech: Tech, armorType: ArmorType,  loadout: IBipedalLoadout | IQuadrupedalLoadout) => {
+  const armor =  type === MechType.Bipedal
+    ? getBipedalLoadoutArmor(loadout as IBipedalLoadout)
+    : getQuadrupedalLoadoutArmor(loadout as IQuadrupedalLoadout)
+
+  return Math.ceil((armor / (16 * getArmorBasePointMultiplier(tech, armorType))) * 2.0) * 0.5
 }
