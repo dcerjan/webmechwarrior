@@ -15,7 +15,7 @@ class App extends React.Component {
         <BrowserRouter>
           <div className='App'>
             <div>
-              <Link to='/'>Dash</Link>
+              <Link to='/'>Dash&nbsp;</Link>
               <Link to='/MechDesigner'>MechDesigner</Link>
             </div>
             <Switch>
