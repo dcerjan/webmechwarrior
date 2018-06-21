@@ -6,6 +6,7 @@ import { getMaxArmorForPart } from '../../../../../../models/Armor'
 import { IHead } from '../../../../../../models/common/Component'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
 import { IInjectedMechLabProps } from '../../MechLab'
+import { Hardpoints } from './Hardpoints'
 
 interface IHeadProps extends IInjectedMechLabProps {
   head: IHead,
@@ -30,6 +31,7 @@ export class Head extends React.PureComponent<IHeadProps> {
           color={DetailColor.TransparentBluishGrey}
         />
         <Detail label='Structure' value={this.getHeadStructure()} color={DetailColor.TransparentBluishGrey} />
+        <Hardpoints hardpoints={head.hardpoints} component={head.name} />
       </Card>
     )
   }

@@ -6,6 +6,7 @@ import { getMaxArmorForPart } from '../../../../../../models/Armor'
 import { ISideTorso } from '../../../../../../models/common/Component'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
 import { IInjectedMechLabProps } from '../../MechLab'
+import { Hardpoints } from './Hardpoints'
 
 interface ISideTorsoProps extends IInjectedMechLabProps {
   sideTorso: ISideTorso,
@@ -42,6 +43,7 @@ export class SideTorso extends React.PureComponent<ISideTorsoProps> {
           color={DetailColor.TransparentBluishGrey}
         />
         <Detail label='Structure' value={this.getSideTorsoStructure()} color={DetailColor.TransparentBluishGrey} />
+        <Hardpoints hardpoints={sideTorso.hardpoints} component={sideTorso.name} />
       </Card>
     )
   }

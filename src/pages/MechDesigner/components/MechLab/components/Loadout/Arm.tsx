@@ -31,7 +31,7 @@ export class Arm extends React.PureComponent<IArmProps> {
           color={DetailColor.TransparentBluishGrey}
         />
         <Detail label='Structure' value={this.getArmStructure()} color={DetailColor.TransparentBluishGrey} />
-        <Hardpoints hardpoints={arm.hardpoints} />
+        <Hardpoints hardpoints={arm.hardpoints} component={arm.name} />
       </Card>
     )
   }
