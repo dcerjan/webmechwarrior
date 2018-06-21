@@ -1,39 +1,42 @@
+import * as classNames from 'classnames'
 import * as React from 'react'
+
 import { Detail, DetailColor } from '../../../../../../components/Common/Detail'
+import { Range } from '../../../../../../components/Field'
+import { Component, IHardpoints } from '../../../../../../models/common/Component'
 import { Hardpoint } from '../../../../../../models/common/Hardpoint'
 
-interface IHardpoints {
-  hardpoints: Hardpoint[],
+import * as styles from './Hardpoint.css'
+
+interface IHardpointsProps {
+  component: Component,
+  hardpoints: IHardpoints
 }
 
-interface IHardpointCountDescriptor {
-  hardpoint: Hardpoint,
-  count: number,
-}
-
-const countHardpoints = (hardpoints: Hardpoint[]): IHardpointCountDescriptor[] => {
-  const hardpointMap = hardpoints.reduce((memo, h) => {
-    if (!memo[h]) {
-      memo[h] = 0
-    }
-    memo[h] += 1
-    return memo
-  }, {})
-
-  return Object.keys(hardpointMap).map(hardpoint =>
-    ({ hardpoint: hardpoint as Hardpoint, count: hardpointMap[hardpoint] }))
-}
-
-export const Hardpoints: React.SFC<IHardpoints> = ({ hardpoints }) => {
-  const hardppointsDescriptors = countHardpoints(hardpoints)
+export const Hardpoints: React.SFC<IHardpointsProps> = ({ component, hardpoints }) => {
+  const orderedHardpoints = [ Hardpoint.Energy, Hardpoint.Ballistic, Hardpoint.Missile ]
 
   return (
     <Detail
       label='Hardpoints'
       value={
-        <div>
-          { hardppointsDescriptors.map(descriptor => (
-            <div key={descriptor.hardpoint} className={descriptor.hardpoint}>{descriptor.count}</div>
+        <div className={styles.Hardpoints}>
+          { orderedHardpoints.map(hardpoint => (
+            <div key={hardpoint} className={styles.Hardpoint}>
+              <Range
+                name={`loadout.${component}.hardpoints.${hardpoint}`}
+                alignment='Right'
+                min={0}
+                max={12}
+                step={1}
+                formater={value => (
+                  <div className={styles.Hardpoint}>
+                    <div className={classNames(styles.Icon, styles[hardpoint])} />
+                    <div>{ value }</div>
+                  </div>
+                )}
+              />
+            </div>
           )) }
         </div>
       }
