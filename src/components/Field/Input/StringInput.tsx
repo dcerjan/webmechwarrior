@@ -4,7 +4,7 @@ import { Field } from 'redux-form'
 import { IFormComponentProps, IFormFieldProps } from '../common'
 import * as styles from './Input.css'
 
-const InternalStringInputComponent: React.SFC<IFormComponentProps<string>> = ({ input, meta, ...props }) => {
+const InternalStringInputComponent: React.SFC<IFormComponentProps<string>> = ({ input, meta, valueChanged, ...props }) => {
 
   const message = meta.warning || meta.error || null
   const level = (meta.warning && 'Warning') || (meta.error && 'Error') || null
@@ -17,7 +17,12 @@ const InternalStringInputComponent: React.SFC<IFormComponentProps<string>> = ({ 
       <input
         {...props}
         {...input}
-        onChange={event => input.onChange(event.target.value)}
+        onChange={event => {
+          input.onChange(event.target.value)
+          if (valueChanged && event.target.value !== input.value) {
+            valueChanged(event.target.value, input.value)
+          }
+        }}
         onBlur={event => input.onBlur(event.target.value)}
         onFocus={event => input.onFocus(event.target.value)}
         onDragStart={event => input.onDragStart(event.currentTarget.value)}
@@ -30,12 +35,13 @@ const InternalStringInputComponent: React.SFC<IFormComponentProps<string>> = ({ 
 interface IStringInputFieldProps<F> extends Pick<IFormFieldProps<string, F>, 'name' | 'validate'> {
   placeholder?: string,
   autocomplete?: boolean,
+  valueChanged?: (newVal: string, oldVal: string) => void,
 }
 
 export class StringInput<F> extends React.PureComponent<IStringInputFieldProps<F>> {
 
   public render() {
-    const { name, validate, placeholder, autocomplete } = this.props
+    const { name, validate, placeholder, autocomplete, valueChanged } = this.props
 
     return (
       <Field
@@ -44,6 +50,7 @@ export class StringInput<F> extends React.PureComponent<IStringInputFieldProps<F
         validate={validate}
         placeholder={placeholder}
         autoComplete={autocomplete ? 'on' : 'off'}
+        valueChanged={valueChanged}
       />
     )
   }

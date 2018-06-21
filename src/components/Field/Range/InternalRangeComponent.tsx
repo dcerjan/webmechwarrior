@@ -9,7 +9,7 @@ interface IInternalRangeComponentProps {
   min: number,
   max: number,
   step: number,
-  formater?: (val: number) => string,
+  formater?: (val: number) => JSX.Element | string,
 }
 
 interface IInternalRangeComponentState {

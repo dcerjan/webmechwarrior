@@ -11,6 +11,7 @@ interface IInternalSelectComponentProps<T> {
   placeholder?: string,
   options: Array<ISelectOption<T>>,
   alignment: 'Left' | 'Center' | 'Right',
+  formater?: (val: string) => JSX.Element | string,
 }
 
 interface IInternalSelectComponentState {
@@ -47,7 +48,7 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
   }
 
   public render() {
-    const { input, meta, placeholder, alignment } = this.props
+    const { input, meta, placeholder, alignment, formater } = this.props
     const { expanded, focused } = this.state
     const message = meta.warning || meta.error || null
     const level = (meta.warning && 'Warning') || (meta.error && 'Error') || null
@@ -57,6 +58,13 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
       : alignment === 'Right'
         ? styles.Right
         : styles.Left
+
+    const name = this.getNameOfValue(input.value)
+    const value = (
+      formater && name != null
+        ? formater(name)
+        : placeholder || ''
+    )
 
     return (
       <div
@@ -77,7 +85,7 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
           onKeyDown={this.onKeyDown}
         >
           <div className={classNames(styles.Value, alignmentClass, !input.value && styles.Placeholder)}>
-            { this.getNameOfValue(input.value) || placeholder || '' }
+            { value }
           </div>
           <div className={classNames(styles.Icon, expanded ? styles.Expanded : null)} />
           { expanded

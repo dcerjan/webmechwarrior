@@ -85,6 +85,7 @@ interface IFormMetaProps<T> {
 export interface IFormComponentProps<T> {
   input: IFormInputProps<T>,
   meta: IFormMetaProps<T>,
+  valueChanged?: (newVal: T, oldVal: T) => void,
 }
 
 export interface IFormFieldProps<T, F, P = void> {

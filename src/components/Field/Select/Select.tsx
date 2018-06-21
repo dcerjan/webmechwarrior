@@ -10,12 +10,13 @@ interface IStringInputFieldProps<T, F> extends Pick<IFormFieldProps<ISelectOptio
   placeholder?: string,
   options: Array<ISelectOption<T>>,
   alignment?: 'Left' | 'Center' | 'Right',
+  formater?: (val: string) => JSX.Element | string,
 }
 
 export class Select<T, F> extends React.PureComponent<IStringInputFieldProps<T, F>> {
 
   public render() {
-    const { name, validate, placeholder, options, alignment } = this.props
+    const { name, validate, placeholder, options, alignment, formater } = this.props
 
     return (
       <Field
@@ -25,6 +26,7 @@ export class Select<T, F> extends React.PureComponent<IStringInputFieldProps<T, 
         placeholder={placeholder}
         options={options}
         alignment={alignment}
+        formater={formater}
       />
     )
   }
