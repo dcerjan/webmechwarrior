@@ -204,8 +204,12 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
   }
 
   private select = (option: ISelectOption<T>) => () => {
+    const { input, valueChanged } = this.props
     if (option && !option.disabled) {
-      this.props.input.onChange(option.value)
+      input.onChange(option.value)
+      if (valueChanged && input.value !== option.value) {
+        valueChanged(option.value, input.value)
+      }
     }
     this.setState({ expanded: false })
   }

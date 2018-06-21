@@ -4,16 +4,14 @@ import { Reducer } from 'redux'
 import { ArmorType } from '../../../models/Armor'
 import { MechType } from '../../../models/common/MechType'
 import { Tech } from '../../../models/common/Tech'
-import { EngineType, IEngine } from '../../../models/Engine'
-import { GyroType, IGyro } from '../../../models/Gryo'
+import { IEngine } from '../../../models/Engine'
+import { IGyro } from '../../../models/Gryo'
 import { InternalStructureType, MechTonnage } from '../../../models/InternalStructure'
 import { IBipedalLoadout, IQuadrupedalLoadout } from '../../../models/Mech'
 
-import { replicate } from '../../../lib/functional'
 import { CockpitType } from '../../../models/Cockpit'
-import { Arm, CenterTorso, Component, Head, Leg, SideTorso } from '../../../models/common/Component'
-import { MechEquipmentName } from '../../../models/MechEquipment/MechEquipmentName'
 import { MechDesignerAction, MechDesignerActionType } from './action'
+import { DEAFULT_BIPEDAL_LOADOUT, DEAFULT_MECH_TYPE, DEFAULT_ARMOR, DEFAULT_COCKPIT, DEFAULT_ENGINE_RATING, DEFAULT_ENGINE_TYPE, DEFAULT_GYRO_TYPE, DEFAULT_INTERNAL_STRUCTURE, DEFAULT_NAME, DEFAULT_TECH, DEFAULT_TONNAGE } from './constants'
 
 export interface IMechDesignerState {
   name: string,
@@ -29,28 +27,6 @@ export interface IMechDesignerState {
 }
 
 const MechDesignerStateL = lens<IMechDesignerState>()
-
-const DEFAULT_NAME = ''
-const DEFAULT_TECH = Tech.IS
-const DEAFULT_MECH_TYPE = MechType.Bipedal
-const DEFAULT_TONNAGE = 50
-const DEFAULT_ENGINE_RATING = 300
-const DEFAULT_ENGINE_TYPE = EngineType.Standard
-const DEFAULT_GYRO_TYPE = GyroType.Standard
-const DEFAULT_COCKPIT = CockpitType.Standard
-const DEFAULT_INTERNAL_STRUCTURE = InternalStructureType.Standard
-const DEFAULT_ARMOR = ArmorType.Standard
-const DEAFULT_LOADOUT: IBipedalLoadout = {
-  // 3, 18, 13, 9,  13
-  [Component.Head]: Head(0, { Ballistic: 0, Energy: 0, Missile: 0 }, []),
-  [Component.CenterTorso]: CenterTorso(0, 0, { Ballistic: 0, Energy: 0, Missile: 0 }, []),
-  [Component.LeftTorso]: SideTorso(Component.LeftTorso, 0, 0, { Ballistic: 0, Energy: 0, Missile: 0 }, replicate(MechEquipmentName.None, 12)),
-  [Component.RightTorso]: SideTorso(Component.RightTorso, 0, 0, { Ballistic: 0, Energy: 0, Missile: 0 }, replicate(MechEquipmentName.None, 12)),
-  [Component.LeftArm]: Arm(Component.LeftArm, 0, { Ballistic: 0, Energy: 0, Missile: 0 }, []),
-  [Component.RightArm]: Arm(Component.RightArm, 0, { Ballistic: 0, Energy: 0, Missile: 0 }, []),
-  [Component.LeftLeg]: Leg(Component.LeftLeg, 0, { Ballistic: 0, Energy: 0, Missile: 0 }, []),
-  [Component.RightLeg]: Leg(Component.RightLeg, 0, { Ballistic: 0, Energy: 0, Missile: 0 }, []),
-}
 
 
 const initialState: IMechDesignerState = {
@@ -68,7 +44,7 @@ const initialState: IMechDesignerState = {
   cockpit: DEFAULT_COCKPIT,
   internalStructure: DEFAULT_INTERNAL_STRUCTURE,
   armor: DEFAULT_ARMOR,
-  loadout: DEAFULT_LOADOUT,
+  loadout: DEAFULT_BIPEDAL_LOADOUT,
 }
 
 export const reducer: Reducer<IMechDesignerState, MechDesignerAction> = (state = initialState, action) => {

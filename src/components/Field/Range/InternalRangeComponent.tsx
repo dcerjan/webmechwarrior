@@ -80,22 +80,28 @@ export class InternalRangeComponent<T> extends React.PureComponent<IFormComponen
 
   private blur = () => {
     this.setState({ focused: false })
-    this.props.input.onFocus(this.props.input.value)
+    this.props.input.onBlur(this.props.input.value)
   }
 
   private onIncrement = () => {
-    const { input, max, step } = this.props
+    const { input, max, step, valueChanged } = this.props
 
     if (input.value + step <= max) {
       input.onChange(input.value + step)
+      if (valueChanged) {
+        valueChanged(input.value + step, input.value)
+      }
     }
   }
 
   private onDecrement = () => {
-    const { input, min, step } = this.props
+    const { input, min, step, valueChanged } = this.props
 
     if (input.value - step >= min) {
       input.onChange(input.value - step)
+      if (valueChanged) {
+        valueChanged(input.value - step, input.value)
+      }
     }
   }
 }

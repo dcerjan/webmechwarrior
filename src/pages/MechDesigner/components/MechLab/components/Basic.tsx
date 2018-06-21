@@ -12,11 +12,14 @@ import { getEngineTonnage } from '../../../../../models/Engine'
 import { getGyroTonnage } from '../../../../../models/Gryo'
 import { getInternalStructureTonnage } from '../../../../../models/InternalStructure'
 import { getArmorTonnage } from '../../../../../models/Mech'
+import { DEAFULT_BIPEDAL_LOADOUT, DEAFULT_QUADRUPEDAL_LOADOUT } from '../../../state/constants'
 import { IInjectedMechLabProps } from '../MechLab'
 
 export class Basic extends React.PureComponent<IInjectedMechLabProps> {
 
   public render() {
+    const { change } = this.props
+
     return (
       <Card
         title='Mech'
@@ -46,6 +49,12 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
             name='type'
             options={Object.values(MechType).map(type => ({ value: type, name: type }))}
             alignment='Right'
+            valueChanged={(newType: MechType) => {
+              switch (newType) {
+              case MechType.Bipedal: return change('loadout', DEAFULT_BIPEDAL_LOADOUT)
+              case MechType.Quadrupedal: return change('loadout', DEAFULT_QUADRUPEDAL_LOADOUT)
+              }
+            }}
           /> }
           color={DetailColor.TransparentBluishGrey}
         />
