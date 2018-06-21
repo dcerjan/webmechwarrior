@@ -8,8 +8,7 @@ export enum EngineType {
   Compact = 'Compact',
   Standard = 'Standard',
   Light = 'Light',
-  ExtraLightIS = 'XL (IS)',
-  ExtraLightClan = 'XL (Clan)',
+  XL = 'XL',
   ICE = 'ICE',
   Cell = 'Cell',
   Fission = 'Fission',
@@ -37,8 +36,7 @@ interface IEngineTableRecord {
   [EngineType.Compact]: number,
   [EngineType.Standard]: number,
   [EngineType.Light]: number,
-  [EngineType.ExtraLightIS]: number,
-  [EngineType.ExtraLightClan]: number,
+  [EngineType.XL]: number,
   hitPoints: number,
 }
 
@@ -61,8 +59,7 @@ const EngineTableRecord = (
   [EngineType.Compact]: compact,
   [EngineType.Standard]: standard,
   [EngineType.Light]: light,
-  [EngineType.ExtraLightIS]: xl,
-  [EngineType.ExtraLightClan]: xl,
+  [EngineType.XL]: xl,
   hitPoints: 3,
 })
 
@@ -182,19 +179,20 @@ export const getEngineTonnage = (rating: EngineRating, type: EngineType): number
 
 export const getAvailableEngines = (tech: Tech) => {
   switch (tech) {
-  case Tech.Clan: return [EngineType.Standard, EngineType.ExtraLightClan]
-  case Tech.IS: return [EngineType.Standard, EngineType.Compact, EngineType.Light, EngineType.ExtraLightIS]
+  case Tech.Clan: return [EngineType.Standard, EngineType.XL]
+  case Tech.IS: return [EngineType.Standard, EngineType.Compact, EngineType.Light, EngineType.XL]
   default: return []
   }
 }
 
-export const getEngineCriticalSlotAllocation = (type: EngineType): IEngineCriticalSlotAllocation => {
+export const getEngineCriticalSlotAllocation = (tech: Tech, type: EngineType): IEngineCriticalSlotAllocation => {
   switch (type) {
   case EngineType.Standard: return { [Component.CenterTorso]: 6 }
   case EngineType.Compact: return { [Component.CenterTorso]: 3 }
   case EngineType.Light: return { [Component.CenterTorso]: 6, [Component.LeftTorso]: 3, [Component.RightTorso]: 3 }
-  case EngineType.ExtraLightIS: return { [Component.CenterTorso]: 6, [Component.LeftTorso]: 3, [Component.RightTorso]: 3 }
-  case EngineType.ExtraLightClan: return { [Component.CenterTorso]: 6, [Component.LeftTorso]: 2, [Component.RightTorso]: 2 }
+  case EngineType.XL: return tech === Tech.IS
+    ? { [Component.CenterTorso]: 6, [Component.LeftTorso]: 3, [Component.RightTorso]: 3 }
+    : { [Component.CenterTorso]: 6, [Component.LeftTorso]: 2, [Component.RightTorso]: 2 }
   default: throw new Error(`Invalid engine type given: ${type}`)
   }
 }

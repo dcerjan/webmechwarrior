@@ -73,7 +73,7 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
   }
 
   private getEngineCriticals() {
-    const allocation = getEngineCriticalSlotAllocation(this.props.values.engine.type)
+    const allocation = getEngineCriticalSlotAllocation(this.props.values.tech, this.props.values.engine.type)
     return `${allocation[Component.LeftTorso] || '-'}/${allocation[Component.CenterTorso]}/${allocation[Component.RightTorso] || '-'}`
   }
 

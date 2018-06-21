@@ -5,6 +5,7 @@ import { InternalStructureType } from '../InternalStructure'
 import { getJumpJetCriticals, JumpJetType } from '../JumpJets'
 import { getHeavyWeaponCriticalSlots } from '../Tables/WeaponTable'
 import { Hardpoint } from './Hardpoint'
+import { Tech } from './Tech'
 
 export type SlotableEquipment =
   | EngineType
@@ -18,9 +19,9 @@ export type CriticalSlotAllocation =
   | IEngineCriticalSlotAllocation
   | number
 
-export const getCriticalSlotsFor = (hardpoint: Hardpoint, equipment: SlotableEquipment): CriticalSlotAllocation => {
+export const getCriticalSlotsFor = (tech: Tech, hardpoint: Hardpoint, equipment: SlotableEquipment): CriticalSlotAllocation => {
   switch (hardpoint) {
-  case Hardpoint.Engine: return getEngineCriticalSlotAllocation(equipment as EngineType)
+  case Hardpoint.Engine: return getEngineCriticalSlotAllocation(tech, equipment as EngineType)
   case Hardpoint.Gyro: return getGyroCriticals(equipment as GyroType)
   case Hardpoint.JumpJet: return getJumpJetCriticals(equipment as JumpJetType)
 
