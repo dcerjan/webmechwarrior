@@ -63,7 +63,7 @@ export class InternalSelectComponent<T> extends React.PureComponent<IFormCompone
     const value = (
       formater && name != null
         ? formater(name)
-        : placeholder || ''
+        : name || placeholder || ''
     )
 
     return (
