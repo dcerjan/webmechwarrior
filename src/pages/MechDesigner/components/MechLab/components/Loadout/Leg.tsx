@@ -6,6 +6,7 @@ import { getMaxArmorForPart } from '../../../../../../models/Armor'
 import { ILeg } from '../../../../../../models/common/Component'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
 import { IInjectedMechLabProps } from '../../MechLab'
+import { Criticals } from './Criticals'
 import { Hardpoints } from './Hardpoints'
 
 interface ILegProps extends IInjectedMechLabProps {
@@ -15,9 +16,12 @@ interface ILegProps extends IInjectedMechLabProps {
 export class Leg extends React.PureComponent<ILegProps> {
 
   public render() {
-    const { leg } = this.props
+    const { leg, values } = this.props
     return (
-      <Card title={leg.name}>
+      <Card
+        title={leg.name}
+        footer={ <Criticals mech={values} part={leg} /> }
+      >
         <Detail
           label='Armor'
           value={ <Range

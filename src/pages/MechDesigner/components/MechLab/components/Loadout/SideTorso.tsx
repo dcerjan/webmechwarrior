@@ -6,6 +6,7 @@ import { getMaxArmorForPart } from '../../../../../../models/Armor'
 import { ISideTorso } from '../../../../../../models/common/Component'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
 import { IInjectedMechLabProps } from '../../MechLab'
+import { Criticals } from './Criticals'
 import { Hardpoints } from './Hardpoints'
 
 interface ISideTorsoProps extends IInjectedMechLabProps {
@@ -15,9 +16,12 @@ interface ISideTorsoProps extends IInjectedMechLabProps {
 export class SideTorso extends React.PureComponent<ISideTorsoProps> {
 
   public render() {
-    const { sideTorso } = this.props
+    const { sideTorso, values } = this.props
     return (
-      <Card title={sideTorso.name}>
+      <Card
+        title={sideTorso.name}
+        footer={ <Criticals mech={values} part={sideTorso} /> }
+      >
         <Detail
           label='Armor'
           value={ <Range
