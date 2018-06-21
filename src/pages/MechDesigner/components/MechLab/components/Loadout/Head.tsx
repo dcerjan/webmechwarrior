@@ -6,6 +6,7 @@ import { getMaxArmorForPart } from '../../../../../../models/Armor'
 import { IHead } from '../../../../../../models/common/Component'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
 import { IInjectedMechLabProps } from '../../MechLab'
+import { Criticals } from './Criticals'
 import { Hardpoints } from './Hardpoints'
 
 interface IHeadProps extends IInjectedMechLabProps {
@@ -15,9 +16,12 @@ interface IHeadProps extends IInjectedMechLabProps {
 export class Head extends React.PureComponent<IHeadProps> {
 
   public render() {
-    const { head } = this.props
+    const { head, values } = this.props
     return (
-      <Card title={head.name}>
+      <Card
+        title={head.name}
+        footer={ <Criticals mech={values} part={head} /> }
+      >
         <Detail
           label='Armor'
           value={ <Range

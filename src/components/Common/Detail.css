@@ -47,4 +47,7 @@
   &.TransparentBluishGrey { background-color: rgba(96, 120, 119, 0.5) }
   &.Red { background-color: rgb(252, 26, 26) }
   &.TransparentRed { background-color: rgba(252, 26, 26, 0.5) }
+  &.Sand { background-color: rgb(164, 146, 120) }
+  &.TransparentSand { background-color: rgba(164, 146, 120, 0.5) }
+  &.Transparent { background-color: transparent }
 }

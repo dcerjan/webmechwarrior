@@ -40,7 +40,7 @@ export interface IHardpoints {
   [Hardpoint.Missile]: number,
 }
 
-interface IBaseMechPart {
+export interface IBaseMechPart {
   name: Component,
   armor: number,
   hardpoints: IHardpoints,
