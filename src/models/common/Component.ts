@@ -34,10 +34,16 @@ type SideTorsos =
   | Component.LeftTorso
   | Component.RightTorso
 
+export interface IHardpoints {
+  [Hardpoint.Energy]: number,
+  [Hardpoint.Ballistic]: number,
+  [Hardpoint.Missile]: number,
+}
+
 interface IBaseMechPart {
   name: Component,
   armor: number,
-  hardpoints: Hardpoint[],
+  hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
   criticals: 6 | 12,
 }
@@ -45,7 +51,7 @@ interface IBaseMechPart {
 const BaseMechPart = (
   name: Component,
   armor: number,
-  hardpoints: Hardpoint[],
+  hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
   criticals: 6 | 12,
 ): IBaseMechPart => ({
@@ -65,7 +71,7 @@ export const HeadL = lens<IHead>()
 
 export const Head = (
   armor: number,
-  hardpoints: Hardpoint[],
+  hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
 ): IHead => ({ ...BaseMechPart(Component.Head, armor, hardpoints, equipment, 6) }) as IHead
 
@@ -81,7 +87,7 @@ export const CenterTorsoL = lens<ICenterTorso>()
 export const CenterTorso = (
   armor: number,
   rearArmor: number,
-  hardpoints: Hardpoint[],
+  hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
 ): ICenterTorso => ({
   rearArmor,
@@ -101,7 +107,7 @@ export const SideTorso = (
   name: SideTorsos,
   armor: number,
   rearArmor: number,
-  hardpoints: Hardpoint[],
+  hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
 ): ISideTorso => ({
   rearArmor,
@@ -119,7 +125,7 @@ export const ArmL = lens<IArm>()
 export const Arm = (
   name: Arms,
   armor: number,
-  hardpoints: Hardpoint[],
+  hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
 ): IArm => BaseMechPart(name, armor, hardpoints, equipment, 12) as IArm
 
@@ -134,7 +140,7 @@ export const LegL = lens<ILeg>()
 export const Leg = (
   name: Legs,
   armor: number,
-  hardpoints: Hardpoint[],
+  hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
 ): ILeg => BaseMechPart(name, armor, hardpoints, equipment, 6) as ILeg
 
