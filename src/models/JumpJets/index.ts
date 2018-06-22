@@ -1,5 +1,5 @@
 import { EngineRating, getRunningMP, getWalkingMP } from '../Engine'
-import { MechTonnage } from '../InternalStructure'
+import { MechTonnage } from '../Mech'
 
 export enum JumpJetType {
   Standard = 'Standard Jump Jet',

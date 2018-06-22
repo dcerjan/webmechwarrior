@@ -11,7 +11,7 @@ interface IStringInputFieldProps<T, F> extends Pick<IFormFieldProps<ISelectOptio
   options: Array<ISelectOption<T>>,
   alignment?: 'Left' | 'Center' | 'Right',
   formater?: (val: string) => JSX.Element | string,
-  valueChanged?: (newVal: string, oldVal: string) => void,
+  valueChanged?: (newVal: T, oldVal: T) => void,
 }
 
 export class Select<T, F> extends React.PureComponent<IStringInputFieldProps<T, F>> {

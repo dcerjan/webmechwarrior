@@ -1,7 +1,13 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { change, getFormValues, InjectedFormProps, reduxForm } from 'redux-form'
+import {
+  change,
+  formValueSelector,
+  getFormValues,
+  InjectedFormProps,
+  reduxForm,
+} from 'redux-form'
 
 import { IMechDesignerState } from '../../state/reducer'
 import { Armor } from './components/Armor'
@@ -19,27 +25,28 @@ interface ILoadoutProps {
 
 export interface IInjectedMechLabProps {
   values: IMechDesignerState,
-  change: (field: string, falue: any) => void,
+  change: (field: string, value: any) => void,
+  select: (field: string) => any,
 }
 
 class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps & InjectedFormProps<ILoadoutProps>> {
 
   public render() {
-    const { values, change } = this.props
+    const { values, change, select } = this.props
 
     return (
       <div>
         <form className={styles.MechLab}>
           <div className={styles.Basic}>
-            <Basic values={values} change={change} />
-            <Engine values={values} change={change} />
-            <Gyro values={values} change={change} />
-            <Cockpit values={values} change={change} />
-            <InternalStructure values={values} change={change} />
-            <Armor values={values} change={change} />
+            <Basic values={values} change={change} select={select} />
+            <Engine values={values} change={change} select={select} />
+            <Gyro values={values} change={change} select={select} />
+            <Cockpit values={values} change={change} select={select} />
+            <InternalStructure values={values} change={change} select={select} />
+            <Armor values={values} change={change} select={select} />
           </div>
           <div>
-            <Loadout values={values} change={change} />
+            <Loadout values={values} change={change} select={select} />
           </div>
         </form>
       </div>
@@ -49,6 +56,7 @@ class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps 
 
 const mapState = (state: any, props: ILoadoutProps) => ({
   initialValues: props.mech,
+  select: (field: string): any => formValueSelector('Lab.Loadout')(state, field),
 })
 
 const mapDispatch = (dispatch: Dispatch) => ({

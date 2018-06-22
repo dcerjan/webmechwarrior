@@ -1,6 +1,7 @@
 import { Component } from '../common/Component'
 import { Tech } from '../common/Tech'
-import { getMaxArmorHitPoints, MechTonnage } from '../InternalStructure'
+import { getMaxArmorHitPoints } from '../InternalStructure'
+import { MechTonnage } from '../Mech'
 
 export enum ArmorType {
   Standard = 'Standard',

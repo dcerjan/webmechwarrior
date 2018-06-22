@@ -11,14 +11,16 @@ import {
   getArmorCriticalSlots,
   getAvailableArmorTypes,
 } from '../../../../../models/Armor'
-import { getMechBipedComponents, getMechQuadrupedComponents } from '../../../../../models/common/Component'
+import { getMechBipedComponents, getMechQuadrupedComponents, getMechTripodComponents } from '../../../../../models/common/Component'
 import { MechType } from '../../../../../models/common/MechType'
 import { getMaxArmorHitPoints, } from '../../../../../models/InternalStructure'
 import {
   getBipedalLoadoutArmor,
   getQuadrupedalLoadoutArmor,
+  getTripodLoadoutArmor,
   IBipedalLoadout,
   IQuadrupedalLoadout,
+  ITripodLoadout,
 } from '../../../../../models/Mech'
 import { IInjectedMechLabProps } from '../MechLab'
 
@@ -50,9 +52,13 @@ export class Armor extends React.PureComponent<IInjectedMechLabProps> {
   private getArmorTonnage() {
     const { values } = this.props
 
-    const armor = values.type === MechType.Bipedal
-      ? getBipedalLoadoutArmor(values.loadout as IBipedalLoadout)
-      : getQuadrupedalLoadoutArmor(values.loadout as IQuadrupedalLoadout)
+    const armor = (() => {
+      switch (values.type) {
+      case MechType.Bipedal: return getBipedalLoadoutArmor(values.loadout as IBipedalLoadout)
+      case MechType.Tripod: return getTripodLoadoutArmor(values.loadout as ITripodLoadout)
+      case MechType.Quadrupedal: return getQuadrupedalLoadoutArmor(values.loadout as IQuadrupedalLoadout)
+      }
+    })()
 
     const tonnage = Math.ceil((armor / (16 * getArmorBasePointMultiplier(values.tech, values.armor))) * 2.0) * 0.5
 
@@ -67,13 +73,21 @@ export class Armor extends React.PureComponent<IInjectedMechLabProps> {
 
   private getArmor() {
     const { values } = this.props
-    const components = values.type === MechType.Bipedal
-      ? getMechBipedComponents()
-      : getMechQuadrupedComponents()
+    const components = (() => {
+      switch (values.type) {
+      case MechType.Bipedal: return getMechBipedComponents()
+      case MechType.Tripod: return getMechTripodComponents()
+      case MechType.Quadrupedal: return getMechQuadrupedComponents()
+      }
+    })()
 
-    const points = values.type === MechType.Bipedal
-      ? getBipedalLoadoutArmor(values.loadout as IBipedalLoadout)
-      : getQuadrupedalLoadoutArmor(values.loadout as IQuadrupedalLoadout)
+    const points = (() => {
+      switch (values.type) {
+      case MechType.Bipedal: return getBipedalLoadoutArmor(values.loadout as IBipedalLoadout)
+      case MechType.Tripod: return getTripodLoadoutArmor(values.loadout as ITripodLoadout)
+      case MechType.Quadrupedal: return getQuadrupedalLoadoutArmor(values.loadout as IQuadrupedalLoadout)
+      }
+    })()
 
     const maxPoints = components.reduce((total, component) =>
       total + getMaxArmorHitPoints(values.tonnage, component), 0)

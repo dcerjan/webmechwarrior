@@ -16,6 +16,7 @@ export enum Component {
   FrontRightLeg = 'Front Right Leg',
   RearLeftLeg = 'Rear Left Leg',
   RearRightLeg = 'Rear Right Leg',
+  RearLeg = 'Rear Leg',
 }
 
 type Arms =
@@ -29,6 +30,7 @@ type Legs =
   | Component.FrontRightLeg
   | Component.RearLeftLeg
   | Component.RearRightLeg
+  | Component.RearLeg
 
 type SideTorsos =
   | Component.LeftTorso
@@ -153,6 +155,16 @@ export const getMechBipedComponents = () => [
   Component.RightArm,
   Component.LeftLeg,
   Component.RightLeg,
+]
+
+export const getMechTripodComponents = () => [
+  Component.Head,
+  Component.CenterTorso,
+  Component.LeftTorso,
+  Component.RightTorso,
+  Component.FrontLeftLeg,
+  Component.FrontRightLeg,
+  Component.RearLeg,
 ]
 
 export const getMechQuadrupedComponents = () => [
