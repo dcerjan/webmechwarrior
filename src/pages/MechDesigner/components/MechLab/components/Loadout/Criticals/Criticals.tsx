@@ -129,7 +129,8 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     case Component.FrontLeftLeg:
     case Component.FrontRightLeg:
     case Component.RearLeftLeg:
-    case Component.RearRightLeg: return this.getLegEquipment(part as ILeg)
+    case Component.RearRightLeg:
+    case Component.RearLeg: return this.getLegEquipment(part as ILeg)
     default: return []
     }
   }

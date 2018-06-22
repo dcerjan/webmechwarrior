@@ -24,6 +24,7 @@ interface IInternalStructureTableRecord {
   [Component.FrontRightLeg]: number,
   [Component.RearLeftLeg]: number,
   [Component.RearRightLeg]: number,
+  [Component.RearLeg]: number,
 }
 
 const InternalStructureRecord = (
@@ -51,6 +52,7 @@ const InternalStructureRecord = (
   [Component.FrontRightLeg]: legs,
   [Component.RearLeftLeg]: legs,
   [Component.RearRightLeg]: legs,
+  [Component.RearLeg]: legs,
 })
 
 export const InternalStructureTable = {
