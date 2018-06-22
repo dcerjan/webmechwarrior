@@ -62,12 +62,12 @@ export class CenterTorso extends React.PureComponent<ICenterTorsoProps> {
 
   private getMaxCenterTorsoArmor() {
     const { centerTorso, values } = this.props
-    return getMaxArmorForPart(values.tonnage, centerTorso.name) - centerTorso.rearArmor
+    return getMaxArmorForPart(values.class, values.tonnage, centerTorso.name) - centerTorso.rearArmor
   }
 
   private getMaxCenterTorsoRearArmor() {
     const { centerTorso, values } = this.props
-    return getMaxArmorForPart(values.tonnage, centerTorso.name) - centerTorso.armor
+    return getMaxArmorForPart(values.class, values.tonnage, centerTorso.name) - centerTorso.armor
   }
 
   private getCenterTorsoStructure() {

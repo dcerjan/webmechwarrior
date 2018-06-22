@@ -62,12 +62,12 @@ export class SideTorso extends React.PureComponent<ISideTorsoProps> {
 
   private getMaxSideTorsoArmor() {
     const { sideTorso, values } = this.props
-    return getMaxArmorForPart(values.tonnage, sideTorso.name) - sideTorso.rearArmor
+    return getMaxArmorForPart(values.class, values.tonnage, sideTorso.name) - sideTorso.rearArmor
   }
 
   private getMaxSideTorsoRearArmor() {
     const { sideTorso, values } = this.props
-    return getMaxArmorForPart(values.tonnage, sideTorso.name) - sideTorso.armor
+    return getMaxArmorForPart(values.class, values.tonnage, sideTorso.name) - sideTorso.armor
   }
 
   private getSideTorsoStructure() {

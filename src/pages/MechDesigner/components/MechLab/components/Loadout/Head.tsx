@@ -46,7 +46,7 @@ export class Head extends React.PureComponent<IHeadProps> {
 
   private getMaxHeadArmor() {
     const { head, values } = this.props
-    return getMaxArmorForPart(values.tonnage, head.name)
+    return getMaxArmorForPart(values.class, values.tonnage, head.name)
   }
 
   private getHeadStructure() {

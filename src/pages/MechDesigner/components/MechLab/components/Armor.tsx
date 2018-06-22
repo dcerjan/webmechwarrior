@@ -90,7 +90,7 @@ export class Armor extends React.PureComponent<IInjectedMechLabProps> {
     })()
 
     const maxPoints = components.reduce((total, component) =>
-      total + getMaxArmorHitPoints(values.tonnage, component), 0)
+      total + getMaxArmorHitPoints(values.class, values.tonnage, component), 0)
 
     return `${points}/${maxPoints} pts`
   }

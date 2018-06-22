@@ -1,4 +1,5 @@
 import { lens } from 'lens.ts'
+import { MechClass } from '../common/MechClass'
 import { Tech } from '../common/Tech'
 
 export enum CockpitType {
@@ -47,16 +48,20 @@ export const CockpitTable = {
   [CockpitType.Small]:    CockpitTableRecord(CockpitType.Small,    2.0, 1, 2, 1, 2),
 }
 
-export const getAvaliableCockpits = (tech: Tech) => {
+export const getAvaliableCockpits = (tech: Tech, mechClass: MechClass) => {
   switch (tech) {
   case Tech.Clan: return [CockpitType.Standard]
-  case Tech.IS: return [CockpitType.Standard, CockpitType.Small]
+  case Tech.IS: return mechClass === MechClass.SuperHeavy
+    ? [CockpitType.Standard]
+    : [CockpitType.Standard, CockpitType.Small]
   default: return []
   }
 }
 
-export const getCockpitTonnage = (type: CockpitType): number =>
-  CockpitTable[type].tonnage
+export const getCockpitTonnage = (mechClass: MechClass, type: CockpitType): number =>
+  mechClass === MechClass.SuperHeavy
+    ? 4.0
+    : CockpitTable[type].tonnage
 
 export const getCockpitCriticals = (type: CockpitType): number =>
   CockpitTable[type].cockpitCriticals

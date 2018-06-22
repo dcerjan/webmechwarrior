@@ -112,7 +112,7 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
 
     const engine = getEngineTonnage(values.engine.rating, values.engine.type)
     const gyro = getGyroTonnage(values.engine.rating, values.gyro.type)
-    const cockpit = getCockpitTonnage(values.cockpit)
+    const cockpit = getCockpitTonnage(values.class, values.cockpit)
     const internal = getInternalStructureTonnage(values.tonnage, values.internalStructure)
 
     const armor = getArmorTonnage(values.type, values.tech, values.armor, values.loadout)

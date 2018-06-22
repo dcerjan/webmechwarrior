@@ -46,7 +46,7 @@ export class Leg extends React.PureComponent<ILegProps> {
 
   private getMaxLegArmor() {
     const { leg, values } = this.props
-    return getMaxArmorForPart(values.tonnage, leg.name)
+    return getMaxArmorForPart(values.class, values.tonnage, leg.name)
   }
 
   private getLegStructure() {

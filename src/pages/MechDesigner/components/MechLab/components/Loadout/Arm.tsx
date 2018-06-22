@@ -46,7 +46,7 @@ export class Arm extends React.PureComponent<IArmProps> {
 
   private getMaxArmArmor() {
     const { arm, values } = this.props
-    return getMaxArmorForPart(values.tonnage, arm.name)
+    return getMaxArmorForPart(values.class, values.tonnage, arm.name)
   }
 
   private getArmStructure() {

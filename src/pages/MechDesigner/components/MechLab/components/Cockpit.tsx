@@ -46,7 +46,8 @@ export class Cockpit extends React.PureComponent<IInjectedMechLabProps> {
   }
 
   private getCockpitTonnage() {
-    const tonnage = getCockpitTonnage(this.props.values.cockpit)
+    const { values } = this.props
+    const tonnage = getCockpitTonnage(values.class, values.cockpit)
     return `${tonnage.toFixed(1)} ${pluralize('ton', tonnage)}`
   }
 
@@ -66,7 +67,8 @@ export class Cockpit extends React.PureComponent<IInjectedMechLabProps> {
   }
 
   private getCokcpitTypes(): Array<ISelectOption<CockpitType>> {
-    return getAvaliableCockpits(this.props.values.tech)
+    const { values } = this.props
+    return getAvaliableCockpits(values.tech, values.class)
       .map(type => ({ value: type, name: type }))
   }
 }
