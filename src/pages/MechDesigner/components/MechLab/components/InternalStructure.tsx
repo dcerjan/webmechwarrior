@@ -42,31 +42,31 @@ export class InternalStructure extends React.PureComponent<IInjectedMechLabProps
   }
 
   private getInternalStructureTonnage() {
-    const { values } = this.props
-    const tonnage = getInternalStructureTonnage(values.tonnage, values.internalStructure)
+    const { mech } = this.props
+    const tonnage = getInternalStructureTonnage(mech.tonnage, mech.internalStructure)
     return `${tonnage.toFixed(1)} ${pluralize('ton', tonnage)}`
   }
 
   private getInternalStructureCriticals() {
-    const { values } = this.props
-    const slots = getInternalStructureCriticals(values.tech, values.internalStructure)
+    const { mech } = this.props
+    const slots = getInternalStructureCriticals(mech.tech, mech.internalStructure)
     return `${slots} ${pluralize('slot', slots)}`
   }
 
   private getInternalStructure() {
-    const { values } = this.props
-    const components = values.type === MechType.Bipedal
+    const { mech } = this.props
+    const components = mech.type === MechType.Bipedal
       ? getMechBipedComponents()
       : getMechQuadrupedComponents()
 
     const points = components.reduce((total, component) =>
-      total + getInternalStructureHitPoints(values.tonnage, component), 0)
+      total + getInternalStructureHitPoints(mech.tonnage, component), 0)
 
     return `${points} pts`
   }
 
   private getInternalStructureTypes(): Array<ISelectOption<InternalStructureType>> {
-    return getAvailableInternalStructureTypes(this.props.values.tech)
+    return getAvailableInternalStructureTypes(this.props.mech.tech)
       .map(type => ({ value: type, name: type }))
   }
 }

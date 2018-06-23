@@ -16,11 +16,11 @@ interface ISideTorsoProps extends IInjectedMechLabProps {
 export class SideTorso extends React.PureComponent<ISideTorsoProps> {
 
   public render() {
-    const { sideTorso, values } = this.props
+    const { sideTorso, mech } = this.props
     return (
       <Card
         title={sideTorso.name}
-        footer={ <Criticals mech={values} part={sideTorso} /> }
+        footer={ <Criticals mech={mech} part={sideTorso} /> }
       >
         <Detail
           label='Armor'
@@ -61,17 +61,17 @@ export class SideTorso extends React.PureComponent<ISideTorsoProps> {
   }
 
   private getMaxSideTorsoArmor() {
-    const { sideTorso, values } = this.props
-    return getMaxArmorForPart(values.class, values.tonnage, sideTorso.name) - sideTorso.rearArmor
+    const { sideTorso, mech } = this.props
+    return getMaxArmorForPart(mech.class, mech.tonnage, sideTorso.name) - sideTorso.rearArmor
   }
 
   private getMaxSideTorsoRearArmor() {
-    const { sideTorso, values } = this.props
-    return getMaxArmorForPart(values.class, values.tonnage, sideTorso.name) - sideTorso.armor
+    const { sideTorso, mech } = this.props
+    return getMaxArmorForPart(mech.class, mech.tonnage, sideTorso.name) - sideTorso.armor
   }
 
   private getSideTorsoStructure() {
-    const { sideTorso, values } = this.props
-    return `${getInternalStructureHitPoints(values.tonnage, sideTorso.name)}`
+    const { sideTorso, mech } = this.props
+    return `${getInternalStructureHitPoints(mech.tonnage, sideTorso.name)}`
   }
 }

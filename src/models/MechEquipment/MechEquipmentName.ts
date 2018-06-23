@@ -20,6 +20,8 @@ export enum MechEquipmentName {
   Foot_Actuator = 'Foot Actuator',
   Jump_Jet = 'Jump Jet',
   Improved_Jump_Jet = 'Improved Jump Jet',
+  Single_Heatsink = 'Single Heatsink',
+  Double_Heatsink = 'Double Heatsink',
 
   /***********************/
   /*  Inner Sphere tech  */
@@ -387,6 +389,12 @@ export type WeaponType =
   | MechEquipmentName.C_Streak_SRM_6
 
 export type EquipmentType =
+  | MechEquipmentName.Internal_Structure
+  | MechEquipmentName.Armor
+  | MechEquipmentName.Jump_Jet
+  | MechEquipmentName.Improved_Jump_Jet
+  | MechEquipmentName.Single_Heatsink
+  | MechEquipmentName.Double_Heatsink
   | MechEquipmentName.AMS
   | MechEquipmentName.LAMS
   | MechEquipmentName.Beagle_Active_Probe

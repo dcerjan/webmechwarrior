@@ -2,17 +2,17 @@ import * as React from 'react'
 
 import { Detail, DetailColor } from '../../../../../../../components/Common/Detail'
 import { Component, getCriticalsForComponent, IArm, IBaseMechPart, ICenterTorso, IHead, ILeg, ISideTorso } from '../../../../../../../models/common/Component'
-import { IMechDesignerState } from '../../../../../state/reducer'
 
 import { replicate } from '../../../../../../../lib/functional'
 import { getCockpitCriticals, getLifeSupportCriticals, getSensorsCriticals } from '../../../../../../../models/Cockpit'
 import { getEngineCriticalSlotAllocation } from '../../../../../../../models/Engine'
 import { getGyroCriticals } from '../../../../../../../models/Gryo'
 import { MechEquipmentName } from '../../../../../../../models/MechEquipment/MechEquipmentName'
+import { IMechDesignerMech } from '../../../../../state/constants'
+import { IInjectedMechLabProps } from '../../../MechLab'
 import * as styles from './Criticals.css'
 
-interface ICriticalsProps {
-  mech: IMechDesignerState,
+interface ICriticalsProps extends Pick<IInjectedMechLabProps, 'mech'> {
   part: IBaseMechPart,
 }
 
@@ -31,7 +31,7 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     )
   }
 
-  private getHeadEquipment(mech: IMechDesignerState, head: IHead): ICriticalDescriptor[] {
+  private getHeadEquipment(mech: IMechDesignerMech, head: IHead): ICriticalDescriptor[] {
     const cockpitCriticals = getCockpitCriticals(mech.cockpit)
     const sensorsCriticals = getSensorsCriticals(mech.cockpit)
     const lifeSupportCriticals = getLifeSupportCriticals(mech.cockpit)
@@ -49,7 +49,7 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     ]
   }
 
-  private getArmEquipment(mech: IMechDesignerState, arm: IArm): ICriticalDescriptor[] {
+  private getArmEquipment(mech: IMechDesignerMech, arm: IArm): ICriticalDescriptor[] {
     const criticals = getCriticalsForComponent(mech.class, arm.name)
     // #TODO: add booleans for checkboxes to determine if lower arm and hand actuators are present
     // and correctly calculate totalCriticals
@@ -67,7 +67,7 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     ]
   }
 
-  private getLegEquipment(mech: IMechDesignerState, leg: ILeg): ICriticalDescriptor[] {
+  private getLegEquipment(mech: IMechDesignerMech, leg: ILeg): ICriticalDescriptor[] {
     const criticals = getCriticalsForComponent(mech.class, leg.name)
     const totalCriticals = 4
 
@@ -83,7 +83,7 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     ]
   }
 
-  private getCenterTorsoEquipment(mech: IMechDesignerState, centerTorso: ICenterTorso): ICriticalDescriptor[] {
+  private getCenterTorsoEquipment(mech: IMechDesignerMech, centerTorso: ICenterTorso): ICriticalDescriptor[] {
     const engineCriticals = getEngineCriticalSlotAllocation(mech.tech, mech.engine.type)[Component.CenterTorso]
     const gyroCriticals = getGyroCriticals(mech.gyro.type)
     const criticals = getCriticalsForComponent(mech.class, centerTorso.name)
@@ -100,7 +100,7 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     ]
   }
 
-  private getSideTorsoEquipment(mech: IMechDesignerState, sideTorso: ISideTorso): ICriticalDescriptor[] {
+  private getSideTorsoEquipment(mech: IMechDesignerMech, sideTorso: ISideTorso): ICriticalDescriptor[] {
     const engineCriticals = getEngineCriticalSlotAllocation(mech.tech, mech.engine.type)[Component.LeftTorso] || 0
     const criticals = getCriticalsForComponent(mech.class, sideTorso.name)
 

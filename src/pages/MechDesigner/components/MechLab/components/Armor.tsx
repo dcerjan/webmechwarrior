@@ -50,31 +50,31 @@ export class Armor extends React.PureComponent<IInjectedMechLabProps> {
   }
 
   private getArmorTonnage() {
-    const { values } = this.props
+    const { mech } = this.props
 
     const armor = (() => {
-      switch (values.type) {
-      case MechType.Bipedal: return getBipedalLoadoutArmor(values.loadout as IBipedalLoadout)
-      case MechType.Tripod: return getTripodLoadoutArmor(values.loadout as ITripodLoadout)
-      case MechType.Quadrupedal: return getQuadrupedalLoadoutArmor(values.loadout as IQuadrupedalLoadout)
+      switch (mech.type) {
+      case MechType.Bipedal: return getBipedalLoadoutArmor(mech.loadout as IBipedalLoadout)
+      case MechType.Tripod: return getTripodLoadoutArmor(mech.loadout as ITripodLoadout)
+      case MechType.Quadrupedal: return getQuadrupedalLoadoutArmor(mech.loadout as IQuadrupedalLoadout)
       }
     })()
 
-    const tonnage = Math.ceil((armor / (16 * getArmorBasePointMultiplier(values.tech, values.armor))) * 2.0) * 0.5
+    const tonnage = Math.ceil((armor / (16 * getArmorBasePointMultiplier(mech.tech, mech.armor))) * 2.0) * 0.5
 
     return `${tonnage.toFixed(1)} ${pluralize('ton', tonnage)}`
   }
 
   private getArmorCriticals() {
-    const { values } = this.props
-    const slots = getArmorCriticalSlots(values.tech, values.armor)
+    const { mech } = this.props
+    const slots = getArmorCriticalSlots(mech.tech, mech.armor)
     return `${slots} ${pluralize('slot', slots)}`
   }
 
   private getArmor() {
-    const { values } = this.props
+    const { mech } = this.props
     const components = (() => {
-      switch (values.type) {
+      switch (mech.type) {
       case MechType.Bipedal: return getMechBipedComponents()
       case MechType.Tripod: return getMechTripodComponents()
       case MechType.Quadrupedal: return getMechQuadrupedComponents()
@@ -82,21 +82,21 @@ export class Armor extends React.PureComponent<IInjectedMechLabProps> {
     })()
 
     const points = (() => {
-      switch (values.type) {
-      case MechType.Bipedal: return getBipedalLoadoutArmor(values.loadout as IBipedalLoadout)
-      case MechType.Tripod: return getTripodLoadoutArmor(values.loadout as ITripodLoadout)
-      case MechType.Quadrupedal: return getQuadrupedalLoadoutArmor(values.loadout as IQuadrupedalLoadout)
+      switch (mech.type) {
+      case MechType.Bipedal: return getBipedalLoadoutArmor(mech.loadout as IBipedalLoadout)
+      case MechType.Tripod: return getTripodLoadoutArmor(mech.loadout as ITripodLoadout)
+      case MechType.Quadrupedal: return getQuadrupedalLoadoutArmor(mech.loadout as IQuadrupedalLoadout)
       }
     })()
 
     const maxPoints = components.reduce((total, component) =>
-      total + getMaxArmorHitPoints(values.class, values.tonnage, component), 0)
+      total + getMaxArmorHitPoints(mech.class, mech.tonnage, component), 0)
 
     return `${points}/${maxPoints} pts`
   }
 
   private getArmorTypes(): Array<ISelectOption<ArmorType>> {
-    return getAvailableArmorTypes(this.props.values.tech)
+    return getAvailableArmorTypes(this.props.mech.tech)
       .map(type => ({ value: type, name: type }))
   }
 }

@@ -16,11 +16,11 @@ interface ILegProps extends IInjectedMechLabProps {
 export class Leg extends React.PureComponent<ILegProps> {
 
   public render() {
-    const { leg, values } = this.props
+    const { leg, mech } = this.props
     return (
       <Card
         title={leg.name}
-        footer={ <Criticals mech={values} part={leg} /> }
+        footer={ <Criticals mech={mech} part={leg} /> }
       >
         <Detail
           label='Armor'
@@ -45,12 +45,12 @@ export class Leg extends React.PureComponent<ILegProps> {
   }
 
   private getMaxLegArmor() {
-    const { leg, values } = this.props
-    return getMaxArmorForPart(values.class, values.tonnage, leg.name)
+    const { leg, mech } = this.props
+    return getMaxArmorForPart(mech.class, mech.tonnage, leg.name)
   }
 
   private getLegStructure() {
-    const { leg, values } = this.props
-    return `${getInternalStructureHitPoints(values.tonnage, leg.name)}`
+    const { leg, mech } = this.props
+    return `${getInternalStructureHitPoints(mech.tonnage, leg.name)}`
   }
 }

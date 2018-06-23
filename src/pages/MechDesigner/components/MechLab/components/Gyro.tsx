@@ -17,7 +17,7 @@ import { IInjectedMechLabProps } from '../MechLab'
 export class Gyro extends React.PureComponent<IInjectedMechLabProps> {
 
   public render() {
-    const { values } = this.props
+    const { mech } = this.props
 
     return (
       <Card
@@ -25,7 +25,7 @@ export class Gyro extends React.PureComponent<IInjectedMechLabProps> {
         footer={<div>
           <Detail label='Tonnage' value={this.getGyroTonnage()} />
           <Detail label='Criticals' value={this.getGyroCriticals()} />
-          <Detail label='Hit points' value={`${getGyroHitPoints(values.gyro.type)}`} />
+          <Detail label='Hit points' value={`${getGyroHitPoints(mech.gyro.type)}`} />
         </div>}
       >
         <Detail
@@ -42,18 +42,18 @@ export class Gyro extends React.PureComponent<IInjectedMechLabProps> {
   }
 
   private getGyroTonnage() {
-    const { values } = this.props
-    const tonnage = getGyroTonnage(values.engine.rating, values.gyro.type)
+    const { mech } = this.props
+    const tonnage = getGyroTonnage(mech.engine.rating, mech.gyro.type)
     return `${tonnage.toFixed(1)} ${pluralize('ton', tonnage)}`
   }
 
   private getGyroCriticals() {
-    const criticals = getGyroCriticals(this.props.values.gyro.type)
+    const criticals = getGyroCriticals(this.props.mech.gyro.type)
     return `${criticals} ${pluralize('slot', criticals)}`
   }
 
   private getGyroTypes(): Array<ISelectOption<GyroType>> {
-    return getAvaliableGyros(this.props.values.tech)
+    return getAvaliableGyros(this.props.mech.tech)
       .map(type => ({ value: type, name: type }))
   }
 }

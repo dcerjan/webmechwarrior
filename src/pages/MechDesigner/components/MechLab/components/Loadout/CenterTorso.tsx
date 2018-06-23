@@ -16,11 +16,11 @@ interface ICenterTorsoProps extends IInjectedMechLabProps {
 export class CenterTorso extends React.PureComponent<ICenterTorsoProps> {
 
   public render() {
-    const { centerTorso, values } = this.props
+    const { centerTorso, mech } = this.props
     return (
       <Card
         title={centerTorso.name}
-        footer={ <Criticals mech={values} part={centerTorso} /> }
+        footer={ <Criticals mech={mech} part={centerTorso} /> }
       >
         <Detail
           label='Armor'
@@ -61,17 +61,17 @@ export class CenterTorso extends React.PureComponent<ICenterTorsoProps> {
   }
 
   private getMaxCenterTorsoArmor() {
-    const { centerTorso, values } = this.props
-    return getMaxArmorForPart(values.class, values.tonnage, centerTorso.name) - centerTorso.rearArmor
+    const { centerTorso, mech } = this.props
+    return getMaxArmorForPart(mech.class, mech.tonnage, centerTorso.name) - centerTorso.rearArmor
   }
 
   private getMaxCenterTorsoRearArmor() {
-    const { centerTorso, values } = this.props
-    return getMaxArmorForPart(values.class, values.tonnage, centerTorso.name) - centerTorso.armor
+    const { centerTorso, mech } = this.props
+    return getMaxArmorForPart(mech.class, mech.tonnage, centerTorso.name) - centerTorso.armor
   }
 
   private getCenterTorsoStructure() {
-    const { centerTorso, values } = this.props
-    return `${getInternalStructureHitPoints(values.tonnage, centerTorso.name)}`
+    const { centerTorso, mech } = this.props
+    return `${getInternalStructureHitPoints(mech.tonnage, centerTorso.name)}`
   }
 }

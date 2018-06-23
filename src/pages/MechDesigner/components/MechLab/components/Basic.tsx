@@ -13,7 +13,17 @@ import { getEngineTonnage } from '../../../../../models/Engine'
 import { getGyroTonnage } from '../../../../../models/Gryo'
 import { getInternalStructureTonnage } from '../../../../../models/InternalStructure'
 import { getArmorTonnage, MechTonnage } from '../../../../../models/Mech'
-import { DEAFULT_BIPEDAL_LOADOUT, DEAFULT_QUADRUPEDAL_LOADOUT, DEAFULT_TRIPOD_LOADOUT, DEFAULT_ASSAULT_TONNAGE, DEFAULT_HEAVY_TONNAGE, DEFAULT_LIGHT_TONNAGE, DEFAULT_MECH_CLASS, DEFAULT_MEDIUM_TONNAGE, DEFAULT_SUPER_HEAVY_TONNAGE } from '../../../state/constants'
+import {
+  DEAFULT_BIPEDAL_LOADOUT,
+  DEAFULT_QUADRUPEDAL_LOADOUT,
+  DEAFULT_TRIPOD_LOADOUT,
+  DEFAULT_ASSAULT_TONNAGE,
+  DEFAULT_HEAVY_TONNAGE,
+  DEFAULT_LIGHT_TONNAGE,
+  DEFAULT_MECH_CLASS,
+  DEFAULT_MEDIUM_TONNAGE,
+  DEFAULT_SUPER_HEAVY_TONNAGE,
+} from '../../../state/constants'
 import { IInjectedMechLabProps } from '../MechLab'
 
 export class Basic extends React.PureComponent<IInjectedMechLabProps> {
@@ -108,16 +118,16 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
   }
 
   private getFreeTonnage() {
-    const { values } = this.props
+    const { mech } = this.props
 
-    const engine = getEngineTonnage(values.engine.rating, values.engine.type)
-    const gyro = getGyroTonnage(values.engine.rating, values.gyro.type)
-    const cockpit = getCockpitTonnage(values.class, values.cockpit)
-    const internal = getInternalStructureTonnage(values.tonnage, values.internalStructure)
+    const engine = getEngineTonnage(mech.engine.rating, mech.engine.type)
+    const gyro = getGyroTonnage(mech.engine.rating, mech.gyro.type)
+    const cockpit = getCockpitTonnage(mech.class, mech.cockpit)
+    const internal = getInternalStructureTonnage(mech.tonnage, mech.internalStructure)
 
-    const armor = getArmorTonnage(values.type, values.tech, values.armor, values.loadout)
+    const armor = getArmorTonnage(mech.type, mech.tech, mech.armor, mech.loadout)
 
-    const amount = values.tonnage - engine - gyro - cockpit - internal - armor
+    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor
 
     return amount
   }

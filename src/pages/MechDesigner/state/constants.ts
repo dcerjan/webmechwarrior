@@ -5,10 +5,12 @@ import { MechClass } from '../../../models/common/MechClass'
 import { MechType } from '../../../models/common/MechType'
 import { Tech } from '../../../models/common/Tech'
 import { EngineType } from '../../../models/Engine'
+import { getEngintInternalHeatsinks, IEngine } from '../../../models/Engine'
 import { GyroType } from '../../../models/Gryo'
+import { IGyro } from '../../../models/Gryo'
 import { HeatsinkType } from '../../../models/Heatsink'
 import { InternalStructureType } from '../../../models/InternalStructure'
-import { IBipedalLoadout, IQuadrupedalLoadout, ITripodLoadout } from '../../../models/Mech'
+import { IBipedalLoadout, IQuadrupedalLoadout, ITripodLoadout, MechTonnage } from '../../../models/Mech'
 
 
 export const DEFAULT_NAME = ''
@@ -63,4 +65,39 @@ export const DEAFULT_QUADRUPEDAL_LOADOUT: IQuadrupedalLoadout = {
   [Component.FrontRightLeg]: Leg(Component.FrontRightLeg, 0, { Ballistic: 0, Energy: 0, Missile: 0 }, []),
   [Component.RearLeftLeg]: Leg(Component.RearLeftLeg, 0, { Ballistic: 0, Energy: 0, Missile: 0 }, []),
   [Component.RearRightLeg]: Leg(Component.RearRightLeg, 0, { Ballistic: 0, Energy: 0, Missile: 0 }, []),
+}
+
+export interface IMechDesignerMech {
+  name: string,
+  tech: Tech,
+  type: MechType,
+  class: MechClass,
+  tonnage: MechTonnage,
+  engine: Pick<IEngine, 'rating' | 'type' | 'heatsinkType' | 'internalHeatSinks'>,
+  gyro: Pick<IGyro, 'type'>,
+  cockpit: CockpitType,
+  internalStructure: InternalStructureType,
+  armor: ArmorType,
+  loadout: IBipedalLoadout | ITripodLoadout | IQuadrupedalLoadout
+}
+
+export const DEFAULT_MECH: IMechDesignerMech =  {
+  name: DEFAULT_NAME,
+  tech: DEFAULT_TECH,
+  type: DEAFULT_MECH_TYPE,
+  class: DEFAULT_MECH_CLASS,
+  tonnage: DEFAULT_TONNAGE,
+  engine: {
+    rating: DEFAULT_ENGINE_RATING,
+    type: DEFAULT_ENGINE_TYPE,
+    heatsinkType: DEFAULT_HEATSINK_TYPE,
+    internalHeatSinks: Math.min(getEngintInternalHeatsinks(DEFAULT_ENGINE_RATING), 10)
+  },
+  gyro: {
+    type: DEFAULT_GYRO_TYPE,
+  },
+  cockpit: DEFAULT_COCKPIT,
+  internalStructure: DEFAULT_INTERNAL_STRUCTURE,
+  armor: DEFAULT_ARMOR,
+  loadout: DEAFULT_BIPEDAL_LOADOUT,
 }

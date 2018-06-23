@@ -16,11 +16,11 @@ interface IArmProps extends IInjectedMechLabProps {
 export class Arm extends React.PureComponent<IArmProps> {
 
   public render() {
-    const { arm, values } = this.props
+    const { arm, mech } = this.props
     return (
       <Card
         title={arm.name}
-        footer={ <Criticals mech={values} part={arm} /> }
+        footer={ <Criticals mech={mech} part={arm} /> }
       >
         <Detail
           label='Armor'
@@ -45,12 +45,12 @@ export class Arm extends React.PureComponent<IArmProps> {
   }
 
   private getMaxArmArmor() {
-    const { arm, values } = this.props
-    return getMaxArmorForPart(values.class, values.tonnage, arm.name)
+    const { arm, mech } = this.props
+    return getMaxArmorForPart(mech.class, mech.tonnage, arm.name)
   }
 
   private getArmStructure() {
-    const { arm, values } = this.props
-    return `${getInternalStructureHitPoints(values.tonnage, arm.name)}`
+    const { arm, mech } = this.props
+    return `${getInternalStructureHitPoints(mech.tonnage, arm.name)}`
   }
 }

@@ -14,7 +14,7 @@ export class Loadout extends React.PureComponent<IInjectedMechLabProps> {
 
   public render() {
     return (() => {
-      switch (this.props.values.type) {
+      switch (this.props.mech.type) {
       case MechType.Bipedal: return this.renderBipedal()
       case MechType.Tripod: return this.renderTripod()
       case MechType.Quadrupedal: return this.renderQuadrupedal()
@@ -23,79 +23,79 @@ export class Loadout extends React.PureComponent<IInjectedMechLabProps> {
   }
 
   private renderBipedal() {
-    const { values, change, select } = this.props
+    const { mech, change, select } = this.props
     return (
       <div className={styles.Loadout}>
         <div className={styles.Outer}>
-          <Arm values={values} arm={values.loadout[Component.LeftArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[Component.LeftArm]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso values={values} sideTorso={values.loadout[Component.LeftTorso]} change={change} select={select} />
-          <Leg values={values} leg={values.loadout[Component.LeftLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[Component.LeftTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[Component.LeftLeg]} change={change} select={select} />
         </div>
         <div className={styles.Center}>
-          <Head values={values} head={values.loadout[Component.Head]} change={change} select={select} />
-          <CenterTorso values={values} centerTorso={values.loadout[Component.CenterTorso]} change={change} select={select} />
+          <Head mech={mech} head={mech.loadout[Component.Head]} change={change} select={select} />
+          <CenterTorso mech={mech} centerTorso={mech.loadout[Component.CenterTorso]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso values={values} sideTorso={values.loadout[Component.RightTorso]} change={change} select={select} />
-          <Leg values={values} leg={values.loadout[Component.RightLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[Component.RightTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[Component.RightLeg]} change={change} select={select} />
         </div>
         <div className={styles.Outer}>
-          <Arm values={values} arm={values.loadout[Component.RightArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[Component.RightArm]} change={change} select={select} />
         </div>
       </div>
     )
   }
 
   private renderTripod() {
-    const { values, change, select } = this.props
+    const { mech, change, select } = this.props
     return (
       <div className={styles.Loadout}>
         <div className={styles.Outer}>
-          <Arm values={values} arm={values.loadout[Component.LeftArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[Component.LeftArm]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso values={values} sideTorso={values.loadout[Component.LeftTorso]} change={change} select={select} />
-          <Leg values={values} leg={values.loadout[Component.FrontLeftLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[Component.LeftTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[Component.FrontLeftLeg]} change={change} select={select} />
         </div>
         <div className={styles.Center}>
-          <Head values={values} head={values.loadout[Component.Head]} change={change} select={select} />
-          <CenterTorso values={values} centerTorso={values.loadout[Component.CenterTorso]} change={change} select={select} />
-          <Leg values={values} leg={values.loadout[Component.RearLeg]} change={change} select={select} />
+          <Head mech={mech} head={mech.loadout[Component.Head]} change={change} select={select} />
+          <CenterTorso mech={mech} centerTorso={mech.loadout[Component.CenterTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[Component.RearLeg]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso values={values} sideTorso={values.loadout[Component.RightTorso]} change={change} select={select} />
-          <Leg values={values} leg={values.loadout[Component.FrontRightLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[Component.RightTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[Component.FrontRightLeg]} change={change} select={select} />
         </div>
         <div className={styles.Outer}>
-          <Arm values={values} arm={values.loadout[Component.RightArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[Component.RightArm]} change={change} select={select} />
         </div>
       </div>
     )
   }
 
   private renderQuadrupedal() {
-    const { values, change, select } = this.props
+    const { mech, change, select } = this.props
     return (
       <div className={styles.Loadout}>
         <div className={styles.Outer}>
-          <Leg values={values} leg={values.loadout[Component.FrontLeftLeg]} change={change} select={select} />
-          <Leg values={values} leg={values.loadout[Component.RearLeftLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[Component.FrontLeftLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[Component.RearLeftLeg]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso values={values} sideTorso={values.loadout[Component.LeftTorso]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[Component.LeftTorso]} change={change} select={select} />
         </div>
         <div className={styles.Center}>
-          <Head values={values} head={values.loadout[Component.Head]} change={change} select={select} />
-          <CenterTorso values={values} centerTorso={values.loadout[Component.CenterTorso]} change={change} select={select} />
+          <Head mech={mech} head={mech.loadout[Component.Head]} change={change} select={select} />
+          <CenterTorso mech={mech} centerTorso={mech.loadout[Component.CenterTorso]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso values={values} sideTorso={values.loadout[Component.RightTorso]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[Component.RightTorso]} change={change} select={select} />
         </div>
         <div className={styles.Outer}>
-          <Leg values={values} leg={values.loadout[Component.FrontRightLeg]} change={change} select={select} />
-          <Leg values={values} leg={values.loadout[Component.RearRightLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[Component.FrontRightLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[Component.RearRightLeg]} change={change} select={select} />
         </div>
       </div>
     )

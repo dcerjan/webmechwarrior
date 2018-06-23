@@ -1,0 +1,31 @@
+.TabsContainer {
+  > .TabsHeader {
+    display: flex;
+    flex-direction: row;
+
+    > .Tab {
+      flex: 1 1;
+      box-sizing: border-box;
+      padding: 6px;
+      border-right: 1px solid darkgrey;
+      box-shadow: inset 0 0 1px black, inset 0 0 12px rgba(0, 0, 0, 0.2);
+      background: rgb(63, 73, 73);
+      border-bottom: 1px solid darkgrey;
+
+      &:last-child {
+        box-sizing: border-box;
+        border-right: 0px solid darkgrey;
+        background: rgb(63, 73, 73);
+      }
+
+      &:hover {
+        box-shadow: inset 0 0 1px black, inset 0 0 12px rgba(0, 0, 0, 0.2), inset 0 0 256px rgba(255, 255, 255, 0.3);
+      }
+
+      &.Selected {
+        box-shadow: inset 0 0 1px black, inset 0 0 12px rgba(0, 0, 0, 0.2), inset 0 0 256px rgba(255, 255, 255, 0.3);
+        border-bottom: 0px solid darkgrey;
+      }
+    }
+  }
+}

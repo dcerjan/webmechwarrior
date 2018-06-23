@@ -9,22 +9,24 @@ import {
   reduxForm,
 } from 'redux-form'
 
+import { DEFAULT_MECH, IMechDesignerMech } from '../../state/constants'
 import { IMechDesignerState } from '../../state/reducer'
 import { Armor } from './components/Armor'
 import { Basic } from './components/Basic'
 import { Cockpit } from './components/Cockpit'
 import { Engine } from './components/Engine'
+import { Equipment } from './components/Equipment'
 import { Gyro } from './components/Gyro'
 import { InternalStructure } from './components/InternalStructure'
 import { Loadout } from './components/Loadout'
 import * as styles from './MechLab.css'
 
 interface ILoadoutProps {
-  mech: IMechDesignerState,
+  state: IMechDesignerState,
 }
 
 export interface IInjectedMechLabProps {
-  values: IMechDesignerState,
+  mech: IMechDesignerMech,
   change: (field: string, value: any) => void,
   select: (field: string) => any,
 }
@@ -32,21 +34,24 @@ export interface IInjectedMechLabProps {
 class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps & InjectedFormProps<ILoadoutProps>> {
 
   public render() {
-    const { values, change, select } = this.props
+    const { mech, change, select } = this.props
 
     return (
       <div>
         <form className={styles.MechLab}>
           <div className={styles.Basic}>
-            <Basic values={values} change={change} select={select} />
-            <Engine values={values} change={change} select={select} />
-            <Gyro values={values} change={change} select={select} />
-            <Cockpit values={values} change={change} select={select} />
-            <InternalStructure values={values} change={change} select={select} />
-            <Armor values={values} change={change} select={select} />
+            <Basic mech={mech} change={change} select={select} />
+            <Engine mech={mech} change={change} select={select} />
+            <Gyro mech={mech} change={change} select={select} />
+            <Cockpit mech={mech} change={change} select={select} />
+            <InternalStructure mech={mech} change={change} select={select} />
+            <Armor mech={mech} change={change} select={select} />
           </div>
           <div>
-            <Loadout values={values} change={change} select={select} />
+            <Loadout mech={mech} change={change} select={select} />
+          </div>
+          <div>
+            <Equipment mech={mech} />
           </div>
         </form>
       </div>
@@ -55,7 +60,7 @@ class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps 
 }
 
 const mapState = (state: any, props: ILoadoutProps) => ({
-  initialValues: props.mech,
+  initialValues: DEFAULT_MECH,
   select: (field: string): any => formValueSelector('Lab.Loadout')(state, field),
 })
 
@@ -64,7 +69,7 @@ const mapDispatch = (dispatch: Dispatch) => ({
 })
 
 const mapInternalState = (state: any) => ({
-  values: getFormValues('Lab.Loadout')(state),
+  mech: getFormValues('Lab.Loadout')(state),
 })
 
 const MechLabForm: React.SFC<ILoadoutProps> = (

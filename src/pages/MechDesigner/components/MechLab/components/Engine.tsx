@@ -25,7 +25,7 @@ import { IInjectedMechLabProps } from '../MechLab'
 export class Engine extends React.PureComponent<IInjectedMechLabProps> {
 
   public render() {
-    const { values, change, select } = this.props
+    const { mech, change, select } = this.props
 
     return (
       <Card
@@ -34,13 +34,13 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
           <Detail label='Movement' value={this.getMechMovement()} />
           <Detail label='Engine Tonnage' value={this.getEngineTonnage()} />
           <Detail label='Criticals' value={this.getEngineCriticals()} />
-          { getEngintInternalHeatsinks(values.engine.rating) <= 10
-            ? <Detail label='Engine Heatsinks' value={`${getEngintInternalHeatsinks(values.engine.rating)}`} />
+          { getEngintInternalHeatsinks(mech.engine.rating) <= 10
+            ? <Detail label='Engine Heatsinks' value={`${getEngintInternalHeatsinks(mech.engine.rating)}`} />
             : null }
           { this.getUnallocatedHeatsinks() > 0
             ? <Detail label='Alloc. Heatsinks' value={`${this.getUnallocatedHeatsinks()}`} />
             : null }
-          <Detail label='Hit points' value={`${getEngineHitPoints(values.engine.rating)}`} />
+          <Detail label='Hit points' value={`${getEngineHitPoints(mech.engine.rating)}`} />
         </div>}
       >
         <Detail
@@ -77,7 +77,7 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
           /> }
           color={DetailColor.TransparentBluishGrey}
         />
-        { getEngintInternalHeatsinks(values.engine.rating) > 10
+        { getEngintInternalHeatsinks(mech.engine.rating) > 10
           ? (
             <Detail
               label='Engine Heatsinks'
@@ -85,9 +85,9 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
                 name='engine.internalHeatSinks'
                 alignment='Right'
                 min={10}
-                max={getEngintInternalHeatsinks(values.engine.rating)}
+                max={getEngintInternalHeatsinks(mech.engine.rating)}
                 step={1}
-                formater={(heatsinks) => `${heatsinks}/${getEngintInternalHeatsinks(values.engine.rating)}`}
+                formater={(heatsinks) => `${heatsinks}/${getEngintInternalHeatsinks(mech.engine.rating)}`}
               /> }
               color={DetailColor.TransparentBluishGrey}
             />
@@ -99,32 +99,32 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
   }
 
   private getMechMovement() {
-    const { values } = this.props
-    const walking = getWalkingMP(values.engine.rating, values.tonnage)
-    const running = getRunningMP(values.engine.rating, values.tonnage)
+    const { mech } = this.props
+    const walking = getWalkingMP(mech.engine.rating, mech.tonnage)
+    const running = getRunningMP(mech.engine.rating, mech.tonnage)
     return `${walking}/${running}`
   }
 
   private getEngineTonnage() {
-    const { values } = this.props
-    const tonnage = getEngineTonnage(values.engine.rating, values.engine.type)
+    const { mech } = this.props
+    const tonnage = getEngineTonnage(mech.engine.rating, mech.engine.type)
     return `${tonnage.toFixed(1)} ${pluralize('ton', tonnage)}`
   }
 
   private getEngineCriticals() {
-    const allocation = getEngineCriticalSlotAllocation(this.props.values.tech, this.props.values.engine.type)
+    const allocation = getEngineCriticalSlotAllocation(this.props.mech.tech, this.props.mech.engine.type)
     return `${allocation[Component.LeftTorso] || '-'}/${allocation[Component.CenterTorso]}/${allocation[Component.RightTorso] || '-'}`
   }
 
   private getUnallocatedHeatsinks() {
-    const internalHeatsinks = getEngintInternalHeatsinks(this.props.values.engine.rating)
+    const internalHeatsinks = getEngintInternalHeatsinks(this.props.mech.engine.rating)
     return internalHeatsinks < 10
-      ? 10 - getEngintInternalHeatsinks(this.props.values.engine.rating)
+      ? 10 - getEngintInternalHeatsinks(this.props.mech.engine.rating)
       : 0
   }
 
   private getEngineRatings(): Array<ISelectOption<number>> {
-    const { values } = this.props
+    const { mech } = this.props
 
     return segment(10, 500, 5)
       .map((r: EngineRating) => ({
@@ -132,18 +132,18 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
         name: `${r} ${getEngineManufacturer(r)}`,
       }))
       .filter(engine => (
-        (getWalkingMP(engine.value, values.tonnage) !== 0) &&
-        (getEngineTonnage(engine.value, values.engine.type) <= values.tonnage)
+        (getWalkingMP(engine.value, mech.tonnage) !== 0) &&
+        (getEngineTonnage(engine.value, mech.engine.type) <= mech.tonnage)
       ))
   }
 
   private getEngineTypes(): Array<ISelectOption<EngineType>> {
-    return getAvailableEngines(this.props.values.tech)
+    return getAvailableEngines(this.props.mech.tech)
       .map(engine => ({ value: engine, name: engine }))
   }
 
   private getHeatsinkTypes(): Array<ISelectOption<HeatsinkType>> {
-    return getAvaliableHeatsinkTypes(this.props.values.tech)
+    return getAvaliableHeatsinkTypes(this.props.mech.tech)
       .map(heatsink => ({ value: heatsink, name: heatsink }))
   }
 }

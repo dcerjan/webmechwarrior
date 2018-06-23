@@ -16,11 +16,11 @@ interface IHeadProps extends IInjectedMechLabProps {
 export class Head extends React.PureComponent<IHeadProps> {
 
   public render() {
-    const { head, values } = this.props
+    const { head, mech } = this.props
     return (
       <Card
         title={head.name}
-        footer={ <Criticals mech={values} part={head} /> }
+        footer={ <Criticals mech={mech} part={head} /> }
       >
         <Detail
           label='Armor'
@@ -45,12 +45,12 @@ export class Head extends React.PureComponent<IHeadProps> {
   }
 
   private getMaxHeadArmor() {
-    const { head, values } = this.props
-    return getMaxArmorForPart(values.class, values.tonnage, head.name)
+    const { head, mech } = this.props
+    return getMaxArmorForPart(mech.class, mech.tonnage, head.name)
   }
 
   private getHeadStructure() {
-    const { head, values } = this.props
-    return `${getInternalStructureHitPoints(values.tonnage, head.name)}`
+    const { head, mech } = this.props
+    return `${getInternalStructureHitPoints(mech.tonnage, head.name)}`
   }
 }
