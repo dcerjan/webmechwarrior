@@ -1,0 +1,22 @@
+.Hardpoints {
+  display: flex;
+  flex-direction: row;
+
+  .Hardpoint {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    align-items: center;
+
+    .Icon {
+      width: 12px;
+      height: 12px;
+      background-size: contain;
+      margin-right: 3px;
+
+      &.Energy { background-image: url('/assets/icons/energy.svg') }
+      &.Ballistic { background-image: url('/assets/icons/ballistic.svg') }
+      &.Missile { background-image: url('/assets/icons/missile.svg') }
+    }
+  }
+}
