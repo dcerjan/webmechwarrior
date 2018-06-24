@@ -3,17 +3,19 @@ import { Reducer } from 'redux'
 
 import { MechDesignerAction, MechDesignerActionType } from './action'
 
+export interface IEquipmentState {
+  tab: string,
+}
+
 export interface IMechDesignerState {
-  equipment: {
-    tab: string,
-  }
+  equipment: IEquipmentState,
 }
 
 const MechDesignerStateL = lens<IMechDesignerState>()
 
 const initialState: IMechDesignerState = {
   equipment: {
-    tab: 'All',
+    tab: 'Weapons',
   }
 }
 

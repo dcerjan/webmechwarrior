@@ -10,7 +10,7 @@ import {
 } from 'redux-form'
 
 import { DEFAULT_MECH, IMechDesignerMech } from '../../state/constants'
-import { IMechDesignerState } from '../../state/reducer'
+import { IEquipmentState, IMechDesignerState } from '../../state/reducer'
 import { Armor } from './components/Armor'
 import { Basic } from './components/Basic'
 import { Cockpit } from './components/Cockpit'
@@ -23,6 +23,8 @@ import * as styles from './MechLab.css'
 
 interface ILoadoutProps {
   state: IMechDesignerState,
+  equipment: IEquipmentState,
+  setEquipmentTableTab: (tab: string) => void,
 }
 
 export interface IInjectedMechLabProps {
@@ -34,7 +36,7 @@ export interface IInjectedMechLabProps {
 class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps & InjectedFormProps<ILoadoutProps>> {
 
   public render() {
-    const { mech, change, select } = this.props
+    const { mech, change, select, setEquipmentTableTab, equipment } = this.props
 
     return (
       <div>
@@ -51,7 +53,11 @@ class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps 
             <Loadout mech={mech} change={change} select={select} />
           </div>
           <div>
-            <Equipment mech={mech} />
+            <Equipment
+              mech={mech}
+              equipment={equipment}
+              setEquipmentTableTab={setEquipmentTableTab}
+            />
           </div>
         </form>
       </div>
@@ -61,20 +67,20 @@ class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps 
 
 const mapState = (state: any, props: ILoadoutProps) => ({
   initialValues: DEFAULT_MECH,
-  select: (field: string): any => formValueSelector('Lab.Loadout')(state, field),
+  select: (field: string): any => formValueSelector('Lab.Mech')(state, field),
 })
 
 const mapDispatch = (dispatch: Dispatch) => ({
-  change: (field: string, value: any) => dispatch(change('Lab.Loadout', field, value)),
+  change: (field: string, value: any) => dispatch(change('Lab.Mech', field, value)),
 })
 
 const mapInternalState = (state: any) => ({
-  mech: getFormValues('Lab.Loadout')(state),
+  mech: getFormValues('Lab.Mech')(state),
 })
 
 const MechLabForm: React.SFC<ILoadoutProps> = (
   connect(mapState, mapDispatch)(
-    reduxForm({ form: 'Lab.Loadout' })(
+    reduxForm({ form: 'Lab.Mech' })(
       connect(mapInternalState)
         (MechLab)
     )

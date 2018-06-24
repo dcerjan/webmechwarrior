@@ -26,12 +26,11 @@ export const getAvailableEquipmentTypes = (
     E.C3_Computer_Slave,
     E.Improved_C3_Computer,
     E.Guardian_ECM_Suite,
-    E.MASC,
-    E.Narc_Launcher,
-    E.Improved_Narc_Launcher,
+    E.NARC_Launcher,
+    E.Improved_NARC_Launcher,
     E.TAG,
     E.Artemis_IV,
-    E.Targeting_Computer,
+    // E.Targeting_Computer,
   ] as EquipmentType[]
 
   const clanEquipment = [
@@ -40,10 +39,10 @@ export const getAvailableEquipmentTypes = (
     E.C_Active_Probe,
     E.C_Light_Active_Probe,
     E.C_ECM_Suite,
-    E.C_MASC,
     E.C_TAG,
+    E.C_NARC_Launcher,
     E.C_Light_TAG,
-    E.C_Targeting_Computer,
+    // E.C_Targeting_Computer,
     E.C_Artemis_IV,
   ] as EquipmentType[]
 
@@ -86,7 +85,6 @@ export const getAvailableWeaponTypes = (tech: Tech): WeaponType[] => {
     E.C_Flamer, E.C_Vehicle_Flamer,
     E.C_Plasma_Cannon,
     E.C_ER_PPC,
-    E.C_Autocannon_2, E.C_Autocannon_5, E.C_Autocannon_10, E.C_Autocannon_20,
     E.C_LB_2X_Autocannon, E.C_LB_5X_Autocannon, E.C_LB_10X_Autocannon, E.C_LB_20X_Autocannon,
     E.C_Ultra_Autocannon_2, E.C_Ultra_Autocannon_5, E.C_Ultra_Autocannon_10, E.C_Ultra_Autocannon_20,
     E.C_AP_Gauss_Rifle, E.C_Gauss_Rifle, E.C_Hyper_Assault_Gauss_20, E.C_Hyper_Assault_Gauss_30, E.C_Hyper_Assault_Gauss_40,
@@ -103,42 +101,39 @@ export const getAvailableWeaponTypes = (tech: Tech): WeaponType[] => {
 }
 
 export const getAvailableAmmoTypes = (tech: Tech): AmmoType[] => {
-  const commonAmmoTypes = [
-    E.Vehicle_Flamer_Ammo,
+  const innerSphereAmmoTypes = [
     E.Autocannon_Ammo,
+    E.Autocannon_Armor_Piercing_Ammo,
+    E.Autocannon_Flechette_Ammo,
+    E.Autocannon_Precision_Ammo,
     E.LB_X_Autocannon_Ammo,
     E.LB_X_Autocannon_Cluster_Ammo,
+    E.Light_Autocannon_Ammo,
+    E.Light_Autocannon_Armor_Piercing_Ammo,
+    E.Light_Autocannon_Flechette_Ammo,
+    E.Light_Autocannon_Precision_Ammo,
+    E.Rotary_Autocannon_Ammo,
     E.Ultra_Autocannon_Ammo,
+    E.Light_Gauss_Ammo,
     E.Gauss_Ammo,
+    E.Heavy_Gauss_Ammo,
     E.Light_Machine_Gun_Ammo,
     E.Machine_Gun_Ammo,
     E.Heavy_Machine_Gun_Ammo,
+    E.Vehicle_Flamer_Ammo,
+    E.Plasma_Rifle_Ammo,
     E.LRM_Ammo,
     E.LRM_Fragmentation_Ammo,
+    E.LRM_Incendiary_Ammo,
     E.LRM_SWARM_Ammo,
     E.LRM_Flare_Ammo,
+    E.MRM_Ammo,
     E.SRM_Ammo,
     E.SRM_Fragmentation_Ammo,
     E.SRM_Harpoon_Ammo,
     E.SRM_Inferno_Ammo,
     E.Streak_SRM_Ammo,
     E.AMS_Ammo,
-  ] as AmmoType[]
-
-  const innerSphereAmmoTypes = [
-    E.Plasma_Rifle_Ammo,
-    E.Autocannon_Armor_Piercing_Ammo,
-    E.Autocannon_Flechette_Ammo,
-    E.Autocannon_Precision_Ammo,
-    E.Light_Autocannon_Ammo,
-    E.Light_Autocannon_Armor_Piercing_Ammo,
-    E.Light_Autocannon_Flechette_Ammo,
-    E.Light_Autocannon_Precision_Ammo,
-    E.Rotary_Autocannon_Ammo,
-    E.Light_Gauss_Ammo,
-    E.Heavy_Gauss_Ammo,
-    E.LRM_Incendiary_Ammo,
-    E.MRM_Ammo,
     E.NARC_Ammo,
     E.NARC_Explosive_Ammo,
     E.NARC_ECM_Ammo,
@@ -147,20 +142,34 @@ export const getAvailableAmmoTypes = (tech: Tech): AmmoType[] => {
   ] as AmmoType[]
 
   const clanAmmoTypes = [
-    E.Plasma_Cannon_Ammo,
-    E.AP_Gauss_Ammo,
-    E.Hyper_Assault_Gauss_Ammo,
-
-    E.ATM_Ammo,
-    E.ATM_ER_Ammo,
-    E.ATM_HE_Ammo,
+    E.C_LB_X_Autocannon_Ammo,
+    E.C_LB_X_Autocannon_Cluster_Ammo,
+    E.C_Ultra_Autocannon_Ammo,
+    E.C_Gauss_Ammo,
+    E.C_AP_Gauss_Ammo,
+    E.C_Hyper_Assault_Gauss_Ammo,
+    E.C_Light_Machine_Gun_Ammo,
+    E.C_Machine_Gun_Ammo,
+    E.C_Heavy_Machine_Gun_Ammo,
+    E.C_Vehicle_Flamer_Ammo,
+    E.C_Plasma_Cannon_Ammo,
+    E.C_LRM_Ammo,
+    E.C_LRM_Fragmentation_Ammo,
+    E.C_LRM_SWARM_Ammo,
+    E.C_LRM_Flare_Ammo,
+    E.C_SRM_Ammo,
+    E.C_SRM_Fragmentation_Ammo,
+    E.C_SRM_Harpoon_Ammo,
+    E.C_SRM_Inferno_Ammo,
+    E.C_Streak_SRM_Ammo,
+    E.C_ATM_Ammo,
+    E.C_ATM_ER_Ammo,
+    E.C_ATM_HE_Ammo,
+    E.C_AMS_Ammo,
+    E.C_NARC_Ammo,
   ] as AmmoType[]
 
-  return [
-    ...commonAmmoTypes,
-    ...(tech === Tech.IS
-      ? innerSphereAmmoTypes
-      : clanAmmoTypes
-    ),
-  ]
+  return tech === Tech.IS
+    ? innerSphereAmmoTypes
+    : clanAmmoTypes
 }

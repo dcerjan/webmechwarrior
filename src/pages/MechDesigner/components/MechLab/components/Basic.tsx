@@ -12,6 +12,7 @@ import { Tech } from '../../../../../models/common/Tech'
 import { getEngineTonnage } from '../../../../../models/Engine'
 import { getGyroTonnage } from '../../../../../models/Gryo'
 import { getInternalStructureTonnage } from '../../../../../models/InternalStructure'
+import { JumpJetType } from '../../../../../models/JumpJets'
 import { getArmorTonnage, MechTonnage } from '../../../../../models/Mech'
 import {
   DEAFULT_BIPEDAL_LOADOUT,
@@ -90,6 +91,19 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
           /> }
           color={DetailColor.TransparentBluishGrey}
         />
+        { select('class') !== MechClass.SuperHeavy
+          ? (
+            <Detail
+              label='Jump Jets'
+              value={ <Select
+                name='jumpJetType'
+                options={Object.values(JumpJetType).map(jumpJetType => ({ value: jumpJetType, name: jumpJetType }))}
+                alignment='Right'
+              /> }
+              color={DetailColor.TransparentBluishGrey}
+            />
+          )
+          : null }
         <Detail
           label='Tonnage'
           value={ <Select

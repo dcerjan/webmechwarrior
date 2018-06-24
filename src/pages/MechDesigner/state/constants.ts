@@ -10,6 +10,7 @@ import { GyroType } from '../../../models/Gryo'
 import { IGyro } from '../../../models/Gryo'
 import { HeatsinkType } from '../../../models/Heatsink'
 import { InternalStructureType } from '../../../models/InternalStructure'
+import { JumpJetType } from '../../../models/JumpJets'
 import { IBipedalLoadout, IQuadrupedalLoadout, ITripodLoadout, MechTonnage } from '../../../models/Mech'
 
 
@@ -17,6 +18,7 @@ export const DEFAULT_NAME = ''
 export const DEFAULT_TECH = Tech.IS
 export const DEAFULT_MECH_TYPE = MechType.Bipedal
 export const DEFAULT_MECH_CLASS = MechClass.Medium
+export const DEFAULT_JUMP_JET_TYPE = JumpJetType.Standard
 export const DEFAULT_TONNAGE = 50
 
 export const DEFAULT_LIGHT_TONNAGE = 20
@@ -72,6 +74,7 @@ export interface IMechDesignerMech {
   tech: Tech,
   type: MechType,
   class: MechClass,
+  jumpJetType: JumpJetType,
   tonnage: MechTonnage,
   engine: Pick<IEngine, 'rating' | 'type' | 'heatsinkType' | 'internalHeatSinks'>,
   gyro: Pick<IGyro, 'type'>,
@@ -86,6 +89,7 @@ export const DEFAULT_MECH: IMechDesignerMech =  {
   tech: DEFAULT_TECH,
   type: DEAFULT_MECH_TYPE,
   class: DEFAULT_MECH_CLASS,
+  jumpJetType: DEFAULT_JUMP_JET_TYPE,
   tonnage: DEFAULT_TONNAGE,
   engine: {
     rating: DEFAULT_ENGINE_RATING,

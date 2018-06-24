@@ -124,11 +124,55 @@ export enum MechEquipmentName {
   Improved_C3_Computer = 'Improved C3 Computer',
   Guardian_ECM_Suite = 'Guardian ECM Suite',
   MASC = 'MASC',
-  Narc_Launcher = 'NarcLauncher',
-  Improved_Narc_Launcher = 'Imporved Narc Launcher',
+  NARC_Launcher = 'NARC Launcher',
+  Improved_NARC_Launcher = 'Improved NARC Launcher',
   TAG = 'TAG',
   Targeting_Computer = 'Targeting Computer',
   Artemis_IV = 'Artemis IV',
+
+  // IS Ammo
+  // Ballistic * Ammo
+  Autocannon_Ammo = 'Autocannon Ammo',
+  Autocannon_Armor_Piercing_Ammo = 'Autocannon Armor Piercing Ammo',
+  Autocannon_Flechette_Ammo = 'Autocannon Flechette Ammo',
+  Autocannon_Precision_Ammo = 'Autocannon Precision Ammo',
+  LB_X_Autocannon_Ammo = 'LB-X Autocannon Ammo',
+  LB_X_Autocannon_Cluster_Ammo = 'LB-X Autocannon Cluster Ammo',
+  Light_Autocannon_Ammo = 'Light Autocannon Ammo',
+  Light_Autocannon_Armor_Piercing_Ammo = 'Light Autocannon Armor Piercing Ammo',
+  Light_Autocannon_Flechette_Ammo = 'Light Autocannon Flechette Ammo',
+  Light_Autocannon_Precision_Ammo = 'Light Autocannon Precision Ammo',
+  Rotary_Autocannon_Ammo = 'Rotary Autocannon Ammo',
+  Ultra_Autocannon_Ammo = 'Ultra Autocannon Ammo',
+  Light_Gauss_Ammo = 'Light Gauss Ammo',
+  Gauss_Ammo = 'Gauss Ammo',
+  Heavy_Gauss_Ammo = 'Heavy Gauss Ammo',
+  Light_Machine_Gun_Ammo = 'Light Machine Gun Ammo',
+  Machine_Gun_Ammo = 'Machine Gun Ammo',
+  Heavy_Machine_Gun_Ammo = 'Heavy Machine Gun Ammo',
+
+  // Energy * Ammo
+  Vehicle_Flamer_Ammo = 'Vehicle Flamer Ammo',
+  Plasma_Rifle_Ammo = 'Plasma Rifle Ammo',
+
+  // Missile * Ammo
+  LRM_Ammo = 'LRM Ammo',
+  LRM_Fragmentation_Ammo = 'LRM Fragmentation Ammo',
+  LRM_Incendiary_Ammo = 'LRM Incendiary Ammo',
+  LRM_SWARM_Ammo = 'LRM SWARM Ammo',
+  LRM_Flare_Ammo = 'LRM Flare Ammo',
+  MRM_Ammo = 'MRM Ammo',
+  SRM_Ammo = 'SRM Ammo',
+  SRM_Fragmentation_Ammo = 'SRM Fragmentation Ammo',
+  SRM_Harpoon_Ammo = 'SRM Harpoon Ammo',
+  SRM_Inferno_Ammo = 'SRM Inferno Ammo',
+  Streak_SRM_Ammo = 'Streak SRM Ammo',
+  AMS_Ammo = 'AMS Ammo',
+  NARC_Ammo = 'NARC Ammo',
+  NARC_Explosive_Ammo = 'NARC Explosive Ammo',
+  NARC_ECM_Ammo = 'NARC ECM Ammo',
+  NARC_Haywire_Ammo = 'NARC Haywire Ammo',
+  NARC_Nemesis_Ammo = 'NARC Nemesis Ammo',
 
   /***************/
   /*  Clan tech  */
@@ -157,11 +201,6 @@ export enum MechEquipmentName {
   C_ER_PPC = 'Clan ER PPC',
 
   // Ballistic * Autocannon
-  C_Autocannon_2 = 'Clan Autocannon/2',
-  C_Autocannon_5 = 'Clan Autocannon/5',
-  C_Autocannon_10 = 'Clan Autocannon/10',
-  C_Autocannon_20 = 'Clan Autocannon/20',
-
   C_LB_2X_Autocannon = 'Clan LB 2-X Autocannon',
   C_LB_5X_Autocannon = 'Clan LB 5-X Autocannon',
   C_LB_10X_Autocannon = 'Clan LB 10-X Autocannon',
@@ -211,70 +250,43 @@ export enum MechEquipmentName {
   C_Light_Active_Probe = 'Clan Light Active Probe',
   C_ECM_Suite = 'Clan ECM Suite',
   C_MASC = 'Clan MASC',
+  C_NARC_Launcher = 'Clan NARC Launcher',
   C_TAG = 'Clan TAG',
   C_Light_TAG = 'Clan Light TAG',
   C_Targeting_Computer = 'Clan Targeting Computer',
   C_Artemis_IV = 'Clan Artemis IV',
 
-  // Ammo
-  // Energy * Ammo
-  Vehicle_Flamer_Ammo = 'Vehicle Flamer Ammo',
-  Plasma_Cannon_Ammo = 'Plasma Cannon Ammo',
-  Plasma_Rifle_Ammo = 'Plasma Rifle Ammo',
-
+  // Clan Ammo
   // Ballistic * Ammo
-  Autocannon_Ammo = 'Autocannon Ammo',
-  Autocannon_Armor_Piercing_Ammo = 'Autocannon Armor Piercing Ammo',
-  Autocannon_Flechette_Ammo = 'Autocannon Flechette Ammo',
-  Autocannon_Precision_Ammo = 'Autocannon Precision Ammo',
+  C_LB_X_Autocannon_Ammo = 'Clan LB-X Autocannon Ammo',
+  C_LB_X_Autocannon_Cluster_Ammo = 'Clan LB-X Autocannon Cluster Ammo',
+  C_Ultra_Autocannon_Ammo = 'Clan Ultra Autocannon Ammo',
+  C_Gauss_Ammo = 'Clan Gauss Ammo',
+  C_AP_Gauss_Ammo = 'Clan AP Gauss Ammo',
+  C_Hyper_Assault_Gauss_Ammo = 'Clan Hyper-Assault Gauss Ammo',
+  C_Light_Machine_Gun_Ammo = 'Clan Light Machine Gun Ammo',
+  C_Machine_Gun_Ammo = 'Clan Machine Gun Ammo',
+  C_Heavy_Machine_Gun_Ammo = 'Clan Heavy Machine Gun Ammo',
 
-  LB_X_Autocannon_Ammo = 'LB-X Autocannon Ammo',
-  LB_X_Autocannon_Cluster_Ammo = 'LB-X Autocannon Cluster  Ammo',
-
-  Light_Autocannon_Ammo = 'Light Autocannon Ammo',
-  Light_Autocannon_Armor_Piercing_Ammo = 'Light Autocannon Armor Piercing Ammo',
-  Light_Autocannon_Flechette_Ammo = 'Light Autocannon Flechette Ammo',
-  Light_Autocannon_Precision_Ammo = 'Light Autocannon Precision Ammo',
-
-  Rotary_Autocannon_Ammo = 'Rotary Autocannon Ammo',
-  Ultra_Autocannon_Ammo = 'Ultra Autocannon Ammo',
-
-  Light_Gauss_Ammo = 'Light Gauss Ammo',
-  Gauss_Ammo = 'Gauss Ammo',
-  Heavy_Gauss_Ammo = 'Heavy Gauss Ammo',
-  AP_Gauss_Ammo = 'AP Gauss Ammo',
-  Hyper_Assault_Gauss_Ammo = 'Hyper-Assault Gauss Ammo',
-
-  Light_Machine_Gun_Ammo = 'Light Machine Gun Ammo',
-  Machine_Gun_Ammo = 'Machine Gun Ammo',
-  Heavy_Machine_Gun_Ammo = 'Heavy Machine Gun Ammo',
+  // Energy * Ammo
+  C_Vehicle_Flamer_Ammo = 'Clan Vehicle Flamer Ammo',
+  C_Plasma_Cannon_Ammo = 'Clan Plasma Cannon Ammo',
 
   // Missile * Ammo
-  LRM_Ammo = 'LRM Ammo',
-  LRM_Fragmentation_Ammo = 'LRM Fragmentation Ammo',
-  LRM_Incendiary_Ammo = 'LRM Incendiary Ammo',
-  LRM_SWARM_Ammo = 'LRM SWARM Ammo',
-  LRM_Flare_Ammo = 'LRM Flare Ammo',
-
-  SRM_Ammo = 'SRM Ammo',
-  SRM_Fragmentation_Ammo = 'SRM Fragmentation Ammo',
-  SRM_Harpoon_Ammo = 'SRM Harpoon Ammo',
-  SRM_Inferno_Ammo = 'SRM Inferno Ammo',
-  Streak_SRM_Ammo = 'Streak SRM Ammo',
-
-  MRM_Ammo = 'MRM Ammo',
-
-  ATM_Ammo = 'ATM Ammo',
-  ATM_ER_Ammo = 'ATM ER Ammo',
-  ATM_HE_Ammo = 'ATM HE Ammo',
-
-  AMS_Ammo = 'AMS Ammo',
-
-  NARC_Ammo = 'Narc Ammo',
-  NARC_Explosive_Ammo = 'Narc Explosive Ammo',
-  NARC_ECM_Ammo = 'Narc ECM Ammo',
-  NARC_Haywire_Ammo = 'Narc Haywire Ammo',
-  NARC_Nemesis_Ammo = 'Narc Nemesis Ammo',
+  C_LRM_Ammo = 'Clan LRM Ammo',
+  C_LRM_Fragmentation_Ammo = 'Clan LRM Fragmentation Ammo',
+  C_LRM_SWARM_Ammo = 'Clan LRM SWARM Ammo',
+  C_LRM_Flare_Ammo = 'Clan LRM Flare Ammo',
+  C_SRM_Ammo = 'Clan SRM Ammo',
+  C_SRM_Fragmentation_Ammo = 'Clan SRM Fragmentation Ammo',
+  C_SRM_Harpoon_Ammo = 'Clan SRM Harpoon Ammo',
+  C_SRM_Inferno_Ammo = 'Clan SRM Inferno Ammo',
+  C_Streak_SRM_Ammo = 'Clan Streak SRM Ammo',
+  C_ATM_Ammo = 'Clan ATM Ammo',
+  C_ATM_ER_Ammo = 'Clan ATM ER Ammo',
+  C_ATM_HE_Ammo = 'Clan ATM HE Ammo',
+  C_AMS_Ammo = 'Clan AMS Ammo',
+  C_NARC_Ammo = 'Clan NARC Ammo',
 }
 
 export type WeaponType =
@@ -353,10 +365,6 @@ export type WeaponType =
   | MechEquipmentName.C_Vehicle_Flamer
   | MechEquipmentName.C_Plasma_Cannon
   | MechEquipmentName.C_ER_PPC
-  | MechEquipmentName.C_Autocannon_2
-  | MechEquipmentName.C_Autocannon_5
-  | MechEquipmentName.C_Autocannon_10
-  | MechEquipmentName.C_Autocannon_20
   | MechEquipmentName.C_LB_2X_Autocannon
   | MechEquipmentName.C_LB_5X_Autocannon
   | MechEquipmentName.C_LB_10X_Autocannon
@@ -404,8 +412,8 @@ export type EquipmentType =
   | MechEquipmentName.Improved_C3_Computer
   | MechEquipmentName.Guardian_ECM_Suite
   | MechEquipmentName.MASC
-  | MechEquipmentName.Narc_Launcher
-  | MechEquipmentName.Improved_Narc_Launcher
+  | MechEquipmentName.NARC_Launcher
+  | MechEquipmentName.Improved_NARC_Launcher
   | MechEquipmentName.TAG
   | MechEquipmentName.Artemis_IV
   | MechEquipmentName.Targeting_Computer
@@ -415,15 +423,13 @@ export type EquipmentType =
   | MechEquipmentName.C_Light_Active_Probe
   | MechEquipmentName.C_ECM_Suite
   | MechEquipmentName.C_MASC
+  | MechEquipmentName.C_NARC_Launcher
   | MechEquipmentName.C_TAG
   | MechEquipmentName.C_Light_TAG
   | MechEquipmentName.C_Targeting_Computer
   | MechEquipmentName.C_Artemis_IV
 
 export type AmmoType =
-  | MechEquipmentName.Vehicle_Flamer_Ammo
-  | MechEquipmentName.Plasma_Cannon_Ammo
-  | MechEquipmentName.Plasma_Rifle_Ammo
   | MechEquipmentName.Autocannon_Ammo
   | MechEquipmentName.Autocannon_Armor_Piercing_Ammo
   | MechEquipmentName.Autocannon_Flechette_Ammo
@@ -439,28 +445,50 @@ export type AmmoType =
   | MechEquipmentName.Light_Gauss_Ammo
   | MechEquipmentName.Gauss_Ammo
   | MechEquipmentName.Heavy_Gauss_Ammo
-  | MechEquipmentName.AP_Gauss_Ammo
-  | MechEquipmentName.Hyper_Assault_Gauss_Ammo
   | MechEquipmentName.Light_Machine_Gun_Ammo
   | MechEquipmentName.Machine_Gun_Ammo
   | MechEquipmentName.Heavy_Machine_Gun_Ammo
+  | MechEquipmentName.Vehicle_Flamer_Ammo
+  | MechEquipmentName.Plasma_Rifle_Ammo
   | MechEquipmentName.LRM_Ammo
   | MechEquipmentName.LRM_Fragmentation_Ammo
   | MechEquipmentName.LRM_Incendiary_Ammo
   | MechEquipmentName.LRM_SWARM_Ammo
   | MechEquipmentName.LRM_Flare_Ammo
+  | MechEquipmentName.MRM_Ammo
   | MechEquipmentName.SRM_Ammo
   | MechEquipmentName.SRM_Fragmentation_Ammo
   | MechEquipmentName.SRM_Harpoon_Ammo
   | MechEquipmentName.SRM_Inferno_Ammo
   | MechEquipmentName.Streak_SRM_Ammo
-  | MechEquipmentName.MRM_Ammo
-  | MechEquipmentName.ATM_Ammo
-  | MechEquipmentName.ATM_ER_Ammo
-  | MechEquipmentName.ATM_HE_Ammo
   | MechEquipmentName.AMS_Ammo
   | MechEquipmentName.NARC_Ammo
   | MechEquipmentName.NARC_Explosive_Ammo
   | MechEquipmentName.NARC_ECM_Ammo
   | MechEquipmentName.NARC_Haywire_Ammo
   | MechEquipmentName.NARC_Nemesis_Ammo
+  | MechEquipmentName.C_LB_X_Autocannon_Ammo
+  | MechEquipmentName.C_LB_X_Autocannon_Cluster_Ammo
+  | MechEquipmentName.C_Ultra_Autocannon_Ammo
+  | MechEquipmentName.C_Gauss_Ammo
+  | MechEquipmentName.C_AP_Gauss_Ammo
+  | MechEquipmentName.C_Hyper_Assault_Gauss_Ammo
+  | MechEquipmentName.C_Light_Machine_Gun_Ammo
+  | MechEquipmentName.C_Machine_Gun_Ammo
+  | MechEquipmentName.C_Heavy_Machine_Gun_Ammo
+  | MechEquipmentName.C_Vehicle_Flamer_Ammo
+  | MechEquipmentName.C_Plasma_Cannon_Ammo
+  | MechEquipmentName.C_LRM_Ammo
+  | MechEquipmentName.C_LRM_Fragmentation_Ammo
+  | MechEquipmentName.C_LRM_SWARM_Ammo
+  | MechEquipmentName.C_LRM_Flare_Ammo
+  | MechEquipmentName.C_SRM_Ammo
+  | MechEquipmentName.C_SRM_Fragmentation_Ammo
+  | MechEquipmentName.C_SRM_Harpoon_Ammo
+  | MechEquipmentName.C_SRM_Inferno_Ammo
+  | MechEquipmentName.C_Streak_SRM_Ammo
+  | MechEquipmentName.C_ATM_Ammo
+  | MechEquipmentName.C_ATM_ER_Ammo
+  | MechEquipmentName.C_ATM_HE_Ammo
+  | MechEquipmentName.C_AMS_Ammo
+  | MechEquipmentName.C_NARC_Ammo
