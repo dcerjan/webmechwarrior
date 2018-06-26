@@ -9,6 +9,7 @@ import { MechEquipmentType } from '../../../../../../models/MechEquipment/MechEq
 import { IMechDesignerMech } from '../../../../state/constants'
 import { IEquipmentState } from '../../../../state/reducer'
 
+// import { DraggableRowWrapper } from './DraggableRowWrapper'
 import * as styles from './Equipment.css'
 
 interface IEquipmentProps {
@@ -31,9 +32,11 @@ const getTableConfig = (
       default: return styles.Equipment
       }
     },
-    onDragStart: (_, item) => {
-      console.log(item)
-    },
+    // rowWrapper: ({ component, id, value }) => {
+    //   return <div key={id}>
+    //     <DraggableRowWrapper value={value} component={component} />
+    //   </div>
+    // },
     columns: [
       {
         field: 'name',

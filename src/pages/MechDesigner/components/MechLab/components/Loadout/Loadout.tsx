@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 import { Component } from '../../../../../../models/common/Component'
 import { MechType } from '../../../../../../models/common/MechType'
@@ -10,7 +12,7 @@ import { Leg } from './Leg'
 import * as styles from './Loadout.css'
 import { SideTorso } from './SideTorso'
 
-export class Loadout extends React.PureComponent<IInjectedMechLabProps> {
+class Loadout extends React.PureComponent<IInjectedMechLabProps> {
 
   public render() {
     return (() => {
@@ -100,4 +102,10 @@ export class Loadout extends React.PureComponent<IInjectedMechLabProps> {
       </div>
     )
   }
+}
+
+const DnDLoadout = DragDropContext(HTML5Backend)(Loadout)
+
+export {
+  DnDLoadout as Loadout,
 }

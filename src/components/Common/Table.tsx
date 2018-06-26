@@ -23,6 +23,7 @@ const getAlignment = (alignment: 'Left' | 'Center' | 'Right'): string => {
 
 export interface IRowConfig<T> {
   columns: Array<IColumnConfig<T, keyof T>>,
+  rowWrapper?: ({ value, id, component}: { value: T, id: number, component: JSX.Element}) => JSX.Element,
   className?: (value: T) => string,
   onEnter?: (event: React.MouseEvent<HTMLDivElement>, value: T) => void,
   onLeave?: (event: React.MouseEvent<HTMLDivElement>, value: T) => void,
@@ -37,64 +38,76 @@ interface ITableProps<T> {
 const DEFAULT_COLUMN_WEIGHT = 120
 const DEFAULT_COLUMN_ALIGN = 'Left'
 
-export const Table: React.SFC<ITableProps<any>> = ({ config, data }) => {
-  return (
-    <div className={styles.Table}>
-      <div className={styles.Header}>
-        { config.columns.map(column => (
+export class Table<T> extends React.PureComponent<ITableProps<T>> {
+  public render() {
+    const { config, data } = this.props
+
+    return (
+      <div className={styles.Table}>
+        <div className={styles.Header}>
+          { config.columns.map(column => (
+            <div
+              key={column.field.toString()}
+              className={classNames(styles.Column, getAlignment(column.alignment || DEFAULT_COLUMN_ALIGN))}
+              style={{
+                flex: `${column.weight || DEFAULT_COLUMN_WEIGHT}px`,
+                width: `${column.weight || DEFAULT_COLUMN_WEIGHT}px`,
+              }}
+            >
+              { column.header || column.field }
+            </div>
+          )) }
+        </div>
+        <div className={styles.Body}>
+          <Scrollbars
+            autoHeight
+            autoHeightMax={720}
+            autoHide
+            hideTracksWhenNotNeeded
+          >
+            { data.map((item, index) => {
+              return config.rowWrapper != null
+                ? config.rowWrapper({ value: item, id: index, component: this.renderRow(item, index) })
+                : this.renderRow(item, index)
+            }) }
+          </Scrollbars>
+        </div>
+      </div>
+    )
+  }
+
+  private renderRow(item: T, index: number) {
+    const { config } = this.props
+
+    return (
+      <div
+        key={`${index}`}
+        className={classNames(styles.Row, config.className && config.className(item))}
+        onMouseEnter={config.onEnter != null
+          ? (evt) => (config as any).onEnter(evt, item)
+          : undefined }
+        onMouseLeave={config.onLeave != null
+          ? (evt) => (config as any).onLeave(evt, item)
+          : undefined }
+        draggable={config.onDragStart != null}
+        onDragStart={config.onDragStart != null
+          ? (evt) => (config as any).onDragStart(evt, item)
+          : undefined
+        }
+      >
+        { config.columns.map((column, index) => (
           <div
-            key={column.field.toString()}
-            className={classNames(styles.Column, getAlignment(column.alignment || DEFAULT_COLUMN_ALIGN))}
+            key={`${column.field}:${index}`}
+            className={classNames(styles.Column, getAlignment(column.alignment || DEFAULT_COLUMN_ALIGN), column.className && column.className(item, item[column.field]))}
             style={{
               flex: `${column.weight || DEFAULT_COLUMN_WEIGHT}px`,
               width: `${column.weight || DEFAULT_COLUMN_WEIGHT}px`,
             }}
           >
-            { column.header || column.field }
+            { column.format ? column.format(item, item[column.field]) : item[column.field].toString() }
           </div>
         )) }
       </div>
-      <div className={styles.Body}>
-        <Scrollbars
-          autoHeight
-          autoHeightMax={720}
-          autoHide
-          hideTracksWhenNotNeeded
-        >
-          { data.map(item => (
-            <div
-              key={item.name}
-              className={classNames(styles.Row, config.className && config.className(item))}
-              onMouseEnter={config.onEnter != null
-                ? (evt) => (config as any).onEnter(evt, item)
-                : undefined }
-              onMouseLeave={config.onLeave != null
-                ? (evt) => (config as any).onLeave(evt, item)
-                : undefined }
-              draggable={config.onDragStart != null}
-              onDragStart={config.onDragStart != null
-                ? (evt) => (config as any).onDragStart(evt, item)
-                : undefined
-              }
-            >
-              { config.columns.map(column => (
-                <div
-                  key={column.field.toString()}
-                  className={classNames(styles.Column, getAlignment(column.alignment || DEFAULT_COLUMN_ALIGN), column.className && column.className(item, item[column.field]))}
-                  style={{
-                    flex: `${column.weight || DEFAULT_COLUMN_WEIGHT}px`,
-                    width: `${column.weight || DEFAULT_COLUMN_WEIGHT}px`,
-                  }}
-                >
-                  { column.format
-                    ? column.format(item, item[column.field])
-                    : item[column.field] }
-                </div>
-              )) }
-            </div>
-          )) }
-        </Scrollbars>
-      </div>
-    </div>
-  )
+    )
+  }
 }
