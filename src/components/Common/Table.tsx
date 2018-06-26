@@ -4,13 +4,13 @@ import Scrollbars from 'react-custom-scrollbars'
 
 import * as styles from './Table.css'
 
-export interface IColumnConfig<T, S extends keyof T, V = T[S]> {
-  field: keyof T,
+export interface IColumnConfig<T extends {}, S extends keyof T> {
+  field: S,
   header?: string,
   weight?: number,
   alignment?: 'Left' | 'Center' | 'Right',
-  format?: (row: T, value: V) => string,
-  className?: (row: T, value: V) => string,
+  format?: (row: T, value: T[S]) => string,
+  className?: (row: T, value: T[S]) => string,
 }
 
 const getAlignment = (alignment: 'Left' | 'Center' | 'Right'): string => {
@@ -23,11 +23,10 @@ const getAlignment = (alignment: 'Left' | 'Center' | 'Right'): string => {
 
 export interface IRowConfig<T> {
   columns: Array<IColumnConfig<T, keyof T>>,
-  rowWrapper?: ({ value, id, component}: { value: T, id: number, component: JSX.Element}) => JSX.Element,
+  rowWrapper?: React.ComponentClass<{ value: T, component: JSX.Element | JSX.Element[]} & Pick<React.HTMLAttributes<HTMLDivElement>, 'className'>>,
   className?: (value: T) => string,
   onEnter?: (event: React.MouseEvent<HTMLDivElement>, value: T) => void,
   onLeave?: (event: React.MouseEvent<HTMLDivElement>, value: T) => void,
-  onDragStart?: (event: React.DragEvent<HTMLDivElement>, value: T) => void,
 }
 
 interface ITableProps<T> {
@@ -65,20 +64,15 @@ export class Table<T> extends React.PureComponent<ITableProps<T>> {
             autoHide
             hideTracksWhenNotNeeded
           >
-            { data.map((item, index) => {
-              return config.rowWrapper != null
-                ? config.rowWrapper({ value: item, id: index, component: this.renderRow(item, index) })
-                : this.renderRow(item, index)
-            }) }
+            { data.map((item, index) => this.renderRow(item, index)) }
           </Scrollbars>
         </div>
       </div>
     )
   }
 
-  private renderRow(item: T, index: number) {
+  private renderColumns(item: T, index: number) {
     const { config } = this.props
-
     return (
       <div
         key={`${index}`}
@@ -89,11 +83,6 @@ export class Table<T> extends React.PureComponent<ITableProps<T>> {
         onMouseLeave={config.onLeave != null
           ? (evt) => (config as any).onLeave(evt, item)
           : undefined }
-        draggable={config.onDragStart != null}
-        onDragStart={config.onDragStart != null
-          ? (evt) => (config as any).onDragStart(evt, item)
-          : undefined
-        }
       >
         { config.columns.map((column, index) => (
           <div
@@ -109,5 +98,20 @@ export class Table<T> extends React.PureComponent<ITableProps<T>> {
         )) }
       </div>
     )
+  }
+
+  private renderRow(item: T, index: number) {
+    const { config } = this.props
+
+    const Wrapper = config.rowWrapper
+
+    return Wrapper
+      ? <Wrapper
+        className={styles.RowWrapper}
+        key={index}
+        value={item}
+        component={this.renderColumns(item, index)}
+      />
+      : this.renderColumns(item, index)
   }
 }
