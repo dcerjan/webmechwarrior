@@ -205,7 +205,7 @@ export const getEngineCriticalSlotAllocation = (tech: Tech, type: EngineType): I
   switch (type) {
   case EngineType.Standard: return { [MechComponent.CenterTorso]: 6 }
   case EngineType.Compact: return { [MechComponent.CenterTorso]: 3 }
-  case EngineType.Light: return { [MechComponent.CenterTorso]: 6, [MechComponent.LeftTorso]: 3, [MechComponent.RightTorso]: 3 }
+  case EngineType.Light: return { [MechComponent.CenterTorso]: 6, [MechComponent.LeftTorso]: 2, [MechComponent.RightTorso]: 2 }
   case EngineType.XL: return tech === Tech.IS
     ? { [MechComponent.CenterTorso]: 6, [MechComponent.LeftTorso]: 3, [MechComponent.RightTorso]: 3 }
     : { [MechComponent.CenterTorso]: 6, [MechComponent.LeftTorso]: 2, [MechComponent.RightTorso]: 2 }

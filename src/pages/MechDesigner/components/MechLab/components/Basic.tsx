@@ -9,7 +9,7 @@ import { getCockpitTonnage } from '../../../../../models/Cockpit'
 import { isAssault, isHeavy, isLight, isMedium, isSuperHeavy, MechClass } from '../../../../../models/common/MechClass'
 import { MechType } from '../../../../../models/common/MechType'
 import { Tech } from '../../../../../models/common/Tech'
-import { getEngineTonnage } from '../../../../../models/Engine'
+import { EngineType, getEngineTonnage } from '../../../../../models/Engine'
 import { getGyroTonnage } from '../../../../../models/Gryo'
 import { getInternalStructureTonnage } from '../../../../../models/InternalStructure'
 import { JumpJetType } from '../../../../../models/JumpJets'
@@ -30,7 +30,7 @@ import { IInjectedMechLabProps } from '../MechLab'
 export class Basic extends React.PureComponent<IInjectedMechLabProps> {
 
   public render() {
-    const { change, select } = this.props
+    const { change, select, mech } = this.props
 
     return (
       <Card
@@ -52,6 +52,11 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
             name='tech'
             options={Object.values(Tech).map(tech => ({ value: tech, name: tech }))}
             alignment='Right'
+            valueChanged={(newTech: Tech) => {
+              if (newTech === Tech.Clan && [EngineType.Light, EngineType.Compact].includes(mech.engine.type)) {
+                change('engine.type', EngineType.Standard)
+              }
+            }}
           /> }
           color={DetailColor.TransparentBluishGrey}
         />
