@@ -1,8 +1,8 @@
 import { lens } from 'lens.ts'
 
 import { ArmorType, getArmorBasePointMultiplier } from '../Armor'
-import { Component, IArm, ICenterTorso, IHead, ILeg, ISideTorso } from '../common/Component'
 import { MechClass } from '../common/MechClass'
+import { IArm, ICenterTorso, IHead, ILeg, ISideTorso, MechComponent } from '../common/MechComponent'
 import { MechType } from '../common/MechType'
 import { Tech } from '../common/Tech'
 import { IEngine } from '../Engine'
@@ -28,14 +28,14 @@ export interface IBaseMech {
 }
 
 export interface IBipedalLoadout {
-  [Component.Head]: IHead,
-  [Component.CenterTorso]: ICenterTorso,
-  [Component.LeftTorso]: ISideTorso,
-  [Component.RightTorso]: ISideTorso,
-  [Component.LeftArm]: IArm,
-  [Component.RightArm]: IArm,
-  [Component.LeftLeg]: ILeg,
-  [Component.RightLeg]: ILeg,
+  [MechComponent.Head]: IHead,
+  [MechComponent.CenterTorso]: ICenterTorso,
+  [MechComponent.LeftTorso]: ISideTorso,
+  [MechComponent.RightTorso]: ISideTorso,
+  [MechComponent.LeftArm]: IArm,
+  [MechComponent.RightArm]: IArm,
+  [MechComponent.LeftLeg]: ILeg,
+  [MechComponent.RightLeg]: ILeg,
 }
 
 export interface IBipedalMech extends IBaseMech {
@@ -49,15 +49,15 @@ export const BipedalMech = (props: IBipedalMech): Readonly<IBipedalMech> => ({
 export const BipedalMechL = lens<IBipedalMech>()
 
 export interface ITripodLoadout {
-  [Component.Head]: IHead,
-  [Component.CenterTorso]: ICenterTorso,
-  [Component.LeftTorso]: ISideTorso,
-  [Component.RightTorso]: ISideTorso,
-  [Component.LeftArm]: IArm,
-  [Component.RightArm]: IArm,
-  [Component.FrontLeftLeg]: ILeg,
-  [Component.FrontRightLeg]: ILeg,
-  [Component.RearLeg]: ILeg,
+  [MechComponent.Head]: IHead,
+  [MechComponent.CenterTorso]: ICenterTorso,
+  [MechComponent.LeftTorso]: ISideTorso,
+  [MechComponent.RightTorso]: ISideTorso,
+  [MechComponent.LeftArm]: IArm,
+  [MechComponent.RightArm]: IArm,
+  [MechComponent.FrontLeftLeg]: ILeg,
+  [MechComponent.FrontRightLeg]: ILeg,
+  [MechComponent.RearLeg]: ILeg,
 }
 
 export interface ITripodMech extends IBaseMech {
@@ -69,14 +69,14 @@ export const TripodMech = (props: ITripodMech): Readonly<ITripodMech> => ({
 })
 
 export interface IQuadrupedalLoadout {
-  [Component.Head]: IHead,
-  [Component.CenterTorso]: ICenterTorso,
-  [Component.LeftTorso]: ISideTorso,
-  [Component.RightTorso]: ISideTorso,
-  [Component.FrontLeftLeg]: ILeg,
-  [Component.FrontRightLeg]: ILeg,
-  [Component.RearLeftLeg]: ILeg,
-  [Component.RearRightLeg]: ILeg,
+  [MechComponent.Head]: IHead,
+  [MechComponent.CenterTorso]: ICenterTorso,
+  [MechComponent.LeftTorso]: ISideTorso,
+  [MechComponent.RightTorso]: ISideTorso,
+  [MechComponent.FrontLeftLeg]: ILeg,
+  [MechComponent.FrontRightLeg]: ILeg,
+  [MechComponent.RearLeftLeg]: ILeg,
+  [MechComponent.RearRightLeg]: ILeg,
 }
 
 export interface IQuadrupedalMech extends IBaseMech {
@@ -91,50 +91,50 @@ export const QuadrupedalMechL = lens<IQuadrupedalMech>()
 
 export const getBipedalLoadoutArmor = (loadout: IBipedalLoadout): number => {
   return (
-    loadout[Component.Head].armor +
-    loadout[Component.CenterTorso].armor +
-    loadout[Component.CenterTorso].rearArmor +
-    loadout[Component.LeftTorso].armor +
-    loadout[Component.LeftTorso].rearArmor +
-    loadout[Component.RightTorso].armor +
-    loadout[Component.RightTorso].rearArmor +
-    loadout[Component.LeftArm].armor +
-    loadout[Component.RightArm].armor +
-    loadout[Component.LeftLeg].armor +
-    loadout[Component.RightLeg].armor
+    loadout[MechComponent.Head].armor +
+    loadout[MechComponent.CenterTorso].armor +
+    loadout[MechComponent.CenterTorso].rearArmor +
+    loadout[MechComponent.LeftTorso].armor +
+    loadout[MechComponent.LeftTorso].rearArmor +
+    loadout[MechComponent.RightTorso].armor +
+    loadout[MechComponent.RightTorso].rearArmor +
+    loadout[MechComponent.LeftArm].armor +
+    loadout[MechComponent.RightArm].armor +
+    loadout[MechComponent.LeftLeg].armor +
+    loadout[MechComponent.RightLeg].armor
   )
 }
 
 export const getTripodLoadoutArmor = (loadout: ITripodLoadout): number => {
   return (
-    loadout[Component.Head].armor +
-    loadout[Component.CenterTorso].armor +
-    loadout[Component.CenterTorso].rearArmor +
-    loadout[Component.LeftTorso].armor +
-    loadout[Component.LeftTorso].rearArmor +
-    loadout[Component.RightTorso].armor +
-    loadout[Component.RightTorso].rearArmor +
-    loadout[Component.LeftArm].armor +
-    loadout[Component.RightArm].armor +
-    loadout[Component.FrontLeftLeg].armor +
-    loadout[Component.FrontRightLeg].armor +
-    loadout[Component.RearLeg].armor
+    loadout[MechComponent.Head].armor +
+    loadout[MechComponent.CenterTorso].armor +
+    loadout[MechComponent.CenterTorso].rearArmor +
+    loadout[MechComponent.LeftTorso].armor +
+    loadout[MechComponent.LeftTorso].rearArmor +
+    loadout[MechComponent.RightTorso].armor +
+    loadout[MechComponent.RightTorso].rearArmor +
+    loadout[MechComponent.LeftArm].armor +
+    loadout[MechComponent.RightArm].armor +
+    loadout[MechComponent.FrontLeftLeg].armor +
+    loadout[MechComponent.FrontRightLeg].armor +
+    loadout[MechComponent.RearLeg].armor
   )
 }
 
 export const getQuadrupedalLoadoutArmor = (loadout: IQuadrupedalLoadout): number => {
   return (
-    loadout[Component.Head].armor +
-    loadout[Component.CenterTorso].armor +
-    loadout[Component.CenterTorso].rearArmor +
-    loadout[Component.LeftTorso].armor +
-    loadout[Component.LeftTorso].rearArmor +
-    loadout[Component.RightTorso].armor +
-    loadout[Component.RightTorso].rearArmor +
-    loadout[Component.FrontLeftLeg].armor +
-    loadout[Component.FrontRightLeg].armor +
-    loadout[Component.RearLeftLeg].armor +
-    loadout[Component.RearRightLeg].armor
+    loadout[MechComponent.Head].armor +
+    loadout[MechComponent.CenterTorso].armor +
+    loadout[MechComponent.CenterTorso].rearArmor +
+    loadout[MechComponent.LeftTorso].armor +
+    loadout[MechComponent.LeftTorso].rearArmor +
+    loadout[MechComponent.RightTorso].armor +
+    loadout[MechComponent.RightTorso].rearArmor +
+    loadout[MechComponent.FrontLeftLeg].armor +
+    loadout[MechComponent.FrontRightLeg].armor +
+    loadout[MechComponent.RearLeftLeg].armor +
+    loadout[MechComponent.RearRightLeg].armor
   )
 }
 

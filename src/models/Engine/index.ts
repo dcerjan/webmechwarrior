@@ -1,6 +1,6 @@
 import { lens } from 'lens.ts'
 
-import { Component } from '../common/Component'
+import { MechComponent } from '../common/MechComponent'
 import { Tech } from '../common/Tech'
 import { HeatsinkType } from '../Heatsink'
 import { MechTonnage } from '../Mech'
@@ -170,9 +170,9 @@ export type EngineRating =
   | 370 | 375 | 380 | 385 | 390 | 395 | 400
 
 export interface IEngineCriticalSlotAllocation {
-  [Component.CenterTorso]: number,
-  [Component.LeftTorso]?: number,
-  [Component.RightTorso]?: number,
+  [MechComponent.CenterTorso]: number,
+  [MechComponent.LeftTorso]?: number,
+  [MechComponent.RightTorso]?: number,
 }
 
 export const getWalkingMP = (rating: EngineRating, tonnage: MechTonnage): number =>
@@ -203,15 +203,15 @@ export const getAvailableEngines = (tech: Tech) => {
 
 export const getEngineCriticalSlotAllocation = (tech: Tech, type: EngineType): IEngineCriticalSlotAllocation => {
   switch (type) {
-  case EngineType.Standard: return { [Component.CenterTorso]: 6 }
-  case EngineType.Compact: return { [Component.CenterTorso]: 3 }
-  case EngineType.Light: return { [Component.CenterTorso]: 6, [Component.LeftTorso]: 3, [Component.RightTorso]: 3 }
+  case EngineType.Standard: return { [MechComponent.CenterTorso]: 6 }
+  case EngineType.Compact: return { [MechComponent.CenterTorso]: 3 }
+  case EngineType.Light: return { [MechComponent.CenterTorso]: 6, [MechComponent.LeftTorso]: 3, [MechComponent.RightTorso]: 3 }
   case EngineType.XL: return tech === Tech.IS
-    ? { [Component.CenterTorso]: 6, [Component.LeftTorso]: 3, [Component.RightTorso]: 3 }
-    : { [Component.CenterTorso]: 6, [Component.LeftTorso]: 2, [Component.RightTorso]: 2 }
+    ? { [MechComponent.CenterTorso]: 6, [MechComponent.LeftTorso]: 3, [MechComponent.RightTorso]: 3 }
+    : { [MechComponent.CenterTorso]: 6, [MechComponent.LeftTorso]: 2, [MechComponent.RightTorso]: 2 }
   case EngineType.XXL: return tech === Tech.IS
-    ? { [Component.CenterTorso]: 6, [Component.LeftTorso]: 6, [Component.RightTorso]: 6 }
-    : { [Component.CenterTorso]: 6, [Component.LeftTorso]: 4, [Component.RightTorso]: 4 }
+    ? { [MechComponent.CenterTorso]: 6, [MechComponent.LeftTorso]: 6, [MechComponent.RightTorso]: 6 }
+    : { [MechComponent.CenterTorso]: 6, [MechComponent.LeftTorso]: 4, [MechComponent.RightTorso]: 4 }
   default: throw new Error(`Invalid engine type given: ${type}`)
   }
 }

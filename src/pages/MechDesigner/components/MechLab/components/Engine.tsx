@@ -6,7 +6,7 @@ import { Detail, DetailColor } from '../../../../../components/Common/Detail'
 import { Range, Select } from '../../../../../components/Field'
 import { ISelectOption } from '../../../../../components/Field/Select/common'
 import { segment } from '../../../../../lib/functional'
-import { Component } from '../../../../../models/common/Component'
+import { MechComponent } from '../../../../../models/common/MechComponent'
 import {
   EngineRating,
   EngineType,
@@ -113,7 +113,7 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
 
   private getEngineCriticals() {
     const allocation = getEngineCriticalSlotAllocation(this.props.mech.tech, this.props.mech.engine.type)
-    return `${allocation[Component.LeftTorso] || '-'}/${allocation[Component.CenterTorso]}/${allocation[Component.RightTorso] || '-'}`
+    return `${allocation[MechComponent.LeftTorso] || '-'}/${allocation[MechComponent.CenterTorso]}/${allocation[MechComponent.RightTorso] || '-'}`
   }
 
   private getUnallocatedHeatsinks() {

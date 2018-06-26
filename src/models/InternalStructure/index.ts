@@ -1,5 +1,5 @@
-import { Component } from '../common/Component'
 import { MechClass } from '../common/MechClass'
+import { MechComponent } from '../common/MechComponent'
 import { Tech } from '../common/Tech'
 import { MechTonnage } from '../Mech'
 
@@ -12,19 +12,19 @@ export enum InternalStructureType {
 interface IInternalStructureTableRecord {
   mechTonnage: number,
   tonnage: number,
-  [Component.Head]: number,
-  [Component.CenterTorso]: number,
-  [Component.LeftTorso]: number,
-  [Component.RightTorso]: number,
-  [Component.LeftArm]: number,
-  [Component.RightArm]: number,
-  [Component.LeftLeg]: number,
-  [Component.RightLeg]: number,
-  [Component.FrontLeftLeg]: number,
-  [Component.FrontRightLeg]: number,
-  [Component.RearLeftLeg]: number,
-  [Component.RearRightLeg]: number,
-  [Component.RearLeg]: number,
+  [MechComponent.Head]: number,
+  [MechComponent.CenterTorso]: number,
+  [MechComponent.LeftTorso]: number,
+  [MechComponent.RightTorso]: number,
+  [MechComponent.LeftArm]: number,
+  [MechComponent.RightArm]: number,
+  [MechComponent.LeftLeg]: number,
+  [MechComponent.RightLeg]: number,
+  [MechComponent.FrontLeftLeg]: number,
+  [MechComponent.FrontRightLeg]: number,
+  [MechComponent.RearLeftLeg]: number,
+  [MechComponent.RearRightLeg]: number,
+  [MechComponent.RearLeg]: number,
 }
 
 const InternalStructureRecord = (
@@ -38,19 +38,19 @@ const InternalStructureRecord = (
 ): IInternalStructureTableRecord => ({
   mechTonnage,
   tonnage,
-  [Component.Head]: head,
-  [Component.CenterTorso]: centerTorso,
-  [Component.LeftTorso]: sideTorsos,
-  [Component.RightTorso]: sideTorsos,
-  [Component.LeftArm]: arms,
-  [Component.RightArm]: arms,
-  [Component.LeftLeg]: legs,
-  [Component.RightLeg]: legs,
-  [Component.FrontLeftLeg]: legs,
-  [Component.FrontRightLeg]: legs,
-  [Component.RearLeftLeg]: legs,
-  [Component.RearRightLeg]: legs,
-  [Component.RearLeg]: legs,
+  [MechComponent.Head]: head,
+  [MechComponent.CenterTorso]: centerTorso,
+  [MechComponent.LeftTorso]: sideTorsos,
+  [MechComponent.RightTorso]: sideTorsos,
+  [MechComponent.LeftArm]: arms,
+  [MechComponent.RightArm]: arms,
+  [MechComponent.LeftLeg]: legs,
+  [MechComponent.RightLeg]: legs,
+  [MechComponent.FrontLeftLeg]: legs,
+  [MechComponent.FrontRightLeg]: legs,
+  [MechComponent.RearLeftLeg]: legs,
+  [MechComponent.RearRightLeg]: legs,
+  [MechComponent.RearLeg]: legs,
 })
 
 export const InternalStructureTypeWeightMultipliers = {
@@ -108,11 +108,11 @@ export const getInternalStructureCriticals = (tech: Tech, type: InternalStructur
   }
 }
 
-export const getInternalStructureHitPoints = (mechTonnage: MechTonnage, component: Component): number =>
+export const getInternalStructureHitPoints = (mechTonnage: MechTonnage, component: MechComponent): number =>
   InternalStructureTable[mechTonnage][component]
 
-export const getMaxArmorHitPoints = (mechClass: MechClass, mechTonnage: MechTonnage, component: Component): number =>
-  component === Component.Head
+export const getMaxArmorHitPoints = (mechClass: MechClass, mechTonnage: MechTonnage, component: MechComponent): number =>
+  component === MechComponent.Head
     ? mechClass === MechClass.SuperHeavy ? 12 : 9
     : InternalStructureTable[mechTonnage][component] * 2
 

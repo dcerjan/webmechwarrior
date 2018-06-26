@@ -2,7 +2,7 @@ import * as React from 'react'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
-import { Component } from '../../../../../../models/common/Component'
+import { MechComponent } from '../../../../../../models/common/MechComponent'
 import { MechType } from '../../../../../../models/common/MechType'
 import { IInjectedMechLabProps } from '../../MechLab'
 import { Arm } from './Arm'
@@ -29,22 +29,22 @@ class Loadout extends React.PureComponent<IInjectedMechLabProps> {
     return (
       <div className={styles.Loadout}>
         <div className={styles.Outer}>
-          <Arm mech={mech} arm={mech.loadout[Component.LeftArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[MechComponent.LeftArm]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[Component.LeftTorso]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[Component.LeftLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.LeftTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.LeftLeg]} change={change} select={select} />
         </div>
         <div className={styles.Center}>
-          <Head mech={mech} head={mech.loadout[Component.Head]} change={change} select={select} />
-          <CenterTorso mech={mech} centerTorso={mech.loadout[Component.CenterTorso]} change={change} select={select} />
+          <Head mech={mech} head={mech.loadout[MechComponent.Head]} change={change} select={select} />
+          <CenterTorso mech={mech} centerTorso={mech.loadout[MechComponent.CenterTorso]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[Component.RightTorso]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[Component.RightLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.RightTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.RightLeg]} change={change} select={select} />
         </div>
         <div className={styles.Outer}>
-          <Arm mech={mech} arm={mech.loadout[Component.RightArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[MechComponent.RightArm]} change={change} select={select} />
         </div>
       </div>
     )
@@ -55,23 +55,23 @@ class Loadout extends React.PureComponent<IInjectedMechLabProps> {
     return (
       <div className={styles.Loadout}>
         <div className={styles.Outer}>
-          <Arm mech={mech} arm={mech.loadout[Component.LeftArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[MechComponent.LeftArm]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[Component.LeftTorso]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[Component.FrontLeftLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.LeftTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontLeftLeg]} change={change} select={select} />
         </div>
         <div className={styles.Center}>
-          <Head mech={mech} head={mech.loadout[Component.Head]} change={change} select={select} />
-          <CenterTorso mech={mech} centerTorso={mech.loadout[Component.CenterTorso]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[Component.RearLeg]} change={change} select={select} />
+          <Head mech={mech} head={mech.loadout[MechComponent.Head]} change={change} select={select} />
+          <CenterTorso mech={mech} centerTorso={mech.loadout[MechComponent.CenterTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.RearLeg]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[Component.RightTorso]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[Component.FrontRightLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.RightTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontRightLeg]} change={change} select={select} />
         </div>
         <div className={styles.Outer}>
-          <Arm mech={mech} arm={mech.loadout[Component.RightArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[MechComponent.RightArm]} change={change} select={select} />
         </div>
       </div>
     )
@@ -82,22 +82,22 @@ class Loadout extends React.PureComponent<IInjectedMechLabProps> {
     return (
       <div className={styles.Loadout}>
         <div className={styles.Outer}>
-          <Leg mech={mech} leg={mech.loadout[Component.FrontLeftLeg]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[Component.RearLeftLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontLeftLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.RearLeftLeg]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[Component.LeftTorso]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.LeftTorso]} change={change} select={select} />
         </div>
         <div className={styles.Center}>
-          <Head mech={mech} head={mech.loadout[Component.Head]} change={change} select={select} />
-          <CenterTorso mech={mech} centerTorso={mech.loadout[Component.CenterTorso]} change={change} select={select} />
+          <Head mech={mech} head={mech.loadout[MechComponent.Head]} change={change} select={select} />
+          <CenterTorso mech={mech} centerTorso={mech.loadout[MechComponent.CenterTorso]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[Component.RightTorso]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.RightTorso]} change={change} select={select} />
         </div>
         <div className={styles.Outer}>
-          <Leg mech={mech} leg={mech.loadout[Component.FrontRightLeg]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[Component.RearRightLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontRightLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.RearRightLeg]} change={change} select={select} />
         </div>
       </div>
     )

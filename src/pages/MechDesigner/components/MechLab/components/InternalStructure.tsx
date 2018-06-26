@@ -5,7 +5,7 @@ import { Card } from '../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../components/Common/Detail'
 import { Select } from '../../../../../components/Field'
 import { ISelectOption } from '../../../../../components/Field/Select/common'
-import { getMechBipedComponents, getMechQuadrupedComponents } from '../../../../../models/common/Component'
+import { getMechBipedComponents, getMechQuadrupedComponents } from '../../../../../models/common/MechComponent'
 import { MechType } from '../../../../../models/common/MechType'
 import {
   getAvailableInternalStructureTypes,

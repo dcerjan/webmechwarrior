@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { Detail, DetailColor } from '../../../../../../../components/Common/Detail'
-import { Component, getCriticalsForComponent, IArm, IBaseMechPart, ICenterTorso, IHead, ILeg, ISideTorso } from '../../../../../../../models/common/Component'
+import { getCriticalsForComponent, IArm, IBaseMechPart, ICenterTorso, IHead, ILeg, ISideTorso, MechComponent } from '../../../../../../../models/common/MechComponent'
 
 import { replicate } from '../../../../../../../lib/functional'
 import { getCockpitCriticals, getLifeSupportCriticals, getSensorsCriticals } from '../../../../../../../models/Cockpit'
@@ -84,7 +84,7 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
   }
 
   private getCenterTorsoEquipment(mech: IMechDesignerMech, centerTorso: ICenterTorso): ICriticalDescriptor[] {
-    const engineCriticals = getEngineCriticalSlotAllocation(mech.tech, mech.engine.type)[Component.CenterTorso]
+    const engineCriticals = getEngineCriticalSlotAllocation(mech.tech, mech.engine.type)[MechComponent.CenterTorso]
     const gyroCriticals = getGyroCriticals(mech.gyro.type)
     const criticals = getCriticalsForComponent(mech.class, centerTorso.name)
 
@@ -101,7 +101,7 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
   }
 
   private getSideTorsoEquipment(mech: IMechDesignerMech, sideTorso: ISideTorso): ICriticalDescriptor[] {
-    const engineCriticals = getEngineCriticalSlotAllocation(mech.tech, mech.engine.type)[Component.LeftTorso] || 0
+    const engineCriticals = getEngineCriticalSlotAllocation(mech.tech, mech.engine.type)[MechComponent.LeftTorso] || 0
     const criticals = getCriticalsForComponent(mech.class, sideTorso.name)
 
     const totalCriticals = engineCriticals
@@ -123,19 +123,19 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     const { mech, part } = this.props
 
     switch (part.name) {
-    case Component.Head: return this.getHeadEquipment(mech, part as IHead)
-    case Component.CenterTorso: return this.getCenterTorsoEquipment(mech, part as ICenterTorso)
-    case Component.LeftTorso:
-    case Component.RightTorso: return this.getSideTorsoEquipment(mech, part as ISideTorso)
-    case Component.LeftArm:
-    case Component.RightArm: return this.getArmEquipment(mech, part as IArm)
-    case Component.LeftLeg:
-    case Component.RightLeg:
-    case Component.FrontLeftLeg:
-    case Component.FrontRightLeg:
-    case Component.RearLeftLeg:
-    case Component.RearRightLeg:
-    case Component.RearLeg: return this.getLegEquipment(mech, part as ILeg)
+    case MechComponent.Head: return this.getHeadEquipment(mech, part as IHead)
+    case MechComponent.CenterTorso: return this.getCenterTorsoEquipment(mech, part as ICenterTorso)
+    case MechComponent.LeftTorso:
+    case MechComponent.RightTorso: return this.getSideTorsoEquipment(mech, part as ISideTorso)
+    case MechComponent.LeftArm:
+    case MechComponent.RightArm: return this.getArmEquipment(mech, part as IArm)
+    case MechComponent.LeftLeg:
+    case MechComponent.RightLeg:
+    case MechComponent.FrontLeftLeg:
+    case MechComponent.FrontRightLeg:
+    case MechComponent.RearLeftLeg:
+    case MechComponent.RearRightLeg:
+    case MechComponent.RearLeg: return this.getLegEquipment(mech, part as ILeg)
     default: return []
     }
   }

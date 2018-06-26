@@ -4,7 +4,7 @@ import { MechEquipmentName } from '../MechEquipment/MechEquipmentName'
 import { Hardpoint } from './Hardpoint'
 import { MechClass } from './MechClass'
 
-export enum Component {
+export enum MechComponent {
   Head = 'Head',
   CenterTorso = 'Torso (Center)',
   LeftTorso = 'Torso (Left)',
@@ -21,21 +21,21 @@ export enum Component {
 }
 
 type Arms =
-  | Component.LeftArm
-  | Component.RightArm
+  | MechComponent.LeftArm
+  | MechComponent.RightArm
 
 type Legs =
-  | Component.LeftLeg
-  | Component.RightLeg
-  | Component.FrontLeftLeg
-  | Component.FrontRightLeg
-  | Component.RearLeftLeg
-  | Component.RearRightLeg
-  | Component.RearLeg
+  | MechComponent.LeftLeg
+  | MechComponent.RightLeg
+  | MechComponent.FrontLeftLeg
+  | MechComponent.FrontRightLeg
+  | MechComponent.RearLeftLeg
+  | MechComponent.RearRightLeg
+  | MechComponent.RearLeg
 
 type SideTorsos =
-  | Component.LeftTorso
-  | Component.RightTorso
+  | MechComponent.LeftTorso
+  | MechComponent.RightTorso
 
 export interface IHardpoints {
   [Hardpoint.Energy]: number,
@@ -44,14 +44,14 @@ export interface IHardpoints {
 }
 
 export interface IBaseMechPart {
-  name: Component,
+  name: MechComponent,
   armor: number,
   hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
 }
 
 const BaseMechPart = (
-  name: Component,
+  name: MechComponent,
   armor: number,
   hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
@@ -63,7 +63,7 @@ const BaseMechPart = (
 })
 
 export interface IHead extends IBaseMechPart {
-  name: Component.Head,
+  name: MechComponent.Head,
 }
 
 export const HeadL = lens<IHead>()
@@ -72,11 +72,11 @@ export const Head = (
   armor: number,
   hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
-): IHead => ({ ...BaseMechPart(Component.Head, armor, hardpoints, equipment) }) as IHead
+): IHead => ({ ...BaseMechPart(MechComponent.Head, armor, hardpoints, equipment) }) as IHead
 
 
 export interface ICenterTorso extends IBaseMechPart {
-  name: Component.CenterTorso,
+  name: MechComponent.CenterTorso,
   rearArmor: number,
 }
 
@@ -89,7 +89,7 @@ export const CenterTorso = (
   equipment: MechEquipmentName[],
 ): ICenterTorso => ({
   rearArmor,
-  ...BaseMechPart(Component.CenterTorso, armor, hardpoints, equipment),
+  ...BaseMechPart(MechComponent.CenterTorso, armor, hardpoints, equipment),
 }) as ICenterTorso
 
 
@@ -140,53 +140,53 @@ export const Leg = (
 ): ILeg => BaseMechPart(name, armor, hardpoints, equipment) as ILeg
 
 export const getMechBipedComponents = () => [
-  Component.Head,
-  Component.CenterTorso,
-  Component.LeftTorso,
-  Component.RightTorso,
-  Component.LeftArm,
-  Component.RightArm,
-  Component.LeftLeg,
-  Component.RightLeg,
+  MechComponent.Head,
+  MechComponent.CenterTorso,
+  MechComponent.LeftTorso,
+  MechComponent.RightTorso,
+  MechComponent.LeftArm,
+  MechComponent.RightArm,
+  MechComponent.LeftLeg,
+  MechComponent.RightLeg,
 ]
 
 export const getMechTripodComponents = () => [
-  Component.Head,
-  Component.CenterTorso,
-  Component.LeftTorso,
-  Component.RightTorso,
-  Component.LeftArm,
-  Component.RightArm,
-  Component.FrontLeftLeg,
-  Component.FrontRightLeg,
-  Component.RearLeg,
+  MechComponent.Head,
+  MechComponent.CenterTorso,
+  MechComponent.LeftTorso,
+  MechComponent.RightTorso,
+  MechComponent.LeftArm,
+  MechComponent.RightArm,
+  MechComponent.FrontLeftLeg,
+  MechComponent.FrontRightLeg,
+  MechComponent.RearLeg,
 ]
 
 export const getMechQuadrupedComponents = () => [
-  Component.Head,
-  Component.CenterTorso,
-  Component.LeftTorso,
-  Component.RightTorso,
-  Component.FrontLeftLeg,
-  Component.FrontRightLeg,
-  Component.RearLeftLeg,
-  Component.RearRightLeg,
+  MechComponent.Head,
+  MechComponent.CenterTorso,
+  MechComponent.LeftTorso,
+  MechComponent.RightTorso,
+  MechComponent.FrontLeftLeg,
+  MechComponent.FrontRightLeg,
+  MechComponent.RearLeftLeg,
+  MechComponent.RearRightLeg,
 ]
 
-export const getCriticalsForComponent = (mechClass: MechClass, component: Component): number => {
+export const getCriticalsForComponent = (mechClass: MechClass, component: MechComponent): number => {
   switch (component) {
-  case Component.Head:
-  case Component.LeftLeg:
-  case Component.RightLeg:
-  case Component.FrontLeftLeg:
-  case Component.FrontRightLeg:
-  case Component.RearLeftLeg:
-  case Component.RearRightLeg:
-  case Component.RearLeg: return 6
-  case Component.LeftArm:
-  case Component.RightArm:
-  case Component.CenterTorso: return 12
-  case Component.LeftTorso:
-  case Component.RightTorso: return mechClass === MechClass.SuperHeavy ? 18 : 12
+  case MechComponent.Head:
+  case MechComponent.LeftLeg:
+  case MechComponent.RightLeg:
+  case MechComponent.FrontLeftLeg:
+  case MechComponent.FrontRightLeg:
+  case MechComponent.RearLeftLeg:
+  case MechComponent.RearRightLeg:
+  case MechComponent.RearLeg: return 6
+  case MechComponent.LeftArm:
+  case MechComponent.RightArm:
+  case MechComponent.CenterTorso: return 12
+  case MechComponent.LeftTorso:
+  case MechComponent.RightTorso: return mechClass === MechClass.SuperHeavy ? 18 : 12
   }
 }

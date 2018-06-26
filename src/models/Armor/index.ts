@@ -1,5 +1,5 @@
-import { Component } from '../common/Component'
 import { MechClass } from '../common/MechClass'
+import { MechComponent } from '../common/MechComponent'
 import { Tech } from '../common/Tech'
 import { getMaxArmorHitPoints } from '../InternalStructure'
 import { MechTonnage } from '../Mech'
@@ -32,7 +32,7 @@ export const getArmorBasePointMultiplier = (tech: Tech, type: ArmorType) => {
     }
 }
 
-export const getMaxArmorForPart = (mechClass: MechClass, mechTonnage: MechTonnage, component: Component): number => {
+export const getMaxArmorForPart = (mechClass: MechClass, mechTonnage: MechTonnage, component: MechComponent): number => {
   return getMaxArmorHitPoints(mechClass, mechTonnage, component)
 }
 

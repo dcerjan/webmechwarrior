@@ -11,7 +11,7 @@ import {
   getArmorCriticalSlots,
   getAvailableArmorTypes,
 } from '../../../../../models/Armor'
-import { getMechBipedComponents, getMechQuadrupedComponents, getMechTripodComponents } from '../../../../../models/common/Component'
+import { getMechBipedComponents, getMechQuadrupedComponents, getMechTripodComponents } from '../../../../../models/common/MechComponent'
 import { MechType } from '../../../../../models/common/MechType'
 import { getMaxArmorHitPoints, } from '../../../../../models/InternalStructure'
 import {

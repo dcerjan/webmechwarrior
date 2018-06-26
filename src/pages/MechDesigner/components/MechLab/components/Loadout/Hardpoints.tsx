@@ -3,13 +3,13 @@ import * as React from 'react'
 
 import { Detail, DetailColor } from '../../../../../../components/Common/Detail'
 import { Range } from '../../../../../../components/Field'
-import { Component, IHardpoints } from '../../../../../../models/common/Component'
 import { Hardpoint } from '../../../../../../models/common/Hardpoint'
+import { IHardpoints, MechComponent } from '../../../../../../models/common/MechComponent'
 
 import * as styles from './Hardpoint.css'
 
 interface IHardpointsProps {
-  component: Component,
+  component: MechComponent,
   hardpoints: IHardpoints
 }
 
