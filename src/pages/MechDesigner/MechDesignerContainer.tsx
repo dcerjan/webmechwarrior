@@ -5,33 +5,41 @@ import { Worker } from '../../state/Worker'
 
 import { createStructuredSelector } from 'reselect'
 import { MechLab } from './components/MechLab'
-import { setChassisName } from './state/action'
-import { IMechDesignerState } from './state/reducer'
-import { selectMechDesignerState } from './state/selectors'
+import { setEquipmentTableTab } from './state/action'
+import { IEquipmentState, IMechDesignerState } from './state/reducer'
+import { selectMechDesignerEquipmentState, selectMechDesignerState } from './state/selectors'
 import { start } from './state/worker'
 import { stop } from './state/worker'
 
-interface IMechDesignerProps {
-  mech: IMechDesignerState,
+interface IMechDesignerStateProps {
+  state: IMechDesignerState,
+  equipment: IEquipmentState,
 }
 
-const mapState = createStructuredSelector<any, IMechDesignerProps>({
-  mech: selectMechDesignerState,
+interface IMechDesignerDispatchProps {
+  setEquipmentTableTab: (tab: string) => void,
+}
+
+const mapState = createStructuredSelector<any, IMechDesignerStateProps>({
+  state: selectMechDesignerState,
+  equipment: selectMechDesignerEquipmentState,
 })
 
-const mapDispatch = {
-  setChassisName,
+const mapDispatch: IMechDesignerDispatchProps = {
+  setEquipmentTableTab,
 }
 
-export class MechDesignerContainer extends React.PureComponent<IMechDesignerProps> {
+export class MechDesignerContainer extends React.PureComponent<IMechDesignerStateProps & IMechDesignerDispatchProps> {
   public render() {
-    const { mech } = this.props
+    const { state, equipment, setEquipmentTableTab } = this.props
 
     return (
       <Worker start={start} stop={stop}>
         <div>
           <MechLab
-            mech={mech}
+            state={state}
+            equipment={equipment}
+            setEquipmentTableTab={setEquipmentTableTab}
           />
         </div>
       </Worker>

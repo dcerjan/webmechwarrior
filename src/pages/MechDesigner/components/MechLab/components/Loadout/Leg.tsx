@@ -3,9 +3,10 @@ import { Card } from '../../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../../components/Common/Detail'
 import { Range } from '../../../../../../components/Field'
 import { getMaxArmorForPart } from '../../../../../../models/Armor'
-import { ILeg } from '../../../../../../models/common/Component'
+import { ILeg } from '../../../../../../models/common/MechComponent'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
 import { IInjectedMechLabProps } from '../../MechLab'
+import { Criticals } from './Criticals'
 import { Hardpoints } from './Hardpoints'
 
 interface ILegProps extends IInjectedMechLabProps {
@@ -15,9 +16,12 @@ interface ILegProps extends IInjectedMechLabProps {
 export class Leg extends React.PureComponent<ILegProps> {
 
   public render() {
-    const { leg } = this.props
+    const { leg, mech } = this.props
     return (
-      <Card title={leg.name}>
+      <Card
+        title={leg.name}
+        footer={ <Criticals mech={mech} part={leg} /> }
+      >
         <Detail
           label='Armor'
           value={ <Range
@@ -41,12 +45,12 @@ export class Leg extends React.PureComponent<ILegProps> {
   }
 
   private getMaxLegArmor() {
-    const { leg, values } = this.props
-    return getMaxArmorForPart(values.tonnage, leg.name)
+    const { leg, mech } = this.props
+    return getMaxArmorForPart(mech.class, mech.tonnage, leg.name)
   }
 
   private getLegStructure() {
-    const { leg, values } = this.props
-    return `${getInternalStructureHitPoints(values.tonnage, leg.name)}`
+    const { leg, mech } = this.props
+    return `${getInternalStructureHitPoints(mech.tonnage, leg.name)}`
   }
 }

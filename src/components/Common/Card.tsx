@@ -1,8 +1,9 @@
+import * as  classNames from 'classnames'
 import * as React from 'react'
 
 import * as styles from './Card.css'
 
-interface ICardProps {
+interface ICardProps extends Pick<React.HTMLAttributes<HTMLDivElement>, 'className'>{
   title: JSX.Element | string,
   titleExtra?: JSX.Element | string,
   footer?: JSX.Element | string,
@@ -10,11 +11,12 @@ interface ICardProps {
 
 export const Card: React.SFC<ICardProps> = ({
   children,
+  className,
   title,
   titleExtra,
   footer,
 }) => (
-  <div className={styles.Card}>
+  <div className={classNames(styles.Card, className)}>
     <div className={styles.Header}>
       <div className={styles.Title}>{ title }</div>
       { titleExtra

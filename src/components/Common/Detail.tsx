@@ -11,6 +11,7 @@ export enum DetailColor {
   LightGrey = 'LightGrey',
   BluishGrey = 'BluishGrey',
   Red = 'Red',
+  Sand = 'Sand',
   TransparentLime = 'TransparentLime',
   TransparentPurple = 'TransparentPurple',
   TransparentTeal = 'TransparentTeal',
@@ -18,9 +19,11 @@ export enum DetailColor {
   TransaprentLightGrey = 'TransaprentLightGrey',
   TransparentBluishGrey = 'TransparentBluishGrey',
   TransparentRed = 'TransparentRed',
+  TransparentSand = 'TransparentSand',
+  Transparent = 'Transparent',
 }
 
-interface IDetailProps {
+interface IDetailProps extends Pick<React.HTMLAttributes<HTMLDivElement>, 'style' | 'className'>{
   color?: DetailColor,
   label: JSX.Element | string,
   value?: JSX.Element | string,
@@ -32,13 +35,17 @@ export const Detail: React.SFC<IDetailProps> = ({
   label,
   value,
   disabled,
+  style,
+  className
 }) => (
   <div className={
     classNames(
       styles.Detail,
       color && styles[color],
-      disabled && styles.Disabled
+      disabled && styles.Disabled,
+      className,
     )}
+    style={style}
   >
     <div className={styles.Label}>{ label }</div>
     { value

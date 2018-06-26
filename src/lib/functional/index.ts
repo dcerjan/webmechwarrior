@@ -26,3 +26,5 @@ export const segment = (start: number, end: number, increment: number = 1): numb
 
   return ret
 }
+
+export const identity = <T>(val: T): T => val

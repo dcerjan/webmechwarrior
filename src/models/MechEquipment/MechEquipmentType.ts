@@ -1,11 +1,13 @@
 export enum MechEquipmentType {
   Ballistic = 'Ballistic',
+  BallisticAmmo = 'BallisticAmmo',
   Autocannon = 'Autocannon',
   Gauss_Rifle = 'Gauss Rifle',
   Machine_Gun = 'Machine Gun',
   AMS = 'AMS',
 
-  Eenrgy = 'Eenrgy',
+  Energy = 'Energy',
+  EnergyAmmo = 'EnergyAmmo',
   Flamer = 'Flamer',
   Laser = 'Laser',
   Pulse_Laser = 'Pulse Laser',
@@ -15,15 +17,20 @@ export enum MechEquipmentType {
   TAG = 'TAG',
 
   Missile = 'Missile',
+  MissileAmmo = 'MissileAmmo',
   LRM = 'LRM',
   MRM = 'MRM',
   SRM = 'SRM',
   MML = 'MML',
   ATM = 'ATM',
   Rocket_Launcher = 'Rocket Launcher',
-  Narc = 'Narc',
+  NARC_Launcher = 'NARC Launcher',
 
   Electronics = 'Electronics',
+  Heatsink = 'Heatsink',
+  Jump_Jet = 'Jump Jet',
+  Internal_Structure = 'Internal Structure',
+  Armor = 'Armor',
   ECM_Suite = 'ECM Suite',
   Active_Probe = 'Active Probe',
   MASC = 'MASC',
@@ -31,25 +38,4 @@ export enum MechEquipmentType {
   C3_Computer = 'C3 Computer',
   Targeting_Computer = 'Targeting Computer',
   Artemis_IV = 'Artemis IV',
-}
-
-export enum WeaponClass {
-  Energy = 'Energy',
-  Ballistic = 'Ballistic',
-  Missile = 'Missile',
-}
-
-export enum EquipmentClass {
-  Utility = 'Utility',
-  Weapon = 'Weapon',
-  Ammo = 'Ammo',
-  Actuator = 'Actuator',
-  LifeSupport = 'Life Support',
-  Sensors = 'Sensors',
-  Cockpit = 'Cockpit',
-  Engine = 'Engine',
-  Gyro = 'Gyro',
-  JumpJet = 'Jump Jet',
-  InternalStructure = 'Internal Structure',
-  Armor = 'Armor',
 }

@@ -3,9 +3,10 @@ import { Card } from '../../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../../components/Common/Detail'
 import { Range } from '../../../../../../components/Field'
 import { getMaxArmorForPart } from '../../../../../../models/Armor'
-import { IArm } from '../../../../../../models/common/Component'
+import { IArm } from '../../../../../../models/common/MechComponent'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
 import { IInjectedMechLabProps } from '../../MechLab'
+import { Criticals } from './Criticals'
 import { Hardpoints } from './Hardpoints'
 
 interface IArmProps extends IInjectedMechLabProps {
@@ -15,9 +16,12 @@ interface IArmProps extends IInjectedMechLabProps {
 export class Arm extends React.PureComponent<IArmProps> {
 
   public render() {
-    const { arm } = this.props
+    const { arm, mech } = this.props
     return (
-      <Card title={arm.name}>
+      <Card
+        title={arm.name}
+        footer={ <Criticals mech={mech} part={arm} /> }
+      >
         <Detail
           label='Armor'
           value={ <Range
@@ -41,12 +45,12 @@ export class Arm extends React.PureComponent<IArmProps> {
   }
 
   private getMaxArmArmor() {
-    const { arm, values } = this.props
-    return getMaxArmorForPart(values.tonnage, arm.name)
+    const { arm, mech } = this.props
+    return getMaxArmorForPart(mech.class, mech.tonnage, arm.name)
   }
 
   private getArmStructure() {
-    const { arm, values } = this.props
-    return `${getInternalStructureHitPoints(values.tonnage, arm.name)}`
+    const { arm, mech } = this.props
+    return `${getInternalStructureHitPoints(mech.tonnage, arm.name)}`
   }
 }

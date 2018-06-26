@@ -2,8 +2,9 @@ import { lens } from 'lens.ts'
 
 import { MechEquipmentName } from '../MechEquipment/MechEquipmentName'
 import { Hardpoint } from './Hardpoint'
+import { MechClass } from './MechClass'
 
-export enum Component {
+export enum MechComponent {
   Head = 'Head',
   CenterTorso = 'Torso (Center)',
   LeftTorso = 'Torso (Left)',
@@ -16,23 +17,25 @@ export enum Component {
   FrontRightLeg = 'Front Right Leg',
   RearLeftLeg = 'Rear Left Leg',
   RearRightLeg = 'Rear Right Leg',
+  RearLeg = 'Rear Leg',
 }
 
 type Arms =
-  | Component.LeftArm
-  | Component.RightArm
+  | MechComponent.LeftArm
+  | MechComponent.RightArm
 
 type Legs =
-  | Component.LeftLeg
-  | Component.RightLeg
-  | Component.FrontLeftLeg
-  | Component.FrontRightLeg
-  | Component.RearLeftLeg
-  | Component.RearRightLeg
+  | MechComponent.LeftLeg
+  | MechComponent.RightLeg
+  | MechComponent.FrontLeftLeg
+  | MechComponent.FrontRightLeg
+  | MechComponent.RearLeftLeg
+  | MechComponent.RearRightLeg
+  | MechComponent.RearLeg
 
 type SideTorsos =
-  | Component.LeftTorso
-  | Component.RightTorso
+  | MechComponent.LeftTorso
+  | MechComponent.RightTorso
 
 export interface IHardpoints {
   [Hardpoint.Energy]: number,
@@ -40,31 +43,27 @@ export interface IHardpoints {
   [Hardpoint.Missile]: number,
 }
 
-interface IBaseMechPart {
-  name: Component,
+export interface IBaseMechPart {
+  name: MechComponent,
   armor: number,
   hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
-  criticals: 6 | 12,
 }
 
 const BaseMechPart = (
-  name: Component,
+  name: MechComponent,
   armor: number,
   hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
-  criticals: 6 | 12,
 ): IBaseMechPart => ({
   name,
   armor,
   hardpoints,
   equipment,
-  criticals,
 })
 
 export interface IHead extends IBaseMechPart {
-  name: Component.Head,
-  criticals: 6,
+  name: MechComponent.Head,
 }
 
 export const HeadL = lens<IHead>()
@@ -73,13 +72,12 @@ export const Head = (
   armor: number,
   hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
-): IHead => ({ ...BaseMechPart(Component.Head, armor, hardpoints, equipment, 6) }) as IHead
+): IHead => ({ ...BaseMechPart(MechComponent.Head, armor, hardpoints, equipment) }) as IHead
 
 
 export interface ICenterTorso extends IBaseMechPart {
-  name: Component.CenterTorso,
+  name: MechComponent.CenterTorso,
   rearArmor: number,
-  criticals: 12,
 }
 
 export const CenterTorsoL = lens<ICenterTorso>()
@@ -91,14 +89,13 @@ export const CenterTorso = (
   equipment: MechEquipmentName[],
 ): ICenterTorso => ({
   rearArmor,
-  ...BaseMechPart(Component.CenterTorso, armor, hardpoints, equipment, 12),
+  ...BaseMechPart(MechComponent.CenterTorso, armor, hardpoints, equipment),
 }) as ICenterTorso
 
 
 export interface ISideTorso extends IBaseMechPart  {
   name: SideTorsos,
   rearArmor: number,
-  criticals: 12,
 }
 
 export const SideTorsoL = lens<ISideTorso>()
@@ -111,13 +108,12 @@ export const SideTorso = (
   equipment: MechEquipmentName[],
 ): ISideTorso => ({
   rearArmor,
-  ...BaseMechPart(name, armor, hardpoints, equipment, 12),
+  ...BaseMechPart(name, armor, hardpoints, equipment),
 }) as ISideTorso
 
 
 export interface IArm extends IBaseMechPart {
   name: Arms,
-  criticals: 12,
 }
 
 export const ArmL = lens<IArm>()
@@ -127,12 +123,11 @@ export const Arm = (
   armor: number,
   hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
-): IArm => BaseMechPart(name, armor, hardpoints, equipment, 12) as IArm
+): IArm => BaseMechPart(name, armor, hardpoints, equipment) as IArm
 
 
 export interface ILeg extends IBaseMechPart  {
   name: Legs,
-  criticals: 6,
 }
 
 export const LegL = lens<ILeg>()
@@ -142,26 +137,56 @@ export const Leg = (
   armor: number,
   hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
-): ILeg => BaseMechPart(name, armor, hardpoints, equipment, 6) as ILeg
+): ILeg => BaseMechPart(name, armor, hardpoints, equipment) as ILeg
 
 export const getMechBipedComponents = () => [
-  Component.Head,
-  Component.CenterTorso,
-  Component.LeftTorso,
-  Component.RightTorso,
-  Component.LeftArm,
-  Component.RightArm,
-  Component.LeftLeg,
-  Component.RightLeg,
+  MechComponent.Head,
+  MechComponent.CenterTorso,
+  MechComponent.LeftTorso,
+  MechComponent.RightTorso,
+  MechComponent.LeftArm,
+  MechComponent.RightArm,
+  MechComponent.LeftLeg,
+  MechComponent.RightLeg,
+]
+
+export const getMechTripodComponents = () => [
+  MechComponent.Head,
+  MechComponent.CenterTorso,
+  MechComponent.LeftTorso,
+  MechComponent.RightTorso,
+  MechComponent.LeftArm,
+  MechComponent.RightArm,
+  MechComponent.FrontLeftLeg,
+  MechComponent.FrontRightLeg,
+  MechComponent.RearLeg,
 ]
 
 export const getMechQuadrupedComponents = () => [
-  Component.Head,
-  Component.CenterTorso,
-  Component.LeftTorso,
-  Component.RightTorso,
-  Component.FrontLeftLeg,
-  Component.FrontRightLeg,
-  Component.RearLeftLeg,
-  Component.RearRightLeg,
+  MechComponent.Head,
+  MechComponent.CenterTorso,
+  MechComponent.LeftTorso,
+  MechComponent.RightTorso,
+  MechComponent.FrontLeftLeg,
+  MechComponent.FrontRightLeg,
+  MechComponent.RearLeftLeg,
+  MechComponent.RearRightLeg,
 ]
+
+export const getCriticalsForComponent = (mechClass: MechClass, component: MechComponent): number => {
+  switch (component) {
+  case MechComponent.Head:
+  case MechComponent.LeftLeg:
+  case MechComponent.RightLeg:
+  case MechComponent.FrontLeftLeg:
+  case MechComponent.FrontRightLeg:
+  case MechComponent.RearLeftLeg:
+  case MechComponent.RearRightLeg:
+  case MechComponent.RearLeg: return 6
+  case MechComponent.LeftArm:
+  case MechComponent.RightArm:
+  case MechComponent.CenterTorso: return 12
+  case MechComponent.LeftTorso:
+  case MechComponent.RightTorso: return mechClass === MechClass.SuperHeavy ? 18 : 12
+  }
+}

@@ -11,12 +11,13 @@ interface IStringInputFieldProps<T, F> extends Pick<IFormFieldProps<number, F>, 
   max: number,
   step: number,
   formater?: (val: number) => JSX.Element | string,
+  valueChanged?: (newVal: number, oldVal: string) => void,
 }
 
 export class Range<T, F> extends React.PureComponent<IStringInputFieldProps<T, F>> {
 
   public render() {
-    const { name, validate, alignment, min, max, step, formater } = this.props
+    const { name, validate, alignment, min, max, step, formater, valueChanged } = this.props
 
     return (
       <Field
@@ -28,6 +29,7 @@ export class Range<T, F> extends React.PureComponent<IStringInputFieldProps<T, F
         max={max}
         step={step}
         formater={formater}
+        valueChanged={valueChanged}
       />
     )
   }

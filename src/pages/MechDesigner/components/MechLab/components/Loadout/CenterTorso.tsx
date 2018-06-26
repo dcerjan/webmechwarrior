@@ -3,9 +3,10 @@ import { Card } from '../../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../../components/Common/Detail'
 import { Range } from '../../../../../../components/Field'
 import { getMaxArmorForPart } from '../../../../../../models/Armor'
-import { ICenterTorso } from '../../../../../../models/common/Component'
+import { ICenterTorso } from '../../../../../../models/common/MechComponent'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
 import { IInjectedMechLabProps } from '../../MechLab'
+import { Criticals } from './Criticals'
 import { Hardpoints } from './Hardpoints'
 
 interface ICenterTorsoProps extends IInjectedMechLabProps {
@@ -15,9 +16,12 @@ interface ICenterTorsoProps extends IInjectedMechLabProps {
 export class CenterTorso extends React.PureComponent<ICenterTorsoProps> {
 
   public render() {
-    const { centerTorso } = this.props
+    const { centerTorso, mech } = this.props
     return (
-      <Card title={centerTorso.name}>
+      <Card
+        title={centerTorso.name}
+        footer={ <Criticals mech={mech} part={centerTorso} /> }
+      >
         <Detail
           label='Armor'
           value={ <Range
@@ -57,17 +61,17 @@ export class CenterTorso extends React.PureComponent<ICenterTorsoProps> {
   }
 
   private getMaxCenterTorsoArmor() {
-    const { centerTorso, values } = this.props
-    return getMaxArmorForPart(values.tonnage, centerTorso.name) - centerTorso.rearArmor
+    const { centerTorso, mech } = this.props
+    return getMaxArmorForPart(mech.class, mech.tonnage, centerTorso.name) - centerTorso.rearArmor
   }
 
   private getMaxCenterTorsoRearArmor() {
-    const { centerTorso, values } = this.props
-    return getMaxArmorForPart(values.tonnage, centerTorso.name) - centerTorso.armor
+    const { centerTorso, mech } = this.props
+    return getMaxArmorForPart(mech.class, mech.tonnage, centerTorso.name) - centerTorso.armor
   }
 
   private getCenterTorsoStructure() {
-    const { centerTorso, values } = this.props
-    return `${getInternalStructureHitPoints(values.tonnage, centerTorso.name)}`
+    const { centerTorso, mech } = this.props
+    return `${getInternalStructureHitPoints(mech.tonnage, centerTorso.name)}`
   }
 }
