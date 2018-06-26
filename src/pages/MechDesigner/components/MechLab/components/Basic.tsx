@@ -113,7 +113,7 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
           label='Tonnage'
           value={ <Select
             name='tonnage'
-            options={this.getTonnage().map(t => ({ value: t, name: `${t.toFixed(1)} tons` }))}
+            options={this.getTonnage().map(t => ({ value: t, name: `${t.toFixed(2)} tons` }))}
             alignment='Right'
           /> }
           color={DetailColor.TransparentBluishGrey}
@@ -153,6 +153,6 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
 
   private getFreeTonnageDescription() {
     const amount = this.getFreeTonnage()
-    return `${amount.toFixed(1)} ${pluralize('ton', amount)}`
+    return `${amount.toFixed(2)} ${pluralize('ton', amount)}`
   }
 }

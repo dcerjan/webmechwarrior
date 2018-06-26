@@ -48,7 +48,7 @@ export class Cockpit extends React.PureComponent<IInjectedMechLabProps> {
   private getCockpitTonnage() {
     const { mech } = this.props
     const tonnage = getCockpitTonnage(mech.class, mech.cockpit)
-    return `${tonnage.toFixed(1)} ${pluralize('ton', tonnage)}`
+    return `${tonnage.toFixed(2)} ${pluralize('ton', tonnage)}`
   }
 
   private getCockpitCriticals() {

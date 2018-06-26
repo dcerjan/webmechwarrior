@@ -108,7 +108,7 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
   private getEngineTonnage() {
     const { mech } = this.props
     const tonnage = getEngineTonnage(mech.engine.rating, mech.engine.type)
-    return `${tonnage.toFixed(1)} ${pluralize('ton', tonnage)}`
+    return `${tonnage.toFixed(2)} ${pluralize('ton', tonnage)}`
   }
 
   private getEngineCriticals() {

@@ -9,7 +9,7 @@ import { MechEquipmentType } from '../../../../../../models/MechEquipment/MechEq
 import { IMechDesignerMech } from '../../../../state/constants'
 import { IEquipmentState } from '../../../../state/reducer'
 
-// import { DraggableRowWrapper } from './DraggableRowWrapper'
+import { DraggableRowWrapper } from './DraggableRowWrapper'
 import * as styles from './Equipment.css'
 
 interface IEquipmentProps {
@@ -32,16 +32,12 @@ const getTableConfig = (
       default: return styles.Equipment
       }
     },
-    // rowWrapper: ({ component, id, value }) => {
-    //   return <div key={id}>
-    //     <DraggableRowWrapper value={value} component={component} />
-    //   </div>
-    // },
+    rowWrapper: DraggableRowWrapper,
     columns: [
       {
         field: 'name',
         header: 'Name',
-        weight: 250,
+        weight: 220,
         alignment: 'Left',
       },
       {
@@ -49,6 +45,7 @@ const getTableConfig = (
         header: 'T',
         weight: 35,
         alignment: 'Right',
+        format: (value) => value.tonnage.toFixed(2),
       },
       {
         field: 'criticals',

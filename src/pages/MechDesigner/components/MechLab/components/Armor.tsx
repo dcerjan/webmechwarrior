@@ -62,7 +62,7 @@ export class Armor extends React.PureComponent<IInjectedMechLabProps> {
 
     const tonnage = Math.ceil((armor / (16 * getArmorBasePointMultiplier(mech.tech, mech.armor))) * 2.0) * 0.5
 
-    return `${tonnage.toFixed(1)} ${pluralize('ton', tonnage)}`
+    return `${tonnage.toFixed(2)} ${pluralize('ton', tonnage)}`
   }
 
   private getArmorCriticals() {

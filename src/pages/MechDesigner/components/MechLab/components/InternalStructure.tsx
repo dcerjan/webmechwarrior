@@ -44,7 +44,7 @@ export class InternalStructure extends React.PureComponent<IInjectedMechLabProps
   private getInternalStructureTonnage() {
     const { mech } = this.props
     const tonnage = getInternalStructureTonnage(mech.tonnage, mech.internalStructure)
-    return `${tonnage.toFixed(1)} ${pluralize('ton', tonnage)}`
+    return `${tonnage.toFixed(2)} ${pluralize('ton', tonnage)}`
   }
 
   private getInternalStructureCriticals() {

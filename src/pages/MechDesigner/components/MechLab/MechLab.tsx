@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import {
@@ -16,6 +18,7 @@ import { Basic } from './components/Basic'
 import { Cockpit } from './components/Cockpit'
 import { Engine } from './components/Engine'
 import { Equipment } from './components/Equipment'
+import { DragPreview } from './components/Equipment/DragPreview'
 import { Gyro } from './components/Gyro'
 import { InternalStructure } from './components/InternalStructure'
 import { Loadout } from './components/Loadout'
@@ -60,6 +63,7 @@ class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps 
             />
           </div>
         </form>
+        <DragPreview />
       </div>
     )
   }
@@ -81,8 +85,11 @@ const mapInternalState = (state: any) => ({
 const MechLabForm: React.SFC<ILoadoutProps> = (
   connect(mapState, mapDispatch)(
     reduxForm({ form: 'Lab.Mech' })(
-      connect(mapInternalState)
-        (MechLab)
+      connect(mapInternalState)(
+        DragDropContext(HTML5Backend)(
+          MechLab
+        )
+      )
     )
   )
 ) as any

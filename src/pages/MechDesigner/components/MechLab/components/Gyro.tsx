@@ -44,7 +44,7 @@ export class Gyro extends React.PureComponent<IInjectedMechLabProps> {
   private getGyroTonnage() {
     const { mech } = this.props
     const tonnage = getGyroTonnage(mech.engine.rating, mech.gyro.type)
-    return `${tonnage.toFixed(1)} ${pluralize('ton', tonnage)}`
+    return `${tonnage.toFixed(2)} ${pluralize('ton', tonnage)}`
   }
 
   private getGyroCriticals() {
