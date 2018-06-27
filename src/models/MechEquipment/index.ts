@@ -207,12 +207,12 @@ export const ClanNARCAmmo = [
 
 export const MechEquipmentTable = {
   // Common
-  [N.Single_Heatsink]:          MechEquipmentRecord(N.Single_Heatsink,          T.Heatsink,            'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.X, []),
-  [N.Double_Heatsink]:          MechEquipmentRecord(N.Double_Heatsink,          T.Heatsink,            'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.X, []),
-  [N.Jump_Jet]:                 MechEquipmentRecord(N.Jump_Jet,                 T.Jump_Jet,            'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.X, []),
-  [N.Improved_Jump_Jet]:        MechEquipmentRecord(N.Improved_Jump_Jet,        T.Jump_Jet,            'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.X, []),
-  [N.Internal_Structure]:       MechEquipmentRecord(N.Internal_Structure,       T.Internal_Structure,  'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.X, []),
-  [N.Armor]:                    MechEquipmentRecord(N.Armor,                    T.Armor,               'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.X, []),
+  [N.Single_Heatsink]:          MechEquipmentRecord(N.Single_Heatsink,          T.Heatsink,            'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  1.0,  1, Availability.X, []),
+  [N.Double_Heatsink]:          MechEquipmentRecord(N.Double_Heatsink,          T.Heatsink,            'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  1.0,  3, Availability.X, []),
+  [N.Jump_Jet]:                 MechEquipmentRecord(N.Jump_Jet,                 T.Jump_Jet,            'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  1, Availability.X, []),
+  [N.Improved_Jump_Jet]:        MechEquipmentRecord(N.Improved_Jump_Jet,        T.Jump_Jet,            'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  2, Availability.X, []),
+  [N.Internal_Structure]:       MechEquipmentRecord(N.Internal_Structure,       T.Internal_Structure,  'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  1, Availability.X, []),
+  [N.Armor]:                    MechEquipmentRecord(N.Armor,                    T.Armor,               'None',  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  1, Availability.X, []),
 
   // IS tech
   [N.Autocannon_2]:             MechEquipmentRecord(N.Autocannon_2,             T.Autocannon,         Tech.IS,  1, [         2],  1, [ 4,  8, 16, 24],         ISAutocannonAmmo,  45,  6.0,  1, Availability.C, []),

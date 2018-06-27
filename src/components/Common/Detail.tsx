@@ -21,12 +21,14 @@ export enum DetailColor {
   TransparentRed = 'TransparentRed',
   TransparentSand = 'TransparentSand',
   Transparent = 'Transparent',
+
+  DragSourceActive = 'DragSourceActive',
 }
 
 interface IDetailProps extends Pick<React.HTMLAttributes<HTMLDivElement>, 'style' | 'className'>{
   color?: DetailColor,
-  label: JSX.Element | string,
-  value?: JSX.Element | string,
+  label: JSX.Element | JSX.Element[] | string,
+  value?: JSX.Element | JSX.Element[] | string,
   disabled?: boolean,
 }
 

@@ -3,3 +3,12 @@
   flex-direction: column;
   box-sizing: border-box;
 }
+
+.DetailWrapperBorderHack {
+  box-sizing: border-box;
+  border-bottom: 1px solid darkgrey;
+  &:last-child { border: none }
+  > div {
+    border: none;
+  }
+}

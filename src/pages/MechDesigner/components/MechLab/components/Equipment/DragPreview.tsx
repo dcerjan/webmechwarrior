@@ -1,7 +1,11 @@
 import * as React from 'react'
 import { DragLayer, DragLayerCollector, XYCoord } from 'react-dnd'
+import { Card } from '../../../../../../components/Common/Card'
+import { Detail, DetailColor } from '../../../../../../components/Common/Detail'
+import { getEquipmentType } from '../../../../../../models/MechEquipment'
 import { MechEquipmentName } from '../../../../../../models/MechEquipment/MechEquipmentName'
-import { IDragObject } from './DraggableRowWrapper'
+import { MechEquipmentType } from '../../../../../../models/MechEquipment/MechEquipmentType'
+import { IDragedEquipment } from '../DnD'
 
 const layerStyles: React.CSSProperties = {
 	position: 'fixed',
@@ -13,7 +17,8 @@ const layerStyles: React.CSSProperties = {
 	height: '100%',
 }
 
-interface IDragPreviewLayerProps extends IDragObject{
+interface IDragPreviewLayerProps {
+  item: IDragedEquipment,
 	initialOffset?: XYCoord
 	currentOffset?: XYCoord
 	isDragging?: boolean
@@ -30,10 +35,10 @@ const getItemStyles = (props: IDragPreviewLayerProps) => {
 	const { x, y } = currentOffset
 
 	const transform = `translate(${x}px, ${y}px)`
-	return { transform, WebkitTransform: transform }
+	return { transform, WebkitTransform: transform, opacity: 0.7 }
 }
 
-const collect: DragLayerCollector<IDragPreviewLayerProps, IDragObject> = (monitor) => ({
+const collect: DragLayerCollector<IDragPreviewLayerProps, IDragedEquipment> = (monitor) => ({
   item: monitor.getItem(),
   type: monitor.getItemType() as MechEquipmentName,
   isDragging: monitor.isDragging(),
@@ -41,18 +46,32 @@ const collect: DragLayerCollector<IDragPreviewLayerProps, IDragObject> = (monito
 	currentOffset: monitor.getSourceClientOffset(),
 })
 
+export const getEquipmentDetailColor = (equipment: MechEquipmentName): DetailColor => {
+  switch (getEquipmentType(equipment)) {
+  case MechEquipmentType.Ballistic: return DetailColor.Purple
+  case MechEquipmentType.BallisticAmmo: return DetailColor.TransparentPurple
+  case MechEquipmentType.Energy: return DetailColor.Lime
+  case MechEquipmentType.EnergyAmmo: return DetailColor.TransparentLime
+  case MechEquipmentType.Missile: return DetailColor.Teal
+  case MechEquipmentType.MissileAmmo: return DetailColor.TransparentTeal
+  default: return DetailColor.TransaprentBlue
+  }
+}
+
 export class Preview extends React.PureComponent<IDragPreviewLayerProps> {
   public render() {
-    const { item, type, isDragging } = this.props
+    const { item, isDragging } = this.props
 
-    console.log(isDragging, item, type)
     return isDragging
       ? (
         <div style={layerStyles}>
-          <div style={getItemStyles(this.props)}>
-            { type }
-            { item.name }
-          </div>
+          <Card style={getItemStyles(this.props)} >
+            <Detail
+              label={item.item.name}
+              color={getEquipmentDetailColor(item.item.name)}
+              style={{ height: item.item.criticals * 20 }}
+            />
+          </Card>
         </div>
       )
       : null

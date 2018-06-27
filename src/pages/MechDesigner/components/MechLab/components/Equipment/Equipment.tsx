@@ -37,20 +37,20 @@ const getTableConfig = (
       {
         field: 'name',
         header: 'Name',
-        weight: 220,
+        weight: 240,
         alignment: 'Left',
       },
       {
         field: 'tonnage',
         header: 'T',
-        weight: 35,
+        weight: 25,
         alignment: 'Right',
         format: (value) => value.tonnage.toFixed(2),
       },
       {
         field: 'criticals',
         header: 'C',
-        weight: 35,
+        weight: 10,
         alignment: 'Right',
       },
     ]

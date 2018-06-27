@@ -139,7 +139,7 @@ export enum MechEquipmentName {
   LB_X_Autocannon_Ammo = 'LB-X Autocannon Ammo',
   LB_X_Autocannon_Cluster_Ammo = 'LB-X Autocannon Cluster Ammo',
   Light_Autocannon_Ammo = 'Light Autocannon Ammo',
-  Light_Autocannon_Armor_Piercing_Ammo = 'Light Autocannon Armor Piercing Ammo',
+  Light_Autocannon_Armor_Piercing_Ammo = 'Light Autocannon AP Ammo',
   Light_Autocannon_Flechette_Ammo = 'Light Autocannon Flechette Ammo',
   Light_Autocannon_Precision_Ammo = 'Light Autocannon Precision Ammo',
   Rotary_Autocannon_Ammo = 'Rotary Autocannon Ammo',
