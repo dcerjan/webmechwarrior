@@ -14,6 +14,7 @@ import { getGyroTonnage } from '../../../../../models/Gryo'
 import { getInternalStructureTonnage } from '../../../../../models/InternalStructure'
 import { JumpJetType } from '../../../../../models/JumpJets'
 import { getArmorTonnage, MechTonnage } from '../../../../../models/Mech'
+import { getLoadoutTonnage } from '../../../../../models/MechEquipment/MechEquipmentUtils'
 import {
   DEAFULT_BIPEDAL_LOADOUT,
   DEAFULT_QUADRUPEDAL_LOADOUT,
@@ -143,10 +144,11 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
     const gyro = getGyroTonnage(mech.engine.rating, mech.gyro.type)
     const cockpit = getCockpitTonnage(mech.class, mech.cockpit)
     const internal = getInternalStructureTonnage(mech.tonnage, mech.internalStructure)
-
     const armor = getArmorTonnage(mech.type, mech.tech, mech.armor, mech.loadout)
 
-    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor
+    const loadoutTonnage = getLoadoutTonnage(mech.type, mech.loadout)
+
+    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor - loadoutTonnage
 
     return amount
   }

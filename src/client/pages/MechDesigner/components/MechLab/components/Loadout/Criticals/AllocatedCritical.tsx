@@ -34,10 +34,15 @@ const criticalDragSource: DragSourceSpec<IAllocatedCriticalProps, IDragedEquipme
 
       // #TODO: check wether it is possible to drop the item here at all
       if (mechComponent) {
-        store.dispatch(change('Lab.Mech', `loadout.${mechComponent.name}.equipment`, mechComponent.equipment.filter((_, i) => i !== item.index)))
+        if (mechComponent === component) {
+          store.dispatch(change('Lab.Mech', `loadout.${mechComponent.name}.equipment`, mechComponent.equipment.filter((_, i) => i !== item.index).concat(item.item.name)))
+        } else {
+          store.dispatch(change('Lab.Mech', `loadout.${mechComponent.name}.equipment`, mechComponent.equipment.filter((_, i) => i !== item.index)))
+          store.dispatch(change('Lab.Mech', `loadout.${component.name}.equipment`, [...component.equipment, item.item.name]))
+        }
+      } else {
+        store.dispatch(change('Lab.Mech', `loadout.${component.name}.equipment`, [...component.equipment, item.item.name]))
       }
-
-      store.dispatch(change('Lab.Mech', `loadout.${component.name}.equipment`, [...component.equipment, item.item.name]))
     } else {
       const item = monitor.getItem() as IDragedEquipment
       const mechComponent = item.mechComponent

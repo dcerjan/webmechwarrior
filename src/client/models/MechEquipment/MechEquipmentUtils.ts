@@ -1,8 +1,12 @@
 import { identity } from '../../lib/functional'
 import { MechClass } from '../common/MechClass'
+import { getMechBipedComponents, getMechQuadrupedComponents, getMechTripodComponents } from '../common/MechComponent'
+import { MechType } from '../common/MechType'
 import { Tech } from '../common/Tech'
 import { HeatsinkType } from '../Heatsink'
-import { AmmoType, EquipmentType, MechEquipmentName as E, WeaponType } from './MechEquipmentName'
+import { IBipedalLoadout, IQuadrupedalLoadout, ITripodLoadout } from '../Mech'
+import { getEquipmentMeta } from './index'
+import { AmmoType, EquipmentType, MechEquipmentName, MechEquipmentName as E, WeaponType } from './MechEquipmentName'
 
 export const getAvailableEquipmentTypes = (
   tech: Tech,
@@ -172,4 +176,37 @@ export const getAvailableAmmoTypes = (tech: Tech): AmmoType[] => {
   return tech === Tech.IS
     ? innerSphereAmmoTypes
     : clanAmmoTypes
+}
+
+const sumEquipmentTonnage = (equipment: MechEquipmentName[]): number => {
+  return equipment.reduce((total, equipment) => total + getEquipmentMeta(equipment).tonnage, 0)
+}
+
+const getBipedalLoadoutTonnage = (loadout: IBipedalLoadout): number => {
+  return getMechBipedComponents()
+    .map(component => loadout[component].equipment)
+    .map(sumEquipmentTonnage)
+    .reduce((s, t) => s + t, 0)
+}
+
+const getTripodLoadoutTonnage = (loadout: ITripodLoadout): number => {
+  return getMechTripodComponents()
+    .map(component => loadout[component].equipment)
+    .map(sumEquipmentTonnage)
+    .reduce((s, t) => s + t, 0)
+}
+
+const getQuadrupedalLoadoutTonnage = (loadout: IQuadrupedalLoadout): number => {
+  return getMechQuadrupedComponents()
+    .map(component => loadout[component].equipment)
+    .map(sumEquipmentTonnage)
+    .reduce((s, t) => s + t, 0)
+}
+
+export const getLoadoutTonnage = (mechType: MechType, loadout: IBipedalLoadout | ITripodLoadout | IQuadrupedalLoadout): number => {
+  switch (mechType) {
+  case MechType.Bipedal: return getBipedalLoadoutTonnage(loadout as IBipedalLoadout)
+  case MechType.Tripod: return getTripodLoadoutTonnage(loadout as ITripodLoadout)
+  case MechType.Quadrupedal: return getQuadrupedalLoadoutTonnage(loadout as IQuadrupedalLoadout)
+  }
 }
