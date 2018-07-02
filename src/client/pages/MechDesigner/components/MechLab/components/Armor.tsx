@@ -22,9 +22,9 @@ import {
   IQuadrupedalLoadout,
   ITripodLoadout,
 } from '../../../../../models/Mech'
-import { IInjectedMechLabProps } from '../MechLab'
+import { ICommonProps } from '../MechLab'
 
-export class Armor extends React.PureComponent<IInjectedMechLabProps> {
+export class Armor extends React.PureComponent<ICommonProps> {
 
   public render() {
     return (

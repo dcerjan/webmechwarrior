@@ -1,7 +1,7 @@
 import { Action, applyMiddleware, compose, createStore } from 'redux'
 
 import { createRootReducer, ejectDynamicReducer, injectDynamicReducer } from './reducer'
-import { cancelSaga, sagaMiddleware, startSaga } from './saga'
+import { cancelSaga, globalSagas, sagaMiddleware, startSaga } from './saga'
 import { IWorker } from './Worker'
 
 const middleware = [
@@ -17,6 +17,8 @@ const enhancer = composeEnhancers(
 )
 
 const store = createStore(createRootReducer({}), enhancer)
+
+globalSagas.map(sagaMiddleware.run)
 
 const startWorker = <S, A extends Action, T>(worker: IWorker<S, A, T>) => {
   if (worker.reducer) {

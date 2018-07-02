@@ -1,32 +1,54 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 
 import { Worker } from '../../state/Worker'
 
-import { dashMessagesSelector } from './state/selectors'
-import { start, stop } from './state/worker'
+import { listMechChassisRequest } from './state/actions'
+import { IMechMeta, reducer } from './state/reducer'
+import { watcher as saga } from './state/sagas'
+import { dashMechsLoading, dashMechsSelector } from './state/selectors'
 
 
-interface IProps {
-  messages: string[]
+interface IMapStateProps {
+  loading: boolean,
+  mechs: IMechMeta[],
 }
 
-const mapState = createStructuredSelector<any, IProps>({
-  messages: dashMessagesSelector,
+interface IMapDispatchProps {
+  listMechChassisRequest: () => void,
+}
+
+const mapState = createStructuredSelector<any, IMapStateProps>({
+  loading: dashMechsLoading,
+  mechs: dashMechsSelector,
 })
 
-const mapDispatch = () => ({
-})
+const mapDispatch = {
+  listMechChassisRequest
+}
 
-export class LabContainer extends React.PureComponent<IProps, {}> {
+export class LabContainer extends React.PureComponent<IMapStateProps & IMapDispatchProps, {}> {
+  public componentDidMount() {
+    this.props.listMechChassisRequest()
+  }
+
   public render() {
-    const { messages } = this.props
+    const { loading, mechs } = this.props
 
     return (
-      <Worker start={start} stop={stop}>
+      <Worker id='Dash' reducer={reducer} saga={saga}>
+        { loading ? 'Loading...' : ''}
         <div>
-          { messages.map((m, i) => <div key={`${m}:${i}`}>{m}</div>)}
+          { mechs.map(mech => (
+            <Link
+              key={mech.id}
+              to={`/MechDesigner/${mech.id}`}
+            >
+              {`${mech.name} (${mech.tonnage})`}
+            </Link>
+           )) }
         </div>
       </Worker>
     )

@@ -14,9 +14,9 @@ import {
   getInternalStructureTonnage,
   InternalStructureType,
 } from '../../../../../models/InternalStructure'
-import { IInjectedMechLabProps } from '../MechLab'
+import { ICommonProps } from '../MechLab'
 
-export class InternalStructure extends React.PureComponent<IInjectedMechLabProps> {
+export class InternalStructure extends React.PureComponent<ICommonProps> {
 
   public render() {
     return (
