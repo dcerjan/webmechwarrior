@@ -1,9 +1,25 @@
+import { IMechMeta } from './reducer'
+
 export enum DashActionType {
-  PUSH_MESSAGE = 'DashAction::PUSH_MESSAGE',
+  LIST_MECH_CHASSIS_REQUEST = 'DashAction::LIST_MECH_CHASSIS_REQUEST',
+  LIST_MECH_CHASSIS_SUCCESS = 'DashAction::LIST_MECH_CHASSIS_SUCCESS',
+  LIST_MECH_CHASSIS_FAILURE = 'DashAction::LIST_MECH_CHASSIS_FAILURE',
 }
 
-type PushMessage = (message: string) => { type: DashActionType.PUSH_MESSAGE, message: string }
-export const pushMessage: PushMessage = (message) => ({ type: DashActionType.PUSH_MESSAGE, message })
+type ListMechChassisRequest = (id?: string) => { type: DashActionType.LIST_MECH_CHASSIS_REQUEST, id?: string }
+export const listMechChassisRequest: ListMechChassisRequest = (id) =>
+  ({ type: DashActionType.LIST_MECH_CHASSIS_REQUEST, id })
+
+type ListMechChassisSuccess = (mechs: IMechMeta[]) => { type: DashActionType.LIST_MECH_CHASSIS_SUCCESS, mechs: IMechMeta[] }
+export const listMechChassisSuccess: ListMechChassisSuccess = (mechs) =>
+  ({ type: DashActionType.LIST_MECH_CHASSIS_SUCCESS, mechs })
+
+type ListMechChassisFailure = (error: string) => { type: DashActionType.LIST_MECH_CHASSIS_FAILURE, error: string }
+export const listMechChassisFailure: ListMechChassisFailure = (error) =>
+  ({ type: DashActionType.LIST_MECH_CHASSIS_FAILURE, error })
 
 export type DashAction =
-  | ReturnType<PushMessage>
+  | ReturnType<ListMechChassisRequest>
+  | ReturnType<ListMechChassisSuccess>
+  | ReturnType<ListMechChassisFailure>
+

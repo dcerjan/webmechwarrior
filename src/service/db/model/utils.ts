@@ -1,0 +1,1 @@
+export const required = (field: string) => `Chassis field \'${field}\' is required`

@@ -4,7 +4,13 @@ import { DashboardStateL, IDashState, initial } from './reducer'
 
 export const dashStateSelector = (state: any): IDashState => state.Dash || initial
 
-export const dashMessagesSelector = createSelector(
+export const dashMechsLoading = createSelector(
   [dashStateSelector],
-  (dash) => DashboardStateL.messages.get()(dash)
+  DashboardStateL.loading.get()
+)
+
+
+export const dashMechsSelector = createSelector(
+  [dashStateSelector],
+  DashboardStateL.mechs.get()
 )

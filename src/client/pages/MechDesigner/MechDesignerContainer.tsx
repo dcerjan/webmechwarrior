@@ -1,57 +1,24 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { RouteComponentProps } from 'react-router-dom'
 
 import { Worker } from '../../state/Worker'
 
-import { createStructuredSelector } from 'reselect'
 import { MechLab } from './components/MechLab'
-import { setEquipmentTableTab } from './state/action'
-import { IEquipmentState, IMechDesignerState } from './state/reducer'
-import { selectMechDesignerEquipmentState, selectMechDesignerState } from './state/selectors'
-import { start } from './state/worker'
-import { stop } from './state/worker'
 
-interface IMechDesignerStateProps {
-  state: IMechDesignerState,
-  equipment: IEquipmentState,
-}
+import { reducer } from './state/reducer'
+import { watcher as saga } from './state/saga'
 
-interface IMechDesignerDispatchProps {
-  setEquipmentTableTab: (tab: string) => void,
-}
 
-const mapState = createStructuredSelector<any, IMechDesignerStateProps>({
-  state: selectMechDesignerState,
-  equipment: selectMechDesignerEquipmentState,
-})
-
-const mapDispatch: IMechDesignerDispatchProps = {
-  setEquipmentTableTab,
-}
-
-export class MechDesignerContainer extends React.PureComponent<IMechDesignerStateProps & IMechDesignerDispatchProps> {
+export class MechDesignerContainer extends React.PureComponent<RouteComponentProps<{ id?: string }, {}>> {
   public render() {
-    const { state, equipment, setEquipmentTableTab } = this.props
+    const { match } = this.props
 
     return (
-      <Worker start={start} stop={stop}>
+      <Worker id='Lab.MechDesigner' reducer={reducer} saga={saga}>
         <div>
-          <MechLab
-            state={state}
-            equipment={equipment}
-            setEquipmentTableTab={setEquipmentTableTab}
-          />
+          <MechLab id={match.params.id} />
         </div>
       </Worker>
     )
   }
-}
-
-const ConnectedMechDesigner = connect(
-  mapState,
-  mapDispatch,
-)(MechDesignerContainer)
-
-export {
-  ConnectedMechDesigner,
 }

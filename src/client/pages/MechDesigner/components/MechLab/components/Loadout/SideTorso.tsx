@@ -5,11 +5,11 @@ import { Range } from '../../../../../../components/Field'
 import { getMaxArmorForPart } from '../../../../../../models/Armor'
 import { ISideTorso } from '../../../../../../models/common/MechComponent'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
-import { IInjectedMechLabProps } from '../../MechLab'
+import { ICommonProps } from '../../MechLab'
 import { Criticals } from './Criticals'
 import { Hardpoints } from './Hardpoints'
 
-interface ISideTorsoProps extends IInjectedMechLabProps {
+interface ISideTorsoProps extends ICommonProps {
   sideTorso: ISideTorso,
 }
 

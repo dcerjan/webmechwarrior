@@ -9,13 +9,13 @@ import { getGyroCriticals } from '../../../../../../../models/Gryo'
 import { getEquipmentMeta } from '../../../../../../../models/MechEquipment'
 import { MechEquipmentName } from '../../../../../../../models/MechEquipment/MechEquipmentName'
 import { IMechDesignerMech } from '../../../../../state/constants'
-import { IInjectedMechLabProps } from '../../../MechLab'
+import { ICommonProps } from '../../../MechLab'
 import { getEquipmentDetailColor } from '../../Equipment/DragPreview'
 import { AllocatedCritical } from './AllocatedCritical'
 import * as styles from './Criticals.css'
 import { FreeCriticals } from './FreeCriticals'
 
-interface ICriticalsProps extends Pick<IInjectedMechLabProps, 'mech'> {
+interface ICriticalsProps extends Pick<ICommonProps, 'mech'> {
   part: IBaseMechPart,
 }
 

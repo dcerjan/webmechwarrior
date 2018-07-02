@@ -81,7 +81,7 @@ export class Equipment extends React.PureComponent<IEquipmentProps> {
 
   private getEquipment() {
     const { mech } = this.props
-    const equipment = getAvailableEquipmentTypes(mech.tech, mech.class, mech.engine.heatsinkType)
+    const equipment = getAvailableEquipmentTypes(mech.tech, mech.class, mech.heatsinkType)
 
     return equipment.map(equipment => getEquipmentMeta(equipment))
   }

@@ -20,6 +20,7 @@ export const DEAFULT_MECH_TYPE = MechType.Bipedal
 export const DEFAULT_MECH_CLASS = MechClass.Medium
 export const DEFAULT_JUMP_JET_TYPE = JumpJetType.Standard
 export const DEFAULT_TONNAGE = 50
+export const DEFAULT_HEATSINK_TYPE = HeatsinkType.Single
 
 export const DEFAULT_LIGHT_TONNAGE = 20
 export const DEFAULT_MEDIUM_TONNAGE = 40
@@ -29,7 +30,6 @@ export const DEFAULT_SUPER_HEAVY_TONNAGE = 105
 
 export const DEFAULT_ENGINE_RATING = 300
 export const DEFAULT_ENGINE_TYPE = EngineType.Standard
-export const DEFAULT_HEATSINK_TYPE = HeatsinkType.Single
 export const DEFAULT_GYRO_TYPE = GyroType.Standard
 export const DEFAULT_COCKPIT = CockpitType.Standard
 export const DEFAULT_INTERNAL_STRUCTURE = InternalStructureType.Standard
@@ -76,7 +76,8 @@ export interface IMechDesignerMech {
   class: MechClass,
   jumpJetType: JumpJetType,
   tonnage: MechTonnage,
-  engine: Pick<IEngine, 'rating' | 'type' | 'heatsinkType' | 'internalHeatSinks'>,
+  heatsinkType: HeatsinkType,
+  engine: Pick<IEngine, 'rating' | 'type' | 'internalHeatSinks'>,
   gyro: Pick<IGyro, 'type'>,
   cockpit: CockpitType,
   internalStructure: InternalStructureType,
@@ -91,10 +92,10 @@ export const DEFAULT_MECH: IMechDesignerMech =  {
   class: DEFAULT_MECH_CLASS,
   jumpJetType: DEFAULT_JUMP_JET_TYPE,
   tonnage: DEFAULT_TONNAGE,
+  heatsinkType: DEFAULT_HEATSINK_TYPE,
   engine: {
     rating: DEFAULT_ENGINE_RATING,
     type: DEFAULT_ENGINE_TYPE,
-    heatsinkType: DEFAULT_HEATSINK_TYPE,
     internalHeatSinks: Math.min(getEngintInternalHeatsinks(DEFAULT_ENGINE_RATING), 10)
   },
   gyro: {
