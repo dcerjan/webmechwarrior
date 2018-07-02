@@ -1,0 +1,57 @@
+.Detail {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid darkgrey;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 1px black, inset 0 0 12px rgba(0, 0, 0, 0.2);
+  height: 20px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.Disabled { color: grey }
+
+  & > .Label {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3px;
+    justify-content: flex-start;
+  }
+
+  & > .Value {
+    display: flex;
+    flex: 1 1;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3px;
+    justify-content: flex-end;
+  }
+
+  &.LightGrey { background-color: rgb(221, 221, 221) }
+  &.TransaprentLightGrey { background-color: rgba(221, 221, 221, 0.5) }
+  &.Lime { background-color: rgb(155, 203, 64) }
+  &.TransparentLime { background-color: rgba(155, 203, 64, 0.5) }
+  &.Purple { background-color: rgb(137, 55, 223) }
+  &.TransparentPurple { background-color: rgba(137, 55, 223, 0.5) }
+  &.Teal { background-color: rgb(16, 127, 127) }
+  &.TransparentTeal { background-color: rgba(16, 127, 127, 0.5) }
+  &.Blue { background-color: rgb(26, 155, 252) }
+  &.TransaprentBlue { background-color: rgb(26, 155, 252, 0.5) }
+  &.BluishGrey { background-color: rgb(96, 120, 119) }
+  &.TransparentBluishGrey { background-color: rgba(96, 120, 119, 0.5) }
+  &.Red { background-color: rgb(252, 26, 26) }
+  &.TransparentRed { background-color: rgba(252, 26, 26, 0.5) }
+  &.Sand { background-color: rgb(164, 146, 120) }
+  &.TransparentSand { background-color: rgba(164, 146, 120, 0.5) }
+  &.Transparent { background-color: transparent }
+
+  &.DragSourceActive {
+    background: repeating-linear-gradient(-55deg, #222, #222 10px, #333 10px, #333 20px);
+  }
+}
