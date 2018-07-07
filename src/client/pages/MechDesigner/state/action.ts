@@ -12,6 +12,8 @@ export enum MechDesignerActionType {
   LOAD_MECH_CHASSIS_REQUEST = 'MechDesignerAction::LOAD_MECH_CHASSIS_REQUEST',
   LOAD_MECH_CHASSIS_SUCCESS = 'MechDesignerAction::LOAD_MECH_CHASSIS_SUCCESS',
   LOAD_MECH_CHASSIS_FAILURE = 'MechDesignerAction::LOAD_MECH_CHASSIS_FAILURE',
+
+  CLEAR_MECH_CHASIS = 'MechDesignerAction::CLEAR_MECH_CHASIS',
 }
 
 type SetEquipmentTableTab = (tab: string) => { type: MechDesignerActionType.SET_EQUIPMENT_TABLE_TAB, tab: string }
@@ -42,6 +44,10 @@ type LoadMechChassisFailure = (error: string) => { type: MechDesignerActionType.
 export const loadMechChassisFailure: LoadMechChassisFailure = (error) =>
   ({ type: MechDesignerActionType.LOAD_MECH_CHASSIS_FAILURE, error })
 
+type ClearMechChassis = () => { type: MechDesignerActionType.CLEAR_MECH_CHASIS }
+export const clearMechChassis: ClearMechChassis = () =>
+  ({ type: MechDesignerActionType.CLEAR_MECH_CHASIS })
+
 export type MechDesignerAction =
   | ReturnType<SetEquipmentTableTab>
   | ReturnType<SaveMechChassisRequest>
@@ -50,5 +56,6 @@ export type MechDesignerAction =
   | ReturnType<LoadMechChassisRequest>
   | ReturnType<LoadMechChassisSuccess>
   | ReturnType<LoadMechChassisFailure>
+  | ReturnType<ClearMechChassis>
 
 export const save = createFormAction('MechDesignerAction::SAVE_MECH_CHASSIA')

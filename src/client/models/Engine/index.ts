@@ -19,7 +19,6 @@ export interface IEngine {
   type: EngineType,
   rating: EngineRating,
   hitPoints: number,
-  internalHeatSinks: number,
 }
 
 export const Engine = (props: IEngine): Readonly<IEngine> => ({

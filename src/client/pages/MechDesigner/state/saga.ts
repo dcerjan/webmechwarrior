@@ -1,4 +1,4 @@
-import { SubmissionError } from 'redux-form'
+import { reset, SubmissionError } from 'redux-form'
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 
 import { MechChassisService } from '../../../services/MechChassisService'
@@ -38,9 +38,14 @@ function* loadMechChassis(action: any) {
   }
 }
 
+function* clearMechChasis(action: any) {
+  yield put(reset('Lab.Mech'))
+}
+
 export function* watcher() {
   yield all([
     takeLatest(MechDesignerActionType.LOAD_MECH_CHASSIS_REQUEST, loadMechChassis),
     takeLatest(save.REQUEST, saveMechChassis),
+    takeLatest(MechDesignerActionType.CLEAR_MECH_CHASIS, clearMechChasis),
   ])
 }

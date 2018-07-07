@@ -51,6 +51,7 @@ const MechChassisSchema = new Schema({
     rating: { type: Number, enum: EEngineRating, required: required('engine.rating') },
     type: { type: String, enum: EEngineType, required: required('engine.type') },
   },
+  internalHeatsinks: { type: Number, default: 0 },
   gyro: {
     type: { type: String, enum: EGyroType, required: required('gyro.type') },
   },
@@ -74,5 +75,15 @@ const MechChassisSchema = new Schema({
   //   [MechComponent.RearRightLeg]: equipment(MechComponent.RearRightLeg),
   // }
 })
+
+MechChassisSchema.methods.toJson = function (blacklist: string[] = []) {
+  const obj = this.toObject()
+  return blacklist.reduce((ret, key) => {
+    if (!blacklist.includes(key)) {
+      ret[key] = obj[key]
+    }
+    return ret
+  }, {})
+}
 
 export const MechChassis = model('MechChassis', MechChassisSchema)

@@ -34,7 +34,7 @@ export const MechChassisCommand = (namespace: string) => (app: Express): void =>
   app.post('/command/save.MechChassis', async (req, res) => {
     try {
       const chassis = new MechChassis(req.body)
-      const result = await chassis.save()
+      const result = await MechChassis.findOneAndUpdate({ _id: chassis._id }, chassis, { upsert: true, new: true })
       res.json(result.toJSON())
     } catch(err) {
       saveError(err)
@@ -42,5 +42,4 @@ export const MechChassisCommand = (namespace: string) => (app: Express): void =>
     }
   })
   console.log('[INFO] [COMMAND] [MechChassis]', `registered '${namespace}/save.MechChassis' command`)
-
 }

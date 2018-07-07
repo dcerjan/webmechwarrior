@@ -1,14 +1,17 @@
 import * as React from 'react'
-import { IRowConfig, Table } from '../../../../../../components/Common/Table'
-import { Tabs } from '../../../../../../components/Common/Tabs'
-import { getAvailableAmmoTypes, getAvailableEquipmentTypes, getAvailableWeaponTypes } from '../../../../../../models/MechEquipment/MechEquipmentUtils'
 
 import { Card } from '../../../../../../components/Common/Card'
-import { getEquipmentMeta, getEquipmentType, IMechEquipmentRecord } from '../../../../../../models/MechEquipment'
+import { IRowConfig, Table } from '../../../../../../components/Common/Table'
+import { Tabs } from '../../../../../../components/Common/Tabs'
+
+import { MechTonnage } from '../../../../../../models/Mech'
+import { getEquipmentCriticals, getEquipmentMeta, getEquipmentTonnage, getEquipmentType, IMechEquipmentRecord } from '../../../../../../models/MechEquipment'
 import { MechEquipmentType } from '../../../../../../models/MechEquipment/MechEquipmentType'
+import { getAvailableAmmoTypes, getAvailableEquipmentTypes, getAvailableWeaponTypes } from '../../../../../../models/MechEquipment/MechEquipmentUtils'
 import { IMechDesignerMech } from '../../../../state/constants'
 import { IEquipmentState } from '../../../../state/reducer'
 
+import { Tech } from '../../../../../../models/common/Tech'
 import { DraggableRowWrapper } from './DraggableRowWrapper'
 import * as styles from './Equipment.css'
 
@@ -19,6 +22,8 @@ interface IEquipmentProps {
 }
 
 const getTableConfig = (
+  mechTonnage: MechTonnage,
+  tech: Tech,
 ): IRowConfig<IMechEquipmentRecord> => {
   return {
     className: (value) => {
@@ -45,13 +50,14 @@ const getTableConfig = (
         header: 'T',
         weight: 25,
         alignment: 'Right',
-        format: (value) => value.tonnage.toFixed(2),
+        format: (value) => getEquipmentTonnage(mechTonnage, value.name).toFixed(2),
       },
       {
         field: 'criticals',
         header: 'C',
         weight: 10,
         alignment: 'Right',
+        format: (value) => getEquipmentCriticals(mechTonnage, tech, value.name).toString(),
       },
     ]
   }
@@ -59,7 +65,7 @@ const getTableConfig = (
 
 export class Equipment extends React.PureComponent<IEquipmentProps> {
   public render() {
-    const { setEquipmentTableTab, equipment } = this.props
+    const { setEquipmentTableTab, equipment, mech } = this.props
 
     return (
       <Card
@@ -70,9 +76,9 @@ export class Equipment extends React.PureComponent<IEquipmentProps> {
           value={equipment.tab}
           onChange={setEquipmentTableTab}
           tabs={{
-            'Weapons': { component: <Table config={getTableConfig()} data={this.getWeapons()} /> },
-            'Ammo': { component: <Table config={getTableConfig()} data={this.getAmmo()} /> },
-            'Equipment': { component: <Table config={getTableConfig()} data={this.getEquipment()} /> },
+            'Weapons': { component: <Table config={getTableConfig(mech.tonnage, mech.tech)} data={this.getWeapons()} /> },
+            'Ammo': { component: <Table config={getTableConfig(mech.tonnage, mech.tech)} data={this.getAmmo()} /> },
+            'Equipment': { component: <Table config={getTableConfig(mech.tonnage, mech.tech)} data={this.getEquipment()} /> },
           }}
         />
       </Card>
@@ -81,7 +87,7 @@ export class Equipment extends React.PureComponent<IEquipmentProps> {
 
   private getEquipment() {
     const { mech } = this.props
-    const equipment = getAvailableEquipmentTypes(mech.tech, mech.class, mech.heatsinkType)
+    const equipment = getAvailableEquipmentTypes(mech.tech, mech.class, mech.heatsinkType, mech.jumpJetType)
 
     return equipment.map(equipment => getEquipmentMeta(equipment))
   }

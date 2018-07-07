@@ -157,9 +157,11 @@ export class Basic extends React.PureComponent<ICommonProps> {
     const internal = getInternalStructureTonnage(mech.tonnage, mech.internalStructure)
     const armor = getArmorTonnage(mech.type, mech.tech, mech.armor, mech.loadout)
 
-    const loadoutTonnage = getLoadoutTonnage(mech.type, mech.loadout)
+    const engineInternalHeatsinks = Math.max(mech.internalHeatsinks - 10, 0)
 
-    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor - loadoutTonnage
+    const loadoutTonnage = getLoadoutTonnage(mech.tonnage, mech.type, mech.loadout)
+
+    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor - loadoutTonnage - engineInternalHeatsinks
 
     return amount
   }

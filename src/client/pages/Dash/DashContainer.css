@@ -1,0 +1,19 @@
+.Link {
+  color: white;
+
+  &:link {
+    color: white;
+  }
+
+  &:visited {
+    color: white;
+  }
+
+  &:hover {
+    color: white;
+  }
+
+  &:active {
+    color: white;
+  }
+}

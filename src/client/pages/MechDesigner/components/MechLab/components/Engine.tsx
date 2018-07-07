@@ -24,7 +24,7 @@ import { ICommonProps } from '../MechLab'
 export class Engine extends React.PureComponent<ICommonProps> {
 
   public render() {
-    const { mech, change, select } = this.props
+    const { mech, change } = this.props
 
     return (
       <Card
@@ -51,10 +51,7 @@ export class Engine extends React.PureComponent<ICommonProps> {
             alignment='Right'
             valueChanged={(newRating: EngineRating) => {
               const newInternalHeatsinks = getEngintInternalHeatsinks(newRating)
-              const currentInternalHeatsinks = select('engine.internalHeatsinks') as number
-              if (newInternalHeatsinks < currentInternalHeatsinks) {
-                change('engine.internalHeatsinks', newInternalHeatsinks)
-              }
+              change('internalHeatsinks', Math.min(newInternalHeatsinks, 10))
             }}
           /> }
           color={DetailColor.TransparentBluishGrey}
@@ -73,7 +70,7 @@ export class Engine extends React.PureComponent<ICommonProps> {
             <Detail
               label='Engine Heatsinks'
               value={ <Range
-                name='engine.internalHeatSinks'
+                name='internalHeatsinks'
                 alignment='Right'
                 min={10}
                 max={getEngintInternalHeatsinks(mech.engine.rating)}

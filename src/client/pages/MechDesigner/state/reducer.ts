@@ -33,7 +33,6 @@ export const reducer: Reducer<IMechDesignerState, MechDesignerAction> = (state =
     return MechDesignerStateL.loading.set(true)(state)
 
   case MechDesignerActionType.LOAD_MECH_CHASSIS_SUCCESS:
-
     return compose(
       MechDesignerStateL.loading.set(false),
       MechDesignerStateL.mech.set(action.chassis as any),
@@ -41,6 +40,9 @@ export const reducer: Reducer<IMechDesignerState, MechDesignerAction> = (state =
 
   case MechDesignerActionType.LOAD_MECH_CHASSIS_FAILURE:
     return MechDesignerStateL.loading.set(false)(state)
+
+  case MechDesignerActionType.CLEAR_MECH_CHASIS:
+    return MechDesignerStateL.mech.set(null)(state)
 
   default:
     return state

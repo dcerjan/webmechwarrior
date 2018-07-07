@@ -2,9 +2,10 @@ import * as React from 'react'
 import { DragLayer, DragLayerCollector, XYCoord } from 'react-dnd'
 import { Card } from '../../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../../components/Common/Detail'
-import { getEquipmentType } from '../../../../../../models/MechEquipment'
+import { getEquipmentCriticals, getEquipmentType } from '../../../../../../models/MechEquipment'
 import { MechEquipmentName } from '../../../../../../models/MechEquipment/MechEquipmentName'
 import { MechEquipmentType } from '../../../../../../models/MechEquipment/MechEquipmentType'
+import { IMechDesignerMech } from '../../../../state/constants'
 import { IDragedEquipment } from '../DnD'
 
 const layerStyles: React.CSSProperties = {
@@ -19,6 +20,7 @@ const layerStyles: React.CSSProperties = {
 
 interface IDragPreviewLayerProps {
   item: IDragedEquipment,
+  mech: IMechDesignerMech,
 	initialOffset?: XYCoord
 	currentOffset?: XYCoord
 	isDragging?: boolean
@@ -60,7 +62,7 @@ export const getEquipmentDetailColor = (equipment: MechEquipmentName): DetailCol
 
 export class Preview extends React.PureComponent<IDragPreviewLayerProps> {
   public render() {
-    const { item, isDragging } = this.props
+    const { item, isDragging, mech } = this.props
 
     return isDragging
       ? (
@@ -69,7 +71,7 @@ export class Preview extends React.PureComponent<IDragPreviewLayerProps> {
             <Detail
               label={item.item.name}
               color={getEquipmentDetailColor(item.item.name)}
-              style={{ height: item.item.criticals * 20 }}
+              style={{ height: getEquipmentCriticals(mech.tonnage, mech.tech, item.item.name) * 20 }}
             />
           </Card>
         </div>
@@ -79,4 +81,4 @@ export class Preview extends React.PureComponent<IDragPreviewLayerProps> {
 }
 
 
-export const DragPreview = DragLayer(collect)(Preview) as React.ComponentClass<{}>
+export const DragPreview = DragLayer(collect)(Preview) as React.ComponentClass<Pick<IDragPreviewLayerProps, 'mech'>>

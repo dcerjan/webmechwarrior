@@ -28,8 +28,15 @@ import { InternalStructure } from './components/InternalStructure'
 import { Loadout } from './components/Loadout'
 import * as styles from './MechLab.css'
 
-import { setEquipmentTableTab } from '../../state/action'
-import { selectFormInitialValues, selectMechDesignerEquipmentState, selectMechDesignerState } from '../../state/selectors'
+import {
+  clearMechChassis,
+  setEquipmentTableTab,
+} from '../../state/action'
+import {
+  selectFormInitialValues,
+  selectMechDesignerEquipmentState,
+  selectMechDesignerState,
+} from '../../state/selectors'
 
 interface IMechLabPublicProps {
   id?: string,
@@ -42,6 +49,7 @@ interface IMechLabMapStateProps {
   setEquipmentTableTab: (tab: string) => void,
   change: (field: string, value: any) => void,
   select: (field: string) => any,
+  clear: () => void,
 }
 
 interface IMechLabMapDispatchProps {
@@ -58,6 +66,7 @@ const mapDispatch = (dispatch: Dispatch) => ({
   setEquipmentTableTab: (tab: string) => dispatch(setEquipmentTableTab(tab)),
   change: (field: string, value: any) => dispatch(change('Lab.Mech', field, value)),
   loadMechChassisRequest: (id: string) => dispatch(loadMechChassisRequest(id)),
+  clear: () => dispatch(clearMechChassis()),
 })
 
 const mapInternalState = (state: any) => ({
@@ -71,18 +80,27 @@ export interface ICommonProps {
   select: (field: string) => any,
 }
 
-class MechLab extends React.PureComponent<
-  IMechLabPublicProps &
-  IMechLabMapStateProps &
-  IMechLabMapDispatchProps &
-  InjectedFormProps<any>
-> {
+type MechLabProps =
+  & IMechLabPublicProps
+  & IMechLabMapStateProps
+  & IMechLabMapDispatchProps
+  & InjectedFormProps<any>
+
+class MechLab extends React.PureComponent<MechLabProps> {
 
   public componentDidMount() {
-    console.log(this.props.id)
     if (this.props.id) {
-      console.log('loading')
       this.props.loadMechChassisRequest(this.props.id)
+    }
+  }
+
+  public componentWillUnmount() {
+    this.props.clear()
+  }
+
+  public componentWillReceiveProps(newProps: MechLabProps) {
+    if ((newProps.id == null) && (newProps.id !== this.props.id)) {
+      this.props.clear()
     }
   }
 
@@ -118,7 +136,9 @@ class MechLab extends React.PureComponent<
             />
           </div>
         </form>
-        <DragPreview />
+        <DragPreview
+          mech={mech}
+        />
       </div>
     )
   }
@@ -126,7 +146,7 @@ class MechLab extends React.PureComponent<
 
 const MechLabForm: React.SFC<IMechLabPublicProps> = (
   connect(mapState, mapDispatch)(
-    reduxForm({ form: 'Lab.Mech', enableReinitialize: true })(
+    reduxForm({ form: 'Lab.Mech', enableReinitialize: true, destroyOnUnmount: true })(
       connect(mapInternalState)(
         DragDropContext(HTML5Backend)(
           MechLab

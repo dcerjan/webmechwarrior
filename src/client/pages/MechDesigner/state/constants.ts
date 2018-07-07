@@ -77,7 +77,8 @@ export interface IMechDesignerMech {
   jumpJetType: JumpJetType,
   tonnage: MechTonnage,
   heatsinkType: HeatsinkType,
-  engine: Pick<IEngine, 'rating' | 'type' | 'internalHeatSinks'>,
+  engine: Pick<IEngine, 'rating' | 'type'>,
+  internalHeatsinks: number,
   gyro: Pick<IGyro, 'type'>,
   cockpit: CockpitType,
   internalStructure: InternalStructureType,
@@ -96,8 +97,8 @@ export const DEFAULT_MECH: IMechDesignerMech =  {
   engine: {
     rating: DEFAULT_ENGINE_RATING,
     type: DEFAULT_ENGINE_TYPE,
-    internalHeatSinks: Math.min(getEngintInternalHeatsinks(DEFAULT_ENGINE_RATING), 10)
   },
+  internalHeatsinks: Math.min(getEngintInternalHeatsinks(DEFAULT_ENGINE_RATING), 10),
   gyro: {
     type: DEFAULT_GYRO_TYPE,
   },
