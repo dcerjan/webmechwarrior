@@ -140,7 +140,7 @@ export const getQuadrupedalLoadoutArmor = (loadout: IQuadrupedalLoadout): number
   )
 }
 
-export const getArmorTonnage = (type: MechType, tech: Tech, armorType: ArmorType,  loadout: IBipedalLoadout | ITripodLoadout | IQuadrupedalLoadout) => {
+export const getArmorTonnage = (type: MechType, tech: Tech, armorType: ArmorType,  loadout: MechLoadout) => {
   const armor = (() => {
     switch (type) {
     case MechType.Bipedal: return getBipedalLoadoutArmor(loadout as IBipedalLoadout)
@@ -156,3 +156,8 @@ export type MechChassis =
   | IBipedalMech
   | ITripodMech
   | IQuadrupedalMech
+
+export type MechLoadout =
+  | IBipedalLoadout
+  | ITripodLoadout
+  | IQuadrupedalLoadout

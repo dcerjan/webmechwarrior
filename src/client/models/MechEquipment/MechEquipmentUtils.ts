@@ -1,11 +1,11 @@
 import { identity } from '../../lib/functional'
 import { MechClass } from '../common/MechClass'
-import { getMechBipedComponents, getMechQuadrupedComponents, getMechTripodComponents } from '../common/MechComponent'
+import { getMechBipedComponents, getMechQuadrupedComponents, getMechTripodComponents, MechComponent } from '../common/MechComponent'
 import { MechType } from '../common/MechType'
 import { Tech } from '../common/Tech'
 import { HeatsinkType } from '../Heatsink'
 import { JumpJetType } from '../JumpJets'
-import { IBipedalLoadout, IQuadrupedalLoadout, ITripodLoadout, MechTonnage } from '../Mech'
+import { MechLoadout, MechTonnage } from '../Mech'
 import { getEquipmentTonnage } from './index'
 import { AmmoType, EquipmentType, MechEquipmentName, MechEquipmentName as E, WeaponType } from './MechEquipmentName'
 
@@ -187,31 +187,31 @@ const sumEquipmentTonnage = (mechTonnage: MechTonnage) => (equipment: MechEquipm
   return equipment.reduce((total, equipment) => total + getEquipmentTonnage(mechTonnage, equipment), 0)
 }
 
-const getBipedalLoadoutTonnage = (mechTonnage: MechTonnage, loadout: IBipedalLoadout): number => {
-  return getMechBipedComponents()
-    .map(component => loadout[component].equipment)
-    .map(sumEquipmentTonnage(mechTonnage))
-    .reduce((s, t) => s + t, 0)
-}
-
-const getTripodLoadoutTonnage = (mechTonnage: MechTonnage, loadout: ITripodLoadout): number => {
-  return getMechTripodComponents()
-    .map(component => loadout[component].equipment)
-    .map(sumEquipmentTonnage(mechTonnage))
-    .reduce((s, t) => s + t, 0)
-}
-
-const getQuadrupedalLoadoutTonnage = (mechTonnage: MechTonnage, loadout: IQuadrupedalLoadout): number => {
-  return getMechQuadrupedComponents()
-    .map(component => loadout[component].equipment)
-    .map(sumEquipmentTonnage(mechTonnage))
-    .reduce((s, t) => s + t, 0)
-}
-
-export const getLoadoutTonnage = (mechTonnage: MechTonnage, mechType: MechType, loadout: IBipedalLoadout | ITripodLoadout | IQuadrupedalLoadout): number => {
+const getAllMechComponents = (mechType: MechType, loadout: MechLoadout): MechComponent[] => {
   switch (mechType) {
-  case MechType.Bipedal: return getBipedalLoadoutTonnage(mechTonnage, loadout as IBipedalLoadout)
-  case MechType.Tripod: return getTripodLoadoutTonnage(mechTonnage, loadout as ITripodLoadout)
-  case MechType.Quadrupedal: return getQuadrupedalLoadoutTonnage(mechTonnage, loadout as IQuadrupedalLoadout)
+  case MechType.Bipedal: return getMechBipedComponents()
+  case MechType.Tripod: return getMechTripodComponents()
+  case MechType.Quadrupedal: return getMechQuadrupedComponents()
   }
+}
+
+export const getLoadoutTonnage = (mechTonnage: MechTonnage, mechType: MechType, loadout: MechLoadout): number => {
+  return getAllMechComponents(mechType, loadout)
+    .map(component => loadout[component].equipment as MechEquipmentName[])
+    .map(sumEquipmentTonnage(mechTonnage))
+    .reduce((s, t) => s + t, 0)
+}
+
+export const getLoadoutInternalStructureCriticals = (mechType: MechType, loadout: MechLoadout): number => {
+  return getAllMechComponents(mechType, loadout)
+    .map(component => loadout[component].equipment as MechEquipmentName[])
+    .reduce((memo, equipment) => [...memo, ...equipment], [])
+    .reduce((total, equipment) => total + (equipment === E.Internal_Structure ? 1 : 0), 0)
+}
+
+export const getLoadoutArmorCriticals = (mechType: MechType, loadout: MechLoadout): number => {
+  return getAllMechComponents(mechType, loadout)
+    .map(component => loadout[component].equipment as MechEquipmentName[])
+    .reduce((memo, equipment) => [...memo, ...equipment], [])
+    .reduce((total, equipment) => total + (equipment === E.Armor ? 1 : 0), 0)
 }
