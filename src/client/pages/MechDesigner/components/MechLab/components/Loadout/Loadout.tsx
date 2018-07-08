@@ -27,22 +27,22 @@ export class Loadout extends React.PureComponent<ICommonProps> {
     return (
       <div className={styles.Loadout}>
         <div className={styles.Outer}>
-          <Arm mech={mech} arm={mech.loadout[MechComponent.LeftArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[MechComponent.RightArm]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.LeftTorso]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[MechComponent.LeftLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.RightTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.RightLeg]} change={change} select={select} />
         </div>
         <div className={styles.Center}>
           <Head mech={mech} head={mech.loadout[MechComponent.Head]} change={change} select={select} />
           <CenterTorso mech={mech} centerTorso={mech.loadout[MechComponent.CenterTorso]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.RightTorso]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[MechComponent.RightLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.LeftTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.LeftLeg]} change={change} select={select} />
         </div>
         <div className={styles.Outer}>
-          <Arm mech={mech} arm={mech.loadout[MechComponent.RightArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[MechComponent.LeftArm]} change={change} select={select} />
         </div>
       </div>
     )
@@ -53,11 +53,11 @@ export class Loadout extends React.PureComponent<ICommonProps> {
     return (
       <div className={styles.Loadout}>
         <div className={styles.Outer}>
-          <Arm mech={mech} arm={mech.loadout[MechComponent.LeftArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[MechComponent.RightArm]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.LeftTorso]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontLeftLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.RightTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontRightLeg]} change={change} select={select} />
         </div>
         <div className={styles.Center}>
           <Head mech={mech} head={mech.loadout[MechComponent.Head]} change={change} select={select} />
@@ -65,11 +65,11 @@ export class Loadout extends React.PureComponent<ICommonProps> {
           <Leg mech={mech} leg={mech.loadout[MechComponent.RearLeg]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.RightTorso]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontRightLeg]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.LeftTorso]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontLeftLeg]} change={change} select={select} />
         </div>
         <div className={styles.Outer}>
-          <Arm mech={mech} arm={mech.loadout[MechComponent.RightArm]} change={change} select={select} />
+          <Arm mech={mech} arm={mech.loadout[MechComponent.LeftArm]} change={change} select={select} />
         </div>
       </div>
     )
@@ -80,22 +80,22 @@ export class Loadout extends React.PureComponent<ICommonProps> {
     return (
       <div className={styles.Loadout}>
         <div className={styles.Outer}>
-          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontLeftLeg]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[MechComponent.RearLeftLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontRightLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.RearRightLeg]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.LeftTorso]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.RightTorso]} change={change} select={select} />
         </div>
         <div className={styles.Center}>
           <Head mech={mech} head={mech.loadout[MechComponent.Head]} change={change} select={select} />
           <CenterTorso mech={mech} centerTorso={mech.loadout[MechComponent.CenterTorso]} change={change} select={select} />
         </div>
         <div className={styles.Side}>
-          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.RightTorso]} change={change} select={select} />
+          <SideTorso mech={mech} sideTorso={mech.loadout[MechComponent.LeftTorso]} change={change} select={select} />
         </div>
         <div className={styles.Outer}>
-          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontRightLeg]} change={change} select={select} />
-          <Leg mech={mech} leg={mech.loadout[MechComponent.RearRightLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.FrontLeftLeg]} change={change} select={select} />
+          <Leg mech={mech} leg={mech.loadout[MechComponent.RearLeftLeg]} change={change} select={select} />
         </div>
       </div>
     )
