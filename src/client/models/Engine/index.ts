@@ -2,7 +2,6 @@ import { lens } from 'lens.ts'
 
 import { MechComponent } from '../common/MechComponent'
 import { Tech } from '../common/Tech'
-import { HeatsinkType } from '../Heatsink'
 import { MechTonnage } from '../Mech'
 
 export enum EngineType {
@@ -20,8 +19,6 @@ export interface IEngine {
   type: EngineType,
   rating: EngineRating,
   hitPoints: number,
-  internalHeatSinks: number,
-  heatsinkType: HeatsinkType,
 }
 
 export const Engine = (props: IEngine): Readonly<IEngine> => ({

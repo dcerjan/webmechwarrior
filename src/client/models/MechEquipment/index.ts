@@ -2,6 +2,7 @@ import { lens } from 'lens.ts'
 
 import { Availability as Availability } from '../common/Availability'
 import { Tech as Tech } from '../common/Tech'
+import { MechTonnage } from '../Mech'
 import { AmmoType, MechEquipmentName, MechEquipmentName as N } from './MechEquipmentName'
 import { MechEquipmentTag } from './MechEquipmentTag'
 import { MechEquipmentType, MechEquipmentType as T } from './MechEquipmentType'
@@ -433,4 +434,39 @@ export const getEquipmentType = (equipment: MechEquipmentName): MechEquipmentTyp
   } else {
     throw new Error(`Equipment '${equipment}' meta data not found!`)
   }
+}
+
+export const getEquipmentTonnage = (mechTonnage: MechTonnage, equipment: MechEquipmentName): number => {
+  const eq = getEquipmentMeta(equipment)
+  if (eq.type === T.Jump_Jet) {
+    const tonnage = (() => {
+      if (mechTonnage < 60) {
+        return 0.5
+      } else if (mechTonnage < 90) {
+        return 1.0
+      } else {
+        return 2.0
+      }
+    })()
+
+    return eq.name === N.Improved_Jump_Jet
+      ? 2.0 * tonnage
+      : tonnage
+  } else {
+    return eq.tonnage
+  }
+}
+
+export const getEquipmentCriticals = (mechTonnage: MechTonnage, tech: Tech, equipment: MechEquipmentName): number => {
+  const eq = getEquipmentMeta(equipment)
+  if (eq.type === T.Heatsink) {
+    if (eq.name === N.Double_Heatsink) {
+      if (tech === Tech.Clan) {
+        return 2
+      } else {
+        return 3
+      }
+    }
+  }
+  return eq.criticals
 }

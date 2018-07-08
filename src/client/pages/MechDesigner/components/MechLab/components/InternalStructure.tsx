@@ -14,9 +14,10 @@ import {
   getInternalStructureTonnage,
   InternalStructureType,
 } from '../../../../../models/InternalStructure'
-import { IInjectedMechLabProps } from '../MechLab'
+import { getLoadoutInternalStructureCriticals } from '../../../../../models/MechEquipment/MechEquipmentUtils'
+import { ICommonProps } from '../MechLab'
 
-export class InternalStructure extends React.PureComponent<IInjectedMechLabProps> {
+export class InternalStructure extends React.PureComponent<ICommonProps> {
 
   public render() {
     return (
@@ -50,7 +51,8 @@ export class InternalStructure extends React.PureComponent<IInjectedMechLabProps
   private getInternalStructureCriticals() {
     const { mech } = this.props
     const slots = getInternalStructureCriticals(mech.tech, mech.internalStructure)
-    return `${slots} ${pluralize('slot', slots)}`
+    const allocated = getLoadoutInternalStructureCriticals(mech.type, mech.loadout)
+    return `${allocated}/${slots} ${pluralize('slot', slots)}`
   }
 
   private getInternalStructure() {

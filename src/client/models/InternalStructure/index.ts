@@ -99,7 +99,7 @@ export const InternalStructureTable = {
 }
 
 export const getInternalStructureTonnage = (mechTonnage: MechTonnage, type: InternalStructureType): number =>
-  InternalStructureTable[mechTonnage].tonnage * InternalStructureTypeWeightMultipliers[type]
+  Math.ceil((InternalStructureTable[mechTonnage].tonnage * InternalStructureTypeWeightMultipliers[type]) * 2.0) * 0.5
 
 export const getInternalStructureCriticals = (tech: Tech, type: InternalStructureType): number => {
   switch (type) {

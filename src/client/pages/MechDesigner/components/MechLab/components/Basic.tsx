@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Card } from '../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../components/Common/Detail'
 import { Select, StringInput } from '../../../../../components/Field'
+import { ISelectOption } from '../../../../../components/Field/Select/common'
 import { segment } from '../../../../../lib/functional'
 import { getCockpitTonnage } from '../../../../../models/Cockpit'
 import { isAssault, isHeavy, isLight, isMedium, isSuperHeavy, MechClass } from '../../../../../models/common/MechClass'
@@ -11,6 +12,7 @@ import { MechType } from '../../../../../models/common/MechType'
 import { Tech } from '../../../../../models/common/Tech'
 import { EngineType, getEngineTonnage } from '../../../../../models/Engine'
 import { getGyroTonnage } from '../../../../../models/Gryo'
+import { getAvaliableHeatsinkTypes, HeatsinkType } from '../../../../../models/Heatsink'
 import { getInternalStructureTonnage } from '../../../../../models/InternalStructure'
 import { JumpJetType } from '../../../../../models/JumpJets'
 import { getArmorTonnage, MechTonnage } from '../../../../../models/Mech'
@@ -26,9 +28,9 @@ import {
   DEFAULT_MEDIUM_TONNAGE,
   DEFAULT_SUPER_HEAVY_TONNAGE,
 } from '../../../state/constants'
-import { IInjectedMechLabProps } from '../MechLab'
+import { ICommonProps } from '../MechLab'
 
-export class Basic extends React.PureComponent<IInjectedMechLabProps> {
+export class Basic extends React.PureComponent<ICommonProps> {
 
   public render() {
     const { change, select, mech } = this.props
@@ -97,10 +99,19 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
           /> }
           color={DetailColor.TransparentBluishGrey}
         />
+        <Detail
+          label='Tonnage'
+          value={ <Select
+            name='tonnage'
+            options={this.getTonnage().map(t => ({ value: t, name: `${t.toFixed(2)} tons` }))}
+            alignment='Right'
+          /> }
+          color={DetailColor.TransparentBluishGrey}
+        />
         { select('class') !== MechClass.SuperHeavy
           ? (
             <Detail
-              label='Jump Jets'
+              label='Jump Jet Type'
               value={ <Select
                 name='jumpJetType'
                 options={Object.values(JumpJetType).map(jumpJetType => ({ value: jumpJetType, name: jumpJetType }))}
@@ -111,10 +122,10 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
           )
           : null }
         <Detail
-          label='Tonnage'
+          label='Heatsink Type'
           value={ <Select
-            name='tonnage'
-            options={this.getTonnage().map(t => ({ value: t, name: `${t.toFixed(2)} tons` }))}
+            name='heatsinkType'
+            options={this.getHeatsinkTypes()}
             alignment='Right'
           /> }
           color={DetailColor.TransparentBluishGrey}
@@ -146,9 +157,11 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
     const internal = getInternalStructureTonnage(mech.tonnage, mech.internalStructure)
     const armor = getArmorTonnage(mech.type, mech.tech, mech.armor, mech.loadout)
 
-    const loadoutTonnage = getLoadoutTonnage(mech.type, mech.loadout)
+    const engineInternalHeatsinks = Math.max(mech.internalHeatsinks - 10, 0)
 
-    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor - loadoutTonnage
+    const loadoutTonnage = getLoadoutTonnage(mech.tonnage, mech.type, mech.loadout)
+
+    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor - loadoutTonnage - engineInternalHeatsinks
 
     return amount
   }
@@ -156,5 +169,10 @@ export class Basic extends React.PureComponent<IInjectedMechLabProps> {
   private getFreeTonnageDescription() {
     const amount = this.getFreeTonnage()
     return `${amount.toFixed(2)} ${pluralize('ton', amount)}`
+  }
+
+  private getHeatsinkTypes(): Array<ISelectOption<HeatsinkType>> {
+    return getAvaliableHeatsinkTypes(this.props.mech.tech)
+      .map(heatsink => ({ value: heatsink, name: heatsink }))
   }
 }

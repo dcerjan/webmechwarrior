@@ -114,6 +114,8 @@ export const SideTorso = (
 
 export interface IArm extends IBaseMechPart {
   name: Arms,
+  hasLowerArmActuator: boolean,
+  hasHandActuator: boolean,
 }
 
 export const ArmL = lens<IArm>()
@@ -123,7 +125,13 @@ export const Arm = (
   armor: number,
   hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
-): IArm => BaseMechPart(name, armor, hardpoints, equipment) as IArm
+  hasLowerArmActuator: boolean = true,
+  hasHandActuator: boolean = true,
+): IArm => ({
+  ...BaseMechPart(name, armor, hardpoints, equipment),
+  hasLowerArmActuator,
+  hasHandActuator,
+ }) as IArm
 
 
 export interface ILeg extends IBaseMechPart  {

@@ -10,8 +10,12 @@ import {
   InjectedFormProps,
   reduxForm,
 } from 'redux-form'
+import { createStructuredSelector } from 'reselect'
 
-import { DEFAULT_MECH, IMechDesignerMech } from '../../state/constants'
+import { save } from '../../state/action'
+
+import { loadMechChassisRequest } from '../../state/action'
+import { IMechDesignerMech } from '../../state/constants'
 import { IEquipmentState, IMechDesignerState } from '../../state/reducer'
 import { Armor } from './components/Armor'
 import { Basic } from './components/Basic'
@@ -24,26 +28,90 @@ import { InternalStructure } from './components/InternalStructure'
 import { Loadout } from './components/Loadout'
 import * as styles from './MechLab.css'
 
-interface ILoadoutProps {
-  state: IMechDesignerState,
-  equipment: IEquipmentState,
-  setEquipmentTableTab: (tab: string) => void,
+import {
+  clearMechChassis,
+  setEquipmentTableTab,
+} from '../../state/action'
+import {
+  selectFormInitialValues,
+  selectMechDesignerEquipmentState,
+  selectMechDesignerState,
+} from '../../state/selectors'
+
+interface IMechLabPublicProps {
+  id?: string,
 }
 
-export interface IInjectedMechLabProps {
+interface IMechLabMapStateProps {
+  state: IMechDesignerState,
+  equipment: IEquipmentState,
+  mech: IMechDesignerMech,
+  setEquipmentTableTab: (tab: string) => void,
+  change: (field: string, value: any) => void,
+  select: (field: string) => any,
+  clear: () => void,
+}
+
+interface IMechLabMapDispatchProps {
+  loadMechChassisRequest: (id: string) => void,
+}
+
+const mapState = createStructuredSelector({
+  state: selectMechDesignerState,
+  equipment: selectMechDesignerEquipmentState,
+  initialValues: selectFormInitialValues,
+})
+
+const mapDispatch = (dispatch: Dispatch) => ({
+  setEquipmentTableTab: (tab: string) => dispatch(setEquipmentTableTab(tab)),
+  change: (field: string, value: any) => dispatch(change('Lab.Mech', field, value)),
+  loadMechChassisRequest: (id: string) => dispatch(loadMechChassisRequest(id)),
+  clear: () => dispatch(clearMechChassis()),
+})
+
+const mapInternalState = (state: any) => ({
+  mech: getFormValues('Lab.Mech')(state),
+  select: (field: string): any => formValueSelector('Lab.Mech')(state, field),
+})
+
+export interface ICommonProps {
   mech: IMechDesignerMech,
   change: (field: string, value: any) => void,
   select: (field: string) => any,
 }
 
-class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps & InjectedFormProps<ILoadoutProps>> {
+type MechLabProps =
+  & IMechLabPublicProps
+  & IMechLabMapStateProps
+  & IMechLabMapDispatchProps
+  & InjectedFormProps<any>
+
+class MechLab extends React.PureComponent<MechLabProps> {
+
+  public componentDidMount() {
+    if (this.props.id) {
+      this.props.loadMechChassisRequest(this.props.id)
+    }
+  }
+
+  public componentWillUnmount() {
+    this.props.clear()
+  }
+
+  public componentWillReceiveProps(newProps: MechLabProps) {
+    if ((newProps.id == null) && (newProps.id !== this.props.id)) {
+      this.props.clear()
+    }
+  }
 
   public render() {
-    const { mech, change, select, setEquipmentTableTab, equipment } = this.props
+    const { mech, change, select, setEquipmentTableTab, equipment, handleSubmit } = this.props
+
+    const submit = handleSubmit(save)
 
     return (
       <div>
-        <form className={styles.MechLab}>
+        <form className={styles.MechLab} onSubmit={submit} >
           <div className={styles.Basic}>
             <Basic mech={mech} change={change} select={select} />
             <Engine mech={mech} change={change} select={select} />
@@ -51,6 +119,11 @@ class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps 
             <Cockpit mech={mech} change={change} select={select} />
             <InternalStructure mech={mech} change={change} select={select} />
             <Armor mech={mech} change={change} select={select} />
+            <button
+              type='submit'
+            >
+              Save Mech Chassis
+            </button>
           </div>
           <div>
             <Loadout mech={mech} change={change} select={select} />
@@ -63,28 +136,17 @@ class MechLab extends React.PureComponent<ILoadoutProps & IInjectedMechLabProps 
             />
           </div>
         </form>
-        <DragPreview />
+        <DragPreview
+          mech={mech}
+        />
       </div>
     )
   }
 }
 
-const mapState = (state: any, props: ILoadoutProps) => ({
-  initialValues: DEFAULT_MECH,
-  select: (field: string): any => formValueSelector('Lab.Mech')(state, field),
-})
-
-const mapDispatch = (dispatch: Dispatch) => ({
-  change: (field: string, value: any) => dispatch(change('Lab.Mech', field, value)),
-})
-
-const mapInternalState = (state: any) => ({
-  mech: getFormValues('Lab.Mech')(state),
-})
-
-const MechLabForm: React.SFC<ILoadoutProps> = (
+const MechLabForm: React.SFC<IMechLabPublicProps> = (
   connect(mapState, mapDispatch)(
-    reduxForm({ form: 'Lab.Mech' })(
+    reduxForm({ form: 'Lab.Mech', enableReinitialize: true, destroyOnUnmount: true })(
       connect(mapInternalState)(
         DragDropContext(HTML5Backend)(
           MechLab

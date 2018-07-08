@@ -22,9 +22,10 @@ import {
   IQuadrupedalLoadout,
   ITripodLoadout,
 } from '../../../../../models/Mech'
-import { IInjectedMechLabProps } from '../MechLab'
+import { getLoadoutArmorCriticals } from '../../../../../models/MechEquipment/MechEquipmentUtils'
+import { ICommonProps } from '../MechLab'
 
-export class Armor extends React.PureComponent<IInjectedMechLabProps> {
+export class Armor extends React.PureComponent<ICommonProps> {
 
   public render() {
     return (
@@ -68,7 +69,8 @@ export class Armor extends React.PureComponent<IInjectedMechLabProps> {
   private getArmorCriticals() {
     const { mech } = this.props
     const slots = getArmorCriticalSlots(mech.tech, mech.armor)
-    return `${slots} ${pluralize('slot', slots)}`
+    const allocated = getLoadoutArmorCriticals(mech.type, mech.loadout)
+    return `${allocated}/${slots} ${pluralize('slot', slots)}`
   }
 
   private getArmor() {

@@ -19,19 +19,19 @@ import {
   getRunningMP,
   getWalkingMP,
 } from '../../../../../models/Engine'
-import { getAvaliableHeatsinkTypes, HeatsinkType } from '../../../../../models/Heatsink'
-import { IInjectedMechLabProps } from '../MechLab'
+import { ICommonProps } from '../MechLab'
 
-export class Engine extends React.PureComponent<IInjectedMechLabProps> {
+export class Engine extends React.PureComponent<ICommonProps> {
 
   public render() {
-    const { mech, change, select } = this.props
+    const { mech, change } = this.props
 
     return (
       <Card
         title='Engine'
         footer={<div>
-          <Detail label='Movement' value={this.getMechMovement()} />
+          <Detail label='Walking' value={this.getMechWalk()} />
+          <Detail label='Running' value={this.getMechRun()} />
           <Detail label='Engine Tonnage' value={this.getEngineTonnage()} />
           <Detail label='Criticals' value={this.getEngineCriticals()} />
           { getEngintInternalHeatsinks(mech.engine.rating) <= 10
@@ -51,10 +51,7 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
             alignment='Right'
             valueChanged={(newRating: EngineRating) => {
               const newInternalHeatsinks = getEngintInternalHeatsinks(newRating)
-              const currentInternalHeatsinks = select('engine.internalHeatsinks') as number
-              if (newInternalHeatsinks < currentInternalHeatsinks) {
-                change('engine.internalHeatsinks', newInternalHeatsinks)
-              }
+              change('internalHeatsinks', Math.min(newInternalHeatsinks, 10))
             }}
           /> }
           color={DetailColor.TransparentBluishGrey}
@@ -68,21 +65,12 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
           />}
           color={DetailColor.TransparentBluishGrey}
         />
-        <Detail
-          label='Heatsink Type'
-          value={ <Select
-            name='engine.heatsinkType'
-            options={this.getHeatsinkTypes()}
-            alignment='Right'
-          /> }
-          color={DetailColor.TransparentBluishGrey}
-        />
         { getEngintInternalHeatsinks(mech.engine.rating) > 10
           ? (
             <Detail
               label='Engine Heatsinks'
               value={ <Range
-                name='engine.internalHeatSinks'
+                name='internalHeatsinks'
                 alignment='Right'
                 min={10}
                 max={getEngintInternalHeatsinks(mech.engine.rating)}
@@ -98,11 +86,16 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
     )
   }
 
-  private getMechMovement() {
+  private getMechWalk() {
     const { mech } = this.props
     const walking = getWalkingMP(mech.engine.rating, mech.tonnage)
+    return `${walking} (${(walking * 10.8).toFixed(1)} kph)`
+  }
+
+  private getMechRun() {
+    const { mech } = this.props
     const running = getRunningMP(mech.engine.rating, mech.tonnage)
-    return `${walking}/${running}`
+    return `${running} (${(running * 10.8).toFixed(1)} kph)`
   }
 
   private getEngineTonnage() {
@@ -140,10 +133,5 @@ export class Engine extends React.PureComponent<IInjectedMechLabProps> {
   private getEngineTypes(): Array<ISelectOption<EngineType>> {
     return getAvailableEngines(this.props.mech.tech)
       .map(engine => ({ value: engine, name: engine }))
-  }
-
-  private getHeatsinkTypes(): Array<ISelectOption<HeatsinkType>> {
-    return getAvaliableHeatsinkTypes(this.props.mech.tech)
-      .map(heatsink => ({ value: heatsink, name: heatsink }))
   }
 }

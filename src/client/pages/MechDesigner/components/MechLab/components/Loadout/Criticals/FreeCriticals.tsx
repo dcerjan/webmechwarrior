@@ -4,19 +4,23 @@ import { DropTarget, DropTargetSpec } from 'react-dnd'
 import { Detail, DetailColor } from '../../../../../../../components/Common/Detail'
 import { range } from '../../../../../../../lib/functional'
 import { IBaseMechPart } from '../../../../../../../models/common/MechComponent'
+import { getEquipmentCriticals } from '../../../../../../../models/MechEquipment'
 import { MechEquipmentName } from '../../../../../../../models/MechEquipment/MechEquipmentName'
+import { IMechDesignerMech } from '../../../../../state/constants'
 import { DnDType, IDragedEquipment, IInjectedDropTargetProps, targetCollect } from '../../DnD'
 
 
 interface IFreeCriticalProps extends Pick<React.HTMLAttributes<HTMLDivElement>, 'className'> {
   mechComponent: IBaseMechPart
   freeSlots: number,
+  mech: IMechDesignerMech,
 }
 
 const criticalDropTarget: DropTargetSpec<IFreeCriticalProps> = {
   canDrop: (props, monitor) => {
+    const { mech, freeSlots } = props
     const item = monitor.getItem() as IDragedEquipment
-    return item.item.criticals <= props.freeSlots
+    return getEquipmentCriticals(mech.tonnage, mech.tech, item.item.name) <= freeSlots
   },
   drop: (props) => ({
     mechComponent: props.mechComponent,
@@ -43,13 +47,13 @@ class FreeCriticals extends React.PureComponent<IFreeCriticalProps & IInjectedDr
   }
 
   private getSlotColor(index: number): DetailColor {
-    const { canDrop, descriptor, isOver } = this.props
+    const { canDrop, descriptor, isOver, mech } = this.props
 
     if (!descriptor) {
       return DetailColor.Transparent
     } else {
       if (canDrop) {
-        if (isOver && index < descriptor.criticals) {
+        if (isOver && index <  getEquipmentCriticals(mech.tonnage, mech.tech, descriptor.name)) {
           return DetailColor.Blue
         } else {
           return DetailColor.TransaprentBlue

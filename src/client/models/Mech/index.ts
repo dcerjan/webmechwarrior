@@ -7,6 +7,7 @@ import { MechType } from '../common/MechType'
 import { Tech } from '../common/Tech'
 import { IEngine } from '../Engine'
 import { IGyro } from '../Gryo'
+import { HeatsinkType } from '../Heatsink'
 import { InternalStructureType } from '../InternalStructure'
 
 export type MechTonnage =
@@ -21,6 +22,7 @@ export interface IBaseMech {
   type: MechType,
   class: MechClass,
   tonnage: MechTonnage,
+  heatsinkType: HeatsinkType,
   engine: IEngine,
   gyro: IGyro,
   internalStructure: InternalStructureType,
@@ -138,7 +140,7 @@ export const getQuadrupedalLoadoutArmor = (loadout: IQuadrupedalLoadout): number
   )
 }
 
-export const getArmorTonnage = (type: MechType, tech: Tech, armorType: ArmorType,  loadout: IBipedalLoadout | ITripodLoadout | IQuadrupedalLoadout) => {
+export const getArmorTonnage = (type: MechType, tech: Tech, armorType: ArmorType,  loadout: MechLoadout) => {
   const armor = (() => {
     switch (type) {
     case MechType.Bipedal: return getBipedalLoadoutArmor(loadout as IBipedalLoadout)
@@ -149,3 +151,13 @@ export const getArmorTonnage = (type: MechType, tech: Tech, armorType: ArmorType
 
   return Math.ceil((armor / (16 * getArmorBasePointMultiplier(tech, armorType))) * 2.0) * 0.5
 }
+
+export type MechChassis =
+  | IBipedalMech
+  | ITripodMech
+  | IQuadrupedalMech
+
+export type MechLoadout =
+  | IBipedalLoadout
+  | ITripodLoadout
+  | IQuadrupedalLoadout

@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { MechComponent } from '../../../../../../models/common/MechComponent'
 import { MechType } from '../../../../../../models/common/MechType'
-import { IInjectedMechLabProps } from '../../MechLab'
+import { ICommonProps } from '../../MechLab'
 import { Arm } from './Arm'
 import { CenterTorso } from './CenterTorso'
 import { Head } from './Head'
@@ -10,7 +10,7 @@ import { Leg } from './Leg'
 import * as styles from './Loadout.css'
 import { SideTorso } from './SideTorso'
 
-export class Loadout extends React.PureComponent<IInjectedMechLabProps> {
+export class Loadout extends React.PureComponent<ICommonProps> {
 
   public render() {
     return (() => {
