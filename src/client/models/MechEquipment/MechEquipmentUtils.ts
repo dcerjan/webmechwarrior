@@ -6,6 +6,7 @@ import { Tech } from '../common/Tech'
 import { HeatsinkType } from '../Heatsink'
 import { JumpJetType } from '../JumpJets'
 import { MechLoadout, MechTonnage } from '../Mech'
+import { MissileGuidenceType } from '../MissileGuidenceType'
 import { getEquipmentTonnage } from './index'
 import { AmmoType, EquipmentType, MechEquipmentName, MechEquipmentName as E, WeaponType } from './MechEquipmentName'
 
@@ -38,7 +39,6 @@ export const getAvailableEquipmentTypes = (
     E.NARC_Launcher,
     E.Improved_NARC_Launcher,
     E.TAG,
-    E.Artemis_IV,
     // E.Targeting_Computer,
   ] as EquipmentType[]
 
@@ -47,12 +47,12 @@ export const getAvailableEquipmentTypes = (
     E.C_LAMS,
     E.C_Active_Probe,
     E.C_Light_Active_Probe,
+    // E.C_CASE,
     E.C_ECM_Suite,
     E.C_TAG,
     E.C_NARC_Launcher,
     E.C_Light_TAG,
     // E.C_Targeting_Computer,
-    E.C_Artemis_IV,
   ] as EquipmentType[]
 
   return [
@@ -64,7 +64,18 @@ export const getAvailableEquipmentTypes = (
   ]
 }
 
-export const getAvailableWeaponTypes = (tech: Tech): WeaponType[] => {
+export const getAvailableWeaponTypes = (tech: Tech, missileGuidanceType: MissileGuidenceType): WeaponType[] => {
+  const innerSphereMissiles = missileGuidanceType === MissileGuidenceType.Standard
+    ? [
+      E.LRM_5, E.LRM_10, E.LRM_15, E.LRM_20,
+      E.MML_3, E.MML_5, E.MML_7, E.MML_9,
+      E.SRM_2, E.SRM_4, E.SRM_6,
+    ]
+    : [
+      E.LRM_5_Artemis_IV, E.LRM_10_Artemis_IV, E.LRM_15_Artemis_IV, E.LRM_20_Artemis_IV,
+      E.MML_3_Artemis_IV, E.MML_5_Artemis_IV, E.MML_7_Artemis_IV, E.MML_9_Artemis_IV,
+      E.SRM_2_Artemis_IV, E.SRM_4_Artemis_IV, E.SRM_6_Artemis_IV,
+    ]
   const innerSphereWeaponTypes = [
     E.ER_Small_Laser, E.ER_Medium_Laser, E.ER_Large_Laser,
     E.Small_Laser, E.Medium_Laser, E.Large_Laser,
@@ -79,14 +90,21 @@ export const getAvailableWeaponTypes = (tech: Tech): WeaponType[] => {
     E.Ultra_Autocannon_2, E.Ultra_Autocannon_5, E.Ultra_Autocannon_10, E.Ultra_Autocannon_20,
     E.Light_Gauss_Rifle, E.Gauss_Rifle, E.Heavy_Gauss_Rifle,
     E.Light_Machine_Gun, E.Machine_Gun, E.Heavy_Machine_Gun,
-    E.LRM_5, E.LRM_10, E.LRM_15, E.LRM_20,
-    E.MML_3, E.MML_5, E.MML_7, E.MML_9,
-    E.SRM_2, E.SRM_4, E.SRM_6,
+    ...innerSphereMissiles,
     E.Streak_SRM_2, E.Streak_SRM_4, E.Streak_SRM_6,
     E.MRM_10, E.MRM_20, E.MRM_30, E.MRM_40,
     E.Rocket_Launcher_10, E.Rocket_Launcher_15, E.Rocket_Launcher_20,
   ] as WeaponType[]
 
+  const clanMissiles = missileGuidanceType === MissileGuidenceType.Standard
+    ? [
+      E.C_LRM_5, E.C_LRM_10, E.C_LRM_15, E.C_LRM_20,
+      E.C_SRM_2, E.C_SRM_4, E.C_SRM_6,
+    ]
+    : [
+      E.C_LRM_5_Artemis_IV, E.C_LRM_10_Artemis_IV, E.C_LRM_15_Artemis_IV, E.C_LRM_20_Artemis_IV,
+      E.C_SRM_2_Artemis_IV, E.C_SRM_4_Artemis_IV, E.C_SRM_6_Artemis_IV,
+    ]
   const clanWeaponTypes = [
     E.C_ER_Micro_Laser, E.C_ER_Small_Laser, E.C_ER_Medium_Laser, E.C_ER_Large_Laser,
     E.C_Micro_Pulse_Laser, E.C_Small_Pulse_Laser, E.C_Medium_Pulse_Laser, E.C_Large_Pulse_Laser,
@@ -99,8 +117,7 @@ export const getAvailableWeaponTypes = (tech: Tech): WeaponType[] => {
     E.C_AP_Gauss_Rifle, E.C_Gauss_Rifle, E.C_Hyper_Assault_Gauss_20, E.C_Hyper_Assault_Gauss_30, E.C_Hyper_Assault_Gauss_40,
     E.C_Light_Machine_Gun, E.C_Machine_Gun, E.C_Heavy_Machine_Gun,
     E.C_ATM_3, E.C_ATM_6, E.C_ATM_9, E.C_ATM_12,
-    E.C_LRM_5, E.C_LRM_10, E.C_LRM_15, E.C_LRM_20,
-    E.C_SRM_2, E.C_SRM_4, E.C_SRM_6,
+    ...clanMissiles,
     E.C_Streak_SRM_2, E.C_Streak_SRM_4, E.C_Streak_SRM_6,
   ] as WeaponType[]
 
@@ -109,7 +126,23 @@ export const getAvailableWeaponTypes = (tech: Tech): WeaponType[] => {
     : clanWeaponTypes
 }
 
-export const getAvailableAmmoTypes = (tech: Tech): AmmoType[] => {
+export const getAvailableAmmoTypes = (tech: Tech, missileGuidanceType: MissileGuidenceType): AmmoType[] => {
+  const innerSphereMissileAmmo = missileGuidanceType === MissileGuidenceType.Standard
+    ? [
+      E.LRM_Ammo,
+      E.LRM_Fragmentation_Ammo,
+      E.LRM_Incendiary_Ammo,
+      E.LRM_SWARM_Ammo,
+      E.LRM_Flare_Ammo,
+      E.SRM_Ammo,
+      E.SRM_Fragmentation_Ammo,
+      E.SRM_Harpoon_Ammo,
+      E.SRM_Inferno_Ammo,
+    ]
+    : [
+      E.LRM_Artemis_Ammo,
+      E.SRM_Artemis_Ammo,
+    ]
   const innerSphereAmmoTypes = [
     E.Autocannon_Ammo,
     E.Autocannon_Armor_Piercing_Ammo,
@@ -131,16 +164,8 @@ export const getAvailableAmmoTypes = (tech: Tech): AmmoType[] => {
     E.Heavy_Machine_Gun_Ammo,
     E.Vehicle_Flamer_Ammo,
     E.Plasma_Rifle_Ammo,
-    E.LRM_Ammo,
-    E.LRM_Fragmentation_Ammo,
-    E.LRM_Incendiary_Ammo,
-    E.LRM_SWARM_Ammo,
-    E.LRM_Flare_Ammo,
+    ...innerSphereMissileAmmo,
     E.MRM_Ammo,
-    E.SRM_Ammo,
-    E.SRM_Fragmentation_Ammo,
-    E.SRM_Harpoon_Ammo,
-    E.SRM_Inferno_Ammo,
     E.Streak_SRM_Ammo,
     E.AMS_Ammo,
     E.NARC_Ammo,
@@ -149,6 +174,22 @@ export const getAvailableAmmoTypes = (tech: Tech): AmmoType[] => {
     E.NARC_Haywire_Ammo,
     E.NARC_Nemesis_Ammo,
   ] as AmmoType[]
+
+  const clanMissileAmmo = missileGuidanceType === MissileGuidenceType.Standard
+    ? [
+      E.C_LRM_Ammo,
+      E.C_LRM_Fragmentation_Ammo,
+      E.C_LRM_SWARM_Ammo,
+      E.C_LRM_Flare_Ammo,
+      E.C_SRM_Ammo,
+      E.C_SRM_Fragmentation_Ammo,
+      E.C_SRM_Harpoon_Ammo,
+      E.C_SRM_Inferno_Ammo,
+    ]
+    : [
+      E.C_LRM_Artemis_Ammo,
+      E.C_SRM_Artemis_Ammo,
+    ]
 
   const clanAmmoTypes = [
     E.C_LB_X_Autocannon_Ammo,
@@ -162,14 +203,7 @@ export const getAvailableAmmoTypes = (tech: Tech): AmmoType[] => {
     E.C_Heavy_Machine_Gun_Ammo,
     E.C_Vehicle_Flamer_Ammo,
     E.C_Plasma_Cannon_Ammo,
-    E.C_LRM_Ammo,
-    E.C_LRM_Fragmentation_Ammo,
-    E.C_LRM_SWARM_Ammo,
-    E.C_LRM_Flare_Ammo,
-    E.C_SRM_Ammo,
-    E.C_SRM_Fragmentation_Ammo,
-    E.C_SRM_Harpoon_Ammo,
-    E.C_SRM_Inferno_Ammo,
+    ...clanMissileAmmo,
     E.C_Streak_SRM_Ammo,
     E.C_ATM_Ammo,
     E.C_ATM_ER_Ammo,

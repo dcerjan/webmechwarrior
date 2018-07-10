@@ -9,6 +9,7 @@ import { IEngine } from '../Engine'
 import { IGyro } from '../Gryo'
 import { HeatsinkType } from '../Heatsink'
 import { InternalStructureType } from '../InternalStructure'
+import { MissileGuidenceType } from '../MissileGuidenceType'
 
 export type MechTonnage =
   | 20 | 25 | 30 | 35 | 40 | 45 | 50
@@ -24,6 +25,7 @@ export interface IBaseMech {
   class: MechClass,
   tonnage: MechTonnage,
   heatsinkType: HeatsinkType,
+  missileGuidenceType: MissileGuidenceType,
   engine: IEngine,
   gyro: IGyro,
   internalStructure: InternalStructureType,

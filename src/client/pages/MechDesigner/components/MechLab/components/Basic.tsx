@@ -17,6 +17,7 @@ import { getInternalStructureTonnage } from '../../../../../models/InternalStruc
 import { JumpJetType } from '../../../../../models/JumpJets'
 import { getArmorTonnage, MechTonnage } from '../../../../../models/Mech'
 import { geLoadoutHeatsinks, getLoadoutTonnage } from '../../../../../models/MechEquipment/MechEquipmentUtils'
+import { getAvaliableMissileGuidenceTypes, MissileGuidenceType } from '../../../../../models/MissileGuidenceType'
 import {
   DEAFULT_BIPEDAL_LOADOUT,
   DEAFULT_QUADRUPEDAL_LOADOUT,
@@ -130,6 +131,15 @@ export class Basic extends React.PureComponent<ICommonProps> {
           /> }
           color={DetailColor.TransparentBluishGrey}
         />
+        <Detail
+          label='Missile Guidence'
+          value={ <Select
+            name='missileGuidenceType'
+            options={this.getMissileGuidenceTypes()}
+            alignment='Right'
+          /> }
+          color={DetailColor.TransparentBluishGrey}
+        />
       </Card>
     )
   }
@@ -178,5 +188,10 @@ export class Basic extends React.PureComponent<ICommonProps> {
   private getHeatsinkTypes(): Array<ISelectOption<HeatsinkType>> {
     return getAvaliableHeatsinkTypes(this.props.mech.tech)
       .map(heatsink => ({ value: heatsink, name: heatsink }))
+  }
+
+  private getMissileGuidenceTypes(): Array<ISelectOption<MissileGuidenceType>> {
+    return getAvaliableMissileGuidenceTypes()
+      .map(missileGuidence => ({ value: missileGuidence, name: missileGuidence }))
   }
 }

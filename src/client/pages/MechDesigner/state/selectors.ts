@@ -13,5 +13,5 @@ export const selectMechDesignerEquipmentState = createSelector<any, IMechDesigne
 
 export const selectFormInitialValues = createSelector<any, IMechDesignerState, IMechDesignerMech>(
   [selectMechDesignerState],
-  (state) => state.mech || DEFAULT_MECH
+  (state) => ({ ...DEFAULT_MECH, ...state.mech })
 )

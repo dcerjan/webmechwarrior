@@ -94,14 +94,14 @@ export class Equipment extends React.PureComponent<IEquipmentProps> {
 
   private getWeapons() {
     const { mech } = this.props
-    const weapons = getAvailableWeaponTypes(mech.tech)
+    const weapons = getAvailableWeaponTypes(mech.tech, mech.missileGuidenceType)
 
     return weapons.map(weapon => getEquipmentMeta(weapon))
   }
 
   private getAmmo() {
     const { mech } = this.props
-    const ammo = getAvailableAmmoTypes(mech.tech)
+    const ammo = getAvailableAmmoTypes(mech.tech, mech.missileGuidenceType)
 
     return ammo.map(ammo => getEquipmentMeta(ammo))
   }
