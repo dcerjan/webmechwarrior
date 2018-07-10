@@ -11,6 +11,7 @@ export interface IEquipmentState {
 export interface IMechDesignerState {
   equipment: IEquipmentState,
   loading: boolean,
+  deleting: boolean,
   mech: IMechDesignerMech | null,
 }
 
@@ -21,6 +22,7 @@ const initialState: IMechDesignerState = {
     tab: 'Weapons',
   },
   loading: false,
+  deleting: false,
   mech: null,
 }
 
@@ -40,6 +42,18 @@ export const reducer: Reducer<IMechDesignerState, MechDesignerAction> = (state =
 
   case MechDesignerActionType.LOAD_MECH_CHASSIS_FAILURE:
     return MechDesignerStateL.loading.set(false)(state)
+
+  case MechDesignerActionType.DELETE_MECH_CHASSIS_REQUEST:
+    return MechDesignerStateL.deleting.set(true)(state)
+
+  case MechDesignerActionType.DELETE_MECH_CHASSIS_SUCCESS:
+    return compose(
+      MechDesignerStateL.deleting.set(false),
+      MechDesignerStateL.mech.set(null),
+    )(state)
+
+  case MechDesignerActionType.DELETE_MECH_CHASSIS_FAILURE:
+    return MechDesignerStateL.deleting.set(false)(state)
 
   case MechDesignerActionType.CLEAR_MECH_CHASIS:
     return MechDesignerStateL.mech.set(null)(state)

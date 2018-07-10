@@ -17,6 +17,7 @@ export type MechTonnage =
   | 155 | 160 | 165 | 170 | 175 | 180 | 185 | 190 | 195 | 200
 
 export interface IBaseMech {
+  _id?: string,
   name: string,
   tech: Tech,
   type: MechType,

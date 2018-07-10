@@ -76,14 +76,12 @@ const MechChassisSchema = new Schema({
   // }
 })
 
-MechChassisSchema.methods.toJson = function (blacklist: string[] = []) {
+MechChassisSchema.methods.toJSON = function (blacklist: string[] = []) {
   const obj = this.toObject()
-  return blacklist.reduce((ret, key) => {
-    if (!blacklist.includes(key)) {
-      ret[key] = obj[key]
-    }
-    return ret
-  }, {})
+  blacklist.forEach(field => {
+    delete obj[field]
+  })
+  return obj
 }
 
 export const MechChassis = model('MechChassis', MechChassisSchema)
