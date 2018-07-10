@@ -5,6 +5,7 @@ import { Range } from '../../../../../../components/Field'
 import { BooleanInput } from '../../../../../../components/Field/Input'
 import { getMaxArmorForPart } from '../../../../../../models/Armor'
 import { IArm } from '../../../../../../models/common/MechComponent'
+import { Tech } from '../../../../../../models/common/Tech'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
 import { ICommonProps } from '../../MechLab'
 import { Criticals } from './Criticals'
@@ -37,8 +38,11 @@ export class Arm extends React.PureComponent<IArmProps> {
         />
         <Detail label='Structure' value={this.getArmStructure()} color={DetailColor.TransparentBluishGrey} />
         <Hardpoints hardpoints={arm.hardpoints} component={arm.name} />
-        <Detail label='Lower Arm' value={ <BooleanInput name={`loadout.${arm.name}.hasLowerArmActuator`} /> } />
-        <Detail label='Hand' value={ <BooleanInput name={`loadout.${arm.name}.hasHandActuator`} /> } />
+        <Detail label='Lower Arm' value={ <BooleanInput name={`loadout.${arm.name}.hasLowerArmActuator`} /> } color={DetailColor.TransparentBluishGrey} />
+        <Detail label='Hand' value={ <BooleanInput name={`loadout.${arm.name}.hasHandActuator`} /> } color={DetailColor.TransparentBluishGrey} />
+        { mech.tech === Tech.Clan
+          ? <Detail label='CASE Protected' value={ <BooleanInput name={`loadout.${arm.name}.caseProtected`} /> } color={DetailColor.TransparentBluishGrey} />
+          : null }
       </Card>
     )
   }
