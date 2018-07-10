@@ -16,7 +16,7 @@ import { getAvaliableHeatsinkTypes, HeatsinkType } from '../../../../../models/H
 import { getInternalStructureTonnage } from '../../../../../models/InternalStructure'
 import { JumpJetType } from '../../../../../models/JumpJets'
 import { getArmorTonnage, MechTonnage } from '../../../../../models/Mech'
-import { getLoadoutTonnage } from '../../../../../models/MechEquipment/MechEquipmentUtils'
+import { geLoadoutHeatsinks, getLoadoutTonnage } from '../../../../../models/MechEquipment/MechEquipmentUtils'
 import {
   DEAFULT_BIPEDAL_LOADOUT,
   DEAFULT_QUADRUPEDAL_LOADOUT,
@@ -157,11 +157,15 @@ export class Basic extends React.PureComponent<ICommonProps> {
     const internal = getInternalStructureTonnage(mech.tonnage, mech.internalStructure)
     const armor = getArmorTonnage(mech.type, mech.tech, mech.armor, mech.loadout)
 
-    const engineInternalHeatsinks = Math.max(mech.internalHeatsinks - 10, 0)
-
     const loadoutTonnage = getLoadoutTonnage(mech.tonnage, mech.type, mech.loadout)
 
-    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor - loadoutTonnage - engineInternalHeatsinks
+    const totalHeatsinks = mech.internalHeatsinks + geLoadoutHeatsinks(mech.type, mech.loadout)
+
+    const heatsinkTonnage = totalHeatsinks <= 10
+      ? 0
+      : totalHeatsinks - 10
+
+    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor - loadoutTonnage - heatsinkTonnage
 
     return amount
   }

@@ -184,7 +184,13 @@ export const getAvailableAmmoTypes = (tech: Tech): AmmoType[] => {
 }
 
 const sumEquipmentTonnage = (mechTonnage: MechTonnage) => (equipment: MechEquipmentName[]): number => {
-  return equipment.reduce((total, equipment) => total + getEquipmentTonnage(mechTonnage, equipment), 0)
+  return equipment.reduce((total, equipment) => {
+    const tonnage = [E.Single_Heatsink, E.Double_Heatsink].includes(equipment)
+      ? 0
+      : getEquipmentTonnage(mechTonnage, equipment)
+
+    return total + tonnage
+  }, 0)
 }
 
 const getAllMechComponents = (mechType: MechType, loadout: MechLoadout): MechComponent[] => {
@@ -214,4 +220,11 @@ export const getLoadoutArmorCriticals = (mechType: MechType, loadout: MechLoadou
     .map(component => loadout[component].equipment as MechEquipmentName[])
     .reduce((memo, equipment) => [...memo, ...equipment], [])
     .reduce((total, equipment) => total + (equipment === E.Armor ? 1 : 0), 0)
+}
+
+export const geLoadoutHeatsinks = (mechType: MechType, loadout: MechLoadout): number => {
+  return getAllMechComponents(mechType, loadout)
+    .map(component => loadout[component].equipment as MechEquipmentName[])
+    .reduce((memo, equipment) => [...memo, ...equipment], [])
+    .reduce((memo, equipment) => memo + (([E.Single_Heatsink, E.Double_Heatsink].includes(equipment) ? 1 : 0)), 0)
 }
