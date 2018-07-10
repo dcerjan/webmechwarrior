@@ -328,7 +328,7 @@ export const MechEquipmentTable = {
   [N.Ultra_Autocannon_Ammo]:                MechEquipmentRecord(N.Ultra_Autocannon_Ammo,                T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Light_Gauss_Ammo]:                     MechEquipmentRecord(N.Light_Gauss_Ammo,                     T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Gauss_Ammo]:                           MechEquipmentRecord(N.Gauss_Ammo,                           T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
-  [N.Heavy_Gauss_Ammo]:                     MechEquipmentRecord(N.Heavy_Gauss_Ammo,                     T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.Heavy_Gauss_Ammo]:                     MechEquipmentRecord(N.Heavy_Gauss_Ammo,                     T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 2.0, 2, Availability.X, []),
   [N.Light_Machine_Gun_Ammo]:               MechEquipmentRecord(N.Light_Machine_Gun_Ammo,               T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Machine_Gun_Ammo]:                     MechEquipmentRecord(N.Machine_Gun_Ammo,                     T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Heavy_Machine_Gun_Ammo]:               MechEquipmentRecord(N.Heavy_Machine_Gun_Ammo,               T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
