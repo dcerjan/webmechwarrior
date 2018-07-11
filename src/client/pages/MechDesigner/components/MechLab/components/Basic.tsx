@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Card } from '../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../components/Common/Detail'
 import { Select, StringInput } from '../../../../../components/Field'
+import { BooleanInput } from '../../../../../components/Field/Input'
 import { ISelectOption } from '../../../../../components/Field/Select/common'
 import { segment } from '../../../../../lib/functional'
 import { getCockpitTonnage } from '../../../../../models/Cockpit'
@@ -107,6 +108,11 @@ export class Basic extends React.PureComponent<ICommonProps> {
             options={this.getTonnage().map(t => ({ value: t, name: `${t.toFixed(2)} tons` }))}
             alignment='Right'
           /> }
+          color={DetailColor.TransparentBluishGrey}
+        />
+        <Detail
+          label={'Omni \'Mech'}
+          value={ <BooleanInput name={`omni`} /> }
           color={DetailColor.TransparentBluishGrey}
         />
         { select('class') !== MechClass.SuperHeavy

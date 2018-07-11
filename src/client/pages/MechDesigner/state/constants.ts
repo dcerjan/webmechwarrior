@@ -19,8 +19,9 @@ export const DEFAULT_NAME = ''
 export const DEFAULT_TECH = Tech.IS
 export const DEAFULT_MECH_TYPE = MechType.Bipedal
 export const DEFAULT_MECH_CLASS = MechClass.Medium
-export const DEFAULT_JUMP_JET_TYPE = JumpJetType.Standard
 export const DEFAULT_TONNAGE = 50
+export const DEFAULT_OMNI = false
+export const DEFAULT_JUMP_JET_TYPE = JumpJetType.Standard
 export const DEFAULT_HEATSINK_TYPE = HeatsinkType.Single
 export const DEFAULT_MISSILE_GUIDENCE_TYPE = MissileGuidenceType.Standard
 
@@ -76,8 +77,9 @@ export interface IMechDesignerMech {
   tech: Tech,
   type: MechType,
   class: MechClass,
-  jumpJetType: JumpJetType,
   tonnage: MechTonnage,
+  omni: boolean,
+  jumpJetType: JumpJetType,
   heatsinkType: HeatsinkType,
   missileGuidenceType: MissileGuidenceType,
   engine: Pick<IEngine, 'rating' | 'type'>,
@@ -94,8 +96,9 @@ export const DEFAULT_MECH: IMechDesignerMech =  {
   tech: DEFAULT_TECH,
   type: DEAFULT_MECH_TYPE,
   class: DEFAULT_MECH_CLASS,
-  jumpJetType: DEFAULT_JUMP_JET_TYPE,
   tonnage: DEFAULT_TONNAGE,
+  omni: DEFAULT_OMNI,
+  jumpJetType: DEFAULT_JUMP_JET_TYPE,
   heatsinkType: DEFAULT_HEATSINK_TYPE,
   missileGuidenceType: DEFAULT_MISSILE_GUIDENCE_TYPE,
   engine: {

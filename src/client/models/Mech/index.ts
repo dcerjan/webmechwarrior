@@ -24,6 +24,7 @@ export interface IBaseMech {
   type: MechType,
   class: MechClass,
   tonnage: MechTonnage,
+  omni: boolean,
   heatsinkType: HeatsinkType,
   missileGuidenceType: MissileGuidenceType,
   engine: IEngine,
