@@ -88,17 +88,28 @@ export enum MechEquipmentName {
   LRM_10 = 'LRM 10',
   LRM_15 = 'LRM 15',
   LRM_20 = 'LRM 20',
+  LRM_5_Artemis_IV = 'LRM 5 + Artemis IV',
+  LRM_10_Artemis_IV = 'LRM 10 + Artemis IV',
+  LRM_15_Artemis_IV = 'LRM 15 + Artemis IV',
+  LRM_20_Artemis_IV = 'LRM 20 + Artemis IV',
 
   // Missile * MML
   MML_3 = 'MML 3',
   MML_5 = 'MML 5',
   MML_7 = 'MML 7',
   MML_9 = 'MML 9',
+  MML_3_Artemis_IV = 'MML 3 + Artemis IV',
+  MML_5_Artemis_IV = 'MML 5 + Artemis IV',
+  MML_7_Artemis_IV = 'MML 7 + Artemis IV',
+  MML_9_Artemis_IV = 'MML 9 + Artemis IV',
 
   // Missile * SRM
   SRM_2 = 'SRM 2',
   SRM_4 = 'SRM 4',
   SRM_6 = 'SRM 6',
+  SRM_2_Artemis_IV = 'SRM 2 + Artemis',
+  SRM_4_Artemis_IV = 'SRM 4 + Artemis',
+  SRM_6_Artemis_IV = 'SRM 6 + Artemis',
   Streak_SRM_2 = 'Streak SRM 2',
   Streak_SRM_4 = 'Streak SRM 4',
   Streak_SRM_6 = 'Streak SRM 6',
@@ -124,11 +135,11 @@ export enum MechEquipmentName {
   Improved_C3_Computer = 'Improved C3 Computer',
   Guardian_ECM_Suite = 'Guardian ECM Suite',
   MASC = 'MASC',
+  TSM = 'TSM',
   NARC_Launcher = 'NARC Launcher',
   Improved_NARC_Launcher = 'Improved NARC Launcher',
   TAG = 'TAG',
   Targeting_Computer = 'Targeting Computer',
-  Artemis_IV = 'Artemis IV',
 
   // IS Ammo
   // Ballistic * Ammo
@@ -148,8 +159,11 @@ export enum MechEquipmentName {
   Gauss_Ammo = 'Gauss Ammo',
   Heavy_Gauss_Ammo = 'Heavy Gauss Ammo',
   Light_Machine_Gun_Ammo = 'Light Machine Gun Ammo',
+  Light_Machine_Gun_Ammo_Half = 'Light Machine Gun Ammo (1/2)',
   Machine_Gun_Ammo = 'Machine Gun Ammo',
+  Machine_Gun_Ammo_Half = 'Machine Gun Ammo (1/2)',
   Heavy_Machine_Gun_Ammo = 'Heavy Machine Gun Ammo',
+  Heavy_Machine_Gun_Ammo_Half = 'Heavy Machine Gun Ammo (1/2)',
 
   // Energy * Ammo
   Vehicle_Flamer_Ammo = 'Vehicle Flamer Ammo',
@@ -157,12 +171,14 @@ export enum MechEquipmentName {
 
   // Missile * Ammo
   LRM_Ammo = 'LRM Ammo',
+  LRM_Artemis_Ammo = 'LRM + Artemis Ammo',
   LRM_Fragmentation_Ammo = 'LRM Fragmentation Ammo',
   LRM_Incendiary_Ammo = 'LRM Incendiary Ammo',
   LRM_SWARM_Ammo = 'LRM SWARM Ammo',
   LRM_Flare_Ammo = 'LRM Flare Ammo',
   MRM_Ammo = 'MRM Ammo',
   SRM_Ammo = 'SRM Ammo',
+  SRM_Artemis_Ammo = 'SRM + Artemis Ammo',
   SRM_Fragmentation_Ammo = 'SRM Fragmentation Ammo',
   SRM_Harpoon_Ammo = 'SRM Harpoon Ammo',
   SRM_Inferno_Ammo = 'SRM Inferno Ammo',
@@ -234,11 +250,18 @@ export enum MechEquipmentName {
   C_LRM_10 = 'Clan LRM 10',
   C_LRM_15 = 'Clan LRM 15',
   C_LRM_20 = 'Clan LRM 20',
+  C_LRM_5_Artemis_IV = 'Clan LRM 5 + Artemis IV',
+  C_LRM_10_Artemis_IV = 'Clan LRM 10 + Artemis IV',
+  C_LRM_15_Artemis_IV = 'Clan LRM 15 + Artemis IV',
+  C_LRM_20_Artemis_IV = 'Clan LRM 20 + Artemis IV',
 
   // Missiles * SRM
   C_SRM_2 = 'Clan SRM 2',
   C_SRM_4 = 'Clan SRM 4',
   C_SRM_6 = 'Clan SRM 6',
+  C_SRM_2_Artemis_IV = 'Clan SRM 2 + Artemis IV',
+  C_SRM_4_Artemis_IV = 'Clan SRM 4 + Artemis IV',
+  C_SRM_6_Artemis_IV = 'Clan SRM 6 + Artemis IV',
   C_Streak_SRM_2 = 'Clan Streak SRM 2',
   C_Streak_SRM_4 = 'Clan Streak SRM 4',
   C_Streak_SRM_6 = 'Clan Streak SRM 6',
@@ -248,13 +271,13 @@ export enum MechEquipmentName {
   C_LAMS = 'Clan LAMS',
   C_Active_Probe = 'Clan Active Probe',
   C_Light_Active_Probe = 'Clan Light Active Probe',
+  C_CASE = 'Clan CASE',
   C_ECM_Suite = 'Clan ECM Suite',
   C_MASC = 'Clan MASC',
   C_NARC_Launcher = 'Clan NARC Launcher',
   C_TAG = 'Clan TAG',
   C_Light_TAG = 'Clan Light TAG',
   C_Targeting_Computer = 'Clan Targeting Computer',
-  C_Artemis_IV = 'Clan Artemis IV',
 
   // Clan Ammo
   // Ballistic * Ammo
@@ -265,8 +288,11 @@ export enum MechEquipmentName {
   C_AP_Gauss_Ammo = 'Clan AP Gauss Ammo',
   C_Hyper_Assault_Gauss_Ammo = 'Clan Hyper-Assault Gauss Ammo',
   C_Light_Machine_Gun_Ammo = 'Clan Light Machine Gun Ammo',
+  C_Light_Machine_Gun_Ammo_Half = 'Clan Light Machine Gun Ammo (1/2)',
   C_Machine_Gun_Ammo = 'Clan Machine Gun Ammo',
+  C_Machine_Gun_Ammo_Half = 'Clan Machine Gun Ammo (1/2)',
   C_Heavy_Machine_Gun_Ammo = 'Clan Heavy Machine Gun Ammo',
+  C_Heavy_Machine_Gun_Ammo_Half = 'Clan Heavy Machine Gun Ammo (1/2)',
 
   // Energy * Ammo
   C_Vehicle_Flamer_Ammo = 'Clan Vehicle Flamer Ammo',
@@ -274,10 +300,12 @@ export enum MechEquipmentName {
 
   // Missile * Ammo
   C_LRM_Ammo = 'Clan LRM Ammo',
+  C_LRM_Artemis_Ammo = 'Clan LRM + Artemis Ammo',
   C_LRM_Fragmentation_Ammo = 'Clan LRM Fragmentation Ammo',
   C_LRM_SWARM_Ammo = 'Clan LRM SWARM Ammo',
   C_LRM_Flare_Ammo = 'Clan LRM Flare Ammo',
   C_SRM_Ammo = 'Clan SRM Ammo',
+  C_SRM_Artemis_Ammo = 'Clan SRM + Artemis Ammo',
   C_SRM_Fragmentation_Ammo = 'Clan SRM Fragmentation Ammo',
   C_SRM_Harpoon_Ammo = 'Clan SRM Harpoon Ammo',
   C_SRM_Inferno_Ammo = 'Clan SRM Inferno Ammo',
@@ -415,19 +443,18 @@ export type EquipmentType =
   | MechEquipmentName.NARC_Launcher
   | MechEquipmentName.Improved_NARC_Launcher
   | MechEquipmentName.TAG
-  | MechEquipmentName.Artemis_IV
   | MechEquipmentName.Targeting_Computer
   | MechEquipmentName.C_AMS
   | MechEquipmentName.C_LAMS
   | MechEquipmentName.C_Active_Probe
   | MechEquipmentName.C_Light_Active_Probe
+  | MechEquipmentName.C_CASE
   | MechEquipmentName.C_ECM_Suite
   | MechEquipmentName.C_MASC
   | MechEquipmentName.C_NARC_Launcher
   | MechEquipmentName.C_TAG
   | MechEquipmentName.C_Light_TAG
   | MechEquipmentName.C_Targeting_Computer
-  | MechEquipmentName.C_Artemis_IV
 
 export type AmmoType =
   | MechEquipmentName.Autocannon_Ammo
@@ -446,17 +473,22 @@ export type AmmoType =
   | MechEquipmentName.Gauss_Ammo
   | MechEquipmentName.Heavy_Gauss_Ammo
   | MechEquipmentName.Light_Machine_Gun_Ammo
+  | MechEquipmentName.Light_Machine_Gun_Ammo_Half
   | MechEquipmentName.Machine_Gun_Ammo
+  | MechEquipmentName.Machine_Gun_Ammo_Half
   | MechEquipmentName.Heavy_Machine_Gun_Ammo
+  | MechEquipmentName.Heavy_Machine_Gun_Ammo_Half
   | MechEquipmentName.Vehicle_Flamer_Ammo
   | MechEquipmentName.Plasma_Rifle_Ammo
   | MechEquipmentName.LRM_Ammo
+  | MechEquipmentName.LRM_Artemis_Ammo
   | MechEquipmentName.LRM_Fragmentation_Ammo
   | MechEquipmentName.LRM_Incendiary_Ammo
   | MechEquipmentName.LRM_SWARM_Ammo
   | MechEquipmentName.LRM_Flare_Ammo
   | MechEquipmentName.MRM_Ammo
   | MechEquipmentName.SRM_Ammo
+  | MechEquipmentName.SRM_Artemis_Ammo
   | MechEquipmentName.SRM_Fragmentation_Ammo
   | MechEquipmentName.SRM_Harpoon_Ammo
   | MechEquipmentName.SRM_Inferno_Ammo
@@ -474,15 +506,20 @@ export type AmmoType =
   | MechEquipmentName.C_AP_Gauss_Ammo
   | MechEquipmentName.C_Hyper_Assault_Gauss_Ammo
   | MechEquipmentName.C_Light_Machine_Gun_Ammo
+  | MechEquipmentName.C_Light_Machine_Gun_Ammo_Half
   | MechEquipmentName.C_Machine_Gun_Ammo
+  | MechEquipmentName.C_Machine_Gun_Ammo_Half
   | MechEquipmentName.C_Heavy_Machine_Gun_Ammo
+  | MechEquipmentName.C_Heavy_Machine_Gun_Ammo_Half
   | MechEquipmentName.C_Vehicle_Flamer_Ammo
   | MechEquipmentName.C_Plasma_Cannon_Ammo
   | MechEquipmentName.C_LRM_Ammo
+  | MechEquipmentName.C_LRM_Artemis_Ammo
   | MechEquipmentName.C_LRM_Fragmentation_Ammo
   | MechEquipmentName.C_LRM_SWARM_Ammo
   | MechEquipmentName.C_LRM_Flare_Ammo
   | MechEquipmentName.C_SRM_Ammo
+  | MechEquipmentName.C_SRM_Artemis_Ammo
   | MechEquipmentName.C_SRM_Fragmentation_Ammo
   | MechEquipmentName.C_SRM_Harpoon_Ammo
   | MechEquipmentName.C_SRM_Inferno_Ammo

@@ -48,6 +48,7 @@ export interface IBaseMechPart {
   armor: number,
   hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
+  caseProtected: boolean,
 }
 
 const BaseMechPart = (
@@ -55,11 +56,13 @@ const BaseMechPart = (
   armor: number,
   hardpoints: IHardpoints,
   equipment: MechEquipmentName[],
+  caseProtected: boolean = false,
 ): IBaseMechPart => ({
   name,
   armor,
   hardpoints,
   equipment,
+  caseProtected,
 })
 
 export interface IHead extends IBaseMechPart {

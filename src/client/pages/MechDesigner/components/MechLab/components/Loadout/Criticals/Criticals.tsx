@@ -7,8 +7,10 @@ import { identity } from '../../../../../../../lib/functional'
 import { getCockpitCriticals, getLifeSupportCriticals, getSensorsCriticals } from '../../../../../../../models/Cockpit'
 import { getEngineCriticalSlotAllocation } from '../../../../../../../models/Engine'
 import { getGyroCriticals } from '../../../../../../../models/Gryo'
-import { getEquipmentCriticals } from '../../../../../../../models/MechEquipment'
+import { getEquipmentCriticals, getEquipmentMeta } from '../../../../../../../models/MechEquipment'
 import { MechEquipmentName } from '../../../../../../../models/MechEquipment/MechEquipmentName'
+import { MechEquipmentType } from '../../../../../../../models/MechEquipment/MechEquipmentType'
+import { getTargetingComputerWeight } from '../../../../../../../models/MechEquipment/MechEquipmentUtils'
 import { IMechDesignerMech } from '../../../../../state/constants'
 import { ICommonProps } from '../../../MechLab'
 import { getEquipmentDetailColor } from '../../Equipment/DragPreview'
@@ -49,15 +51,24 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
   }
 
   private getAllocated(part: IBaseMechPart): ICriticalDescriptor[] {
-    const { mech } = this.props
     return part.equipment.map((equipment): ICriticalDescriptor => {
-      const criticals = getEquipmentCriticals(mech.tonnage, mech.tech, equipment)
+      const criticals = this.getEquipmentCriticals(equipment)
       return {
         equipment,
         criticals,
         color: getEquipmentDetailColor(equipment),
       }
     })
+  }
+
+  private getEquipmentCriticals(equipment: MechEquipmentName) {
+    const { mech } = this.props
+
+    const meta = getEquipmentMeta(equipment)
+
+    return meta.type === MechEquipmentType.Targeting_Computer
+      ? getTargetingComputerWeight(mech.tonnage, mech.type, mech.tech, mech.loadout)
+      : getEquipmentCriticals(mech.tonnage, mech.tech, meta.name)
   }
 
   private getHeadEquipment(mech: IMechDesignerMech, head: IHead): ICriticals {

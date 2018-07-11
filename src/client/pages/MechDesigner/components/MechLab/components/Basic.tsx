@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Card } from '../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../components/Common/Detail'
 import { Select, StringInput } from '../../../../../components/Field'
+import { BooleanInput } from '../../../../../components/Field/Input'
 import { ISelectOption } from '../../../../../components/Field/Select/common'
 import { segment } from '../../../../../lib/functional'
 import { getCockpitTonnage } from '../../../../../models/Cockpit'
@@ -16,7 +17,8 @@ import { getAvaliableHeatsinkTypes, HeatsinkType } from '../../../../../models/H
 import { getInternalStructureTonnage } from '../../../../../models/InternalStructure'
 import { JumpJetType } from '../../../../../models/JumpJets'
 import { getArmorTonnage, MechTonnage } from '../../../../../models/Mech'
-import { getLoadoutTonnage } from '../../../../../models/MechEquipment/MechEquipmentUtils'
+import { geLoadoutHeatsinks, getLoadoutTonnage, getTargetingComputerWeight, hasTargetingComputerEquiped } from '../../../../../models/MechEquipment/MechEquipmentUtils'
+import { getAvaliableMissileGuidenceTypes, MissileGuidenceType } from '../../../../../models/MissileGuidenceType'
 import {
   DEAFULT_BIPEDAL_LOADOUT,
   DEAFULT_QUADRUPEDAL_LOADOUT,
@@ -108,6 +110,11 @@ export class Basic extends React.PureComponent<ICommonProps> {
           /> }
           color={DetailColor.TransparentBluishGrey}
         />
+        <Detail
+          label={'Omni \'Mech'}
+          value={ <BooleanInput name={`omni`} /> }
+          color={DetailColor.TransparentBluishGrey}
+        />
         { select('class') !== MechClass.SuperHeavy
           ? (
             <Detail
@@ -126,6 +133,15 @@ export class Basic extends React.PureComponent<ICommonProps> {
           value={ <Select
             name='heatsinkType'
             options={this.getHeatsinkTypes()}
+            alignment='Right'
+          /> }
+          color={DetailColor.TransparentBluishGrey}
+        />
+        <Detail
+          label='Missile Guidence'
+          value={ <Select
+            name='missileGuidenceType'
+            options={this.getMissileGuidenceTypes()}
             alignment='Right'
           /> }
           color={DetailColor.TransparentBluishGrey}
@@ -157,11 +173,19 @@ export class Basic extends React.PureComponent<ICommonProps> {
     const internal = getInternalStructureTonnage(mech.tonnage, mech.internalStructure)
     const armor = getArmorTonnage(mech.type, mech.tech, mech.armor, mech.loadout)
 
-    const engineInternalHeatsinks = Math.max(mech.internalHeatsinks - 10, 0)
-
     const loadoutTonnage = getLoadoutTonnage(mech.tonnage, mech.type, mech.loadout)
 
-    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor - loadoutTonnage - engineInternalHeatsinks
+    const totalHeatsinks = mech.internalHeatsinks + geLoadoutHeatsinks(mech.type, mech.loadout)
+
+    const heatsinkTonnage = totalHeatsinks <= 10
+      ? 0
+      : totalHeatsinks - 10
+
+    const targetingcomputerTonnage = hasTargetingComputerEquiped(mech.type, mech.loadout)
+      ? getTargetingComputerWeight(mech.tonnage, mech.type, mech.tech, mech.loadout)
+      : 0
+
+    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor - loadoutTonnage - heatsinkTonnage - targetingcomputerTonnage
 
     return amount
   }
@@ -174,5 +198,10 @@ export class Basic extends React.PureComponent<ICommonProps> {
   private getHeatsinkTypes(): Array<ISelectOption<HeatsinkType>> {
     return getAvaliableHeatsinkTypes(this.props.mech.tech)
       .map(heatsink => ({ value: heatsink, name: heatsink }))
+  }
+
+  private getMissileGuidenceTypes(): Array<ISelectOption<MissileGuidenceType>> {
+    return getAvaliableMissileGuidenceTypes()
+      .map(missileGuidence => ({ value: missileGuidence, name: missileGuidence }))
   }
 }

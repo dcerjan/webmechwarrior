@@ -5,6 +5,7 @@ import { Detail, DetailColor } from '../../../../../../components/Common/Detail'
 import { getEquipmentCriticals, getEquipmentType } from '../../../../../../models/MechEquipment'
 import { MechEquipmentName } from '../../../../../../models/MechEquipment/MechEquipmentName'
 import { MechEquipmentType } from '../../../../../../models/MechEquipment/MechEquipmentType'
+import { getTargetingComputerWeight } from '../../../../../../models/MechEquipment/MechEquipmentUtils'
 import { IMechDesignerMech } from '../../../../state/constants'
 import { IDragedEquipment } from '../DnD'
 
@@ -62,7 +63,7 @@ export const getEquipmentDetailColor = (equipment: MechEquipmentName): DetailCol
 
 export class Preview extends React.PureComponent<IDragPreviewLayerProps> {
   public render() {
-    const { item, isDragging, mech } = this.props
+    const { item, isDragging } = this.props
 
     return isDragging
       ? (
@@ -71,12 +72,20 @@ export class Preview extends React.PureComponent<IDragPreviewLayerProps> {
             <Detail
               label={item.item.name}
               color={getEquipmentDetailColor(item.item.name)}
-              style={{ height: getEquipmentCriticals(mech.tonnage, mech.tech, item.item.name) * 20 }}
+              style={{ height: this.getItemCriticals() * 20 }}
             />
           </Card>
         </div>
       )
       : null
+  }
+
+  private getItemCriticals() {
+    const { item, mech } = this.props
+
+    return item.item.type === MechEquipmentType.Targeting_Computer
+      ? getTargetingComputerWeight(mech.tonnage, mech.type, mech.tech, mech.loadout)
+      : getEquipmentCriticals(mech.tonnage, mech.tech, item.item.name)
   }
 }
 

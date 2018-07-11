@@ -92,12 +92,15 @@ export const ISHeavyGaussAmmo = [
 ] as AmmoType[]
 export const ISLightMachingeunAmmo = [
   N.Light_Machine_Gun_Ammo,
+  N.Light_Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ISMachingeunAmmo = [
   N.Machine_Gun_Ammo,
+  N.Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ISHeavyMachingeunAmmo = [
   N.Heavy_Machine_Gun_Ammo,
+  N.Heavy_Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ISAMSAmmo = [
   N.AMS_Ammo,
@@ -115,6 +118,9 @@ export const ISLRMAmmo = [
   N.LRM_SWARM_Ammo,
   N.LRM_Flare_Ammo,
 ] as AmmoType[]
+export const ISLRMArtemisAmmo = [
+  N.LRM_Artemis_Ammo,
+] as AmmoType[]
 export const ISMRMAmmo = [
   N.MRM_Ammo,
 ] as AmmoType[]
@@ -123,6 +129,9 @@ export const ISSRMAmmo = [
   N.SRM_Fragmentation_Ammo,
   N.SRM_Harpoon_Ammo,
   N.SRM_Inferno_Ammo,
+] as AmmoType[]
+export const ISSRMArtemisAmmo = [
+  N.SRM_Artemis_Ammo,
 ] as AmmoType[]
 export const ISStreakSRMAmmo = [
   N.Streak_SRM_Ammo,
@@ -137,6 +146,10 @@ export const ISMMLAmmo = [
   N.SRM_Fragmentation_Ammo,
   N.SRM_Harpoon_Ammo,
   N.SRM_Inferno_Ammo,
+] as AmmoType[]
+export const ISMMLArtemisAmmo = [
+  N.LRM_Artemis_Ammo,
+  N.SRM_Artemis_Ammo,
 ] as AmmoType[]
 export const ISNARCAmmo = [
   N.NARC_Ammo,
@@ -166,12 +179,15 @@ export const ClanHAGaussAmmo = [
 ] as AmmoType[]
 export const ClanLightMachingeunAmmo = [
   N.C_Light_Machine_Gun_Ammo,
+  N.C_Light_Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ClanMachingeunAmmo = [
   N.C_Machine_Gun_Ammo,
+  N.C_Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ClanHeavyMachingeunAmmo = [
   N.C_Heavy_Machine_Gun_Ammo,
+  N.C_Heavy_Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ClanAMSAmmo = [
   N.C_AMS_Ammo,
@@ -188,6 +204,9 @@ export const ClanLRMAmmo = [
   N.C_LRM_SWARM_Ammo,
   N.C_LRM_Flare_Ammo,
 ] as AmmoType[]
+export const ClanLRMArtemisAmmo = [
+  N.C_LRM_Artemis_Ammo,
+] as AmmoType[]
 export const ClanATMAmmo = [
   N.C_ATM_Ammo,
   N.C_ATM_ER_Ammo,
@@ -198,6 +217,9 @@ export const ClanSRMAmmo = [
   N.C_SRM_Fragmentation_Ammo,
   N.C_SRM_Harpoon_Ammo,
   N.C_SRM_Inferno_Ammo,
+] as AmmoType[]
+export const ClanSRMArtemisAmmo = [
+  N.C_SRM_Artemis_Ammo,
 ] as AmmoType[]
 export const ClanStreakSRMAmmo = [
   N.C_Streak_SRM_Ammo,
@@ -259,13 +281,24 @@ export const MechEquipmentTable = {
   [N.LRM_10]:                   MechEquipmentRecord(N.LRM_10,                   T.LRM,                Tech.IS,  4, [         1], 10, [ 6,  7, 14, 21],                ISLRMAmmo,  12,  5.0,  2, Availability.C, []),
   [N.LRM_15]:                   MechEquipmentRecord(N.LRM_15,                   T.LRM,                Tech.IS,  5, [         1], 15, [ 6,  7, 14, 21],                ISLRMAmmo,   8,  7.0,  3, Availability.C, []),
   [N.LRM_20]:                   MechEquipmentRecord(N.LRM_20,                   T.LRM,                Tech.IS,  6, [         1], 20, [ 6,  7, 14, 21],                ISLRMAmmo,   6, 10.0,  5, Availability.C, []),
+  [N.LRM_5_Artemis_IV]:         MechEquipmentRecord(N.LRM_5_Artemis_IV,         T.LRM,                Tech.IS,  2, [         1],  5, [ 6,  7, 14, 21],         ISLRMArtemisAmmo,  24,  3.0,  2, Availability.E, []),
+  [N.LRM_10_Artemis_IV]:        MechEquipmentRecord(N.LRM_10_Artemis_IV,        T.LRM,                Tech.IS,  4, [         1], 10, [ 6,  7, 14, 21],         ISLRMArtemisAmmo,  12,  6.0,  3, Availability.E, []),
+  [N.LRM_15_Artemis_IV]:        MechEquipmentRecord(N.LRM_15_Artemis_IV,        T.LRM,                Tech.IS,  5, [         1], 15, [ 6,  7, 14, 21],         ISLRMArtemisAmmo,   8,  8.0,  4, Availability.E, []),
+  [N.LRM_20_Artemis_IV]:        MechEquipmentRecord(N.LRM_20_Artemis_IV,        T.LRM,                Tech.IS,  6, [         1], 20, [ 6,  7, 14, 21],         ISLRMArtemisAmmo,   6, 11.0,  6, Availability.E, []),
   [N.MML_3]:                    MechEquipmentRecord(N.MML_3,                    T.MML,                Tech.IS,  2, [         1],  3, [ 6,  7, 14, 21],                ISMMLAmmo,  40,  1.5,  2, Availability.E, []),
   [N.MML_5]:                    MechEquipmentRecord(N.MML_5,                    T.MML,                Tech.IS,  3, [         1],  5, [ 6,  7, 14, 21],                ISMMLAmmo,  24,  3.0,  3, Availability.E, []),
   [N.MML_7]:                    MechEquipmentRecord(N.MML_7,                    T.MML,                Tech.IS,  4, [         1],  6, [ 6,  7, 14, 21],                ISMMLAmmo,  17,  4.5,  4, Availability.E, []),
   [N.MML_9]:                    MechEquipmentRecord(N.MML_9,                    T.MML,                Tech.IS,  5, [         1],  9, [ 6,  7, 14, 21],                ISMMLAmmo,  13,  6.0,  5, Availability.E, []),
+  [N.MML_3_Artemis_IV]:         MechEquipmentRecord(N.MML_3_Artemis_IV,         T.MML,                Tech.IS,  2, [         1],  3, [ 6,  7, 14, 21],         ISMMLArtemisAmmo,  40,  2.5,  3, Availability.E, []),
+  [N.MML_5_Artemis_IV]:         MechEquipmentRecord(N.MML_5_Artemis_IV,         T.MML,                Tech.IS,  3, [         1],  5, [ 6,  7, 14, 21],         ISMMLArtemisAmmo,  24,  4.0,  4, Availability.E, []),
+  [N.MML_7_Artemis_IV]:         MechEquipmentRecord(N.MML_7_Artemis_IV,         T.MML,                Tech.IS,  4, [         1],  6, [ 6,  7, 14, 21],         ISMMLArtemisAmmo,  17,  5.5,  5, Availability.E, []),
+  [N.MML_9_Artemis_IV]:         MechEquipmentRecord(N.MML_9_Artemis_IV,         T.MML,                Tech.IS,  5, [         1],  9, [ 6,  7, 14, 21],         ISMMLArtemisAmmo,  13,  7.0,  6, Availability.E, []),
   [N.SRM_2]:                    MechEquipmentRecord(N.SRM_2,                    T.SRM,                Tech.IS,  2, [         2],  2, [ 0,  3,  6,  9],                ISSRMAmmo,  50,  1.0,  1, Availability.C, []),
   [N.SRM_4]:                    MechEquipmentRecord(N.SRM_4,                    T.SRM,                Tech.IS,  3, [         2],  4, [ 0,  3,  6,  9],                ISSRMAmmo,  25,  2.0,  1, Availability.C, []),
   [N.SRM_6]:                    MechEquipmentRecord(N.SRM_6,                    T.SRM,                Tech.IS,  4, [         2],  6, [ 0,  3,  6,  9],                ISSRMAmmo,  15,  3.0,  2, Availability.C, []),
+  [N.SRM_2_Artemis_IV]:         MechEquipmentRecord(N.SRM_2_Artemis_IV,         T.SRM,                Tech.IS,  2, [         2],  2, [ 0,  3,  6,  9],         ISSRMArtemisAmmo,  50,  2.0,  2, Availability.E, []),
+  [N.SRM_4_Artemis_IV]:         MechEquipmentRecord(N.SRM_4_Artemis_IV,         T.SRM,                Tech.IS,  3, [         2],  4, [ 0,  3,  6,  9],         ISSRMArtemisAmmo,  25,  3.0,  2, Availability.E, []),
+  [N.SRM_6_Artemis_IV]:         MechEquipmentRecord(N.SRM_6_Artemis_IV,         T.SRM,                Tech.IS,  4, [         2],  6, [ 0,  3,  6,  9],         ISSRMArtemisAmmo,  15,  4.0,  3, Availability.E, []),
   [N.Streak_SRM_2]:             MechEquipmentRecord(N.Streak_SRM_2,             T.SRM,                Tech.IS,  2, [         2],  2, [ 0,  3,  6,  9],          ISStreakSRMAmmo,  50,  1.5,  1, Availability.E, []),
   [N.Streak_SRM_4]:             MechEquipmentRecord(N.Streak_SRM_4,             T.SRM,                Tech.IS,  3, [         2],  4, [ 0,  3,  6,  9],          ISStreakSRMAmmo,  25,  3.0,  1, Availability.E, []),
   [N.Streak_SRM_6]:             MechEquipmentRecord(N.Streak_SRM_6,             T.SRM,                Tech.IS,  4, [         2],  6, [ 0,  3,  6,  9],          ISStreakSRMAmmo,  15,  4.5,  2, Availability.E, []),
@@ -280,14 +313,16 @@ export const MechEquipmentTable = {
   [N.LAMS]:                     MechEquipmentRecord(N.LAMS,                     T.Laser_AMS,          Tech.IS,  2, [         1],  1, [ 0,  1, -1, -1],                       [],   0,  1.5,  2, Availability.F, []),
   [N.Beagle_Active_Probe]:      MechEquipmentRecord(N.Beagle_Active_Probe,      T.Active_Probe,       Tech.IS,  0, [         0],  0, [ 0,  0,  0,  4],                       [],   0,  1.5,  2, Availability.E, []),
   [N.CASE]:                     MechEquipmentRecord(N.CASE,                     T.CASE,               Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.5,  1, Availability.D, []),
+  [N.MASC]:                     MechEquipmentRecord(N.MASC,                     T.MASC,               Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.E, []),
+  [N.TSM]:                      MechEquipmentRecord(N.TSM,                      T.TSM,                Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  1, Availability.E, []),
   [N.C3_Computer_Master]:       MechEquipmentRecord(N.C3_Computer_Master,       T.C3_Computer,        Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  5.0,  5, Availability.E, []),
   [N.C3_Computer_Slave]:        MechEquipmentRecord(N.C3_Computer_Slave,        T.C3_Computer,        Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  1.0,  1, Availability.E, []),
   [N.Improved_C3_Computer]:     MechEquipmentRecord(N.Improved_C3_Computer,     T.C3_Computer,        Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  2.5,  2, Availability.E, []),
   [N.Guardian_ECM_Suite]:       MechEquipmentRecord(N.Guardian_ECM_Suite,       T.ECM_Suite,          Tech.IS,  0, [         0],  0, [ 0,  0,  0,  6],                       [],   0,  1.5,  2, Availability.E, []),
   [N.NARC_Launcher]:            MechEquipmentRecord(N.NARC_Launcher,            T.NARC_Launcher,      Tech.IS,  0, [         0],  1, [ 0,  3,  6,  9],               ISNARCAmmo,   6,  3.0,  2, Availability.E, []),
   [N.Improved_NARC_Launcher]:   MechEquipmentRecord(N.Improved_NARC_Launcher,   T.NARC_Launcher,      Tech.IS,  0, [         0],  1, [ 0,  4,  9, 15],               ISNARCAmmo,   4,  5.0,  3, Availability.E, []),
+  [N.Targeting_Computer]:       MechEquipmentRecord(N.Targeting_Computer,       T.Targeting_Computer, Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.E, []),
   [N.TAG]:                      MechEquipmentRecord(N.TAG,                      T.TAG,                Tech.IS,  0, [         0],  0, [ 0,  5,  9, 15],                       [],   0,  1.0,  1, Availability.B, []),
-  [N.Artemis_IV]:               MechEquipmentRecord(N.Artemis_IV,               T.Artemis_IV,         Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  1.0,  1, Availability.B, []),
   [N.Autocannon_Ammo]:                      MechEquipmentRecord(N.Autocannon_Ammo,                      T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Autocannon_Armor_Piercing_Ammo]:       MechEquipmentRecord(N.Autocannon_Armor_Piercing_Ammo,       T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Autocannon_Flechette_Ammo]:            MechEquipmentRecord(N.Autocannon_Flechette_Ammo,            T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
@@ -302,20 +337,25 @@ export const MechEquipmentTable = {
   [N.Ultra_Autocannon_Ammo]:                MechEquipmentRecord(N.Ultra_Autocannon_Ammo,                T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Light_Gauss_Ammo]:                     MechEquipmentRecord(N.Light_Gauss_Ammo,                     T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Gauss_Ammo]:                           MechEquipmentRecord(N.Gauss_Ammo,                           T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
-  [N.Heavy_Gauss_Ammo]:                     MechEquipmentRecord(N.Heavy_Gauss_Ammo,                     T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.Heavy_Gauss_Ammo]:                     MechEquipmentRecord(N.Heavy_Gauss_Ammo,                     T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 2.0, 2, Availability.X, []),
   [N.Light_Machine_Gun_Ammo]:               MechEquipmentRecord(N.Light_Machine_Gun_Ammo,               T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.Light_Machine_Gun_Ammo_Half]:          MechEquipmentRecord(N.Light_Machine_Gun_Ammo_Half,          T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.Machine_Gun_Ammo]:                     MechEquipmentRecord(N.Machine_Gun_Ammo,                     T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.Machine_Gun_Ammo_Half]:                MechEquipmentRecord(N.Machine_Gun_Ammo_Half,                T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.Heavy_Machine_Gun_Ammo]:               MechEquipmentRecord(N.Heavy_Machine_Gun_Ammo,               T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.Heavy_Machine_Gun_Ammo_Half]:          MechEquipmentRecord(N.Heavy_Machine_Gun_Ammo_Half,          T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.AMS_Ammo]:                             MechEquipmentRecord(N.AMS_Ammo,                             T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Vehicle_Flamer_Ammo]:                  MechEquipmentRecord(N.Vehicle_Flamer_Ammo,                     T.EnergyAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Plasma_Rifle_Ammo]:                    MechEquipmentRecord(N.Plasma_Rifle_Ammo,                       T.EnergyAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.LRM_Ammo]:                             MechEquipmentRecord(N.LRM_Ammo,                               T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.LRM_Artemis_Ammo]:                     MechEquipmentRecord(N.LRM_Artemis_Ammo,                       T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.LRM_Fragmentation_Ammo]:               MechEquipmentRecord(N.LRM_Fragmentation_Ammo,                 T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.LRM_Incendiary_Ammo]:                  MechEquipmentRecord(N.LRM_Incendiary_Ammo,                    T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.LRM_SWARM_Ammo]:                       MechEquipmentRecord(N.LRM_SWARM_Ammo,                         T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.LRM_Flare_Ammo]:                       MechEquipmentRecord(N.LRM_Flare_Ammo,                         T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.MRM_Ammo]:                             MechEquipmentRecord(N.MRM_Ammo,                               T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.SRM_Ammo]:                             MechEquipmentRecord(N.SRM_Ammo,                               T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.SRM_Artemis_Ammo]:                     MechEquipmentRecord(N.SRM_Artemis_Ammo,                       T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.SRM_Fragmentation_Ammo]:               MechEquipmentRecord(N.SRM_Fragmentation_Ammo,                 T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.SRM_Harpoon_Ammo]:                     MechEquipmentRecord(N.SRM_Harpoon_Ammo,                       T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.SRM_Inferno_Ammo]:                     MechEquipmentRecord(N.SRM_Inferno_Ammo,                       T.MissileAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
@@ -366,21 +406,30 @@ export const MechEquipmentTable = {
   [N.C_LRM_10]:                 MechEquipmentRecord(N.C_LRM_10,                 T.LRM,              Tech.Clan,  4, [         1], 10, [ 0,  7, 14, 21],              ClanLRMAmmo,  12,  2.5,  1, Availability.F, []),
   [N.C_LRM_15]:                 MechEquipmentRecord(N.C_LRM_15,                 T.LRM,              Tech.Clan,  5, [         1], 15, [ 0,  7, 14, 21],              ClanLRMAmmo,   8,  3.5,  2, Availability.F, []),
   [N.C_LRM_20]:                 MechEquipmentRecord(N.C_LRM_20,                 T.LRM,              Tech.Clan,  6, [         1], 20, [ 0,  7, 14, 21],              ClanLRMAmmo,   6,  5.0,  4, Availability.F, []),
+  [N.C_LRM_5_Artemis_IV]:       MechEquipmentRecord(N.C_LRM_5_Artemis_IV,       T.LRM,              Tech.Clan,  2, [         1],  5, [ 0,  7, 14, 21],       ClanLRMArtemisAmmo,  24,  2.0,  2, Availability.F, []),
+  [N.C_LRM_10_Artemis_IV]:      MechEquipmentRecord(N.C_LRM_10_Artemis_IV,      T.LRM,              Tech.Clan,  4, [         1], 10, [ 0,  7, 14, 21],       ClanLRMArtemisAmmo,  12,  3.5,  2, Availability.F, []),
+  [N.C_LRM_15_Artemis_IV]:      MechEquipmentRecord(N.C_LRM_15_Artemis_IV,      T.LRM,              Tech.Clan,  5, [         1], 15, [ 0,  7, 14, 21],       ClanLRMArtemisAmmo,   8,  4.5,  3, Availability.F, []),
+  [N.C_LRM_20_Artemis_IV]:      MechEquipmentRecord(N.C_LRM_20_Artemis_IV,      T.LRM,              Tech.Clan,  6, [         1], 20, [ 0,  7, 14, 21],       ClanLRMArtemisAmmo,   6,  6.0,  5, Availability.F, []),
   [N.C_SRM_2]:                  MechEquipmentRecord(N.C_SRM_2,                  T.SRM,              Tech.Clan,  2, [         2],  2, [ 0,  3,  6,  9],              ClanSRMAmmo,  50,  0.5,  1, Availability.F, []),
   [N.C_SRM_4]:                  MechEquipmentRecord(N.C_SRM_4,                  T.SRM,              Tech.Clan,  3, [         2],  4, [ 0,  3,  6,  9],              ClanSRMAmmo,  25,  1.0,  1, Availability.F, []),
   [N.C_SRM_6]:                  MechEquipmentRecord(N.C_SRM_6,                  T.SRM,              Tech.Clan,  4, [         2],  6, [ 0,  3,  6,  9],              ClanSRMAmmo,  15,  1.5,  1, Availability.F, []),
+  [N.C_SRM_2_Artemis_IV]:       MechEquipmentRecord(N.C_SRM_2_Artemis_IV,       T.SRM,              Tech.Clan,  2, [         2],  2, [ 0,  3,  6,  9],              ClanSRMAmmo,  50,  1.5,  2, Availability.F, []),
+  [N.C_SRM_4_Artemis_IV]:       MechEquipmentRecord(N.C_SRM_4_Artemis_IV,       T.SRM,              Tech.Clan,  3, [         2],  4, [ 0,  3,  6,  9],              ClanSRMAmmo,  25,  2.0,  2, Availability.F, []),
+  [N.C_SRM_6_Artemis_IV]:       MechEquipmentRecord(N.C_SRM_6_Artemis_IV,       T.SRM,              Tech.Clan,  4, [         2],  6, [ 0,  3,  6,  9],              ClanSRMAmmo,  15,  3.5,  2, Availability.F, []),
   [N.C_Streak_SRM_2]:           MechEquipmentRecord(N.C_Streak_SRM_2,           T.SRM,              Tech.Clan,  2, [         2],  2, [ 0,  4,  8, 12],        ClanStreakSRMAmmo,  50,  1.0,  1, Availability.F, []),
   [N.C_Streak_SRM_4]:           MechEquipmentRecord(N.C_Streak_SRM_4,           T.SRM,              Tech.Clan,  3, [         2],  4, [ 0,  4,  8, 12],        ClanStreakSRMAmmo,  25,  2.0,  1, Availability.F, []),
   [N.C_Streak_SRM_6]:           MechEquipmentRecord(N.C_Streak_SRM_6,           T.SRM,              Tech.Clan,  4, [         2],  6, [ 0,  3,  6,  9],        ClanStreakSRMAmmo,  15,  3.0,  2, Availability.F, []),
   [N.C_AMS]:                    MechEquipmentRecord(N.C_AMS,                    T.AMS,              Tech.Clan,  1, [         1],  1, [ 0,  1, -1, -1],              ClanAMSAmmo,  24,  0.5,  1, Availability.F, []),
   [N.C_LAMS]:                   MechEquipmentRecord(N.C_LAMS,                   T.Laser_AMS,        Tech.Clan,  2, [         1],  1, [ 0,  1, -1, -1],                       [],   0,  1.0,  1, Availability.F, []),
+  [N.C_CASE]:                   MechEquipmentRecord(N.C_CASE,                   T.CASE,             Tech.Clan,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.F, []),
+  [N.C_MASC]:                   MechEquipmentRecord(N.MASC,                     T.MASC,               Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.F, []),
   [N.C_Active_Probe]:           MechEquipmentRecord(N.C_Active_Probe,           T.Active_Probe,     Tech.Clan,  0, [         0],  0, [ 0,  0,  0,  5],                       [],   0,  1.0,  1, Availability.E, []),
   [N.C_Light_Active_Probe]:     MechEquipmentRecord(N.C_Light_Active_Probe,     T.Active_Probe,     Tech.Clan,  0, [         0],  0, [ 0,  0,  0,  3],                       [],   0,  0.5,  0, Availability.F, []),
   [N.C_ECM_Suite]:              MechEquipmentRecord(N.C_ECM_Suite,              T.ECM_Suite,        Tech.Clan,  0, [         0],  0, [ 0,  0,  0,  6],                       [],   0,  1.0,  1, Availability.F, []),
   [N.C_NARC_Launcher]:          MechEquipmentRecord(N.C_NARC_Launcher,          T.NARC_Launcher,    Tech.Clan,  0, [         0],  1, [ 0,  4,  8, 12],             ClanNARCAmmo,   6,  2.0,  1, Availability.F, []),
+  [N.C_Targeting_Computer]:     MechEquipmentRecord(N.C_Targeting_Computer,   T.Targeting_Computer, Tech.Clan,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.E, []),
   [N.C_TAG]:                    MechEquipmentRecord(N.C_TAG,                    T.TAG,              Tech.Clan,  0, [         0],  0, [ 0,  5,  9, 15],                       [],   0,  1.0,  1, Availability.E, []),
   [N.C_Light_TAG]:              MechEquipmentRecord(N.C_Light_TAG,              T.TAG,              Tech.Clan,  0, [         0],  0, [ 0,  3,  6,  9],                       [],   0,  0.5,  1, Availability.E, []),
-  [N.C_Artemis_IV]:             MechEquipmentRecord(N.C_Artemis_IV,             T.Artemis_IV,       Tech.Clan,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  1.0,  1, Availability.F, []),
   [N.C_LB_X_Autocannon_Ammo]:                 MechEquipmentRecord(N.C_LB_X_Autocannon_Ammo,               T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_LB_X_Autocannon_Cluster_Ammo]:         MechEquipmentRecord(N.C_LB_X_Autocannon_Cluster_Ammo,       T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_Ultra_Autocannon_Ammo]:                MechEquipmentRecord(N.C_Ultra_Autocannon_Ammo,              T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
@@ -388,19 +437,24 @@ export const MechEquipmentTable = {
   [N.C_Gauss_Ammo]:                           MechEquipmentRecord(N.C_Gauss_Ammo,                         T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_Hyper_Assault_Gauss_Ammo]:             MechEquipmentRecord(N.C_Hyper_Assault_Gauss_Ammo,           T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_Light_Machine_Gun_Ammo]:               MechEquipmentRecord(N.C_Light_Machine_Gun_Ammo,             T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.C_Light_Machine_Gun_Ammo_Half]:          MechEquipmentRecord(N.C_Light_Machine_Gun_Ammo_Half,        T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.C_Machine_Gun_Ammo]:                     MechEquipmentRecord(N.C_Machine_Gun_Ammo,                   T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.C_Machine_Gun_Ammo_Half]:                MechEquipmentRecord(N.C_Machine_Gun_Ammo_Half,              T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.C_Heavy_Machine_Gun_Ammo]:               MechEquipmentRecord(N.C_Heavy_Machine_Gun_Ammo,             T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.C_Heavy_Machine_Gun_Ammo_Half]:          MechEquipmentRecord(N.C_Heavy_Machine_Gun_Ammo_Half,        T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.C_AMS_Ammo]:                             MechEquipmentRecord(N.C_AMS_Ammo,                           T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_Vehicle_Flamer_Ammo]:                  MechEquipmentRecord(N.C_Vehicle_Flamer_Ammo,                   T.EnergyAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_Plasma_Cannon_Ammo]:                   MechEquipmentRecord(N.C_Plasma_Cannon_Ammo,                    T.EnergyAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_LRM_Ammo]:                             MechEquipmentRecord(N.C_LRM_Ammo,                             T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.C_LRM_Artemis_Ammo]:                     MechEquipmentRecord(N.C_LRM_Artemis_Ammo,                     T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_LRM_Fragmentation_Ammo]:               MechEquipmentRecord(N.C_LRM_Fragmentation_Ammo,               T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_LRM_SWARM_Ammo]:                       MechEquipmentRecord(N.C_LRM_SWARM_Ammo,                       T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_LRM_Flare_Ammo]:                       MechEquipmentRecord(N.C_LRM_Flare_Ammo,                       T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_ATM_Ammo]:                             MechEquipmentRecord(N.C_ATM_Ammo,                             T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
-  [N.C_ATM_ER_Ammo]:                           MechEquipmentRecord(N.C_ATM_ER_Ammo,                         T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
-  [N.C_ATM_HE_Ammo]:                           MechEquipmentRecord(N.C_ATM_HE_Ammo,                         T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.C_ATM_ER_Ammo]:                          MechEquipmentRecord(N.C_ATM_ER_Ammo,                          T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.C_ATM_HE_Ammo]:                          MechEquipmentRecord(N.C_ATM_HE_Ammo,                          T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_SRM_Ammo]:                             MechEquipmentRecord(N.C_SRM_Ammo,                             T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.C_SRM_Artemis_Ammo]:                     MechEquipmentRecord(N.C_SRM_Artemis_Ammo,                     T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_SRM_Fragmentation_Ammo]:               MechEquipmentRecord(N.C_SRM_Fragmentation_Ammo,               T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_SRM_Harpoon_Ammo]:                     MechEquipmentRecord(N.C_SRM_Harpoon_Ammo,                     T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_SRM_Inferno_Ammo]:                     MechEquipmentRecord(N.C_SRM_Inferno_Ammo,                     T.MissileAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
@@ -452,6 +506,16 @@ export const getEquipmentTonnage = (mechTonnage: MechTonnage, equipment: MechEqu
     return eq.name === N.Improved_Jump_Jet
       ? 2.0 * tonnage
       : tonnage
+  } else if (eq.type === T.MASC) {
+    const tonnage = (() => {
+      if (eq.name === N.MASC) {
+        return Math.round(mechTonnage / 20)
+      } else {
+        return Math.round(mechTonnage / 25)
+      }
+    })()
+
+    return tonnage
   } else {
     return eq.tonnage
   }
@@ -467,6 +531,16 @@ export const getEquipmentCriticals = (mechTonnage: MechTonnage, tech: Tech, equi
         return 3
       }
     }
+  } else if (eq.type === T.MASC) {
+    const criticals = (() => {
+      if (eq.name === N.MASC) {
+        return Math.round(mechTonnage / 20)
+      } else {
+        return Math.round(mechTonnage / 25)
+      }
+    })()
+
+    return criticals
   }
   return eq.criticals
 }

@@ -2,8 +2,10 @@ import * as React from 'react'
 import { Card } from '../../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../../components/Common/Detail'
 import { Range } from '../../../../../../components/Field'
+import { BooleanInput } from '../../../../../../components/Field/Input'
 import { getMaxArmorForPart } from '../../../../../../models/Armor'
 import { IHead } from '../../../../../../models/common/MechComponent'
+import { Tech } from '../../../../../../models/common/Tech'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
 import { ICommonProps } from '../../MechLab'
 import { Criticals } from './Criticals'
@@ -36,6 +38,9 @@ export class Head extends React.PureComponent<IHeadProps> {
         />
         <Detail label='Structure' value={this.getHeadStructure()} color={DetailColor.TransparentBluishGrey} />
         <Hardpoints hardpoints={head.hardpoints} component={head.name} />
+        { mech.tech === Tech.Clan
+          ? <Detail label='CASE Protected' value={ <BooleanInput name={`loadout.${head.name}.caseProtected`} /> } color={DetailColor.TransparentBluishGrey} />
+          : null }
       </Card>
     )
   }

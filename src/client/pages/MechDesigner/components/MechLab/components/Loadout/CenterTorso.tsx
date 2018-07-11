@@ -2,8 +2,10 @@ import * as React from 'react'
 import { Card } from '../../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../../components/Common/Detail'
 import { Range } from '../../../../../../components/Field'
+import { BooleanInput } from '../../../../../../components/Field/Input'
 import { getMaxArmorForPart } from '../../../../../../models/Armor'
 import { ICenterTorso } from '../../../../../../models/common/MechComponent'
+import { Tech } from '../../../../../../models/common/Tech'
 import { getInternalStructureHitPoints } from '../../../../../../models/InternalStructure'
 import { ICommonProps } from '../../MechLab'
 import { Criticals } from './Criticals'
@@ -48,6 +50,9 @@ export class CenterTorso extends React.PureComponent<ICenterTorsoProps> {
         />
         <Detail label='Structure' value={this.getCenterTorsoStructure()} color={DetailColor.TransparentBluishGrey} />
         <Hardpoints hardpoints={centerTorso.hardpoints} component={centerTorso.name} />
+        { mech.tech === Tech.Clan
+          ? <Detail label='CASE Protected' value={ <BooleanInput name={`loadout.${centerTorso.name}.caseProtected`} /> } color={DetailColor.TransparentBluishGrey} />
+          : null }
       </Card>
     )
   }
