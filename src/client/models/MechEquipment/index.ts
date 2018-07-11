@@ -92,12 +92,15 @@ export const ISHeavyGaussAmmo = [
 ] as AmmoType[]
 export const ISLightMachingeunAmmo = [
   N.Light_Machine_Gun_Ammo,
+  N.Light_Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ISMachingeunAmmo = [
   N.Machine_Gun_Ammo,
+  N.Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ISHeavyMachingeunAmmo = [
   N.Heavy_Machine_Gun_Ammo,
+  N.Heavy_Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ISAMSAmmo = [
   N.AMS_Ammo,
@@ -176,12 +179,15 @@ export const ClanHAGaussAmmo = [
 ] as AmmoType[]
 export const ClanLightMachingeunAmmo = [
   N.C_Light_Machine_Gun_Ammo,
+  N.C_Light_Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ClanMachingeunAmmo = [
   N.C_Machine_Gun_Ammo,
+  N.C_Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ClanHeavyMachingeunAmmo = [
   N.C_Heavy_Machine_Gun_Ammo,
+  N.C_Heavy_Machine_Gun_Ammo_Half,
 ] as AmmoType[]
 export const ClanAMSAmmo = [
   N.C_AMS_Ammo,
@@ -330,8 +336,11 @@ export const MechEquipmentTable = {
   [N.Gauss_Ammo]:                           MechEquipmentRecord(N.Gauss_Ammo,                           T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Heavy_Gauss_Ammo]:                     MechEquipmentRecord(N.Heavy_Gauss_Ammo,                     T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 2.0, 2, Availability.X, []),
   [N.Light_Machine_Gun_Ammo]:               MechEquipmentRecord(N.Light_Machine_Gun_Ammo,               T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.Light_Machine_Gun_Ammo_Half]:          MechEquipmentRecord(N.Light_Machine_Gun_Ammo_Half,          T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.Machine_Gun_Ammo]:                     MechEquipmentRecord(N.Machine_Gun_Ammo,                     T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.Machine_Gun_Ammo_Half]:                MechEquipmentRecord(N.Machine_Gun_Ammo_Half,                T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.Heavy_Machine_Gun_Ammo]:               MechEquipmentRecord(N.Heavy_Machine_Gun_Ammo,               T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.Heavy_Machine_Gun_Ammo_Half]:          MechEquipmentRecord(N.Heavy_Machine_Gun_Ammo_Half,          T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.AMS_Ammo]:                             MechEquipmentRecord(N.AMS_Ammo,                             T.BallisticAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Vehicle_Flamer_Ammo]:                  MechEquipmentRecord(N.Vehicle_Flamer_Ammo,                     T.EnergyAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.Plasma_Rifle_Ammo]:                    MechEquipmentRecord(N.Plasma_Rifle_Ammo,                       T.EnergyAmmo, Tech.IS, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
@@ -423,8 +432,11 @@ export const MechEquipmentTable = {
   [N.C_Gauss_Ammo]:                           MechEquipmentRecord(N.C_Gauss_Ammo,                         T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_Hyper_Assault_Gauss_Ammo]:             MechEquipmentRecord(N.C_Hyper_Assault_Gauss_Ammo,           T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_Light_Machine_Gun_Ammo]:               MechEquipmentRecord(N.C_Light_Machine_Gun_Ammo,             T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.C_Light_Machine_Gun_Ammo_Half]:          MechEquipmentRecord(N.C_Light_Machine_Gun_Ammo_Half,        T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.C_Machine_Gun_Ammo]:                     MechEquipmentRecord(N.C_Machine_Gun_Ammo,                   T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.C_Machine_Gun_Ammo_Half]:                MechEquipmentRecord(N.C_Machine_Gun_Ammo_Half,              T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.C_Heavy_Machine_Gun_Ammo]:               MechEquipmentRecord(N.C_Heavy_Machine_Gun_Ammo,             T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
+  [N.C_Heavy_Machine_Gun_Ammo_Half]:          MechEquipmentRecord(N.C_Heavy_Machine_Gun_Ammo_Half,        T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 0.5, 1, Availability.X, []),
   [N.C_AMS_Ammo]:                             MechEquipmentRecord(N.C_AMS_Ammo,                           T.BallisticAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_Vehicle_Flamer_Ammo]:                  MechEquipmentRecord(N.C_Vehicle_Flamer_Ammo,                   T.EnergyAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),
   [N.C_Plasma_Cannon_Ammo]:                   MechEquipmentRecord(N.C_Plasma_Cannon_Ammo,                    T.EnergyAmmo, Tech.Clan, 0, [0], 0, [0, 0, 0, 0], [], 0, 1.0, 1, Availability.X, []),

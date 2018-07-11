@@ -158,8 +158,11 @@ export enum MechEquipmentName {
   Gauss_Ammo = 'Gauss Ammo',
   Heavy_Gauss_Ammo = 'Heavy Gauss Ammo',
   Light_Machine_Gun_Ammo = 'Light Machine Gun Ammo',
+  Light_Machine_Gun_Ammo_Half = 'Light Machine Gun Ammo (1/2)',
   Machine_Gun_Ammo = 'Machine Gun Ammo',
+  Machine_Gun_Ammo_Half = 'Machine Gun Ammo (1/2)',
   Heavy_Machine_Gun_Ammo = 'Heavy Machine Gun Ammo',
+  Heavy_Machine_Gun_Ammo_Half = 'Heavy Machine Gun Ammo (1/2)',
 
   // Energy * Ammo
   Vehicle_Flamer_Ammo = 'Vehicle Flamer Ammo',
@@ -284,8 +287,11 @@ export enum MechEquipmentName {
   C_AP_Gauss_Ammo = 'Clan AP Gauss Ammo',
   C_Hyper_Assault_Gauss_Ammo = 'Clan Hyper-Assault Gauss Ammo',
   C_Light_Machine_Gun_Ammo = 'Clan Light Machine Gun Ammo',
+  C_Light_Machine_Gun_Ammo_Half = 'Clan Light Machine Gun Ammo (1/2)',
   C_Machine_Gun_Ammo = 'Clan Machine Gun Ammo',
+  C_Machine_Gun_Ammo_Half = 'Clan Machine Gun Ammo (1/2)',
   C_Heavy_Machine_Gun_Ammo = 'Clan Heavy Machine Gun Ammo',
+  C_Heavy_Machine_Gun_Ammo_Half = 'Clan Heavy Machine Gun Ammo (1/2)',
 
   // Energy * Ammo
   C_Vehicle_Flamer_Ammo = 'Clan Vehicle Flamer Ammo',
@@ -466,8 +472,11 @@ export type AmmoType =
   | MechEquipmentName.Gauss_Ammo
   | MechEquipmentName.Heavy_Gauss_Ammo
   | MechEquipmentName.Light_Machine_Gun_Ammo
+  | MechEquipmentName.Light_Machine_Gun_Ammo_Half
   | MechEquipmentName.Machine_Gun_Ammo
+  | MechEquipmentName.Machine_Gun_Ammo_Half
   | MechEquipmentName.Heavy_Machine_Gun_Ammo
+  | MechEquipmentName.Heavy_Machine_Gun_Ammo_Half
   | MechEquipmentName.Vehicle_Flamer_Ammo
   | MechEquipmentName.Plasma_Rifle_Ammo
   | MechEquipmentName.LRM_Ammo
@@ -496,8 +505,11 @@ export type AmmoType =
   | MechEquipmentName.C_AP_Gauss_Ammo
   | MechEquipmentName.C_Hyper_Assault_Gauss_Ammo
   | MechEquipmentName.C_Light_Machine_Gun_Ammo
+  | MechEquipmentName.C_Light_Machine_Gun_Ammo_Half
   | MechEquipmentName.C_Machine_Gun_Ammo
+  | MechEquipmentName.C_Machine_Gun_Ammo_Half
   | MechEquipmentName.C_Heavy_Machine_Gun_Ammo
+  | MechEquipmentName.C_Heavy_Machine_Gun_Ammo_Half
   | MechEquipmentName.C_Vehicle_Flamer_Ammo
   | MechEquipmentName.C_Plasma_Cannon_Ammo
   | MechEquipmentName.C_LRM_Ammo
