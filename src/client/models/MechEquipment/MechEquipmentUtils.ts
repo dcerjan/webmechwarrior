@@ -7,8 +7,9 @@ import { HeatsinkType } from '../Heatsink'
 import { JumpJetType } from '../JumpJets'
 import { MechLoadout, MechTonnage } from '../Mech'
 import { MissileGuidenceType } from '../MissileGuidenceType'
-import { getEquipmentTonnage } from './index'
+import { getEquipmentMeta, getEquipmentTonnage } from './index'
 import { AmmoType, EquipmentType, MechEquipmentName, MechEquipmentName as E, WeaponType } from './MechEquipmentName'
+import { MechEquipmentType } from './MechEquipmentType'
 
 export const getAvailableEquipmentTypes = (
   tech: Tech,
@@ -41,7 +42,7 @@ export const getAvailableEquipmentTypes = (
     E.NARC_Launcher,
     E.Improved_NARC_Launcher,
     E.TAG,
-    // E.Targeting_Computer,
+    E.Targeting_Computer,
   ] as EquipmentType[]
 
   const clanEquipment = [
@@ -54,7 +55,7 @@ export const getAvailableEquipmentTypes = (
     E.C_TAG,
     E.C_NARC_Launcher,
     E.C_Light_TAG,
-    // E.C_Targeting_Computer,
+    E.C_Targeting_Computer,
   ] as EquipmentType[]
 
   return [
@@ -269,4 +270,35 @@ export const geLoadoutHeatsinks = (mechType: MechType, loadout: MechLoadout): nu
     .map(component => loadout[component].equipment as MechEquipmentName[])
     .reduce((memo, equipment) => [...memo, ...equipment], [])
     .reduce((memo, equipment) => memo + (([E.Single_Heatsink, E.Double_Heatsink].includes(equipment) ? 1 : 0)), 0)
+}
+
+const TARGETING_COMPUTER_AFFECTED_EQUIPMENT = [
+  MechEquipmentType.Ballistic,
+  MechEquipmentType.BallisticAmmo,
+  MechEquipmentType.Autocannon,
+  MechEquipmentType.Gauss_Rifle,
+  MechEquipmentType.Energy,
+  MechEquipmentType.Laser,
+  MechEquipmentType.Pulse_Laser,
+  MechEquipmentType.Plasma,
+  MechEquipmentType.PPC,
+]
+
+export const getTargetingComputerWeight = (mechTonnage: MechTonnage, mechType: MechType, tech: Tech, loadout: MechLoadout) => {
+  const tonnage = getAllMechComponents(mechType, loadout)
+    .map(component => loadout[component].equipment as MechEquipmentName[])
+    .reduce((memo, equipment) => [...memo, ...equipment], [])
+    .map(getEquipmentMeta)
+    .filter(equipment => TARGETING_COMPUTER_AFFECTED_EQUIPMENT.includes(equipment.type))
+    .reduce((memo, eq) => memo + getEquipmentTonnage(mechTonnage, eq.name), 0)
+
+  return Math.ceil(tonnage / (tech === Tech.IS ? 4 : 5))
+}
+
+export const hasTargetingComputerEquiped = (mechType: MechType, loadout: MechLoadout) => {
+  return Boolean(getAllMechComponents(mechType, loadout)
+    .map(component => loadout[component].equipment as MechEquipmentName[])
+    .reduce((memo, equipment) => [...memo, ...equipment], [])
+    .map(getEquipmentMeta)
+    .find(eq => eq.type === MechEquipmentType.Targeting_Computer))
 }

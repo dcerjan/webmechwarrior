@@ -6,6 +6,8 @@ import { range } from '../../../../../../../lib/functional'
 import { IBaseMechPart } from '../../../../../../../models/common/MechComponent'
 import { getEquipmentCriticals } from '../../../../../../../models/MechEquipment'
 import { MechEquipmentName } from '../../../../../../../models/MechEquipment/MechEquipmentName'
+import { MechEquipmentType } from '../../../../../../../models/MechEquipment/MechEquipmentType'
+import { getTargetingComputerWeight } from '../../../../../../../models/MechEquipment/MechEquipmentUtils'
 import { IMechDesignerMech } from '../../../../../state/constants'
 import { DnDType, IDragedEquipment, IInjectedDropTargetProps, targetCollect } from '../../DnD'
 
@@ -47,13 +49,13 @@ class FreeCriticals extends React.PureComponent<IFreeCriticalProps & IInjectedDr
   }
 
   private getSlotColor(index: number): DetailColor {
-    const { canDrop, descriptor, isOver, mech } = this.props
+    const { canDrop, descriptor, isOver } = this.props
 
     if (!descriptor) {
       return DetailColor.Transparent
     } else {
       if (canDrop) {
-        if (isOver && index <  getEquipmentCriticals(mech.tonnage, mech.tech, descriptor.name)) {
+        if (isOver && index <  this.getItemCriticals()) {
           return DetailColor.Blue
         } else {
           return DetailColor.TransaprentBlue
@@ -62,6 +64,14 @@ class FreeCriticals extends React.PureComponent<IFreeCriticalProps & IInjectedDr
         return DetailColor.TransparentRed
       }
     }
+  }
+
+  private getItemCriticals() {
+    const { descriptor, mech } = this.props
+
+    return descriptor.type === MechEquipmentType.Targeting_Computer
+      ? getTargetingComputerWeight(mech.tonnage, mech.type, mech.tech, mech.loadout)
+      : getEquipmentCriticals(mech.tonnage, mech.tech, descriptor.name)
   }
 }
 

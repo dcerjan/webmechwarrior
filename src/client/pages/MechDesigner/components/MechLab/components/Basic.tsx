@@ -17,7 +17,7 @@ import { getAvaliableHeatsinkTypes, HeatsinkType } from '../../../../../models/H
 import { getInternalStructureTonnage } from '../../../../../models/InternalStructure'
 import { JumpJetType } from '../../../../../models/JumpJets'
 import { getArmorTonnage, MechTonnage } from '../../../../../models/Mech'
-import { geLoadoutHeatsinks, getLoadoutTonnage } from '../../../../../models/MechEquipment/MechEquipmentUtils'
+import { geLoadoutHeatsinks, getLoadoutTonnage, getTargetingComputerWeight, hasTargetingComputerEquiped } from '../../../../../models/MechEquipment/MechEquipmentUtils'
 import { getAvaliableMissileGuidenceTypes, MissileGuidenceType } from '../../../../../models/MissileGuidenceType'
 import {
   DEAFULT_BIPEDAL_LOADOUT,
@@ -181,7 +181,11 @@ export class Basic extends React.PureComponent<ICommonProps> {
       ? 0
       : totalHeatsinks - 10
 
-    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor - loadoutTonnage - heatsinkTonnage
+    const targetingcomputerTonnage = hasTargetingComputerEquiped(mech.type, mech.loadout)
+      ? getTargetingComputerWeight(mech.tonnage, mech.type, mech.tech, mech.loadout)
+      : 0
+
+    const amount = mech.tonnage - engine - gyro - cockpit - internal - armor - loadoutTonnage - heatsinkTonnage - targetingcomputerTonnage
 
     return amount
   }
