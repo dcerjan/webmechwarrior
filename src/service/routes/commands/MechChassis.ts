@@ -31,10 +31,14 @@ export const MechChassisCommand = (namespace: string) => (app: Express): void =>
   console.log('[INFO] [COMMAND] [MechChassis]', `registered '${namespace}/list.MechChassis' command`)
 
   const saveError = error(`${namespace}/save.MechChassis`)
-  app.post('/command/save.MechChassis', async (req, res) => {
+  app.post('/command/save.MechChassis(/:id?)', async (req, res) => {
     try {
       const chassis = new MechChassis(req.body)
-      const result = await MechChassis.findOneAndUpdate({ _id: chassis._id }, chassis, { upsert: true, new: true })
+
+      const result = await MechChassis
+        .findOneAndUpdate({ _id: chassis.id }, chassis, { upsert: true, new: true })
+        .exec()
+
       res.json(result.toJSON())
     } catch(err) {
       saveError(err)
@@ -42,4 +46,19 @@ export const MechChassisCommand = (namespace: string) => (app: Express): void =>
     }
   })
   console.log('[INFO] [COMMAND] [MechChassis]', `registered '${namespace}/save.MechChassis' command`)
+
+  const deleteError = error(`${namespace}/delete.MechChassis`)
+  app.post('/command/delete.MechChassis(/:id?)', async (req, res) => {
+    try {
+      const result = await MechChassis
+        .remove({ _id: req.body.id })
+        .exec()
+
+      res.json({ ok: result.ok })
+    } catch(err) {
+      deleteError(err)
+      res.status(400).json({ err })
+    }
+  })
+  console.log('[INFO] [COMMAND] [MechChassis]', `registered '${namespace}/delete.MechChassis' command`)
 }

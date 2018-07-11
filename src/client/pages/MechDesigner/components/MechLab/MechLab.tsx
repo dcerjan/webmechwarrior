@@ -12,7 +12,7 @@ import {
 } from 'redux-form'
 import { createStructuredSelector } from 'reselect'
 
-import { save } from '../../state/action'
+import { deleteMechChassisRequest, save } from '../../state/action'
 
 import { loadMechChassisRequest } from '../../state/action'
 import { IMechDesignerMech } from '../../state/constants'
@@ -28,6 +28,7 @@ import { InternalStructure } from './components/InternalStructure'
 import { Loadout } from './components/Loadout'
 import * as styles from './MechLab.css'
 
+import { Omit } from '../../../../lib/type'
 import {
   clearMechChassis,
   setEquipmentTableTab,
@@ -46,14 +47,15 @@ interface IMechLabMapStateProps {
   state: IMechDesignerState,
   equipment: IEquipmentState,
   mech: IMechDesignerMech,
+}
+
+interface IMechLabMapDispatchProps {
   setEquipmentTableTab: (tab: string) => void,
   change: (field: string, value: any) => void,
   select: (field: string) => any,
   clear: () => void,
-}
-
-interface IMechLabMapDispatchProps {
   loadMechChassisRequest: (id: string) => void,
+  deleteMechChassis: (id: string) => void,
 }
 
 const mapState = createStructuredSelector({
@@ -62,11 +64,12 @@ const mapState = createStructuredSelector({
   initialValues: selectFormInitialValues,
 })
 
-const mapDispatch = (dispatch: Dispatch) => ({
+const mapDispatch = (dispatch: Dispatch): Omit<IMechLabMapDispatchProps, 'select'> => ({
   setEquipmentTableTab: (tab: string) => dispatch(setEquipmentTableTab(tab)),
   change: (field: string, value: any) => dispatch(change('Lab.Mech', field, value)),
   loadMechChassisRequest: (id: string) => dispatch(loadMechChassisRequest(id)),
   clear: () => dispatch(clearMechChassis()),
+  deleteMechChassis: (id: string) => dispatch(deleteMechChassisRequest(id)),
 })
 
 const mapInternalState = (state: any) => ({
@@ -105,7 +108,7 @@ class MechLab extends React.PureComponent<MechLabProps> {
   }
 
   public render() {
-    const { mech, change, select, setEquipmentTableTab, equipment, handleSubmit } = this.props
+    const { mech, change, select, setEquipmentTableTab, equipment, handleSubmit, deleteMechChassis } = this.props
 
     const submit = handleSubmit(save)
 
@@ -124,6 +127,16 @@ class MechLab extends React.PureComponent<MechLabProps> {
             >
               Save Mech Chassis
             </button>
+            { this.props.id != null
+              ? (
+                <button
+                  type='button'
+                  onClick={() => deleteMechChassis(this.props.id as string)}
+                >
+                  Delete Mech Chassis
+                </button>
+              )
+              : null }
           </div>
           <div>
             <Loadout mech={mech} change={change} select={select} />
