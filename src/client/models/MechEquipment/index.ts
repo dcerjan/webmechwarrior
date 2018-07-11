@@ -313,6 +313,8 @@ export const MechEquipmentTable = {
   [N.LAMS]:                     MechEquipmentRecord(N.LAMS,                     T.Laser_AMS,          Tech.IS,  2, [         1],  1, [ 0,  1, -1, -1],                       [],   0,  1.5,  2, Availability.F, []),
   [N.Beagle_Active_Probe]:      MechEquipmentRecord(N.Beagle_Active_Probe,      T.Active_Probe,       Tech.IS,  0, [         0],  0, [ 0,  0,  0,  4],                       [],   0,  1.5,  2, Availability.E, []),
   [N.CASE]:                     MechEquipmentRecord(N.CASE,                     T.CASE,               Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.5,  1, Availability.D, []),
+  [N.MASC]:                     MechEquipmentRecord(N.MASC,                     T.MASC,               Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.E, []),
+  [N.TSM]:                      MechEquipmentRecord(N.TSM,                      T.TSM,                Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  1, Availability.E, []),
   [N.C3_Computer_Master]:       MechEquipmentRecord(N.C3_Computer_Master,       T.C3_Computer,        Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  5.0,  5, Availability.E, []),
   [N.C3_Computer_Slave]:        MechEquipmentRecord(N.C3_Computer_Slave,        T.C3_Computer,        Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  1.0,  1, Availability.E, []),
   [N.Improved_C3_Computer]:     MechEquipmentRecord(N.Improved_C3_Computer,     T.C3_Computer,        Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  2.5,  2, Availability.E, []),
@@ -410,15 +412,16 @@ export const MechEquipmentTable = {
   [N.C_SRM_2]:                  MechEquipmentRecord(N.C_SRM_2,                  T.SRM,              Tech.Clan,  2, [         2],  2, [ 0,  3,  6,  9],              ClanSRMAmmo,  50,  0.5,  1, Availability.F, []),
   [N.C_SRM_4]:                  MechEquipmentRecord(N.C_SRM_4,                  T.SRM,              Tech.Clan,  3, [         2],  4, [ 0,  3,  6,  9],              ClanSRMAmmo,  25,  1.0,  1, Availability.F, []),
   [N.C_SRM_6]:                  MechEquipmentRecord(N.C_SRM_6,                  T.SRM,              Tech.Clan,  4, [         2],  6, [ 0,  3,  6,  9],              ClanSRMAmmo,  15,  1.5,  1, Availability.F, []),
-  [N.C_SRM_2_Artemis_IV]:      MechEquipmentRecord(N.C_SRM_2_Artemis_IV,        T.SRM,              Tech.Clan,  2, [         2],  2, [ 0,  3,  6,  9],              ClanSRMAmmo,  50,  1.5,  2, Availability.F, []),
-  [N.C_SRM_4_Artemis_IV]:      MechEquipmentRecord(N.C_SRM_4_Artemis_IV,        T.SRM,              Tech.Clan,  3, [         2],  4, [ 0,  3,  6,  9],              ClanSRMAmmo,  25,  2.0,  2, Availability.F, []),
-  [N.C_SRM_6_Artemis_IV]:      MechEquipmentRecord(N.C_SRM_6_Artemis_IV,        T.SRM,              Tech.Clan,  4, [         2],  6, [ 0,  3,  6,  9],              ClanSRMAmmo,  15,  3.5,  2, Availability.F, []),
+  [N.C_SRM_2_Artemis_IV]:       MechEquipmentRecord(N.C_SRM_2_Artemis_IV,       T.SRM,              Tech.Clan,  2, [         2],  2, [ 0,  3,  6,  9],              ClanSRMAmmo,  50,  1.5,  2, Availability.F, []),
+  [N.C_SRM_4_Artemis_IV]:       MechEquipmentRecord(N.C_SRM_4_Artemis_IV,       T.SRM,              Tech.Clan,  3, [         2],  4, [ 0,  3,  6,  9],              ClanSRMAmmo,  25,  2.0,  2, Availability.F, []),
+  [N.C_SRM_6_Artemis_IV]:       MechEquipmentRecord(N.C_SRM_6_Artemis_IV,       T.SRM,              Tech.Clan,  4, [         2],  6, [ 0,  3,  6,  9],              ClanSRMAmmo,  15,  3.5,  2, Availability.F, []),
   [N.C_Streak_SRM_2]:           MechEquipmentRecord(N.C_Streak_SRM_2,           T.SRM,              Tech.Clan,  2, [         2],  2, [ 0,  4,  8, 12],        ClanStreakSRMAmmo,  50,  1.0,  1, Availability.F, []),
   [N.C_Streak_SRM_4]:           MechEquipmentRecord(N.C_Streak_SRM_4,           T.SRM,              Tech.Clan,  3, [         2],  4, [ 0,  4,  8, 12],        ClanStreakSRMAmmo,  25,  2.0,  1, Availability.F, []),
   [N.C_Streak_SRM_6]:           MechEquipmentRecord(N.C_Streak_SRM_6,           T.SRM,              Tech.Clan,  4, [         2],  6, [ 0,  3,  6,  9],        ClanStreakSRMAmmo,  15,  3.0,  2, Availability.F, []),
   [N.C_AMS]:                    MechEquipmentRecord(N.C_AMS,                    T.AMS,              Tech.Clan,  1, [         1],  1, [ 0,  1, -1, -1],              ClanAMSAmmo,  24,  0.5,  1, Availability.F, []),
   [N.C_LAMS]:                   MechEquipmentRecord(N.C_LAMS,                   T.Laser_AMS,        Tech.Clan,  2, [         1],  1, [ 0,  1, -1, -1],                       [],   0,  1.0,  1, Availability.F, []),
   [N.C_CASE]:                   MechEquipmentRecord(N.C_CASE,                   T.CASE,             Tech.Clan,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.F, []),
+  [N.C_MASC]:                   MechEquipmentRecord(N.MASC,                     T.MASC,               Tech.IS,  0, [         0],  0, [ 0,  0,  0,  0],                       [],   0,  0.0,  0, Availability.F, []),
   [N.C_Active_Probe]:           MechEquipmentRecord(N.C_Active_Probe,           T.Active_Probe,     Tech.Clan,  0, [         0],  0, [ 0,  0,  0,  5],                       [],   0,  1.0,  1, Availability.E, []),
   [N.C_Light_Active_Probe]:     MechEquipmentRecord(N.C_Light_Active_Probe,     T.Active_Probe,     Tech.Clan,  0, [         0],  0, [ 0,  0,  0,  3],                       [],   0,  0.5,  0, Availability.F, []),
   [N.C_ECM_Suite]:              MechEquipmentRecord(N.C_ECM_Suite,              T.ECM_Suite,        Tech.Clan,  0, [         0],  0, [ 0,  0,  0,  6],                       [],   0,  1.0,  1, Availability.F, []),
@@ -501,6 +504,16 @@ export const getEquipmentTonnage = (mechTonnage: MechTonnage, equipment: MechEqu
     return eq.name === N.Improved_Jump_Jet
       ? 2.0 * tonnage
       : tonnage
+  } else if (eq.type === T.MASC) {
+    const tonnage = (() => {
+      if (eq.name === N.MASC) {
+        return Math.round(mechTonnage / 20)
+      } else {
+        return Math.round(mechTonnage / 25)
+      }
+    })()
+
+    return tonnage
   } else {
     return eq.tonnage
   }
@@ -516,6 +529,16 @@ export const getEquipmentCriticals = (mechTonnage: MechTonnage, tech: Tech, equi
         return 3
       }
     }
+  } else if (eq.type === T.MASC) {
+    const criticals = (() => {
+      if (eq.name === N.MASC) {
+        return Math.round(mechTonnage / 20)
+      } else {
+        return Math.round(mechTonnage / 25)
+      }
+    })()
+
+    return criticals
   }
   return eq.criticals
 }

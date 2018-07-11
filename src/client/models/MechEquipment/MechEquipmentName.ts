@@ -135,6 +135,7 @@ export enum MechEquipmentName {
   Improved_C3_Computer = 'Improved C3 Computer',
   Guardian_ECM_Suite = 'Guardian ECM Suite',
   MASC = 'MASC',
+  TSM = 'TSM',
   NARC_Launcher = 'NARC Launcher',
   Improved_NARC_Launcher = 'Improved NARC Launcher',
   TAG = 'TAG',

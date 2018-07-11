@@ -34,6 +34,7 @@ export enum MechEquipmentType {
   ECM_Suite = 'ECM Suite',
   Active_Probe = 'Active Probe',
   MASC = 'MASC',
+  TSM = 'TSM',
   CASE = 'CASE',
   C3_Computer = 'C3 Computer',
   Targeting_Computer = 'Targeting Computer',
