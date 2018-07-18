@@ -1,6 +1,6 @@
 import { lens } from 'lens.ts'
 
-import { MechEquipmentName } from '../MechEquipment/MechEquipmentName'
+import { GearName } from '../MechEquipment/GearName'
 import { Hardpoint } from './Hardpoint'
 import { MechClass } from './MechClass'
 
@@ -47,7 +47,7 @@ export interface IBaseMechPart {
   name: MechComponent,
   armor: number,
   hardpoints: IHardpoints,
-  equipment: MechEquipmentName[],
+  equipment: GearName[],
   caseProtected: boolean,
 }
 
@@ -55,7 +55,7 @@ const BaseMechPart = (
   name: MechComponent,
   armor: number,
   hardpoints: IHardpoints,
-  equipment: MechEquipmentName[],
+  equipment: GearName[],
   caseProtected: boolean = false,
 ): IBaseMechPart => ({
   name,
@@ -74,7 +74,7 @@ export const HeadL = lens<IHead>()
 export const Head = (
   armor: number,
   hardpoints: IHardpoints,
-  equipment: MechEquipmentName[],
+  equipment: GearName[],
 ): IHead => ({ ...BaseMechPart(MechComponent.Head, armor, hardpoints, equipment) }) as IHead
 
 
@@ -89,7 +89,7 @@ export const CenterTorso = (
   armor: number,
   rearArmor: number,
   hardpoints: IHardpoints,
-  equipment: MechEquipmentName[],
+  equipment: GearName[],
 ): ICenterTorso => ({
   rearArmor,
   ...BaseMechPart(MechComponent.CenterTorso, armor, hardpoints, equipment),
@@ -108,7 +108,7 @@ export const SideTorso = (
   armor: number,
   rearArmor: number,
   hardpoints: IHardpoints,
-  equipment: MechEquipmentName[],
+  equipment: GearName[],
 ): ISideTorso => ({
   rearArmor,
   ...BaseMechPart(name, armor, hardpoints, equipment),
@@ -127,7 +127,7 @@ export const Arm = (
   name: Arms,
   armor: number,
   hardpoints: IHardpoints,
-  equipment: MechEquipmentName[],
+  equipment: GearName[],
   hasLowerArmActuator: boolean = true,
   hasHandActuator: boolean = true,
 ): IArm => ({
@@ -147,7 +147,7 @@ export const Leg = (
   name: Legs,
   armor: number,
   hardpoints: IHardpoints,
-  equipment: MechEquipmentName[],
+  equipment: GearName[],
 ): ILeg => BaseMechPart(name, armor, hardpoints, equipment) as ILeg
 
 export const getMechBipedComponents = () => [

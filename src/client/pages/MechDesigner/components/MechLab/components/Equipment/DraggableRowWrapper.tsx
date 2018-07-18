@@ -4,12 +4,12 @@ import { change } from 'redux-form'
 
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import { IBaseMechPart } from '../../../../../../models/common/MechComponent'
-import { IMechEquipmentRecord } from '../../../../../../models/MechEquipment'
+import { MechGear } from '../../../../../../models/MechEquipment'
 import { store } from '../../../../../../state/store'
 import { DnDType, IDragedEquipment, IInjectedDragSourceProps, sourceCollect } from '../DnD'
 
 interface IRowWrapperProps extends Pick<React.HTMLAttributes<HTMLDivElement>, 'className'>{
-  value: IMechEquipmentRecord,
+  value: MechGear,
   component: JSX.Element,
 }
 

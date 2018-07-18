@@ -4,9 +4,8 @@ import { DropTarget, DropTargetSpec } from 'react-dnd'
 import { Detail, DetailColor } from '../../../../../../../components/Common/Detail'
 import { range } from '../../../../../../../lib/functional'
 import { IBaseMechPart } from '../../../../../../../models/common/MechComponent'
-import { getEquipmentCriticals } from '../../../../../../../models/MechEquipment'
-import { MechEquipmentName } from '../../../../../../../models/MechEquipment/MechEquipmentName'
-import { MechEquipmentType } from '../../../../../../../models/MechEquipment/MechEquipmentType'
+import { getGearCriticals } from '../../../../../../../models/MechEquipment'
+import { EquipmentType } from '../../../../../../../models/MechEquipment/Equipment'
 import { getTargetingComputerWeight } from '../../../../../../../models/MechEquipment/MechEquipmentUtils'
 import { IMechDesignerMech } from '../../../../../state/constants'
 import { DnDType, IDragedEquipment, IInjectedDropTargetProps, targetCollect } from '../../DnD'
@@ -22,7 +21,7 @@ const criticalDropTarget: DropTargetSpec<IFreeCriticalProps> = {
   canDrop: (props, monitor) => {
     const { mech, freeSlots } = props
     const item = monitor.getItem() as IDragedEquipment
-    return getEquipmentCriticals(mech.tonnage, mech.tech, item.item.name) <= freeSlots
+    return getGearCriticals(mech.tonnage, mech.tech, item.item.name) <= freeSlots
   },
   drop: (props) => ({
     mechComponent: props.mechComponent,
@@ -39,7 +38,7 @@ class FreeCriticals extends React.PureComponent<IFreeCriticalProps & IInjectedDr
         { range(0, freeSlots).map(index => (
           <Detail
             key={index}
-            label={MechEquipmentName.None}
+            label={'-- empty slot --'}
             color={this.getSlotColor(index)}
           />
         ))
@@ -69,9 +68,9 @@ class FreeCriticals extends React.PureComponent<IFreeCriticalProps & IInjectedDr
   private getItemCriticals() {
     const { descriptor, mech } = this.props
 
-    return descriptor.type === MechEquipmentType.Targeting_Computer
+    return descriptor.type === EquipmentType.Targeting_Computer
       ? getTargetingComputerWeight(mech.tonnage, mech.type, mech.tech, mech.loadout)
-      : getEquipmentCriticals(mech.tonnage, mech.tech, descriptor.name)
+      : getGearCriticals(mech.tonnage, mech.tech, descriptor.name)
   }
 }
 

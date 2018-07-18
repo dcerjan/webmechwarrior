@@ -9,7 +9,7 @@ import { GyroType } from '../../../client/models/Gryo'
 import { HeatsinkType } from '../../../client/models/Heatsink'
 import { InternalStructureType } from '../../../client/models/InternalStructure'
 import { JumpJetType } from '../../../client/models/JumpJets'
-import { MechEquipmentName } from '../../../client/models/MechEquipment/MechEquipmentName'
+import { GearName } from '../../../client/models/MechEquipment/GearName'
 
 export const ETech = Object.values(Tech)
 export const EMechType = Object.values(MechType)
@@ -23,4 +23,4 @@ export const EGyroType = Object.values(GyroType)
 export const ECockpitType = Object.values(CockpitType)
 export const EInternalStructureType = Object.values(InternalStructureType)
 export const EArmorType = Object.values(ArmorType)
-export const EMechEquipmentName = Object.values(MechEquipmentName)
+export const EGearName = Object.values(GearName)

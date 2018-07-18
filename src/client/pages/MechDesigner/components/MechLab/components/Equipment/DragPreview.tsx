@@ -2,12 +2,13 @@ import * as React from 'react'
 import { DragLayer, DragLayerCollector, XYCoord } from 'react-dnd'
 import { Card } from '../../../../../../components/Common/Card'
 import { Detail, DetailColor } from '../../../../../../components/Common/Detail'
-import { getEquipmentCriticals, getEquipmentType } from '../../../../../../models/MechEquipment'
-import { MechEquipmentName } from '../../../../../../models/MechEquipment/MechEquipmentName'
-import { MechEquipmentType } from '../../../../../../models/MechEquipment/MechEquipmentType'
+import { getGearCriticals, MechGear } from '../../../../../../models/MechEquipment'
+import { EquipmentType } from '../../../../../../models/MechEquipment/Equipment'
+import { GearName } from '../../../../../../models/MechEquipment/GearName'
 import { getTargetingComputerWeight } from '../../../../../../models/MechEquipment/MechEquipmentUtils'
 import { IMechDesignerMech } from '../../../../state/constants'
 import { IDragedEquipment } from '../DnD'
+import { getGearDetailColor } from './common'
 
 const layerStyles: React.CSSProperties = {
 	position: 'fixed',
@@ -43,22 +44,14 @@ const getItemStyles = (props: IDragPreviewLayerProps) => {
 
 const collect: DragLayerCollector<IDragPreviewLayerProps, IDragedEquipment> = (monitor) => ({
   item: monitor.getItem(),
-  type: monitor.getItemType() as MechEquipmentName,
+  type: monitor.getItemType() as GearName,
   isDragging: monitor.isDragging(),
   initialOffset: monitor.getInitialSourceClientOffset(),
 	currentOffset: monitor.getSourceClientOffset(),
 })
 
-export const getEquipmentDetailColor = (equipment: MechEquipmentName): DetailColor => {
-  switch (getEquipmentType(equipment)) {
-  case MechEquipmentType.Ballistic: return DetailColor.Purple
-  case MechEquipmentType.BallisticAmmo: return DetailColor.TransparentPurple
-  case MechEquipmentType.Energy: return DetailColor.Lime
-  case MechEquipmentType.EnergyAmmo: return DetailColor.TransparentLime
-  case MechEquipmentType.Missile: return DetailColor.Teal
-  case MechEquipmentType.MissileAmmo: return DetailColor.TransparentTeal
-  default: return DetailColor.TransaprentBlue
-  }
+export const getEquipmentDetailColor = (gear: MechGear): DetailColor => {
+  return getGearDetailColor(gear)
 }
 
 export class Preview extends React.PureComponent<IDragPreviewLayerProps> {
@@ -71,7 +64,7 @@ export class Preview extends React.PureComponent<IDragPreviewLayerProps> {
           <Card style={getItemStyles(this.props)} >
             <Detail
               label={item.item.name}
-              color={getEquipmentDetailColor(item.item.name)}
+              color={getEquipmentDetailColor(item.item)}
               style={{ height: this.getItemCriticals() * 20 }}
             />
           </Card>
@@ -83,9 +76,9 @@ export class Preview extends React.PureComponent<IDragPreviewLayerProps> {
   private getItemCriticals() {
     const { item, mech } = this.props
 
-    return item.item.type === MechEquipmentType.Targeting_Computer
+    return item.item.type === EquipmentType.Targeting_Computer
       ? getTargetingComputerWeight(mech.tonnage, mech.type, mech.tech, mech.loadout)
-      : getEquipmentCriticals(mech.tonnage, mech.tech, item.item.name)
+      : getGearCriticals(mech.tonnage, mech.tech, item.item.name)
   }
 }
 

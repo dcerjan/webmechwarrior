@@ -7,9 +7,9 @@ import { identity } from '../../../../../../../lib/functional'
 import { getCockpitCriticals, getLifeSupportCriticals, getSensorsCriticals } from '../../../../../../../models/Cockpit'
 import { getEngineCriticalSlotAllocation } from '../../../../../../../models/Engine'
 import { getGyroCriticals } from '../../../../../../../models/Gryo'
-import { getEquipmentCriticals, getEquipmentMeta } from '../../../../../../../models/MechEquipment'
-import { MechEquipmentName } from '../../../../../../../models/MechEquipment/MechEquipmentName'
-import { MechEquipmentType } from '../../../../../../../models/MechEquipment/MechEquipmentType'
+import { getGearCriticals, getGearData } from '../../../../../../../models/MechEquipment'
+import { EquipmentType } from '../../../../../../../models/MechEquipment/Equipment'
+import { GearName } from '../../../../../../../models/MechEquipment/GearName'
 import { getTargetingComputerWeight } from '../../../../../../../models/MechEquipment/MechEquipmentUtils'
 import { IMechDesignerMech } from '../../../../../state/constants'
 import { ICommonProps } from '../../../MechLab'
@@ -23,7 +23,7 @@ interface ICriticalsProps extends Pick<ICommonProps, 'mech'> {
 }
 
 export interface ICriticalDescriptor {
-  equipment: MechEquipmentName,
+  equipment: GearName,
   criticals: number,
   color: DetailColor,
 }
@@ -52,23 +52,23 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
 
   private getAllocated(part: IBaseMechPart): ICriticalDescriptor[] {
     return part.equipment.map((equipment): ICriticalDescriptor => {
-      const criticals = this.getEquipmentCriticals(equipment)
+      const criticals = this.getGearCriticals(equipment)
       return {
         equipment,
         criticals,
-        color: getEquipmentDetailColor(equipment),
+        color: getEquipmentDetailColor(getGearData(equipment)),
       }
     })
   }
 
-  private getEquipmentCriticals(equipment: MechEquipmentName) {
+  private getGearCriticals(gearName: GearName) {
     const { mech } = this.props
 
-    const meta = getEquipmentMeta(equipment)
+    const gear = getGearData(gearName)
 
-    return meta.type === MechEquipmentType.Targeting_Computer
+    return gear.type === EquipmentType.Targeting_Computer
       ? getTargetingComputerWeight(mech.tonnage, mech.type, mech.tech, mech.loadout)
-      : getEquipmentCriticals(mech.tonnage, mech.tech, meta.name)
+      : getGearCriticals(mech.tonnage, mech.tech, gear.name)
   }
 
   private getHeadEquipment(mech: IMechDesignerMech, head: IHead): ICriticals {
@@ -79,9 +79,9 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     const criticals = getCriticalsForComponent(mech.class, head.name)
 
     const builtin = [
-      { equipment: MechEquipmentName.Cockpit, color: DetailColor.TransaprentLightGrey, criticals: cockpitCriticals },
-      { equipment: MechEquipmentName.Sensors, color: DetailColor.TransaprentLightGrey, criticals: sensorsCriticals },
-      { equipment: MechEquipmentName.Life_Support, color: DetailColor.TransaprentLightGrey, criticals: lifeSupportCriticals },
+      { equipment: GearName.Cockpit, color: DetailColor.TransaprentLightGrey, criticals: cockpitCriticals },
+      { equipment: GearName.Sensors, color: DetailColor.TransaprentLightGrey, criticals: sensorsCriticals },
+      { equipment: GearName.Life_Support, color: DetailColor.TransaprentLightGrey, criticals: lifeSupportCriticals },
     ]
 
     const allocated = this.getAllocated(head)
@@ -95,10 +95,10 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     const criticals = getCriticalsForComponent(mech.class, arm.name)
 
     const builtin = [
-      { equipment: MechEquipmentName.Shoulder_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
-      { equipment: MechEquipmentName.Upper_Arm_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
-      arm.hasLowerArmActuator ? { equipment: MechEquipmentName.Lower_Arm_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 } : null,
-      arm.hasHandActuator ? { equipment: MechEquipmentName.Hand_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 } : null,
+      { equipment: GearName.Shoulder_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
+      { equipment: GearName.Upper_Arm_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
+      arm.hasLowerArmActuator ? { equipment: GearName.Lower_Arm_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 } : null,
+      arm.hasHandActuator ? { equipment: GearName.Hand_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 } : null,
     ].filter(identity) as ICriticalDescriptor[]
 
     const totalCriticals = builtin.length
@@ -115,10 +115,10 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     const totalCriticals = 4
 
     const builtin = [
-      { equipment: MechEquipmentName.Hip_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
-      { equipment: MechEquipmentName.Upper_Leg_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
-      { equipment: MechEquipmentName.Lower_Leg_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
-      { equipment: MechEquipmentName.Foot_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
+      { equipment: GearName.Hip_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
+      { equipment: GearName.Upper_Leg_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
+      { equipment: GearName.Lower_Leg_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
+      { equipment: GearName.Foot_Actuator, color: DetailColor.TransaprentLightGrey, criticals: 1 },
     ]
 
     const allocated = this.getAllocated(leg)
@@ -136,8 +136,8 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     const totalCriticals = engineCriticals + gyroCriticals
 
     const  builtin = [
-      { equipment: MechEquipmentName.Engine, color: DetailColor.TransaprentLightGrey, criticals: engineCriticals },
-      { equipment: MechEquipmentName.Gyro, color: DetailColor.TransaprentLightGrey, criticals: gyroCriticals },
+      { equipment: GearName.Engine, color: DetailColor.TransaprentLightGrey, criticals: engineCriticals },
+      { equipment: GearName.Gyro, color: DetailColor.TransaprentLightGrey, criticals: gyroCriticals },
     ]
 
     const allocated = this.getAllocated(centerTorso)
@@ -154,7 +154,7 @@ export class Criticals extends React.PureComponent<ICriticalsProps> {
     const totalCriticals = engineCriticals
 
     const engine = engineCriticals
-      ? [{ equipment: MechEquipmentName.Engine, color: DetailColor.TransaprentLightGrey, criticals: engineCriticals }]
+      ? [{ equipment: GearName.Engine, color: DetailColor.TransaprentLightGrey, criticals: engineCriticals }]
       : []
 
     const builtin = engine

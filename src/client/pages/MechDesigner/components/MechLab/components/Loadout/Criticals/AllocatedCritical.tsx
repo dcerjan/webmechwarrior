@@ -4,7 +4,7 @@ import { getEmptyImage } from 'react-dnd-html5-backend'
 import { change } from 'redux-form'
 
 import { Detail, DetailColor } from '../../../../../../../components/Common/Detail'
-import { getEquipmentMeta } from '../../../../../../../models/MechEquipment'
+import { getGearData } from '../../../../../../../models/MechEquipment'
 import { DnDType, IDragedEquipment, IInjectedDragSourceProps } from '../../DnD'
 import { ICriticalDescriptor } from './Criticals'
 
@@ -21,7 +21,7 @@ interface IAllocatedCriticalProps extends Pick<React.HTMLAttributes<HTMLDivEleme
 
 const criticalDragSource: DragSourceSpec<IAllocatedCriticalProps, IDragedEquipment> = {
   beginDrag: (props) => ({
-    item: getEquipmentMeta(props.descriptor.equipment),
+    item: getGearData(props.descriptor.equipment),
     mechComponent: props.mechComponent,
     index: props.index,
   }),

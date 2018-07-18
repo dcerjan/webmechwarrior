@@ -1,14 +1,14 @@
 import { ConnectDragPreview, ConnectDragSource, ConnectDropTarget, DragSourceCollector, DropTargetCollector } from 'react-dnd'
 
 import { IBaseMechPart } from '../../../../../../models/common/MechComponent'
-import { IMechEquipmentRecord } from '../../../../../../models/MechEquipment'
+import { MechGear } from '../../../../../../models/MechEquipment'
 
 export enum DnDType {
   Critical = 'Critical',
 }
 
 export interface IDragedEquipment {
-  item: IMechEquipmentRecord,
+  item: MechGear,
   mechComponent?: IBaseMechPart
   index?: number,
 }
@@ -29,7 +29,7 @@ export interface IInjectedDropTargetProps {
   connectDropTarget: ConnectDropTarget,
   isOver: boolean,
   canDrop: boolean,
-  descriptor: IMechEquipmentRecord,
+  descriptor: MechGear,
 }
 
 export const targetCollect: DropTargetCollector<IInjectedDropTargetProps> = (connect, monitor) => ({

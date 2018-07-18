@@ -7,59 +7,54 @@ import { HeatsinkType } from '../Heatsink'
 import { JumpJetType } from '../JumpJets'
 import { MechLoadout, MechTonnage } from '../Mech'
 import { MissileGuidenceType } from '../MissileGuidenceType'
-import { getEquipmentMeta, getEquipmentTonnage } from './index'
-import { AmmoType, EquipmentType, MechEquipmentName, MechEquipmentName as E, WeaponType } from './MechEquipmentName'
-import { MechEquipmentType } from './MechEquipmentType'
+import { EquipmentType } from './Equipment'
+import { AmmoName, GearClass, GearName, WeaponName } from './GearName'
+import { getGearData, getGearTonnage } from './index'
+import { IWeapon, WeaponType } from './Weapons'
 
-export const getAvailableEquipmentTypes = (
+export const getAvailableEquipmentNames = (
   tech: Tech,
   mechClass: MechClass,
   heatsinkType: HeatsinkType,
   jumpJetType: JumpJetType,
-): EquipmentType[] => {
-  const commonEquipment = [
-    heatsinkType === HeatsinkType.Single ? E.Single_Heatsink : E.Double_Heatsink,
-    mechClass !== MechClass.SuperHeavy
-      ? (jumpJetType === JumpJetType.Standard
-        ? E.Jump_Jet
-        : E.Improved_Jump_Jet)
-      : null,
-    E.Internal_Structure,
-    E.Armor,
-  ].filter(identity) as EquipmentType[]
+): GearName[] => {
 
   const innerSphereEquipment = [
-    E.AMS,
-    E.LAMS,
-    E.Beagle_Active_Probe,
-    E.CASE,
-    E.MASC,
-    E.TSM,
-    E.C3_Computer_Master,
-    E.C3_Computer_Slave,
-    E.Improved_C3_Computer,
-    E.Guardian_ECM_Suite,
-    E.NARC_Launcher,
-    E.Improved_NARC_Launcher,
-    E.TAG,
-    E.Targeting_Computer,
-  ] as EquipmentType[]
+    heatsinkType === HeatsinkType.Single ? GearName.IS_Single_Heatsink : GearName.IS_Double_Heatsink,
+    mechClass !== MechClass.SuperHeavy && (jumpJetType === JumpJetType.Standard ? GearName.IS_Jump_Jet : GearName.IS_Improved_Jump_Jet),
+    GearName.IS_Endo_Steel,
+    // #TODO: pass in the whole mech to detect wther to show different armor
+    GearName.IS_Ferro_Fibrous,
+    GearName.IS_Light_Ferro,
+    GearName.IS_Heavy_Ferro,
+    GearName.IS_Stealth_Armor,
+    GearName.IS_Beagle_Active_Probe,
+    GearName.IS_CASE,
+    GearName.IS_MASC,
+    GearName.IS_TSM,
+    GearName.IS_C3_Master_Computer,
+    GearName.IS_C3_Slave_Computer,
+    GearName.IS_Improved_C3_Computer,
+    GearName.IS_Guardian_ECM,
+    GearName.IS_Targeting_Computer,
+    GearName.IS_TAG,
+  ].filter(identity) as GearName[]
 
   const clanEquipment = [
-    E.C_AMS,
-    E.C_LAMS,
-    E.C_Active_Probe,
-    E.C_Light_Active_Probe,
-    E.C_MASC,
-    E.C_ECM_Suite,
-    E.C_TAG,
-    E.C_NARC_Launcher,
-    E.C_Light_TAG,
-    E.C_Targeting_Computer,
-  ] as EquipmentType[]
+    heatsinkType === HeatsinkType.Single ? GearName.C_Single_Heatsink : GearName.C_Double_Heatsink,
+    mechClass !== MechClass.SuperHeavy && (jumpJetType === JumpJetType.Standard ? GearName.C_Jump_Jet : GearName.C_Improved_Jump_Jet),
+    GearName.C_Endo_Steel,
+    GearName.C_Ferro_Fibrous,
+    GearName.C_Active_Probe,
+    GearName.C_Light_Active_Probe,
+    GearName.C_MASC,
+    GearName.C_ECM_Suite,
+    GearName.C_Targeting_Computer,
+    GearName.C_TAG,
+    GearName.C_Light_TAG,
+  ].filter(identity) as GearName[]
 
   return [
-    ...commonEquipment,
     ...(tech === Tech.IS
       ? innerSphereEquipment
       : clanEquipment
@@ -67,173 +62,187 @@ export const getAvailableEquipmentTypes = (
   ]
 }
 
-export const getAvailableWeaponTypes = (tech: Tech, missileGuidanceType: MissileGuidenceType): WeaponType[] => {
+export const getAvailableWeaponNames = (tech: Tech, missileGuidanceType: MissileGuidenceType): WeaponName[] => {
   const innerSphereMissiles = missileGuidanceType === MissileGuidenceType.Standard
     ? [
-      E.LRM_5, E.LRM_10, E.LRM_15, E.LRM_20,
-      E.MML_3, E.MML_5, E.MML_7, E.MML_9,
-      E.SRM_2, E.SRM_4, E.SRM_6,
+      GearName.IS_LRM_5, GearName.IS_LRM_10, GearName.IS_LRM_15, GearName.IS_LRM_20,
+      GearName.IS_SRM_2, GearName.IS_SRM_4, GearName.IS_SRM_6,
+      GearName.IS_MML_3, GearName.IS_MML_5, GearName.IS_MML_7, GearName.IS_MML_9,
     ]
     : [
-      E.LRM_5_Artemis_IV, E.LRM_10_Artemis_IV, E.LRM_15_Artemis_IV, E.LRM_20_Artemis_IV,
-      E.MML_3_Artemis_IV, E.MML_5_Artemis_IV, E.MML_7_Artemis_IV, E.MML_9_Artemis_IV,
-      E.SRM_2_Artemis_IV, E.SRM_4_Artemis_IV, E.SRM_6_Artemis_IV,
+      GearName.IS_LRM_5_Artemis_IV, GearName.IS_LRM_10_Artemis_IV, GearName.IS_LRM_15_Artemis_IV, GearName.IS_LRM_20_Artemis_IV,
+      GearName.IS_SRM_2_Artemis_IV, GearName.IS_SRM_4_Artemis_IV, GearName.IS_SRM_6_Artemis_IV,
+      GearName.IS_MML_3_Artemis_IV, GearName.IS_MML_5_Artemis_IV, GearName.IS_MML_7_Artemis_IV, GearName.IS_MML_9_Artemis_IV,
     ]
+
   const innerSphereWeaponTypes = [
-    E.ER_Small_Laser, E.ER_Medium_Laser, E.ER_Large_Laser,
-    E.Small_Laser, E.Medium_Laser, E.Large_Laser,
-    E.Small_Pulse_Laser, E.Medium_Pulse_Laser, E.Large_Pulse_Laser,
-    E.Flamer, E.Vehicle_Flamer,
-    E.Plasma_Rifle,
-    E.Light_PPC, E.PPC, E.Heavy_PPC, E.ER_PPC, E.Snub_Nose_PPC,
-    E.Autocannon_2, E.Autocannon_5, E.Autocannon_10, E.Autocannon_20,
-    E.LB_2X_Autocannon, E.LB_5X_Autocannon, E.LB_10X_Autocannon, E.LB_20X_Autocannon,
-    E.Light_Autocannon_2, E.Light_Autocannon_5,
-    E.Rotary_Autocannon_2, E.Rotary_Autocannon_5,
-    E.Ultra_Autocannon_2, E.Ultra_Autocannon_5, E.Ultra_Autocannon_10, E.Ultra_Autocannon_20,
-    E.Light_Gauss_Rifle, E.Gauss_Rifle, E.Heavy_Gauss_Rifle,
-    E.Light_Machine_Gun, E.Machine_Gun, E.Heavy_Machine_Gun,
+    GearName.IS_Autocannon_2, GearName.IS_Autocannon_5, GearName.IS_Autocannon_10, GearName.IS_Autocannon_20,
+    GearName.IS_LB_2X_Autocannon, GearName.IS_LB_5X_Autocannon, GearName.IS_LB_10X_Autocannon, GearName.IS_LB_20X_Autocannon,
+    GearName.IS_Light_Autocannon_2, GearName.IS_Light_Autocannon_5,
+    GearName.IS_Rotary_Autocannon_2, GearName.IS_Rotary_Autocannon_5,
+    GearName.IS_Ultra_Autocannon_2, GearName.IS_Ultra_Autocannon_5, GearName.IS_Ultra_Autocannon_10, GearName.IS_Ultra_Autocannon_20,
+    GearName.IS_Gauss_Rifle, GearName.IS_Light_Gauss_Rifle, GearName.IS_Heavy_Gauss_Rifle,
+    GearName.IS_Machine_Gun, GearName.IS_Light_Machine_Gun, GearName.IS_Heavy_Machine_Gun,
+    GearName.IS_AMS,
+    GearName.IS_ER_Small_Laser, GearName.IS_ER_Medium_Laser, GearName.IS_ER_Large_Laser,
+    GearName.IS_Small_Laser, GearName.IS_Medium_Laser, GearName.IS_Large_Laser,
+    GearName.IS_Small_Pulse_Laser, GearName.IS_Medium_Pulse_Laser, GearName.IS_Large_Pulse_Laser,
+    GearName.IS_Flamer,
+    GearName.IS_Vehicle_Flamer,
+    GearName.IS_Plasma_Rifle,
+    GearName.IS_PPC, GearName.IS_Light_PPC, GearName.IS_Heavy_PPC, GearName.IS_ER_PPC, GearName.IS_Snub_Nose_PPC,
+    GearName.IS_LAMS,
     ...innerSphereMissiles,
-    E.Streak_SRM_2, E.Streak_SRM_4, E.Streak_SRM_6,
-    E.MRM_10, E.MRM_20, E.MRM_30, E.MRM_40,
-    E.Rocket_Launcher_10, E.Rocket_Launcher_15, E.Rocket_Launcher_20,
-  ] as WeaponType[]
+    GearName.IS_MRM_10, GearName.IS_MRM_20, GearName.IS_MRM_30, GearName.IS_MRM_40,
+    GearName.IS_Streak_SRM_2, GearName.IS_Streak_SRM_4, GearName.IS_Streak_SRM_6,
+    GearName.IS_Rocket_Launcher_10, GearName.IS_Rocket_Launcher_15, GearName.IS_Rocket_Launcher_20,
+    GearName.IS_NARC_Launcher,
+    GearName.IS_Improved_NARC_Launcher,
+  ] as WeaponName[]
 
   const clanMissiles = missileGuidanceType === MissileGuidenceType.Standard
     ? [
-      E.C_LRM_5, E.C_LRM_10, E.C_LRM_15, E.C_LRM_20,
-      E.C_SRM_2, E.C_SRM_4, E.C_SRM_6,
+      GearName.C_LRM_5, GearName.C_LRM_10, GearName.C_LRM_15, GearName.C_LRM_20,
+      GearName.C_SRM_2, GearName.C_SRM_4, GearName.C_SRM_6,
     ]
     : [
-      E.C_LRM_5_Artemis_IV, E.C_LRM_10_Artemis_IV, E.C_LRM_15_Artemis_IV, E.C_LRM_20_Artemis_IV,
-      E.C_SRM_2_Artemis_IV, E.C_SRM_4_Artemis_IV, E.C_SRM_6_Artemis_IV,
+      GearName.C_LRM_5_Artemis_IV, GearName.C_LRM_10_Artemis_IV, GearName.C_LRM_15_Artemis_IV, GearName.C_LRM_20_Artemis_IV,
+      GearName.C_SRM_2_Artemis_IV, GearName.C_SRM_4_Artemis_IV, GearName.C_SRM_6_Artemis_IV,
     ]
+
   const clanWeaponTypes = [
-    E.C_ER_Micro_Laser, E.C_ER_Small_Laser, E.C_ER_Medium_Laser, E.C_ER_Large_Laser,
-    E.C_Micro_Pulse_Laser, E.C_Small_Pulse_Laser, E.C_Medium_Pulse_Laser, E.C_Large_Pulse_Laser,
-    E.C_Heavy_Small_Laser, E.C_Heavy_Medium_Laser, E.C_Heavy_Large_Laser,
-    E.C_Flamer, E.C_Vehicle_Flamer,
-    E.C_Plasma_Cannon,
-    E.C_ER_PPC,
-    E.C_LB_2X_Autocannon, E.C_LB_5X_Autocannon, E.C_LB_10X_Autocannon, E.C_LB_20X_Autocannon,
-    E.C_Ultra_Autocannon_2, E.C_Ultra_Autocannon_5, E.C_Ultra_Autocannon_10, E.C_Ultra_Autocannon_20,
-    E.C_AP_Gauss_Rifle, E.C_Gauss_Rifle, E.C_Hyper_Assault_Gauss_20, E.C_Hyper_Assault_Gauss_30, E.C_Hyper_Assault_Gauss_40,
-    E.C_Light_Machine_Gun, E.C_Machine_Gun, E.C_Heavy_Machine_Gun,
-    E.C_ATM_3, E.C_ATM_6, E.C_ATM_9, E.C_ATM_12,
+    GearName.C_LB_2X_Autocannon, GearName.C_LB_5X_Autocannon, GearName.C_LB_10X_Autocannon, GearName.C_LB_20X_Autocannon,
+    GearName.C_Ultra_Autocannon_2, GearName.C_Ultra_Autocannon_5, GearName.C_Ultra_Autocannon_10, GearName.C_Ultra_Autocannon_20,
+    GearName.C_Gauss_Rifle,
+    GearName.C_AP_Gauss_Rifle,
+    GearName.C_Hyper_Assault_Gauss_20, GearName.C_Hyper_Assault_Gauss_30, GearName.C_Hyper_Assault_Gauss_40,
+    GearName.C_Machine_Gun, GearName.C_Light_Machine_Gun, GearName.C_Heavy_Machine_Gun,
+    GearName.C_AMS,
+    GearName.C_ER_Micro_Laser, GearName.C_ER_Small_Laser, GearName.C_ER_Medium_Laser, GearName.C_ER_Large_Laser,
+    GearName.C_Micro_Pulse_Laser, GearName.C_Small_Pulse_Laser, GearName.C_Medium_Pulse_Laser, GearName.C_Large_Pulse_Laser,
+    GearName.C_Heavy_Small_Laser, GearName.C_Heavy_Medium_Laser, GearName.C_Heavy_Large_Laser,
+    GearName.C_Flamer,
+    GearName.C_Vehicle_Flamer,
+    GearName.C_Plasma_Cannon,
+    GearName.C_ER_PPC,
+    GearName.C_LAMS,
     ...clanMissiles,
-    E.C_Streak_SRM_2, E.C_Streak_SRM_4, E.C_Streak_SRM_6,
-  ] as WeaponType[]
+    GearName.C_Streak_SRM_2, GearName.C_Streak_SRM_4, GearName.C_Streak_SRM_6,
+    GearName.C_ATM_3, GearName.C_ATM_6, GearName.C_ATM_9, GearName.C_ATM_12,
+    GearName.C_NARC_Launcher,
+  ] as WeaponName[]
 
   return tech === Tech.IS
     ? innerSphereWeaponTypes
     : clanWeaponTypes
 }
 
-export const getAvailableAmmoTypes = (tech: Tech, missileGuidanceType: MissileGuidenceType): AmmoType[] => {
+export const getAvailableAmmoNames = (tech: Tech, missileGuidanceType: MissileGuidenceType): AmmoName[] => {
   const innerSphereMissileAmmo = missileGuidanceType === MissileGuidenceType.Standard
     ? [
-      E.LRM_Ammo,
-      E.LRM_Fragmentation_Ammo,
-      E.LRM_Incendiary_Ammo,
-      E.LRM_SWARM_Ammo,
-      E.LRM_Flare_Ammo,
-      E.SRM_Ammo,
-      E.SRM_Fragmentation_Ammo,
-      E.SRM_Harpoon_Ammo,
-      E.SRM_Inferno_Ammo,
+      GearName.IS_LRM_Ammo,
+      GearName.IS_LRM_Fragmentation_Ammo,
+      GearName.IS_LRM_Incendiary_Ammo,
+      GearName.IS_LRM_SWARM_Ammo,
+      GearName.IS_LRM_Flare_Ammo,
+      GearName.IS_SRM_Ammo,
+      GearName.IS_SRM_Fragmentation_Ammo,
+      GearName.IS_SRM_Inferno_Ammo,
     ]
-    : [
-      E.LRM_Artemis_Ammo,
-      E.SRM_Artemis_Ammo,
-    ]
+    : [GearName.IS_LRM_Artemis_Ammo, GearName.IS_SRM_Artemis_Ammo]
+
   const innerSphereAmmoTypes = [
-    E.Autocannon_Ammo,
-    E.Autocannon_Armor_Piercing_Ammo,
-    E.Autocannon_Flechette_Ammo,
-    E.Autocannon_Precision_Ammo,
-    E.LB_X_Autocannon_Ammo,
-    E.LB_X_Autocannon_Cluster_Ammo,
-    E.Light_Autocannon_Ammo,
-    E.Light_Autocannon_Armor_Piercing_Ammo,
-    E.Light_Autocannon_Flechette_Ammo,
-    E.Light_Autocannon_Precision_Ammo,
-    E.Rotary_Autocannon_Ammo,
-    E.Ultra_Autocannon_Ammo,
-    E.Light_Gauss_Ammo,
-    E.Gauss_Ammo,
-    E.Heavy_Gauss_Ammo,
-    E.Light_Machine_Gun_Ammo,
-    E.Light_Machine_Gun_Ammo_Half,
-    E.Machine_Gun_Ammo,
-    E.Machine_Gun_Ammo_Half,
-    E.Heavy_Machine_Gun_Ammo,
-    E.Heavy_Machine_Gun_Ammo_Half,
-    E.Vehicle_Flamer_Ammo,
-    E.Plasma_Rifle_Ammo,
+    GearName.IS_AC2_Ammo, GearName.IS_AC2_AP_Ammo, GearName.IS_AC2_Flechette_Ammo, GearName.IS_AC2_Precision_Ammo,
+    GearName.IS_AC5_Ammo, GearName.IS_AC5_AP_Ammo, GearName.IS_AC5_Flechette_Ammo, GearName.IS_AC5_Precision_Ammo,
+    GearName.IS_AC10_Ammo, GearName.IS_AC10_AP_Ammo, GearName.IS_AC10_Flechette_Ammo, GearName.IS_AC10_Precision_Ammo,
+    GearName.IS_AC20_Ammo, GearName.IS_AC20_AP_Ammo, GearName.IS_AC20_Flechette_Ammo, GearName.IS_AC20_Precision_Ammo,
+    GearName.IS_LB_2X_AC_Ammo, GearName.IS_LB_2X_AC_Cluster_Ammo,
+    GearName.IS_LB_5X_AC_Ammo, GearName.IS_LB_5X_AC_Cluster_Ammo,
+    GearName.IS_LB_10X_AC_Ammo, GearName.IS_LB_10X_AC_Cluster_Ammo,
+    GearName.IS_LB_20X_AC_Ammo, GearName.IS_LB_20X_AC_Cluster_Ammo,
+    GearName.IS_LAC2_Ammo, GearName.IS_LAC2_AP_Ammo, GearName.IS_LAC2_Flechette_Ammo, GearName.IS_LAC2_Precision_Ammo,
+    GearName.IS_LAC5_Ammo, GearName.IS_LAC5_AP_Ammo, GearName.IS_LAC5_Flechette_Ammo, GearName.IS_LAC5_Precision_Ammo,
+    GearName.IS_RAC2_Ammo,
+    GearName.IS_RAC5_Ammo,
+    GearName.IS_UAC2_Ammo,
+    GearName.IS_UAC5_Ammo,
+    GearName.IS_UAC10_Ammo,
+    GearName.IS_UAC20_Ammo,
+    GearName.IS_Light_Gauss_Ammo,
+    GearName.IS_Gauss_Ammo,
+    GearName.IS_Heavy_Gauss_Ammo,
+    GearName.IS_LMG_Ammo,
+    GearName.IS_LMG_Half_Ammo,
+    GearName.IS_MG_Ammo,
+    GearName.IS_MG_Half_Ammo,
+    GearName.IS_HMG_Ammo,
+    GearName.IS_HMG_Half_Ammo,
+    GearName.IS_AMS_Ammo,
+    GearName.IS_Flamer_Ammo,
+    GearName.IS_Plasma_Rifle_Ammo,
     ...innerSphereMissileAmmo,
-    E.MRM_Ammo,
-    E.Streak_SRM_Ammo,
-    E.AMS_Ammo,
-    E.NARC_Ammo,
-    E.NARC_Explosive_Ammo,
-    E.NARC_ECM_Ammo,
-    E.NARC_Haywire_Ammo,
-    E.NARC_Nemesis_Ammo,
-  ] as AmmoType[]
+    GearName.IS_MRM_Ammo,
+    GearName.IS_Streak_SRM_Ammo,
+    GearName.IS_NARC_Ammo,
+    GearName.IS_NARC_Explosive_Ammo,
+    GearName.IS_NARC_ECM_Ammo,
+    GearName.IS_NARC_Haywire_Ammo,
+    GearName.IS_NARC_Nemesis_Ammo,
+  ] as AmmoName[]
 
   const clanMissileAmmo = missileGuidanceType === MissileGuidenceType.Standard
     ? [
-      E.C_LRM_Ammo,
-      E.C_LRM_Fragmentation_Ammo,
-      E.C_LRM_SWARM_Ammo,
-      E.C_LRM_Flare_Ammo,
-      E.C_SRM_Ammo,
-      E.C_SRM_Fragmentation_Ammo,
-      E.C_SRM_Harpoon_Ammo,
-      E.C_SRM_Inferno_Ammo,
+      GearName.C_LRM_Ammo,
+      GearName.C_LRM_Fragmentation_Ammo,
+      GearName.C_LRM_SWARM_Ammo,
+      GearName.C_LRM_Flare_Ammo,
+      GearName.C_SRM_Ammo,
+      GearName.C_SRM_Fragmentation_Ammo,
+      GearName.C_SRM_Inferno_Ammo,
     ]
     : [
-      E.C_LRM_Artemis_Ammo,
-      E.C_SRM_Artemis_Ammo,
+      GearName.C_LRM_Artemis_Ammo,
+      GearName.C_SRM_Artemis_Ammo,
     ]
 
   const clanAmmoTypes = [
-    E.C_LB_X_Autocannon_Ammo,
-    E.C_LB_X_Autocannon_Cluster_Ammo,
-    E.C_Ultra_Autocannon_Ammo,
-    E.C_Gauss_Ammo,
-    E.C_AP_Gauss_Ammo,
-    E.C_Hyper_Assault_Gauss_Ammo,
-    E.C_Light_Machine_Gun_Ammo,
-    E.C_Light_Machine_Gun_Ammo_Half,
-    E.C_Machine_Gun_Ammo,
-    E.C_Machine_Gun_Ammo_Half,
-    E.C_Heavy_Machine_Gun_Ammo,
-    E.C_Heavy_Machine_Gun_Ammo_Half,
-    E.C_Vehicle_Flamer_Ammo,
-    E.C_Plasma_Cannon_Ammo,
+    GearName.C_LB_2X_AC_Ammo, GearName.C_LB_2X_AC_Cluster_Ammo,
+    GearName.C_LB_5X_AC_Ammo, GearName.C_LB_5X_AC_Cluster_Ammo,
+    GearName.C_LB_10X_AC_Ammo, GearName.C_LB_10X_AC_Cluster_Ammo,
+    GearName.C_LB_20X_AC_Ammo, GearName.C_LB_20X_AC_Cluster_Ammo,
+    GearName.C_UAC2_Ammo,
+    GearName.C_UAC5_Ammo,
+    GearName.C_UAC10_Ammo,
+    GearName.C_UAC20_Ammo,
+    GearName.C_Gauss_Ammo,
+    GearName.C_AP_Gauss_Ammo,
+    GearName.C_HAG_Ammo,
+    GearName.C_LMG_Ammo,
+    GearName.C_LMG_Half_Ammo,
+    GearName.C_MG_Ammo,
+    GearName.C_MG_Half_Ammo,
+    GearName.C_HMG_Ammo,
+    GearName.C_HMG_Half_Ammo,
+    GearName.C_AMS_Ammo,
+    GearName.C_Flamer_Ammo,
+    GearName.C_Plasma_Cannon_Ammo,
     ...clanMissileAmmo,
-    E.C_Streak_SRM_Ammo,
-    E.C_ATM_Ammo,
-    E.C_ATM_ER_Ammo,
-    E.C_ATM_HE_Ammo,
-    E.C_AMS_Ammo,
-    E.C_NARC_Ammo,
-  ] as AmmoType[]
+    GearName.C_ATM_Ammo,
+    GearName.C_ATM_ER_Ammo,
+    GearName.C_ATM_HE_Ammo,
+    GearName.C_Streak_SRM_Ammo,
+    GearName.C_NARC_Ammo,
+  ] as AmmoName[]
 
   return tech === Tech.IS
     ? innerSphereAmmoTypes
     : clanAmmoTypes
 }
 
-const sumEquipmentTonnage = (mechTonnage: MechTonnage) => (equipment: MechEquipmentName[]): number => {
-  return equipment.reduce((total, equipment) => {
-    const tonnage = [E.Single_Heatsink, E.Double_Heatsink].includes(equipment)
-      ? 0
-      : getEquipmentTonnage(mechTonnage, equipment)
-
-    return total + tonnage
-  }, 0)
+const sumGearTonnage = (mechTonnage: MechTonnage) => (gearNames: GearName[]): number => {
+  return gearNames
+    .filter(gearName => getGearData(gearName).type !== EquipmentType.Heatsink)
+    .reduce((total, gearName) => total + getGearTonnage(mechTonnage, gearName), 0)
 }
 
 const getAllMechComponents = (mechType: MechType, loadout: MechLoadout): MechComponent[] => {
@@ -246,59 +255,55 @@ const getAllMechComponents = (mechType: MechType, loadout: MechLoadout): MechCom
 
 export const getLoadoutTonnage = (mechTonnage: MechTonnage, mechType: MechType, loadout: MechLoadout): number => {
   return getAllMechComponents(mechType, loadout)
-    .map(component => loadout[component].equipment as MechEquipmentName[])
-    .map(sumEquipmentTonnage(mechTonnage))
+    .map(component => loadout[component].equipment as GearName[])
+    .map(sumGearTonnage(mechTonnage))
     .reduce((s, t) => s + t, 0)
 }
 
 export const getLoadoutInternalStructureCriticals = (mechType: MechType, loadout: MechLoadout): number => {
   return getAllMechComponents(mechType, loadout)
-    .map(component => loadout[component].equipment as MechEquipmentName[])
+    .map(component => loadout[component].equipment as GearName[])
     .reduce((memo, equipment) => [...memo, ...equipment], [])
-    .reduce((total, equipment) => total + (equipment === E.Internal_Structure ? 1 : 0), 0)
+    .reduce((total, gear) => total + (getGearData(gear).type === EquipmentType.Internal_Structure ? 1 : 0), 0)
 }
 
 export const getLoadoutArmorCriticals = (mechType: MechType, loadout: MechLoadout): number => {
   return getAllMechComponents(mechType, loadout)
-    .map(component => loadout[component].equipment as MechEquipmentName[])
-    .reduce((memo, equipment) => [...memo, ...equipment], [])
-    .reduce((total, equipment) => total + (equipment === E.Armor ? 1 : 0), 0)
+    .map(component => loadout[component].equipment as GearName[])
+    .reduce((memo, gear) => [...memo, ...gear], [])
+    .reduce((total, gear) => total + (getGearData(gear).type === EquipmentType.Armor ? 1 : 0), 0)
 }
 
 export const geLoadoutHeatsinks = (mechType: MechType, loadout: MechLoadout): number => {
   return getAllMechComponents(mechType, loadout)
-    .map(component => loadout[component].equipment as MechEquipmentName[])
-    .reduce((memo, equipment) => [...memo, ...equipment], [])
-    .reduce((memo, equipment) => memo + (([E.Single_Heatsink, E.Double_Heatsink].includes(equipment) ? 1 : 0)), 0)
+    .map(component => loadout[component].equipment as GearName[])
+    .reduce((memo, gear) => [...memo, ...gear], [])
+    .reduce((total, gear) => total + (getGearData(gear).type === EquipmentType.Heatsink ? 1 : 0), 0)
 }
 
-const TARGETING_COMPUTER_AFFECTED_EQUIPMENT = [
-  MechEquipmentType.Ballistic,
-  MechEquipmentType.BallisticAmmo,
-  MechEquipmentType.Autocannon,
-  MechEquipmentType.Gauss_Rifle,
-  MechEquipmentType.Energy,
-  MechEquipmentType.Laser,
-  MechEquipmentType.Pulse_Laser,
-  MechEquipmentType.Plasma,
-  MechEquipmentType.PPC,
+const TARGETING_COMPUTER_AFFECTED_WEAPON_TYPE = [
+  WeaponType.Autocannon,
+  WeaponType.GaussRifle,
+  WeaponType.Laser,
+  WeaponType.Plasma,
+  WeaponType.ParticleCannon,
 ]
 
 export const getTargetingComputerWeight = (mechTonnage: MechTonnage, mechType: MechType, tech: Tech, loadout: MechLoadout) => {
   const tonnage = getAllMechComponents(mechType, loadout)
-    .map(component => loadout[component].equipment as MechEquipmentName[])
+    .map(component => loadout[component].equipment as GearName[])
     .reduce((memo, equipment) => [...memo, ...equipment], [])
-    .map(getEquipmentMeta)
-    .filter(equipment => TARGETING_COMPUTER_AFFECTED_EQUIPMENT.includes(equipment.type))
-    .reduce((memo, eq) => memo + getEquipmentTonnage(mechTonnage, eq.name), 0)
+    .map(getGearData)
+    .filter(gear => gear.gearClass === GearClass.Weapon && TARGETING_COMPUTER_AFFECTED_WEAPON_TYPE.includes((gear as IWeapon).type))
+    .reduce((memo, eq) => memo + getGearTonnage(mechTonnage, eq.name), 0)
 
   return Math.ceil(tonnage / (tech === Tech.IS ? 4 : 5))
 }
 
 export const hasTargetingComputerEquiped = (mechType: MechType, loadout: MechLoadout) => {
   return Boolean(getAllMechComponents(mechType, loadout)
-    .map(component => loadout[component].equipment as MechEquipmentName[])
+    .map(component => loadout[component].equipment as GearName[])
     .reduce((memo, equipment) => [...memo, ...equipment], [])
-    .map(getEquipmentMeta)
-    .find(eq => eq.type === MechEquipmentType.Targeting_Computer))
+    .map(getGearData)
+    .find(gear => gear.type === EquipmentType.Targeting_Computer))
 }
